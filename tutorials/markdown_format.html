@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.6.43">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>marimo-quarto - Markdown</title>
+<title>Markdown – marimo-quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d1baf4a90293cb7980ca1fb2d9d1efe1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -102,33 +102,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.6.11/dist/main.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.6.11/dist/style.css" rel="stylesheet" crossorigin="anonymous">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
-
-
-<meta property="og:title" content="marimo-quarto - Markdown">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.13.2/dist/main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.13.2/dist/style.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
+    <meta property="og:title" content="Markdown – marimo-quarto">
 <meta property="og:description" content="">
-<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9hAAAPYQGoP6dpAABCwklEQVR4nO3deVyVdf7//+dhOyCbooIguO+gCGpFo5VZlk6WZYvSNDUz9RsbUJOcCqeZppkpnMlKDbOacZrpY2gZWjYuaVNoiy3KwX3NBRcQcQEEOcA51+8PvzlZaKjABed63G+388e5uK54ct3ecZ5er+scbIZhGAIAAIBleJkdAAAAAI2LAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMX4mB2gOXO73Tp8+LCCg4Nls9nMjgMAAOrAMAyVlZUpKipKXl7WvBZGAbwMhw8fVkxMjNkxAADAJThw4ICio6PNjmEKCuBlCA4OlnRmAYWEhJicBgAA1EVpaaliYmLOvo5bEQXwMnw79g0JCaEAAgDQzFj59i1rDr4BAAAsjAIIAABgMRRAAAAAi6EAAgAAWAwFEAAAwGIogAAAABZDAQQAALAYCiAAAIDFUAABAAAsxiMLYEZGhmw2mx555JEL7rd69WoNGDBA/v7+6tKli1555ZXGCQgAAGAijyuAX3/9tV577TX169fvgvvt3btXI0eO1JAhQ+RwODR16lRNnDhR2dnZjZQUAADAHB5VAE+dOqV7771Xf//739WqVasL7vvKK6+oQ4cOmjFjhnr37q0HH3xQv/zlLzV9+vRGSgsAAC7EMAyzI3gsjyqAKSkp+ulPf6obbrjhR/ddu3athg8ffs62m266SevWrVN1dXWtxzidTpWWlp7zAAAA9c+Rf0IjZn6ifcXlZkfxSB5TABcsWKDc3FxlZGTUaf/CwkJFREScsy0iIkI1NTUqLi6u9ZiMjAyFhoaefcTExFx2bgAA8D+GYejva/borlfWanthmaYt3252JI/kEQXwwIEDmjRpkubNmyd/f/86H2ez2c55/u2l5u9v/1Z6erpKSkrOPg4cOHDpoQEAwDlOlFfpwX+v0zPLtqnGbWhk33b6210Xvqcfl8bH7AD1Yf369SoqKtKAAQPObnO5XFqzZo0yMzPldDrl7e19zjHt2rVTYWHhOduKiork4+Oj1q1b1/p97Ha77HZ7/f8AAABY3Lp9xzVxvkOHSyrl5+Ol39/SRz+7ssN5L8rg8nhEARw2bJg2bdp0zrZf/OIX6tWrlx5//PEflD9JSkpK0vvvv3/OtpUrV2rgwIHy9fVt0LwAAOAMt9vQK2u+0fMrd8rlNtS5TaAykxMUGxVqdjSP5hEFMDg4WHFxcedsCwwMVOvWrc9uT09P16FDh/TGG29IksaPH6/MzEylpaXpoYce0tq1azV37lzNnz+/0fMDAGBFx045lfb2Bq3eeVSSdFv/KD1ze18F2T2injRpljnDBQUFys/PP/u8c+fOWrZsmSZPnqzZs2crKipKs2bN0pgxY0xMCQCANXy555gmLnDoSKlTdh8vPX1rrO4ZFMPIt5HYDD5k55KVlpYqNDRUJSUlCgkJMTsOAABNnstt6OWPd+vFD3fKbUhd2wZq9r2J6tWu8V5Hef220BVAAABgrqKySk1+K0+f7T4mSRqTGK0/j45VCz/qSGPjjAMAgAb32e5iTVqQp+JTTgX4euvPo+N054Bos2NZFgUQAAA0GJfb0Mz/7tJLH+2SYUg9IoI0OzlR3SOCzY5maRRAAADQII6UVmrifIe+3HtckjR2UIyeGhWrAL8ffjwbGhcFEAAA1LvVO48q7a08HSuvUqCft569o69u69/e7Fj4fyiAAACg3tS43Hp+1U7NyflGktQ7MkSzkxPUpW2QycnwXRRAAABQLw6fPK2J8x1at/+EJOlnV3XQkz/tI39fRr5NDQUQAABcto+2H1Ha2xt0sqJaQXYfTRvTV7f0izI7Fs6DAggAAC5Ztcut5z7YodfW7JEk9W0fqszkBHVsHWhyMlwIBRAAAFySgycqlJrlUN6Bk5KkB67upPSRvWT3YeTb1FEAAQDARftgS6F+u3CDSitrFOLvo7/dGa+b49qZHQt1RAEEAAB15qxxadry7Xr9s32SpPiYlsocl6CYsBbmBsNFoQACAIA6yT9WoZSsXG06VCJJemhIZ/32pl7y8/EyORkuFgUQAAD8qGWbCvT4OxtV5qxRyxa+mn5nvG7oE2F2LFwiCiAAADivymqXnlm6Tf/3xX5J0oCOrfTSuARFtQwwORkuBwUQAADUam9xuVLezNXWglJJ0sPXdVXajT3k683It7mjAAIAgB94L++Qpi7apPIql8IC/fTC3fG6rme42bFQTyiAAADgrMpql55+f4vmf3VAknRF5zDNGpugdqH+JidDfaIAAgAASdLuolNKeTNXO46UyWaTUod206Rh3eXDyNfjUAABAICy1x/Uk+9u1ulql9oE2TXjnv4a3L2N2bHQQCiAAABYWEVVjf7w3ha9s/6gJOnqrq01Y2x/hQcz8vVkFEAAACxq55EypbyZq11Fp+RlkyYN66HU67vJ28tmdjQ0MAogAAAWYxiG3l53QE8t2aLKarfCg+2aOTZBSV1bmx0NjYQCCACAhZxy1ujJxZv0bt5hSdKQ7m304j391SbIbnIyNCYKIAAAFrH1cKlSs3K1p7hc3l42PTq8h8Zf01VejHwthwIIAICHMwxDb36Zrz/9Z6uqatyKDPXXrHEJGtQpzOxoMAkFEAAAD1ZWWa0nFm3S0o0FkqTre4Vr+l3xCgv0MzkZzEQBBADAQ206WKLU+bnaf6xCPl42PXZzTz04uAsjX1AAAQDwNIZh6N+f79Ozy7aryuVW+5YBeik5QYkdWpkdDU0EBRAAAA9Scrpaj7+zUSu2FEqSbuwToel3xiu0ha/JydCUUAABAPAQeQdOKjUrVwdPnJavt03pI3rrFz/pJJuNkS/ORQEEAKCZMwxDcz/dq2nLt6vGbahDWAtlJieoX3RLs6OhiaIAAgDQjJ2sqNKUhRv04bYiSdLIvu00bUw/hfgz8sX5UQABAGim1u8/rglZDh0uqZSfj5d+f0sf/ezKDox88aMogAAANDNut6FX1+zR9JU75HIb6twmUJnJCYqNCjU7GpoJCiAAAM3IsVNOPbpwg3J2HJUk3RofpWfv6KsgOy/pqDtWCwAAzcSXe45p4gKHjpQ6Zffx0h9vjdXYQTGMfHHRKIAAADRxLrehlz/erRc/3Cm3IXVtG6jZ9yaqV7sQs6OhmaIAAgDQhB0tc2ryW3n6dHexJOmOxPb6821xCmTki8vA6gEAoIn6fHexJr2Vp6NlTgX4eutPt8XqroExZseCB6AAAgDQxLjchmb+d5de+miXDEPqERGk2cmJ6h4RbHY0eAgKIAAATciR0kpNWuDQF3uOS5LuGRijP94aqwA/b5OTwZNQAAEAaCLW7DyqyW/l6Vh5lVr4eevZ2/tqdEJ7s2PBA1EAAQAwWY3LrRdW7dTLOd9IknpHhmh2coK6tA0yORk8FQUQAAATFZSc1sT5Dn2974Qk6d4rO+j3t/SRvy8jXzQcL7MD1Ic5c+aoX79+CgkJUUhIiJKSkrR8+fLz7p+TkyObzfaDx/bt2xsxNQDA6j7eXqSRMz/R1/tOKMjuo8zkBD1ze1/KHxqcR1wBjI6O1rRp09StWzdJ0r///W/ddtttcjgcio2NPe9xO3bsUEjI/z5Es23btg2eFQCAapdb0z/YoVfX7JEkxbUPUea4RHVqE2hyMliFRxTAUaNGnfP8mWee0Zw5c/TFF19csACGh4erZcuWDZwOAID/OXiiQhPmO+TIPylJeuDqTkof2Ut2H676ofF4RAH8LpfLpYULF6q8vFxJSUkX3DchIUGVlZXq06ePnnzySQ0dOvSC+zudTjmdzrPPS0tL6yUzAMAaVm4p1G/f2aiS09UK9vfRc3f2081xkWbHggV5TAHctGmTkpKSVFlZqaCgIC1evFh9+vSpdd/IyEi99tprGjBggJxOp/7v//5Pw4YNU05Ojq655przfo+MjAw9/fTTDfUjAAA8VFWNWxnLt+n1z/ZJkuJjWipzXIJiwlqYGwyWZTMMwzA7RH2oqqpSfn6+Tp48qezsbP3jH//Q6tWrz1sCv2/UqFGy2WxasmTJefep7QpgTEyMSkpKzrmXEACAb+Ufq1Dq/FxtPFgiSXpwcGc9dnMv+fl4xPswm6XS0lKFhoZa+vXbY64A+vn5nX0TyMCBA/X1119r5syZevXVV+t0/FVXXaV58+ZdcB+73S673X7ZWQEA1rB8U4Eee2ejypw1Cg3w1fN3xeuGPhFmxwI8pwB+n2EY51yt+zEOh0ORkdyHAQC4fJXVLj27bJveWLtfkjSgYyvNGpeg9i0DTE4GnOERBXDq1KkaMWKEYmJiVFZWpgULFignJ0crVqyQJKWnp+vQoUN64403JEkzZsxQp06dFBsbq6qqKs2bN0/Z2dnKzs4288cAAHiAvcXlSs3K1ZbDZ94oOP7arnp0eA/5ejPyRdPhEQXwyJEjuu+++1RQUKDQ0FD169dPK1as0I033ihJKigoUH5+/tn9q6qqNGXKFB06dEgBAQGKjY3V0qVLNXLkSLN+BACAB1iy4bDSszeqvMqlsEA/PX93vIb2DDc7FvADHvMmEDNwEykAQDoz8n36/a2a/9WZiw1XdArTrHEJahfqb3Iy1IbXbw+5AggAgFl2F51SalautheWyWaTUod206Rh3eXDyBdNGAUQAIBLtCj3oJ58d7MqqlxqE+SnGfckaHD3NmbHAn4UBRAAgItUUVWjp97booXrD0qSru7aWjPu6a/wEEa+aB4ogAAAXISdR8qU8maudhWdkpdNmjSsh1Kv7yZvL5vZ0YA6owACAFAHhmFo4bqD+sOSzaqsdis82K6ZYxOU1LW12dGAi0YBBADgR5Q7a/Tku5u12HFIkjSkexu9eE9/tQnir0OheaIAAgBwAdsKSpXyZq72FJfL28umtBt76OFru8qLkS+aMQogAAC1MAxDWV/l6+n3t6qqxq12If56KTlBgzqFmR0NuGwUQAAAvqesslrpizbpPxsLJElDe7bV83f3V1ign8nJgPpBAQQA4Ds2HypRSlau9h+rkI+XTY/d3FMPDu7CyBcehQIIAIDOjHzfWLtfzyzdpiqXW+1bBuil5AQldmhldjSg3lEAAQCWV3K6Wo+/s1ErthRKkm7sE6Hn7uynli0Y+cIzUQABAJaWd+CkUrNydfDEafl625Q+ord+8ZNOstkY+cJzUQABAJZkGIbmfrpXf12xXdUuQzFhAcocl6j4mJZmRwMaHAUQAGA5JyuqNGXhRn247YgkaURcO00b00+hAb4mJwMaBwUQAGAp6/ef0ISsXB0uqZSft5d+f0tv/eyqjox8YSkUQACAJbjdhl77ZI+e+2CHXG5DnVq3UGZyouLah5odDWh0FEAAgMc7Xl6ltLfzlLPjqCTp1vgoPXtHXwXZeRmENbHyAQAe7au9xzVxvkOFpZWy+3jpj7fGauygGEa+sDQKIADAI7ndhl7O2a0XVu2U25C6tA3U7ORE9Y4MMTsaYDoKIADA4xwtcyrt7Tx9sqtYknRHQnv9eXScAhn5ApIogAAAD/P57mJNeitPR8uc8vf10p9vi9NdA2PMjgU0KRRAAIBHcLkNzfrvLs36aJcMQ+oREaTZyYnqHhFsdjSgyaEAAgCavaLSSk1akKe1e45Jku4eGK2nb41TgJ+3ycmApokCCABo1j7ZdVST38pT8akqtfDz1jO3x+n2hGizYwFNGgUQANAs1bjcmvHhLs3O2S3DkHq1C9bsexPVtW2Q2dGAJo8CCABodgpKTmvS/Dx9te+4JOneKzvo97f0kb8vI1+gLiiAAIBm5ePtRUp7O08nKqoVZPdRxh19NSo+yuxYQLNCAQQANAvVLremf7BDr67ZI0mKax+izHGJ6tQm0ORkQPNDAQQANHmHTp7WhKxc5eaflCQ9cHUnpY/sJbsPI1/gUlAAAQBN2qqtRzRl4QaVnK5WsL+Pnruzn26OizQ7FtCsUQABAE1SVY1b05Zv1z8/2ytJio8OVWZyomLCWpicDGj+KIAAgCbnwPEKpWblasPBEknSrwZ31uM395Kfj5fJyQDPQAEEADQpKzYX6LfvbFRZZY1CA3w1/a543dgnwuxYgEehAAIAmoTKapcylm3Tv9fulyQldmipl5IT1b5lgMnJAM9DAQQAmG5fcblSsnK15XCpJOnX13bRlOE95evNyBdoCBRAAICp3t9wWOmLNumUs0ZhgX56/u54De0ZbnYswKNRAAEApqisdulP/9mqrC/zJUlXdArTrHEJahfqb3IywPNRAAEAje6bo6eU8mautheWyWaTUod206Rh3eXDyBdoFBRAAECjWuw4qN8t3qyKKpfaBPnpxXv6a0j3tmbHAiyFAggAaBSnq1z6w3ubtXD9QUlSUpfWmjm2v8JDGPkCjY0CCABocDuPlCnlzVztKjolL5s0aVgPpV7fTd5eNrOjAZZEAQQANBjDMLRw/UH94b3Nqqx2q22wXbPGJiipa2uzowGWRgEEADSIcmeNfv/uZi1yHJIkDeneRi/e019tguwmJwNAAQQA1LttBaVKycrVnqPl8rJJjw7vqYev7SovRr5Ak+AR77efM2eO+vXrp5CQEIWEhCgpKUnLly+/4DGrV6/WgAED5O/vry5duuiVV15ppLQA4LkMw1DWl/kaPfsz7TlarnYh/lrw/yUpZWg3yh/QhHjEFcDo6GhNmzZN3bp1kyT9+9//1m233SaHw6HY2Ngf7L93716NHDlSDz30kObNm6fPPvtMv/nNb9S2bVuNGTOmseMDgEcoq6zW1MWb9f6Gw5KkoT3b6vm7+yss0M/kZAC+z2YYhmF2iIYQFham5557Tr/61a9+8LXHH39cS5Ys0bZt285uGz9+vDZs2KC1a9fW+XuUlpYqNDRUJSUlCgkJqZfcANAcbT5UotSsXO07ViEfL5t+e1NPPTSkC1f90CTx+u0hVwC/y+VyaeHChSovL1dSUlKt+6xdu1bDhw8/Z9tNN92kuXPnqrq6Wr6+vrUe53Q65XQ6zz4vLS2tv+AA0AwZhqH/+2K//vKfbapyudW+ZYBmjUvQgI6tzI4G4AI8pgBu2rRJSUlJqqysVFBQkBYvXqw+ffrUum9hYaEiIiLO2RYREaGamhoVFxcrMjKy1uMyMjL09NNP13t2AGiOSk5XK33RRi3bVChJuqF3hKbf1U8tWzDyBZo6j3gTiCT17NlTeXl5+uKLL/Twww/r/vvv19atW8+7v8127lji20n497d/V3p6ukpKSs4+Dhw4UD/hAaCZ2XDgpG556RMt21QoX2+bfn9LH/395wMof0Az4TFXAP38/M6+CWTgwIH6+uuvNXPmTL366qs/2Lddu3YqLCw8Z1tRUZF8fHzUuvX5P5zUbrfLbufzqwBYl2EY+udn+zRt+TZVuwzFhAUoc1yi4mNamh0NwEXwmAL4fYZhnHO/3nclJSXp/fffP2fbypUrNXDgwPPe/wcAVneyokpTFm7Uh9uOSJJGxLXTtDH9FBrA702gufGIAjh16lSNGDFCMTExKisr04IFC5STk6MVK1ZIOjO6PXTokN544w1JZ97xm5mZqbS0ND300ENau3at5s6dq/nz55v5YwBAk7V+/wlNnO/QoZOn5eftpSdv6a37rup4wdtmADRdHlEAjxw5ovvuu08FBQUKDQ1Vv379tGLFCt14442SpIKCAuXn55/dv3Pnzlq2bJkmT56s2bNnKyoqSrNmzeIzAAHge9xuQ3//ZI+e+2CHatyGOrVuoczkRMW1DzU7GoDL4LGfA9gY+BwhAJ7seHmVHn07Tx/vOCpJGhUfpWdvj1OwPyNfNG+8fnvIFUAAQP36au9xTZzvUGFppew+XnpqVKzGXRHDyBfwEBRAAMBZbrehOau/0QurdsrlNtSlbaBmJyeqd6Q1r5IAnooCCACQJBWfcmryW3n6ZFexJOmOhPb68+g4Bdp5qQA8Df9XAwC09ptjmrTAoaIyp/x9vfSn2+J014BoRr6Ah6IAAoCFudyGXvpol2b9d5fchtQ9PEiz701Uj4hgs6MBaEAUQACwqKLSSj3yVp4+/+aYJOnugdF6+tY4Bfh5m5wMQEOjAAKABX2y66gmv5Wn4lNVauHnrWduj9PtCdFmxwLQSCiAAGAhNS63Zny4S7NzdsswpF7tgpWZnKhu4UFmRwPQiCiAAGARhSWVmjjfoa/2HZckJV/ZQX+4pY/8fRn5AlZDAQQAC/h4R5EefXuDjpdXKcjuo2fv6Ktb46PMjgXAJBRAAPBg1S63pq/coVdX75EkxUaFaHZyojq1CTQ5GQAzUQABwEMdOnlaE+c7tH7/CUnS/UkdlT6yNyNfABRAAPBEH249okcXblDJ6WoF+/vob2P6aUTfSLNjAWgiKIAA4EGqatz624rt+seneyVJ8dGhemlcojq0bmFyMgBNCQUQADzEgeMVSp3v0IYDJyVJv/xJZz0xopf8fLzMDQagyaEAAoAHWLG5QL99Z6PKKmsUGuCr6XfF68Y+EWbHAtBEUQABoBlz1rj07NJt+vfa/ZKkxA4tNWtcgqJbMfIFcH4UQABopvYVlyt1fq42HyqVJP362i6aMrynfL0Z+QK4MAogADRD/9l4WE9kb9IpZ41atfDVC3f319Be4WbHAtBMUAABoBmprHbpT//Zqqwv8yVJgzq10qxxCYoMDTA5GYDmhAIIAM3EN0dPKeXNXG0vLJPNJqVc102P3NBdPox8AVwkCiAANAPvOg5p6uJNqqhyqXWgn2aM7a8h3duaHQtAM0UBBIAm7HSVS39cskVvrTsgSUrq0lozx/ZXeIi/yckANGcUQABoonYdKVNKVq52Hjklm02aeH13TRzWXd5eNrOjAWjmKIAA0AQtXHdAf3hvi05Xu9Q22K6Z9/TX1d3amB0LgIegAAJAE1LurNHv39usRbmHJElDurfRC3f3V9tgu8nJAHgSCiAANBHbC0uV8mauvjlaLi+blHZjD/3mum7yYuQLoJ5RAAHAZIZhaMHXB/THJVvkrHErIsSuWWMTdGWX1mZHA+ChKIAAYKKyympNXbxZ7284LEm6rmdbPX9XvFoHMfIF0HAogABgks2HSpSalat9xyrk7WXTYzf11ENDujDyBdDgKIAA0MgMw9C8L/brz//ZpiqXW1Gh/nopOVEDOrYyOxoAi6AAAkAjKq2s1hPZG7VsU6Ek6YbeEZp+Vz+1bOFncjIAVkIBBIBGsvHgSaVk5erA8dPy9bbp8Zt76VeDO8tmY+QLoHFRAAGggRmGodc/26eM5dtU7TIU3SpAmcmJ6h/T0uxoACyKAggADaikolq/fWeDVm49Ikm6Obad/npnP4UG+JqcDICVUQABoIHk5p/QhCyHDp08LT9vL/3up73186SOjHwBmI4CCAD1zO029I9P9+hvK3aoxm2oY+sWmp2cqLj2oWZHAwBJFEAAqFcnyqv06MIN+mh7kSTpln6Ryrijr4L9GfkCaDoogABQT77ed1wT5ztUUFIpPx8vPTWqj5Kv6MDIF0CTQwEEgMvkdhuas/obvbBqp1xuQ13aBCozOVF9okLMjgYAtaIAAsBlKD7l1OS38vTJrmJJ0u0J7fWX0XEKtPPrFUDTxW8oALhEa785pkkLHCoqc8rf10t/ujVOdw2MZuQLoMmjAALARXK5DWV+tFsz/7tTbkPqHh6k2fcmqkdEsNnRAKBOKIAAcBGKyir1yII8ff7NMUnSXQOi9fRtsWrhx69TAM0Hv7EAoI4+3VWsR97KU/Epp1r4eesvo+N0R2K02bEA4KJ5mR2gPmRkZGjQoEEKDg5WeHi4Ro8erR07dlzwmJycHNlsth88tm/f3kipATQXNS63nl+5Q/f980sVn3KqV7tgLUkdTPkD0Gx5xBXA1atXKyUlRYMGDVJNTY1+97vfafjw4dq6dasCAwMveOyOHTsUEvK/j2po27ZtQ8cF0IwUllRq4gKHvtp7XJI07ooOempUH/n7epucDAAunUcUwBUrVpzz/PXXX1d4eLjWr1+va6655oLHhoeHq2XLlg2YDkBzlbOjSGlvb9Dx8ioF+nkrY0w/3RofZXYsALhsHlEAv6+kpESSFBYW9qP7JiQkqLKyUn369NGTTz6poUOHnndfp9Mpp9N59nlpaenlhwXQ5FS73Hph1U7NyflGktQnMkSz701U5zYXnigAQHPhEfcAfpdhGEpLS9PgwYMVFxd33v0iIyP12muvKTs7W4sWLVLPnj01bNgwrVmz5rzHZGRkKDQ09OwjJiamIX4EACY6fPK0xr72xdny9/Okjlr0m6spfwA8is0wDMPsEPUpJSVFS5cu1aeffqro6Iu7QXvUqFGy2WxasmRJrV+v7QpgTEyMSkpKzrmPEEDz9OHWI5ryzgadrKhWsN1Hf72zn0b2jTQ7FoB6VlpaqtDQUEu/fnvUCHjChAlasmSJ1qxZc9HlT5KuuuoqzZs377xft9vtstvtlxMRQBNUVePW31Zs1z8+3StJ6hcdqsxxierQuoXJyQCgYXhEATQMQxMmTNDixYuVk5Ojzp07X9J/x+FwKDKSf+0DVnLgeIVS5zu04cBJSdIvf9JZT4zoJT8fj7tDBgDO8ogCmJKSoqysLL333nsKDg5WYWGhJCk0NFQBAQGSpPT0dB06dEhvvPGGJGnGjBnq1KmTYmNjVVVVpXnz5ik7O1vZ2dmm/RwAGteKzYV67J0NKq2sUYi/j6bfFa/hse3MjgUADc4jCuCcOXMkSdddd905219//XU98MADkqSCggLl5+ef/VpVVZWmTJmiQ4cOKSAgQLGxsVq6dKlGjhzZWLEBmMRZ41LGsu361+f7JEkJHVrqpXEJim7FyBeANXjcm0AaEzeRAs3P/mPlSs1yaNOhMx8X9etrumjKTT3l683IF7AKXr895AogANTF0o0FeiJ7o8qcNWrVwlfP3x2v63tFmB0LABodBRCAx6usdukvS7dq3hdnbgMZ1KmVZo1LUGRogMnJAMAcFEAAHm3P0VNKyXJoW8GZv9zzm+u6Ku3GHvJh5AvAwiiAADzWe3mHNHXRJpVXudQ60E8v3NNf1/Zoa3YsADAdBRCAxzld5dLT72/Rgq8PSJKu6hKmmWMTFBHib3IyAGgaKIAAPMruojKlvOnQjiNlstmkCdd316Rh3eXtZTM7GgA0GRRAAB7jnfUH9ft3N+t0tUttg+2aeU9/Xd2tjdmxAKDJoQACaPYqqmr05LubtSj3kCRpcLc2evGe/mobzN/uBoDaUAABNGvbC0uV8mauvjlaLi+blHZjDz18XTdGvgBwARRAAM2SYRh66+sDemrJFjlr3IoIsWvW2ARd2aW12dEAoMmjAAJodk45a/S7xZv0Xt5hSdK1Pdrqhbvj1TqIkS8A1AUFEECzsuVwiVKzHNpbXC5vL5umDO+pX1/TRV6MfAGgziiAAJoFwzA078t8/fk/W1VV41ZUqL9eSk7QgI5hZkcDgGaHAgigySutrFZ69iYt3VQgSbqhd7ieuzNerQL9TE4GAM0TBRBAk7bx4EmlZjmUf7xCPl42PTGil341uLNsNka+AHCpKIAAmiTDMPSvz/fp2WXbVO0y1L5lgDKTE5TQoZXZ0QCg2aMAAmhySiqq9Vj2Bn2w5Ygk6abYCP1tTLxCW/ianAwAPAMFEECT4sg/odQshw6dPC0/by/97qe99fOkjox8AaAeUQABNAmGYegfn+zVX1dsV43bUMfWLZQ5LlF9o0PNjgYAHocCCMB0J8qrNGXhBv13e5Ek6af9IpVxR1+F+DPyBYCGQAEEYKp1+45rwnyHCkoq5efjpT/c0kf3XtmBkS8ANCAKIABTuN2GXlnzjZ5fuVMut6EubQKVmZyoPlEhZkcDAI9HAQTQ6I6dcirt7Q1avfOoJGl0/yj95fa+CrLzKwkAGgO/bQE0qi/2HNOkBQ4dKXXK39dLT98aq7sHxjDyBYBGRAEE0ChcbkOzP96tGR/ulNuQuoUHaXZyonq2CzY7GgBYDgUQQIMrKqvU5Lfy9NnuY5KkOwdE60+3xaqFH7+CAMAM/PYF0KA+212sSQvyVHzKqQBfb/1ldJzGDIg2OxYAWBoFEECDcLkNzfzvLr300S4ZhtQzIliz701Qt3BGvgBgNgoggHp3pLRSE+c79OXe45KkcVfE6KlRsfL39TY5GQBAogACqGerdx7V5LfydLy8SoF+3nr2jr66rX97s2MBAL6DAgigXtS43Hp+1U7NyflGktQnMkSZyQnq0jbI5GQAgO+jAAK4bIdPntbE+Q6t239CknTfVR31u5/2ZuQLAE0UBRDAZflo+xGlvb1BJyuqFWz30bQx/fTTfpFmxwIAXAAFEMAlqXa59bcV2/X3T/ZKkvq2D1VmcoI6tg40ORkA4MdQAAFctAPHKzRhvkN5B05Kkn7xk056YkQv2X0Y+QJAc0ABBHBRPthSqN8u3KDSyhqF+PvoubvidVNsO7NjAQAuAgUQQJ04a1yatny7Xv9snySpf0xLvTQuQTFhLcwNBgC4aBRAAD8q/1iFUrJytelQiSTpoSGd9dubesnPx8vkZACAS0EBBHBByzYV6PF3NqrMWaOWLXz1/F3xGtY7wuxYAIDLQAEEUKvKapf+snSr5n2RL0ka2LGVZo1LUFTLAJOTAQAuFwUQwA/sLS5Xypu52lpQKkn6zXVdlXZjD/l4M/IFAE9AAQRwjvfyDmnqok0qr3KpdaCfXrinv67t0dbsWACAekQBBCDpzMj3j0u2aMHXByRJV3YO06xxCYoI8Tc5GQCgvlEAAWh3UZlS3nRox5Ey2WzShOu7a+L13Rj5AoCHogACFpe9/qCefHezTle71CbIrplj++sn3dqYHQsA0IA84p/3GRkZGjRokIKDgxUeHq7Ro0drx44dP3rc6tWrNWDAAPn7+6tLly565ZVXGiEt0DRUVNVoysINenThBp2udukn3Vpr2aTBlD8AsACPKICrV69WSkqKvvjiC61atUo1NTUaPny4ysvLz3vM3r17NXLkSA0ZMkQOh0NTp07VxIkTlZ2d3YjJAXPsKCzTrZmf6Z31B+Vlk9Ju7KE3fnmlwoO53w8ArMBmGIZhdoj6dvToUYWHh2v16tW65pprat3n8ccf15IlS7Rt27az28aPH68NGzZo7dq1dfo+paWlCg0NVUlJiUJCQuolO9CQDMPQ2+sO6KklW1RZ7VZEiF0zxyboqi6tzY4GAI2G128PvQewpOTMn6sKCws77z5r167V8OHDz9l20003ae7cuaqurpavr+8PjnE6nXI6nWefl5aW1lNioOGdctboycWb9G7eYUnSNT3a6sW749U6yG5yMgBAY/OIEfB3GYahtLQ0DR48WHFxcefdr7CwUBER5/45q4iICNXU1Ki4uLjWYzIyMhQaGnr2ERMTU6/ZgYay9XCpbn3pU72bd1jeXjY9dnNP/euBQZQ/ALAoj7sCmJqaqo0bN+rTTz/90X1tNts5z7+dhn9/+7fS09OVlpZ29nlpaSklEE2aYRh688t8/ek/W1VV41ZkqL9eGpeggZ3Of3UcAOD5PKoATpgwQUuWLNGaNWsUHR19wX3btWunwsLCc7YVFRXJx8dHrVvXfj+U3W6X3c4VEzQPpZXVSl+0SUs3FkiShvUK1/S74tUq0M/kZAAAs3lEATQMQxMmTNDixYuVk5Ojzp07/+gxSUlJev/998/ZtnLlSg0cOLDW+/+A5mTTwRKlzs/V/mMV8vGy6YkRvfSrwZ3Pe3UbAGAtHnEPYEpKiubNm6esrCwFBwersLBQhYWFOn369Nl90tPT9fOf//zs8/Hjx2v//v1KS0vTtm3b9M9//lNz587VlClTzPgRgHphGIb+9dlejZnzufYfq1D7lgFaOD5JDw7pQvkDAJzlEVcA58yZI0m67rrrztn++uuv64EHHpAkFRQUKD8//+zXOnfurGXLlmny5MmaPXu2oqKiNGvWLI0ZM6axYgP1qqSiWo9lb9AHW45Ikob3idBzd8YrtAVXtAEA5/LIzwFsLHyOEJqKvAMnlZqVq4MnTsvX26apI3vrgas7cdUPAGrB67eHXAEErMowDM39dK+mLd+uGrehDmEtlJmcoH7RLc2OBgBowiiAQDN1sqJKUxZu0IfbiiRJP+0bqYwxfRXiz8gXAHBhFECgGVq//7gmZDl0uKRSfj5e+v0tffSzKzsw8gUA1AkFEGhG3G5Dr67Zo+krd8jlNtS5TaAykxMUGxVqdjQAQDNCAQSaiWOnnEp7e4NW7zwqSbqtf5Seub2vguz8bwwAuDi8cgDNwJd7jmniAoeOlDpl9/HSn26L1d0DYxj5AgAuCQUQaMJcbkMvf7xbL364U25D6to2UC/fO0A92wWbHQ0A0IxRAIEm6miZU5PfytOnu4slSWMSo/Xn0bFq4cf/tgCAy8MrCdAEfb67WBMX5Kn4lFMBvt768+g43Tkg2uxYAAAPQQEEmhCX29DM/+7SSx/tkmFIPSOClZmcoO4RjHwBAPWHAgg0EUdKKzVpgUNf7DkuSRo7KEZPjYpVgJ+3yckAAJ6GAgg0Aat3HlXaW3k6Vl6lQD9vPXtHX93Wv73ZsQAAHooCCJioxuXWC6t26uWcbyRJvSNDNDs5QV3aBpmcDADgySiAgEkKSk5r4nyHvt53QpL0s6s66Mmf9pG/LyNfAEDDogACJvho+xE9+vYGnaioVpDdR9PG9NUt/aLMjgUAsAgKINCIql1uPffBDr22Zo8kqW/7UGUmJ6hj60CTkwEArIQCCDSSgycqNGG+Q478k5KkB67upPSRvWT3YeQLAGhcFECgEazcUqgpCzeotLJGIf4++tud8bo5rp3ZsQAAFkUBBBpQVY1bGcu36fXP9kmS4mNaKnNcgmLCWpgbDABgaRRAoIHkH6tQ6vxcbTxYIkl6aEhn/famXvLz8TI5GQDA6iiAQANYtqlAj7+zUWXOGrVs4avpd8brhj4RZscCAEASBRCoV5XVLj2zdJv+74v9kqQBHVvppXEJimoZYHIyAAD+hwII1JO9xeVKeTNXWwtKJUkPX9dVaTf2kK83I18AQNNCAQTqwXt5hzR10SaVV7kUFuinF+6O13U9w82OBQBArSiAwGWorHbp6fe3aP5XByRJV3QO06yxCWoX6m9yMgAAzo8CCFyi3UWnlJqVq+2FZbLZpNSh3TRpWHf5MPIFADRxFEDgEmSvP6gn392s09UutQmya8Y9/TW4exuzYwEAUCcUQOAiVFTV6A/vbdE76w9Kkq7u2lozxvZXeDAjXwBA80EBBOpo55EypbyZq11Fp+Rlkx65oYdShnaTt5fN7GgAAFwUCiDwIwzD0NvrDuipJVtUWe1WeLBdM8cmKKlra7OjAQBwSSiAwAWcctboycWb9G7eYUnSkO5t9OI9/dUmyG5yMgAALh0FEDiPrYdLlZqVqz3F5fL2sunR4T00/pqu8mLkCwBo5iiAwPcYhqGsr/L19PtbVVXjVmSov2aNS9CgTmFmRwMAoF5QAIHvKKus1hOLNmnpxgJJ0vW9wjX9rniFBfqZnAwAgPpDAQT+n82HSpSSlav9xyrk42XTYzf31IODuzDyBQB4HAogLM8wDP378316dtl2Vbncat8yQC8lJyixQyuzowEA0CAogLC0ktPVevydjVqxpVCSNLxPhJ67M16hLXxNTgYAQMOhAMKy8g6cVGpWrg6eOC1fb5umjuytB67uJJuNkS8AwLNRAGE5hmFo7qd7NW35dtW4DXUIa6HM5AT1i25pdjQAABoFBRCWcrKiSlMWbtCH24okSSP7ttO0Mf0U4s/IFwBgHRRAWMb6/cc1IcuhwyWV8vPx0u9v6aOfXdmBkS8AwHIogPB4breh1z7Zo+c+2CGX21DnNoHKTE5QbFSo2dEAADAFBRAe7dgppx5duEE5O45Kkm6Nj9Kzd/RVkJ2lDwCwLl4F4bG+3HNMExc4dKTUKbuPl/54a6zGDoph5AsAsDwKIDyOy23o5Y9368UPd8ptSF3bBmr2vYnq1S7E7GgAADQJXmYHqC9r1qzRqFGjFBUVJZvNpnffffeC++fk5Mhms/3gsX379sYJjAZxtMyp+//5lZ5fdab83ZHYXktSB1P+AAD4Do+5AlheXq74+Hj94he/0JgxY+p83I4dOxQS8r9y0LZt24aIh0bw+e5iTXorT0fLnArw9dafbovVXQNjzI4FAECT4zEFcMSIERoxYsRFHxceHq6WLVvWfyA0Gpfb0Mz/7tJLH+2SYUg9IoI0OzlR3SOCzY4GAECT5DEF8FIlJCSosrJSffr00ZNPPqmhQ4eed1+n0ymn03n2eWlpaWNExAUcKa3UpAUOfbHnuCTpnoEx+uOtsQrw8zY5GQAATZfH3AN4sSIjI/Xaa68pOztbixYtUs+ePTVs2DCtWbPmvMdkZGQoNDT07CMmhvGimdbsPKqRMz/RF3uOq4Wft2bc019/vbMf5Q8AgB9hMwzDMDtEfbPZbFq8eLFGjx59UceNGjVKNptNS5YsqfXrtV0BjImJUUlJyTn3EaJh1bjcevHDnXo55xsZhtQ7MkSzkxPUpW2Q2dEAAM1AaWmpQkNDLf36bfkR8HddddVVmjdv3nm/brfbZbfbGzERvq+g5LQmznfo630nJEn3XtlBv7+lj/x9ueoHAEBdUQC/w+FwKDIy0uwYOI+Ptxcp7e08naioVpDdR9PG9NUt/aLMjgUAQLPjMQXw1KlT2r1799nne/fuVV5ensLCwtShQwelp6fr0KFDeuONNyRJM2bMUKdOnRQbG6uqqirNmzdP2dnZys7ONutHwHlUu9ya/sEOvbpmjyQprn2IMsclqlObQJOTAQDQPHlMAVy3bt057+BNS0uTJN1///3617/+pYKCAuXn55/9elVVlaZMmaJDhw4pICBAsbGxWrp0qUaOHNno2XF+B09UaMJ8hxz5JyVJD1zdSekje8nuw8gXAIBL5ZFvAmks3ETasFZuKdRv39moktPVCvb30XN39tPNcYzoAQCXh9dvD7oCCM9RVeNWxvJtev2zfZKk+OhQZSYnKiashbnBAADwEBRANCn5xyqUOj9XGw+WSJIeHNxZj93cS34+lv3ISgAA6h0FEE3G8k0FeuydjSpz1ig0wFfP3xWvG/pEmB0LAACPQwGE6SqrXXp22Ta9sXa/JGlAx1aaNS5B7VsGmJwMAADPRAGEqfYWlys1K1dbDp/5u8rjr+2qR4f3kK83I18AABoKBRCmWbLhsKYu2qRTzhqFBfrp+bvjNbRnuNmxAADweBRANLrKapeefn+r5n915nMZr+gUplnjEtQu1N/kZAAAWAMFEI1qd9EppWblanthmWw2KXVoN00a1l0+jHwBAGg0FEA0mkW5B/Xku5tVUeVSmyA/vXhPfw3p3tbsWAAAWA4FEA2uoqpGT723RQvXH5QkJXVprZlj+ys8hJEvAABmoACiQe08UqaUN3O1q+iUvGzSpGE9lHp9N3l72cyOBgCAZVEA0SAMw9DCdQf1hyWbVVntVttgu2aNTVBS19ZmRwMAwPIogKh35c4aPfnuZi12HJIkDeneRi/e019tguwmJwMAABIFEPVs6+FSpWblak9xuby9bEq7sYcevrarvBj5AgDQZFAAUS8Mw1DWV/l6+v2tqqpxq12Iv15KTtCgTmFmRwMAAN9DAcRlK6usVvqiTfrPxgJJ0tCebfX83f0VFuhncjIAAFAbCiAuy+ZDJUrJytX+YxXy8bLpsZt76sHBXRj5AgDQhFEAcUkMw9Aba/frmaXbVOVyq33LAM0al6ABHVuZHQ0AAPwICiAuWsnpaj3+zkat2FIoSbqhd4Sm39VPLVsw8gUAoDmgAOKi5B04qdSsXB08cVq+3jalj+itX/ykk2w2Rr4AADQXFEDUiWEYmvvpXv11xXZVuwzFhAUoc1yi4mNamh0NAABcJAogftTJiipNWbhRH247IkkaEddO08b0U2iAr8nJAADApaAA4oLW7z+uCVkOHS6plJ+3l568pbfuu6ojI18AAJoxCiBq5XYbeu2TPXrugx1yuQ11at1CmcmJimsfanY0AABwmSiA+IFjp5x6dOEG5ew4KkkaFR+lZ2+PU7A/I18AADwBBRDn+GrvcU2Yn6sjpU7Zfbz0x1tjNXZQDCNfAAA8CAUQks6MfF/O2a0XVu2U25C6tA3U7ORE9Y4MMTsaAACoZxRA6GiZU2lv5+mTXcWSpDsS2uvPo+MUaGd5AADgiXiFt7jPdxdr0lt5OlrmlL+vl/50W5zuGhDNyBcAAA9GAbQol9vQrP/u0qyPdskwpO7hQXr53kR1jwg2OxoAAGhgFEALKiqt1KQFeVq755gk6e6B0Xr61jgF+HmbnAwAADQGCqDFrNl5VJPfytOx8iq18PPWM7fH6faEaLNjAQCARkQBtIgal1svfrhTL+d8I8OQerULVmZyorqFB5kdDQAANDIKoAUUlJzWpPl5+mrfcUlS8pUd9Idb+sjfl5EvAABWRAH0cB9vL1La23k6UVGtILuPMu7oq1HxUWbHAgAAJqIAeqhql1vTP9ihV9fskSTFtQ9R5rhEdWoTaHIyAABgNgqgBzp08rQmZOUqN/+kJOn+pI6a+tPesvsw8gUAABRAj7Nq6xFNWbhBJaerFezvo7+N6acRfSPNjgUAAJoQCqCHqKpxa9ry7frnZ3slSfHRocpMTlRMWAuTkwEAgKaGAugBDhyvUGpWrjYcLJEk/WpwZz1+cy/5+XiZnAwAADRFFMBmbvmmAj2WvVFllTUKDfDV9LvidWOfCLNjAQCAJowC2ExVVrv07LJtemPtfklSYoeWmjUuQdGtGPkCAIALowA2Q/uKy5WSlasth0slSb++toumDO8pX29GvgAA4MdRAJuZJRsOa+qiTTrlrFGrFr564e7+Gtor3OxYAACgGaEANhOV1S49/f5Wzf8qX5J0RacwzRzXX5GhASYnAwAAzY3HzAzXrFmjUaNGKSoqSjabTe++++6PHrN69WoNGDBA/v7+6tKli1555ZWGD3oJvjl6SqNnf6b5X+XLZpNSh3ZT1kNXUv4AAMAl8ZgCWF5ervj4eGVmZtZp/71792rkyJEaMmSIHA6Hpk6dqokTJyo7O7uBk16cxY6DGvXSp9peWKY2QX5645dXaMpNPeXD/X4AAOASecwIeMSIERoxYkSd93/llVfUoUMHzZgxQ5LUu3dvrVu3TtOnT9eYMWMaKGXdVVTV6Kn3tmjh+oOSpKQurTVzbH+Fh/ibnAwAADR3HlMAL9batWs1fPjwc7bddNNNmjt3rqqrq+Xr6/uDY5xOp5xO59nnpaWlDZJt55EypbyZq11Fp2SzSZOGddeE67vL28vWIN8PAABYi2XniIWFhYqIOPcDkyMiIlRTU6Pi4uJaj8nIyFBoaOjZR0xMTINky/xot3YVnVLbYLvefPBKPXJDD8ofAACoN5YtgJJks51bqgzDqHX7t9LT01VSUnL2ceDAgQbJ9efb4nTngGgtmzhEV3dt0yDfAwAAWJdlR8Dt2rVTYWHhOduKiork4+Oj1q1b13qM3W6X3W5v8GyhLc78STcAAICGYNkrgElJSVq1atU521auXKmBAwfWev8fAACAp/CYAnjq1Cnl5eUpLy9P0pmPecnLy1N+/pkPTk5PT9fPf/7zs/uPHz9e+/fvV1pamrZt26Z//vOfmjt3rqZMmWJGfAAAgEbjMSPgdevWaejQoWefp6WlSZLuv/9+/etf/1JBQcHZMihJnTt31rJlyzR58mTNnj1bUVFRmjVrVpP4CBgAAICGZDO+fecDLlppaalCQ0NVUlKikJAQs+MAAIA64PXbg0bAAAAAqBsKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBiP+VNwZvj2j6iUlpaanAQAANTVt6/bVv5jaBTAy1BWViZJiomJMTkJAAC4WGVlZQoNDTU7hin4W8CXwe126/DhwwoODpbNZqvX/3ZpaaliYmJ04MABy/6dwrriXNUd56ruOFd1x7mqO85V3TXkuTIMQ2VlZYqKipKXlzXvhuMK4GXw8vJSdHR0g36PkJAQfknUEeeq7jhXdce5qjvOVd1xruquoc6VVa/8fcuatRcAAMDCKIAAAAAWQwFsoux2u5566inZ7XazozR5nKu641zVHeeq7jhXdce5qjvOVcPiTSAAAAAWwxVAAAAAi6EAAgAAWAwFEAAAwGIogAAAABZDATTJyy+/rM6dO8vf318DBgzQJ598csH9V69erQEDBsjf319dunTRK6+80khJm4aLOV85OTmy2Ww/eGzfvr0REze+NWvWaNSoUYqKipLNZtO77777o8dYdV1d7Lmy6pqSpIyMDA0aNEjBwcEKDw/X6NGjtWPHjh89zopr61LOlVXX1pw5c9SvX7+zH/KclJSk5cuXX/AYK66phkQBNMFbb72lRx55RL/73e/kcDg0ZMgQjRgxQvn5+bXuv3fvXo0cOVJDhgyRw+HQ1KlTNXHiRGVnZzdycnNc7Pn61o4dO1RQUHD20b1790ZKbI7y8nLFx8crMzOzTvtbeV1d7Ln6ltXWlHTmRTclJUVffPGFVq1apZqaGg0fPlzl5eXnPcaqa+tSztW3rLa2oqOjNW3aNK1bt07r1q3T9ddfr9tuu01btmypdX+rrqkGZaDRXXHFFcb48ePP2darVy/jiSeeqHX/xx57zOjVq9c52379618bV111VYNlbEou9nx9/PHHhiTjxIkTjZCuaZJkLF68+IL7WH1dfasu54o19T9FRUWGJGP16tXn3Ye1dUZdzhVr639atWpl/OMf/6j1a6yp+scVwEZWVVWl9evXa/jw4edsHz58uD7//PNaj1m7du0P9r/pppu0bt06VVdXN1jWpuBSzte3EhISFBkZqWHDhunjjz9uyJjNkpXX1aViTUklJSWSpLCwsPPuw9o6oy7n6ltWXlsul0sLFixQeXm5kpKSat2HNVX/KICNrLi4WC6XSxEREedsj4iIUGFhYa3HFBYW1rp/TU2NiouLGyxrU3Ap5ysyMlKvvfaasrOztWjRIvXs2VPDhg3TmjVrGiNys2HldXWxWFNnGIahtLQ0DR48WHFxcefdj7VV93Nl5bW1adMmBQUFyW63a/z48Vq8eLH69OlT676sqfrnY3YAq7LZbOc8NwzjB9t+bP/atnuqizlfPXv2VM+ePc8+T0pK0oEDBzR9+nRdc801DZqzubH6uqor1tQZqamp2rhxoz799NMf3dfqa6uu58rKa6tnz57Ky8vTyZMnlZ2drfvvv1+rV68+bwm0+pqqb1wBbGRt2rSRt7f3D65eFRUV/eBfN99q165drfv7+PiodevWDZa1KbiU81Wbq666Srt27arveM2alddVfbDampowYYKWLFmijz/+WNHR0Rfc1+pr62LOVW2ssrb8/PzUrVs3DRw4UBkZGYqPj9fMmTNr3dfqa6ohUAAbmZ+fnwYMGKBVq1ads33VqlW6+uqraz0mKSnpB/uvXLlSAwcOlK+vb4NlbQou5XzVxuFwKDIysr7jNWtWXlf1wSpryjAMpaamatGiRfroo4/UuXPnHz3GqmvrUs5Vbayytr7PMAw5nc5av2bVNdWgTHrziaUtWLDA8PX1NebOnWts3brVeOSRR4zAwEBj3759hmEYxhNPPGHcd999Z/ffs2eP0aJFC2Py5MnG1q1bjblz5xq+vr7GO++8Y9aP0Kgu9ny9+OKLxuLFi42dO3camzdvNp544glDkpGdnW3Wj9AoysrKDIfDYTgcDkOS8cILLxgOh8PYv3+/YRisq++62HNl1TVlGIbx8MMPG6GhoUZOTo5RUFBw9lFRUXF2H9bWGZdyrqy6ttLT0401a9YYe/fuNTZu3GhMnTrV8PLyMlauXGkYBmuqMVAATTJ79myjY8eOhp+fn5GYmHjOxwTcf//9xrXXXnvO/jk5OUZCQoLh5+dndOrUyZgzZ04jJzbXxZyvv/71r0bXrl0Nf39/o1WrVsbgwYONpUuXmpC6cX37cRLff9x///2GYbCuvutiz5VV15RhGLWeJ0nG66+/fnYf1tYZl3KurLq2fvnLX579nd62bVtj2LBhZ8ufYbCmGoPNMP7fXZQAAACwBO4BBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYiiAAAAAFkMBBAAAsBgKIAAAgMVQAAEAACyGAggAAGAxFEAAAACLoQACAABYDAUQAADAYv5/gbDSx2THyaEAAAAASUVORK5CYII=">
 <meta property="og:site_name" content="marimo-quarto">
-</head>
+</head><body class="nav-sidebar docked"><marimo-filename hidden=""></marimo-filename>
+<marimo-mode data-mode="read" hidden=""></marimo-mode>
 
-<body class="nav-sidebar docked">
+
+
+
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/markdown_format.html">Markdown</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -160,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../tutorials/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tutorials</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -237,13 +238,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#marimo-in-markdown" id="toc-marimo-in-markdown" class="nav-link active" data-scroll-target="#marimo-in-markdown">marimo in Markdown!</a>
+  <li><a href="#markdown-file-format" id="toc-markdown-file-format" class="nav-link active" data-scroll-target="#markdown-file-format">Markdown file format</a>
   <ul class="collapse">
+  <li><a href="#running-markdown-notebooks" id="toc-running-markdown-notebooks" class="nav-link" data-scroll-target="#running-markdown-notebooks">Running markdown notebooks</a></li>
+  <li><a href="#exporting-from-python" id="toc-exporting-from-python" class="nav-link" data-scroll-target="#exporting-from-python">Exporting from Python</a></li>
+  <li><a href="#creating-python-cells" id="toc-creating-python-cells" class="nav-link" data-scroll-target="#creating-python-cells">Creating Python cells</a></li>
+  <li><a href="#mo-tricks-and-tips" id="toc-mo-tricks-and-tips" class="nav-link" data-scroll-target="#mo-tricks-and-tips"><code>mo</code> tricks and tips</a></li>
   <li><a href="#limitations-of-the-markdown-format" id="toc-limitations-of-the-markdown-format" class="nav-link" data-scroll-target="#limitations-of-the-markdown-format">Limitations of the markdown format</a>
   <ul class="collapse">
   <li><a href="#limitations-on-conversion" id="toc-limitations-on-conversion" class="nav-link" data-scroll-target="#limitations-on-conversion">Limitations on conversion</a></li>
+  <li><a href="#naming-cells" id="toc-naming-cells" class="nav-link" data-scroll-target="#naming-cells">Naming cells</a></li>
+  <li><a href="#sql-in-markdown" id="toc-sql-in-markdown" class="nav-link" data-scroll-target="#sql-in-markdown">SQL in markdown</a></li>
   </ul></li>
-  <li><a href="#more" id="toc-more" class="nav-link" data-scroll-target="#more">More?!</a></li>
+  <li><a href="#converting-back-to-the-python-file-format" id="toc-converting-back-to-the-python-file-format" class="nav-link" data-scroll-target="#converting-back-to-the-python-file-format">Converting back to the Python file format</a></li>
+  <li><a href="#more-on-markdown" id="toc-more-on-markdown" class="nav-link" data-scroll-target="#more-on-markdown">More on markdown</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -270,107 +278,159 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="marimo-in-markdown" class="level1">
-<h1>marimo in Markdown!</h1>
-<p>Everything in marimo is pure Python, but sometimes, annotating your notebook in markdown can be a little cumbersome. <!----> For example, here’s the code that rendered the above title and paragraph:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in">mo.md(</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">    '''</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">    # marimo in Markdown!</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="in">    Everything in marimo is pure Python, but sometimes, annotating your notebook</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">    in markdown can be a little cumbersome.</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">    '''</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>with markdown notebook support for marimo, you can write and save markdown directly, and marimo will execute the necessary Python code for you behind the scenes. This allows you to focus on prose, and not formatting your text in a block string. <!----> ## Python cells in markdown</p>
+<section id="markdown-file-format" class="level1">
+<h1>Markdown file format</h1>
+<p>By default, marimo notebooks are stored as pure Python files. However, you can also store and edit marimo notebooks as <code>.md</code> files, letting you work on prose-heavy marimo notebooks in your editor of choice.</p>
+<p><em>Make sure to look at the markdown <a href="https://github.com/marimo-team/marimo/blob/main/marimo/_tutorials/markdown_format.md">source code</a> of this tutorial!</em></p>
+<section id="running-markdown-notebooks" class="level2">
+<h2 class="anchored" data-anchor-id="running-markdown-notebooks">Running markdown notebooks</h2>
+<p>To edit a markdown notebook, use</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo edit notebook.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To run it as an app, use</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo run notebook.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!---->
+</section>
+<section id="exporting-from-python" class="level2">
+<h2 class="anchored" data-anchor-id="exporting-from-python">Exporting from Python</h2>
+<p>You can export marimo notebooks that are stored as Python to the markdown format by running the following command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo export md notebook.py <span class="op">&gt;</span> notebook.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!---->
+</section>
+<section id="creating-python-cells" class="level2">
+<h2 class="anchored" data-anchor-id="creating-python-cells">Creating Python cells</h2>
 <p>When you do need to create a Python cell in the markdown format, you can use a special code block:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">import matplotlib.pyplot as plt</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">plt.plot([1, 2, 3, 4])</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">import matplotlib.pyplot as plt</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">plt.plot([1, 2, 3, 4])</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will create the following cell:</p>
 <marimo-island data-app-id="main" data-cell-id="Hbol" data-reactive="true">
     <marimo-cell-output>
-    <img src="data:image/png;base64,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">
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;No module named 'matplotlib'&quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: null, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
     </marimo-cell-output>
-    <marimo-cell-code hidden="">import%20matplotlib.pyplot%20as%20plt%0Aplt.plot(%5B1%2C%202%2C%203%2C%204%5D)%0Aplt.gca()</marimo-cell-code>
+    <marimo-cell-code hidden="">import%20matplotlib.pyplot%20as%20plt%0A%0Aplt.plot(%5B1%2C%202%2C%203%2C%204%5D)%0Aplt.gca()</marimo-cell-code>
 </marimo-island>
-<p>As long as your code block contains the word <code>python</code> in a brace, like <code>{.python.marimo}</code>, or <code>{.python note="Whatever you want"}</code>, marimo will treat it as a Python cell. <!----> ## Exporting from Python</p>
-<p>Do you have a notebook that you think might better be suited for a markdown notebook? You can export your notebook to markdown by running the following code:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo export md my_marimo.py <span class="op">&gt;</span> my_marimo.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>by default, marimo will extract your markdown cells, and wrap your Python cells in <code>{.python.marimo}</code> code blocks. Although <code>{.python.marimo}</code> might be more concise, this format is chosen such that code highlighting will work in your favourite IDE. <!----> ## <code>mo</code> tricks and tips</p>
-<p>You can break up markdown into multiple cells by using an empty html tag <code>&lt;!----&gt;</code>: <!----> View the source of this notebook to see how this cell was created. <!----> You can still hide and disable code cells in markdown notebooks:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo hide_code="true"}</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">import pandas as pd</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As long as your code block contains the word <code>marimo</code> in a brace, like <code>{marimo}</code>, or <code>{.marimo note="Whatever you want"}</code>, marimo will treat it as a Python cell.</p>
+</section>
+<section id="mo-tricks-and-tips" class="level2">
+<h2 class="anchored" data-anchor-id="mo-tricks-and-tips"><code>mo</code> tricks and tips</h2>
+<p>You can break up markdown into multiple cells by using an empty html tag <code>&lt;!----&gt;</code>: <!----> View the source of this notebook to see how this cell was created. <!----> You can still hide cell code in markdown notebooks:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="in">form = (</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="in">    # ...</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="in">    # Just something a bit more complicated</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">    # you might not want to see in the editor.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="in">    # ...</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="in">form</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <marimo-island data-app-id="main" data-cell-id="MJUe" data-reactive="true">
-    <marimo-cell-output>
-    <table class="dataframe table table-sm table-striped small"><thead><tr><th></th><th>a</th><th>b</th></tr></thead><tbody><tr><th>0</th><td>1</td><td>4</td></tr><tr><th>1</th><td>2</td><td>5</td></tr><tr><th>2</th><td>3</td><td>6</td></tr></tbody></table>
-    </marimo-cell-output>
-    <marimo-cell-code hidden="">import%20pandas%20as%20pd%0Apd.DataFrame(%7B'a'%3A%20%5B1%2C%202%2C%203%5D%2C%20'b'%3A%20%5B4%2C%205%2C%206%5D%7D)</marimo-cell-code>
-</marimo-island>
-<div class="sourceCode" id="cb5"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo disabled="true"}</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell is disabled, there should be no output!")</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+            <marimo-cell-output>
+            <marimo-ui-element object-id="MJUe-8" random-id="7e7afde6-5aab-bb7b-921e-6335665b88bd"><marimo-form data-initial-value="null" data-label="null" data-element-id="&quot;MJUe-7&quot;" data-loading="false" data-bordered="false" data-submit-button-label="&quot;Submit&quot;" data-submit-button-disabled="false" data-clear-on-submit="false" data-show-clear-button="true" data-clear-button-label="&quot;Clear&quot;" data-should-validate="false"><marimo-ui-element object-id="MJUe-7" random-id="768f40af-1ceb-74c1-a3e0-694207e1a229"><marimo-dict data-initial-value="{&quot;markdown_is_awesome&quot;: &quot;&quot;, &quot;marimo_is_amazing&quot;: 11}" data-label="null" data-element-ids="{&quot;MJUe-5&quot;: &quot;markdown_is_awesome&quot;, &quot;MJUe-6&quot;: &quot;marimo_is_amazing&quot;}"><span class="markdown prose dark:prose-invert"><span class="paragraph"><strong>Just how great is markdown?.</strong></span>
+<span class="paragraph"><marimo-ui-element object-id="MJUe-5" random-id="f0fbf123-9ffb-608b-c851-bcbb3dac88a4"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>How much do you like markdown?</span></span>&quot;" data-placeholder="&quot;It is pretty swell \ud83c\udf0a&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element></span>
+<span class="paragraph"><marimo-ui-element object-id="MJUe-6" random-id="d1446a4e-783a-e1cb-907b-6fe97dd8734a"><marimo-slider data-initial-value="11" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>How much do you like marimo?</span></span>&quot;" data-start="0" data-stop="11" data-steps="[]" data-debounce="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span></marimo-dict></marimo-ui-element></marimo-form></marimo-ui-element>
+            </marimo-cell-output>
+            <marimo-cell-code hidden="">form%20%3D%20(%0A%20%20%20%20mo.md('''%0A%20%20%20%20**Just%20how%20great%20is%20markdown%3F.**%0A%0A%20%20%20%20%7Bmarkdown_is_awesome%7D%0A%0A%20%20%20%20%7Bmarimo_is_amazing%7D%0A''')%0A%20%20%20%20.batch(%0A%20%20%20%20%20%20%20%20markdown_is_awesome%3Dmo.ui.text(label%3D%22How%20much%20do%20you%20like%20markdown%3F%22%2C%20placeholder%3D%22It%20is%20pretty%20swell%20%F0%9F%8C%8A%22)%2C%0A%20%20%20%20%20%20%20%20marimo_is_amazing%3Dmo.ui.slider(label%3D%22How%20much%20do%20you%20like%20marimo%3F%22%2C%20start%3D0%2C%20stop%3D11%2C%20value%3D11)%2C%0A%20%20%20%20)%0A%20%20%20%20.form(show_clear_button%3DTrue%2C%20bordered%3DFalse)%0A)%0Aform</marimo-cell-code>
+        </marimo-island>
+<p>and disable cells too:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo disabled="true"}</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell is disabled, there should be no output!")</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <p>Additionally, marimo knows when your code has a syntax issue:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell has a syntax error"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and on notebook save, will annotate the cell for you:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo unparseable="true"}</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell has a syntax error"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and on notebook save, will annotate the cell for you:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo unparseable="true"}</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell has a syntax error"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
+</section>
 <section id="limitations-of-the-markdown-format" class="level2">
 <h2 class="anchored" data-anchor-id="limitations-of-the-markdown-format">Limitations of the markdown format</h2>
-<p>marimo’s markdown support treats markdown as just plain old markdown. This means that trying to use string interpolation (like this <code>f"{'🍃' * 7}"</code>) will just give you the raw string. This is a benefit, as you can clearly delineate what values are supposed to be computed, and what values are static;</p>
-<p>and there’s nothing stopping you from executing python to achieve the same effect,</p>
-<marimo-island data-app-id="main" data-cell-id="vblA" data-reactive="true">
+<p>marimo’s markdown support treats markdown as just plain old markdown. This means that trying to use string interpolation (like this <code>f"{'🍃' * 7}"</code>) will just give you the raw string. This lets you clearly delineate what values are supposed to be computed, and what values are static. To interpolate Python values, just use a Python cell:</p>
+<marimo-island data-app-id="main" data-cell-id="bkHC" data-reactive="true">
     <marimo-cell-output>
-    <pre style="font-size: 12px">🍃🍃🍃🍃🍃🍃🍃</pre>
+    <span class="markdown prose dark:prose-invert"><span class="paragraph">Like so: 🍃🍃🍃🍃🍃🍃🍃</span></span>
     </marimo-cell-output>
-    <marimo-cell-code hidden="">'%F0%9F%8D%83'%20*%207</marimo-cell-code>
+    <marimo-cell-code hidden="">mo.md(f%22%22%22Like%20so%3A%20%7B%22%F0%9F%8D%83%22%20*%207%7D%22%22%22)</marimo-cell-code>
 </marimo-island>
 <section id="limitations-on-conversion" class="level3">
 <h3 class="anchored" data-anchor-id="limitations-on-conversion">Limitations on conversion</h3>
 <p>Whenever you try to implement a cell block like this:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">mo.md("This is a markdown cell")</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="in">mo.md("This is a markdown cell")</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The markdown format will know to automatically keep this as markdown. However, some ambiguous cases can’t be converted to markdown like this:</p>
-<marimo-island data-app-id="main" data-cell-id="bkHC" data-reactive="true">
+<marimo-island data-app-id="main" data-cell-id="lEQa" data-reactive="true">
             <marimo-cell-output>
-            <span class="markdown"><span class="paragraph">This is a markdown cell with an execution block in it
-<div class="codehilite"><pre><span></span><code># To ambiguous to convert
+            <span class="markdown prose dark:prose-invert"><span class="paragraph">This is a markdown cell with an execution block in it
+<div class="marimo codehilite"><pre><span></span><code><span class="c1"># Too ambiguous to convert</span>
 </code></pre></div></span></span>
             </marimo-cell-output>
-            <marimo-cell-code hidden="">mo.md(%22%22%22%0A%20%20This%20is%20a%20markdown%20cell%20with%20an%20execution%20block%20in%20it%0A%20%20%60%60%60%7B.python.marimo%7D%0A%20%20%23%20To%20ambiguous%20to%20convert%0A%20%20%60%60%60%0A%20%20%22%22%22)</marimo-cell-code>
+            <marimo-cell-code hidden="">mo.md(%0A%20%20%20%20%22%22%22%0A%20%20%20%20This%20is%20a%20markdown%20cell%20with%20an%20execution%20block%20in%20it%0A%20%20%20%20%60%60%60python%20%7B.marimo%7D%0A%20%20%20%20%23%20Too%20ambiguous%20to%20convert%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
         </marimo-island>
-<p>It’s not likely that you’ll run into this issue, but rest assured that marimo is working behind the scenes to keep your notebooks unambiguous and clean as possible. <!----> ### More limitations</p>
+<p>It’s not likely that you’ll run into this issue, but rest assured that marimo is working behind the scenes to keep your notebooks unambiguous and clean as possible. <!----> ### Saving multicolumn mode</p>
+<p>Multicolumn mode works, but the first cell in a column must be a python cell in order to specify column start and to save correctly:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo column="1"}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="in">print("First cell in column 1")</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!---->
+</section>
+<section id="naming-cells" class="level3">
+<h3 class="anchored" data-anchor-id="naming-cells">Naming cells</h3>
 <p>Since the markdown notebook really is just markdown, you can’t import from a markdown notebook cells like you can in a python notebook; but you can still give your cells a name:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo name="maybe"}</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 🎵 Hey, I just met you, and this is crazy</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<marimo-island data-app-id="main" data-cell-id="lEQa" data-reactive="true">
+<div class="sourceCode" id="cb11"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="maybe"}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="in"># 🎵 Hey, I just met you, and this is crazy</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<marimo-island data-app-id="main" data-cell-id="PKri" data-reactive="true">
     <marimo-cell-output>
+    <span></span>
     </marimo-cell-output>
     <marimo-cell-code hidden="">%23%20But%20here's%20my%20%60cell_id%60%2C%20so%20call%20me%2C%20%60maybe%60%20%F0%9F%8E%B6</marimo-cell-code>
 </marimo-island>
-<p>you can even run a notebook:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo run my_marimo.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>the markdown format is supposed to lower the barrier for writing text heavy documents, it’s not meant to be a full replacement for the python notebook format. You can always convert back to a python notebook if you need to:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo convert my_marimo.md <span class="op">&gt;</span> my_marimo.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sql-in-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="sql-in-markdown">SQL in markdown</h3>
+<p>You can also run SQL queries in markdown cells through marimo, using a <code>sql</code> code block. For instance:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo}</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="in">SELECT GREATEST(x, y), SQRT(z) from uniformly_random_numbers</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The resultant distribution may be surprising! 🎲<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+
+<p>In this SQL format, Python variable interpolation in SQL queries occurs automatically. Additionally, query results can be assigned to a dataframe with the <code>query</code> attribute. For instance, here’s how to create a random uniform distribution and assign it to the dataframe <code>uniformly_random_numbers</code> used above:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo query="uniformly_random_numbers" hide_output="true"}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="in">SELECT i.range::text AS id,</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">       random() AS x,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="in">       random() AS y,</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="in">       random() AS z</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="in">FROM</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="in">    -- Note sample_count comes from the slider below!</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="in">    range(1, {sample_count.value + 1}) i;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can learn more about other SQL use in the SQL tutorial (<code>marimo tutorial sql</code>)</p>
+<marimo-island data-app-id="main" data-cell-id="SFPL" data-reactive="true">
+    <marimo-cell-output>
+    <marimo-ui-element object-id="SFPL-0" random-id="b4cf960c-e94a-a402-fb87-901393773d1f"><marimo-slider data-initial-value="1000" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Sample Count</span></span>&quot;" data-start="1" data-stop="1000" data-steps="[]" data-debounce="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-full-width="false"></marimo-slider></marimo-ui-element>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">sample_count%20%3D%20mo.ui.slider(1%2C%201000%2C%20value%3D1000%2C%20label%3D%22Sample%20Count%22)%0Asample_count</marimo-cell-code>
+</marimo-island>
+
+</section>
+</section>
+<section id="converting-back-to-the-python-file-format" class="level2">
+<h2 class="anchored" data-anchor-id="converting-back-to-the-python-file-format">Converting back to the Python file format</h2>
+<p>The markdown format is supposed to lower the barrier for writing text heavy documents, it’s not meant to be a full replacement for the Python notebook format. You can always convert back to a Python notebook if you need to:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo convert my_marimo.md <span class="op">&gt;</span> my_marimo.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!---->
 </section>
-</section>
-<section id="more" class="level2">
-<h2 class="anchored" data-anchor-id="more">More?!</h2>
-<p>Be sure to checkout the markdown.py tutorial for more information on to type-set and render markdown in marimo.</p>
-<marimo-island data-app-id="main" data-cell-id="PKri" data-reactive="true">
+<section id="more-on-markdown" class="level2">
+<h2 class="anchored" data-anchor-id="more-on-markdown">More on markdown</h2>
+<p>Be sure to checkout the markdown.py tutorial (<code>marimo tutorial markdown</code>) for more information on to type-set and render markdown in marimo.</p>
+<marimo-island data-app-id="main" data-cell-id="RGSE" data-reactive="true">
     <marimo-cell-output>
+    <span></span>
     </marimo-cell-output>
     <marimo-cell-code hidden="">import%20marimo%20as%20mo</marimo-cell-code>
 </marimo-island>
@@ -381,7 +441,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The general distributions should be the same<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -417,18 +483,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -460,7 +515,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -514,12 +589,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("github:marimo-team\/quarto-marimo");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -616,7 +691,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -854,207 +928,273 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Markdown</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">marimo-version:</span><span class="co"> 0.4.11</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - marimo</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># marimo in Markdown!</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>Everything in marimo is pure Python, but sometimes, annotating your notebook</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>in markdown can be a little cumbersome.</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>For example, here's the code that rendered the above title and</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>paragraph:</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="in">mo.md(</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="in">    '''</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="in">    # marimo in Markdown!</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="in">    Everything in marimo is pure Python, but sometimes, annotating your notebook</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="in">    in markdown can be a little cumbersome.</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="in">    '''</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>with markdown notebook support for marimo, you can write and save markdown</span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>directly, and marimo will execute the necessary Python code for you behind the</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>scenes. This allows you to focus on prose, and not formatting your text in a block</span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>string.</span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Python cells in markdown</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>When you do need to create a Python cell in the markdown format, you can use a</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>special code block:</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="in">import matplotlib.pyplot as plt</span></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="in">plt.plot([1, 2, 3, 4])</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>This will create the following cell:</span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="in">import matplotlib.pyplot as plt</span></span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="in">plt.plot([1, 2, 3, 4])</span></span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="in">plt.gca()</span></span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>As long as your code block contains the word <span class="in">`python`</span> in a brace, like</span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="in">`{.python.marimo}`</span>, or <span class="in">`{.python note="Whatever you want"}`</span>, marimo will treat it as a</span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>Python cell.</span>
-<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exporting from Python</span></span>
-<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>Do you have a notebook that you think might better be suited for a markdown notebook?</span>
-<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>You can export your notebook to markdown by running the following code:</span>
-<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo export md my_marimo.py <span class="op">&gt;</span> my_marimo.md</span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>by default, marimo will extract your markdown cells, and wrap your Python cells</span>
-<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>in <span class="in">`{.python.marimo}`</span> code blocks. Although <span class="in">`{.python.marimo}`</span> might be more concise,</span>
-<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>this format is chosen such that code highlighting will work in your favourite</span>
-<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>IDE.</span>
-<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## `mo` tricks and tips</span></span>
-<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>You can break up markdown into multiple cells by using an empty html tag <span class="in">`&lt;!----&gt;`</span>:</span>
-<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>View the source of this notebook to see how this cell was created.</span>
-<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>You can still hide and disable code cells in markdown notebooks:</span>
-<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
-<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo hide_code="true"}</span></span>
-<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a><span class="in">import pandas as pd</span></span>
-<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="in">pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})</span></span>
-<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo hide_code="true"}</span></span>
-<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="in">import pandas as pd</span></span>
-<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a><span class="in">pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})</span></span>
-<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
-<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo disabled="true"}</span></span>
-<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell is disabled, there should be no output!")</span></span>
-<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo disabled="true"}</span></span>
-<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell is disabled, there should be no output!")</span></span>
-<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>Additionally, marimo knows when your code has a syntax issue:</span>
-<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
-<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell has a syntax error"</span></span>
-<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a>and on notebook save, will annotate the cell for you:</span>
-<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
-<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo unparseable="true"}</span></span>
-<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell has a syntax error"</span></span>
-<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo unparsable="true" disabled="true"}</span></span>
-<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: true</span></span>
-<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a><span class="in"># This won't actually run with islands. Disabled.</span></span>
-<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell has a syntax error"</span></span>
-<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limitations of the markdown format</span></span>
-<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a>marimo's markdown support treats markdown as just plain old markdown. This</span>
-<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a>means that trying to use string interpolation (like this <span class="in">`f"{'🍃' * 7}"`</span>) will</span>
-<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a>just give you the raw string. This is a benefit, as you can clearly delineate</span>
-<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a>what values are supposed to be computed, and what values are static;</span>
-<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a>and there's nothing stopping you from executing python to achieve the same effect,</span>
-<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a><span class="in">'🍃' * 7</span></span>
-<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### Limitations on conversion</span></span>
-<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>Whenever you try to implement a cell block like this:</span>
-<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
-<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo}</span></span>
-<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a><span class="in">mo.md("This is a markdown cell")</span></span>
-<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a>The markdown format will know to automatically keep this as markdown. However,</span>
-<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a>some ambiguous cases can't be converted to markdown like this:</span>
-<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a><span class="in">````{.python.marimo}</span></span>
-<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a><span class="in">mo.md("""</span></span>
-<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a><span class="in">  This is a markdown cell with an execution block in it</span></span>
-<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a><span class="in">  ```{.python.marimo}</span></span>
-<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a><span class="in">  # To ambiguous to convert</span></span>
-<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a><span class="in">  ```</span></span>
-<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a><span class="in">  """)</span></span>
-<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a>It's not likely that you'll run into this issue, but rest assured that marimo</span>
-<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a>is working behind the scenes to keep your notebooks unambiguous and clean as</span>
-<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a>possible.</span>
-<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a><span class="fu">### More limitations</span></span>
-<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a>Since the markdown notebook really is just markdown, you can't import from a</span>
-<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a>markdown notebook cells like you can in a python notebook; but you can still</span>
-<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a>give your cells a name:</span>
-<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
-<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo name="maybe"}</span></span>
-<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a><span class="in"># 🎵 Hey, I just met you, and this is crazy</span></span>
-<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo name="maybe"}</span></span>
-<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a><span class="in"># But here's my `cell_id`, so call me, `maybe` 🎶</span></span>
-<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a>you can even run a notebook:</span>
-<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo run my_marimo.md</span>
-<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a>the markdown format is supposed to lower the barrier for writing text heavy</span>
-<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a>documents, it's not meant to be a full replacement for the python notebook</span>
-<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a>format. You can always convert back to a python notebook if you need to:</span>
-<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo convert my_marimo.md <span class="op">&gt;</span> my_marimo.py</span>
-<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a><span class="fu">## More?!</span></span>
-<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a>Be sure to checkout the markdown.py tutorial for more information on to type-set</span>
-<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a>and render markdown in marimo.</span>
-<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python.marimo hide_code="true"}</span></span>
-<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a><span class="in">import marimo as mo</span></span>
-<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Markdown</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="an">marimo-version:</span><span class="co"> 0.10.19</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">    - marimo</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># Markdown file format</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>By default, marimo notebooks are stored as pure Python files. However,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>you can also store and edit marimo notebooks as <span class="in">`.md`</span> files, letting you</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>work on prose-heavy marimo notebooks in your editor of choice.</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>_Make sure to look at the markdown</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">source code</span><span class="co">](https://github.com/marimo-team/marimo/blob/main/marimo/_tutorials/markdown_format.md)</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>of this tutorial!_</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Running markdown notebooks</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>To edit a markdown notebook, use</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo edit notebook.md</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>To run it as an app, use</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo run notebook.md</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exporting from Python</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>You can export marimo notebooks that are stored as Python to the markdown format</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>by running the following command:</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo export md notebook.py <span class="op">&gt;</span> notebook.md</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Creating Python cells</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>When you do need to create a Python cell in the markdown format, you can use a</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>special code block:</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a><span class="in">import matplotlib.pyplot as plt</span></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a><span class="in">plt.plot([1, 2, 3, 4])</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>This will create the following cell:</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a><span class="in">import matplotlib.pyplot as plt</span></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a><span class="in">plt.plot([1, 2, 3, 4])</span></span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a><span class="in">plt.gca()</span></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>As long as your code block contains the word <span class="in">`marimo`</span> in a brace, like</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a><span class="in">`{marimo}`</span>, or <span class="in">`{.marimo note="Whatever you want"}`</span>, marimo will treat it as a Python cell.</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## `mo` tricks and tips</span></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>You can break up markdown into multiple cells by using an empty html tag <span class="in">`&lt;!----&gt;`</span>:</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>View the source of this notebook to see how this cell was created.</span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>You can still hide cell code in markdown notebooks:</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a><span class="in">form = (</span></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a><span class="in">    # ...</span></span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a><span class="in">    # Just something a bit more complicated</span></span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a><span class="in">    # you might not want to see in the editor.</span></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a><span class="in">    # ...</span></span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a><span class="in">form</span></span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a><span class="in">form = (</span></span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a><span class="in">    mo.md('''</span></span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="in">    **Just how great is markdown?.**</span></span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a><span class="in">    {markdown_is_awesome}</span></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a><span class="in">    {marimo_is_amazing}</span></span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a><span class="in">''')</span></span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a><span class="in">    .batch(</span></span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a><span class="in">        markdown_is_awesome=mo.ui.text(label="How much do you like markdown?", placeholder="It is pretty swell 🌊"),</span></span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a><span class="in">        marimo_is_amazing=mo.ui.slider(label="How much do you like marimo?", start=0, stop=11, value=11),</span></span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a><span class="in">    .form(show_clear_button=True, bordered=False)</span></span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a><span class="in">form</span></span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a>and disable cells too:</span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo disabled="true"}</span></span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell is disabled, there should be no output!")</span></span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo disabled="true"}</span></span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell is disabled, there should be no output!")</span></span>
+<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a>Additionally, marimo knows when your code has a syntax issue:</span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
+<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell has a syntax error"</span></span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a>and on notebook save, will annotate the cell for you:</span>
+<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo unparseable="true"}</span></span>
+<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell has a syntax error"</span></span>
+<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo unparsable="true"}</span></span>
+<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a><span class="in">print("This code cell has a syntax error"</span></span>
+<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limitations of the markdown format</span></span>
+<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a>marimo's markdown support treats markdown as just plain old markdown. This</span>
+<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a>means that trying to use string interpolation (like this <span class="in">`f"{'🍃' * 7}"`</span>) will</span>
+<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a>just give you the raw string. This lets you clearly delineate what values are</span>
+<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a>supposed to be computed, and what values are static. To interpolate Python</span>
+<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a>values, just use a Python cell:</span>
+<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
+<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a><span class="in">mo.md(f"""Like so: {"🍃" * 7}""")</span></span>
+<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### Limitations on conversion</span></span>
+<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a>Whenever you try to implement a cell block like this:</span>
+<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
+<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a><span class="in">mo.md("This is a markdown cell")</span></span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a>The markdown format will know to automatically keep this as markdown. However,</span>
+<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a>some ambiguous cases can't be converted to markdown like this:</span>
+<span id="cb15-159"><a href="#cb15-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-160"><a href="#cb15-160" aria-hidden="true" tabindex="-1"></a><span class="in">````python {.marimo}</span></span>
+<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a><span class="in">mo.md(</span></span>
+<span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a><span class="in">    """</span></span>
+<span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a><span class="in">    This is a markdown cell with an execution block in it</span></span>
+<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a><span class="in">    ```python {.marimo}</span></span>
+<span id="cb15-165"><a href="#cb15-165" aria-hidden="true" tabindex="-1"></a><span class="in">    # Too ambiguous to convert</span></span>
+<span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a><span class="in">    """</span></span>
+<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a>It's not likely that you'll run into this issue, but rest assured that marimo</span>
+<span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a>is working behind the scenes to keep your notebooks unambiguous and clean as</span>
+<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a>possible.</span>
+<span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a><span class="fu">### Saving multicolumn mode</span></span>
+<span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-177"><a href="#cb15-177" aria-hidden="true" tabindex="-1"></a>Multicolumn mode works, but the first cell in a column must be a python cell in</span>
+<span id="cb15-178"><a href="#cb15-178" aria-hidden="true" tabindex="-1"></a>order to specify column start and to save correctly:</span>
+<span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo column="1"}</span></span>
+<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a><span class="in">print("First cell in column 1")</span></span>
+<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### Naming cells</span></span>
+<span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a>Since the markdown notebook really is just markdown, you can't import from a</span>
+<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a>markdown notebook cells like you can in a python notebook; but you can still</span>
+<span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a>give your cells a name:</span>
+<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="maybe"}</span></span>
+<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a><span class="in"># 🎵 Hey, I just met you, and this is crazy</span></span>
+<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="maybe"}</span></span>
+<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a><span class="in"># But here's my `cell_id`, so call me, `maybe` 🎶</span></span>
+<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-201"><a href="#cb15-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-202"><a href="#cb15-202" aria-hidden="true" tabindex="-1"></a><span class="fu">### SQL in markdown</span></span>
+<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a>You can also run SQL queries in markdown cells through marimo, using a <span class="in">`sql`</span> code block. For instance:</span>
+<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo}</span></span>
+<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a><span class="in">SELECT GREATEST(x, y), SQRT(z) from uniformly_random_numbers</span></span>
+<span id="cb15-209"><a href="#cb15-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-210"><a href="#cb15-210" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-211"><a href="#cb15-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-212"><a href="#cb15-212" aria-hidden="true" tabindex="-1"></a>The resultant distribution may be surprising! 🎲<span class="ot">[^surprise]</span></span>
+<span id="cb15-213"><a href="#cb15-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-214"><a href="#cb15-214" aria-hidden="true" tabindex="-1"></a><span class="ot">[^surprise]: </span>The general distributions should be the same</span>
+<span id="cb15-215"><a href="#cb15-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-216"><a href="#cb15-216" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo}</span></span>
+<span id="cb15-217"><a href="#cb15-217" aria-hidden="true" tabindex="-1"></a><span class="in">SELECT GREATEST(a, b), SQRT(c) from uniformly_random_numbers</span></span>
+<span id="cb15-218"><a href="#cb15-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-219"><a href="#cb15-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-220"><a href="#cb15-220" aria-hidden="true" tabindex="-1"></a>In this SQL format, Python variable interpolation in SQL queries occurs automatically. Additionally, query results can be assigned to a dataframe with the <span class="in">`query`</span> attribute.</span>
+<span id="cb15-221"><a href="#cb15-221" aria-hidden="true" tabindex="-1"></a>For instance, here's how to create a random uniform distribution and assign it to the dataframe <span class="in">`uniformly_random_numbers`</span> used above:</span>
+<span id="cb15-222"><a href="#cb15-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-223"><a href="#cb15-223" aria-hidden="true" tabindex="-1"></a><span class="in">````md</span></span>
+<span id="cb15-224"><a href="#cb15-224" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo query="uniformly_random_numbers" hide_output="true"}</span></span>
+<span id="cb15-225"><a href="#cb15-225" aria-hidden="true" tabindex="-1"></a><span class="in">SELECT i.range::text AS id,</span></span>
+<span id="cb15-226"><a href="#cb15-226" aria-hidden="true" tabindex="-1"></a><span class="in">       random() AS x,</span></span>
+<span id="cb15-227"><a href="#cb15-227" aria-hidden="true" tabindex="-1"></a><span class="in">       random() AS y,</span></span>
+<span id="cb15-228"><a href="#cb15-228" aria-hidden="true" tabindex="-1"></a><span class="in">       random() AS z</span></span>
+<span id="cb15-229"><a href="#cb15-229" aria-hidden="true" tabindex="-1"></a><span class="in">FROM</span></span>
+<span id="cb15-230"><a href="#cb15-230" aria-hidden="true" tabindex="-1"></a><span class="in">    -- Note sample_count comes from the slider below!</span></span>
+<span id="cb15-231"><a href="#cb15-231" aria-hidden="true" tabindex="-1"></a><span class="in">    range(1, {sample_count.value + 1}) i;</span></span>
+<span id="cb15-232"><a href="#cb15-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-233"><a href="#cb15-233" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb15-234"><a href="#cb15-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-235"><a href="#cb15-235" aria-hidden="true" tabindex="-1"></a>You can learn more about other SQL use in the SQL tutorial (<span class="in">`marimo tutorial sql`</span>)</span>
+<span id="cb15-236"><a href="#cb15-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-237"><a href="#cb15-237" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb15-238"><a href="#cb15-238" aria-hidden="true" tabindex="-1"></a><span class="in">sample_count = mo.ui.slider(1, 1000, value=1000, label="Sample Count")</span></span>
+<span id="cb15-239"><a href="#cb15-239" aria-hidden="true" tabindex="-1"></a><span class="in">sample_count</span></span>
+<span id="cb15-240"><a href="#cb15-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-241"><a href="#cb15-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-242"><a href="#cb15-242" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo query="uniformly_random_numbers" hide_output="True"}</span></span>
+<span id="cb15-243"><a href="#cb15-243" aria-hidden="true" tabindex="-1"></a><span class="in">SELECT i.range::text AS id,</span></span>
+<span id="cb15-244"><a href="#cb15-244" aria-hidden="true" tabindex="-1"></a><span class="in">       random() AS a,</span></span>
+<span id="cb15-245"><a href="#cb15-245" aria-hidden="true" tabindex="-1"></a><span class="in">       random() AS b,</span></span>
+<span id="cb15-246"><a href="#cb15-246" aria-hidden="true" tabindex="-1"></a><span class="in">       random() AS c</span></span>
+<span id="cb15-247"><a href="#cb15-247" aria-hidden="true" tabindex="-1"></a><span class="in">FROM range(1, {sample_count.value + 1}) i;</span></span>
+<span id="cb15-248"><a href="#cb15-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-249"><a href="#cb15-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-250"><a href="#cb15-250" aria-hidden="true" tabindex="-1"></a><span class="fu">## Converting back to the Python file format</span></span>
+<span id="cb15-251"><a href="#cb15-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-252"><a href="#cb15-252" aria-hidden="true" tabindex="-1"></a>The markdown format is supposed to lower the barrier for writing text heavy</span>
+<span id="cb15-253"><a href="#cb15-253" aria-hidden="true" tabindex="-1"></a>documents, it's not meant to be a full replacement for the Python notebook</span>
+<span id="cb15-254"><a href="#cb15-254" aria-hidden="true" tabindex="-1"></a>format. You can always convert back to a Python notebook if you need to:</span>
+<span id="cb15-255"><a href="#cb15-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-256"><a href="#cb15-256" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb15-257"><a href="#cb15-257" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> marimo convert my_marimo.md <span class="op">&gt;</span> my_marimo.py</span>
+<span id="cb15-258"><a href="#cb15-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-259"><a href="#cb15-259" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb15-260"><a href="#cb15-260" aria-hidden="true" tabindex="-1"></a><span class="fu">## More on markdown</span></span>
+<span id="cb15-261"><a href="#cb15-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-262"><a href="#cb15-262" aria-hidden="true" tabindex="-1"></a>Be sure to checkout the markdown.py tutorial (<span class="in">`marimo tutorial markdown`</span>) for</span>
+<span id="cb15-263"><a href="#cb15-263" aria-hidden="true" tabindex="-1"></a>more information on to type-set and render markdown in marimo.</span>
+<span id="cb15-264"><a href="#cb15-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-265"><a href="#cb15-265" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb15-266"><a href="#cb15-266" aria-hidden="true" tabindex="-1"></a><span class="in">import marimo as mo</span></span>
+<span id="cb15-267"><a href="#cb15-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
