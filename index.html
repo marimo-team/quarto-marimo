@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <marimo-cell-output>
     <marimo-callout-output data-html="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><h1 id=\&quot;hello-from-marimo\&quot;>Hello from marimo!</h1>\n<span class=\&quot;paragraph\&quot;>This is a raw, reactive python cell.\nYou can edit it, and the output will change on run.</span></span>&quot;" data-kind="&quot;info&quot;"></marimo-callout-output>
     </marimo-cell-output>
-    <marimo-ui-element object-id="46fa9f25-6b40-1eab-02b2-7a1fb56ed33e" random-id="46fa9f25-6b40-1eab-02b2-7a1fb56ed33e"><marimo-code-editor data-initial-value="&quot;mo.md('''\n  # Hello from marimo!\n\n  This is a raw, reactive python cell.\n  You can edit it, and the output will change on run.\n''').callout(\&quot;info\&quot;)&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
+    <marimo-ui-element object-id="77c73c96-0c36-a6c0-95e9-1996a2578037" random-id="77c73c96-0c36-a6c0-95e9-1996a2578037"><marimo-code-editor data-initial-value="&quot;mo.md('''\n  # Hello from marimo!\n\n  This is a raw, reactive python cell.\n  You can edit it, and the output will change on run.\n''').callout(\&quot;info\&quot;)&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
 </marimo-island>
 <section id="what" class="level2">
 <h2 class="anchored" data-anchor-id="what">What?</h2>
@@ -315,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <marimo-cell-output>
     <marimo-json-output data-json-data="[&quot;Change me!!!&quot;]" data-value-types="&quot;python&quot;"></marimo-json-output>
     </marimo-cell-output>
-    <marimo-ui-element object-id="52ef3704-9875-d742-7539-78ff5d5f8b98" random-id="52ef3704-9875-d742-7539-78ff5d5f8b98"><marimo-code-editor data-initial-value="&quot;editor_result = \&quot;Change me\&quot; + (\&quot;!\&quot; * 3)\neditor_result,&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
+    <marimo-ui-element object-id="b745ffdb-8648-2cd7-1197-8f68d33247bf" random-id="b745ffdb-8648-2cd7-1197-8f68d33247bf"><marimo-code-editor data-initial-value="&quot;editor_result = \&quot;Change me\&quot; + (\&quot;!\&quot; * 3)\neditor_result,&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
 </marimo-island>
 <p>but the default is to show the output only.</p>
 <hr>
@@ -329,7 +329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Hold <code>ctrl</code> to manually run a stale cell.</p>
 <section id="but-how-do-i-run-this" class="level3">
 <h3 class="anchored" data-anchor-id="but-how-do-i-run-this">but how do I run this?</h3>
-<p>Install quarto and <code>quarto install extension marimo-team/marimo</code>.</p>
+<p>Install quarto and <code>quarto install extension marimo-team/quarto-marimo</code>.</p>
 <p>You can also export existing notebooks into quarto format: <code>marimo export md mynotebook.py -o mynotebook.qmd</code></p>
 </section>
 </section>
@@ -339,7 +339,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <marimo-cell-output>
     <span></span>
     </marimo-cell-output>
-    <marimo-ui-element object-id="a4639e8f-770f-afb8-1252-372e27b014b6" random-id="a4639e8f-770f-afb8-1252-372e27b014b6"><marimo-code-editor data-initial-value="&quot;# Bug: Cells are not runnable if no output\nimport marimo as mo&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
+    <marimo-ui-element object-id="06d29ace-90e5-b83c-ca0d-1d9c5a8d2235" random-id="06d29ace-90e5-b83c-ca0d-1d9c5a8d2235"><marimo-code-editor data-initial-value="&quot;# Bug: Cells are not runnable if no output\nimport marimo as mo&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
 </marimo-island>
 
 
@@ -924,7 +924,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="fu">### but how do I run this?</span></span>
 <span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>Install quarto and <span class="in">`quarto install extension marimo-team/marimo`</span>.</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>Install quarto and <span class="in">`quarto install extension marimo-team/quarto-marimo`</span>.</span>
 <span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>You can also export existing notebooks into quarto format: <span class="in">`marimo export md mynotebook.py -o mynotebook.qmd`</span></span>
 <span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
