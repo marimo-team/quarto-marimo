@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8a74300df8a44869a53644f3550cbe05.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-80bc80e2e9e5725eb21ed418cb936ae3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -102,8 +102,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.13.4/dist/main.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.13.4/dist/style.css" rel="stylesheet" crossorigin="anonymous">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.13.6/dist/main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.13.6/dist/style.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <marimo-island data-app-id="main" data-cell-id="Hbol" data-reactive="true">
             <marimo-cell-output>
             <span class="markdown prose dark:prose-invert"><span class="paragraph">The <code>marimo.ui</code> module has a library of pre-built elements.</span>
-<span class="paragraph">For example, here's a <code>slider</code>: <marimo-ui-element object-id="Hbol-0" random-id="fe52c090-f38a-df51-8593-19b25a19e1be"><marimo-slider data-initial-value="1" data-label="null" data-start="1" data-stop="10" data-step="1" data-steps="[]" data-debounce="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span>
+<span class="paragraph">For example, here's a <code>slider</code>: <marimo-ui-element object-id="Hbol-0" random-id="38fa2c00-e32e-e824-b568-3f0a4c006ef3"><marimo-slider data-initial-value="1" data-label="null" data-start="1" data-stop="10" data-step="1" data-steps="[]" data-debounce="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span>
             </marimo-cell-output>
             <marimo-cell-code hidden="">slider%20%3D%20mo.ui.slider(start%3D1%2C%20stop%3D10%2C%20step%3D1)%0Aslider%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20The%20%60marimo.ui%60%20module%20has%20a%20library%20of%20pre-built%20elements.%0A%0A%20%20%20%20For%20example%2C%20here's%20a%20%60slider%60%3A%20%7Bslider%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
         </marimo-island>
@@ -296,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 trigger reactive execution if the UI element is assigned
 to a global variable.</span></span></div><div><span class="markdown prose dark:prose-invert"><span class="paragraph">Every UI element has a value attribute that you can access in 
 Python.</span></span></div><div><span class="markdown prose dark:prose-invert"><span class="paragraph">You can embed UI elements in markdown using f-strings.</span>
-<span class="paragraph">For example, we can render the slider here: <marimo-ui-element object-id="Hbol-0" random-id="fe52c090-f38a-df51-8593-19b25a19e1be"><marimo-slider data-initial-value="1" data-label="null" data-start="1" data-stop="10" data-step="1" data-steps="[]" data-debounce="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span></div></marimo-accordion>
+<span class="paragraph">For example, we can render the slider here: <marimo-ui-element object-id="Hbol-0" random-id="38fa2c00-e32e-e824-b568-3f0a4c006ef3"><marimo-slider data-initial-value="1" data-label="null" data-start="1" data-stop="10" data-step="1" data-steps="[]" data-debounce="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span></div></marimo-accordion>
             </marimo-cell-output>
             <marimo-cell-code hidden="">mo.accordion(%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22Tip%3A%20assign%20UI%20elements%20to%20global%20variables%22%3A%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20Interacting%20with%20a%20displayed%20UI%20element%20will%20only%20%0A%20%20%20%20%20%20%20%20%20%20%20%20trigger%20reactive%20execution%20if%20the%20UI%20element%20is%20assigned%0A%20%20%20%20%20%20%20%20%20%20%20%20to%20a%20global%20variable.%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20%22Tip%3A%20accessing%20an%20element's%20value%22%3A%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20Every%20UI%20element%20has%20a%20value%20attribute%20that%20you%20can%20access%20in%20%0A%20%20%20%20%20%20%20%20%20%20%20%20Python.%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20%22Tip%3A%20embed%20UI%20elements%20in%20markdown%22%3A%20mo.md(%0A%20%20%20%20%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20You%20can%20embed%20UI%20elements%20in%20markdown%20using%20f-strings.%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20For%20example%2C%20we%20can%20render%20the%20slider%20here%3A%20%7Bslider%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%7D%0A)</marimo-cell-code>
         </marimo-island>
@@ -313,7 +313,7 @@ Python.</span></span></div><div><span class="markdown prose dark:prose-invert"><
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="lEQa" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="lEQa-0" random-id="4264a668-e6f5-a01d-a25e-98e42c67b65f"><marimo-number data-initial-value="1" data-label="null" data-start="1" data-stop="10" data-step="1" data-debounce="false" data-full-width="false"></marimo-number></marimo-ui-element>
+    <marimo-ui-element object-id="lEQa-0" random-id="e2ea70e4-8d55-8933-4a2c-444c00721cb3"><marimo-number data-initial-value="1" data-label="null" data-start="1" data-stop="10" data-step="1" data-debounce="false" data-full-width="false"></marimo-number></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">number%20%3D%20mo.ui.number(start%3D1%2C%20stop%3D10%2C%20step%3D1)%0Anumber</marimo-cell-code>
 </marimo-island>
@@ -325,7 +325,7 @@ Python.</span></span></div><div><span class="markdown prose dark:prose-invert"><
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Xref" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="Xref-0" random-id="eb2ae334-9c4d-b50d-4ef3-31134d8808a1"><marimo-checkbox data-initial-value="false" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>checkbox</span></span>&quot;"></marimo-checkbox></marimo-ui-element>
+    <marimo-ui-element object-id="Xref-0" random-id="2accf019-46d6-dde9-47f4-69242bbb5765"><marimo-checkbox data-initial-value="false" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>checkbox</span></span>&quot;"></marimo-checkbox></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">checkbox%20%3D%20mo.ui.checkbox(label%3D%22checkbox%22)%0Acheckbox</marimo-cell-code>
 </marimo-island>
@@ -337,7 +337,7 @@ Python.</span></span></div><div><span class="markdown prose dark:prose-invert"><
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="BYtC" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="BYtC-0" random-id="dff31c03-8a72-d9ae-06c0-d85c09f85ab4"><marimo-text data-initial-value="&quot;&quot;" data-label="null" data-placeholder="&quot;type some text ...&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element>
+    <marimo-ui-element object-id="BYtC-0" random-id="c94f43c0-ebfe-6c45-722c-7a2a6f3b6df6"><marimo-text data-initial-value="&quot;&quot;" data-label="null" data-placeholder="&quot;type some text ...&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">text%20%3D%20mo.ui.text(placeholder%3D%22type%20some%20text%20...%22)%0Atext</marimo-cell-code>
 </marimo-island>
@@ -349,7 +349,7 @@ Python.</span></span></div><div><span class="markdown prose dark:prose-invert"><
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Kclp" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="Kclp-0" random-id="5b4730de-d476-bd92-bbbe-e7ac076e8d5e"><marimo-text-area data-initial-value="&quot;&quot;" data-label="null" data-placeholder="&quot;type some text ...&quot;" data-disabled="false" data-debounce="true" data-full-width="false"></marimo-text-area></marimo-ui-element>
+    <marimo-ui-element object-id="Kclp-0" random-id="75ab698e-0443-20c9-3360-470ce37fe739"><marimo-text-area data-initial-value="&quot;&quot;" data-label="null" data-placeholder="&quot;type some text ...&quot;" data-disabled="false" data-debounce="true" data-full-width="false"></marimo-text-area></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">text_area%20%3D%20mo.ui.text_area(placeholder%3D%22type%20some%20text%20...%22)%0Atext_area</marimo-cell-code>
 </marimo-island>
@@ -361,7 +361,7 @@ Python.</span></span></div><div><span class="markdown prose dark:prose-invert"><
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Hstk" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="Hstk-0" random-id="725f90a2-bfe9-a74c-b354-d1dd609d585a"><marimo-dropdown data-initial-value="[]" data-label="null" data-options="[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]" data-allow-select-none="true" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element>
+    <marimo-ui-element object-id="Hstk-0" random-id="6075872c-e292-3db7-0d3b-d3797c9c4e69"><marimo-dropdown data-initial-value="[]" data-label="null" data-options="[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]" data-allow-select-none="true" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">dropdown%20%3D%20mo.ui.dropdown(%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D)%0Adropdown</marimo-cell-code>
 </marimo-island>
@@ -373,7 +373,7 @@ Python.</span></span></div><div><span class="markdown prose dark:prose-invert"><
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="iLit" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="iLit-0" random-id="02035759-be50-a8c9-d9be-7006b4b29152"><marimo-button data-initial-value="0" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>click me</span></span>&quot;" data-kind="&quot;neutral&quot;" data-disabled="false" data-full-width="false"></marimo-button></marimo-ui-element>
+    <marimo-ui-element object-id="iLit-0" random-id="33ff1898-9f8c-c512-b9f8-7154d2122633"><marimo-button data-initial-value="0" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>click me</span></span>&quot;" data-kind="&quot;neutral&quot;" data-disabled="false" data-full-width="false"></marimo-button></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">run_button%20%3D%20mo.ui.run_button(label%3D%22click%20me%22)%0Arun_button</marimo-cell-code>
 </marimo-island>
@@ -385,7 +385,7 @@ Python.</span></span></div><div><span class="markdown prose dark:prose-invert"><
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="ROlb" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="ROlb-0" random-id="b43a03cd-8064-a9fd-64df-7ed1aa70905f"><marimo-file data-initial-value="[]" data-label="null" data-filetypes="[]" data-multiple="false" data-kind="&quot;area&quot;" data-max_size="100000000"></marimo-file></marimo-ui-element>
+    <marimo-ui-element object-id="ROlb-0" random-id="c00992b2-9094-0325-4af1-afb9a99dc5d2"><marimo-file data-initial-value="[]" data-label="null" data-filetypes="[]" data-multiple="false" data-kind="&quot;area&quot;" data-max_size="100000000"></marimo-file></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">file_upload%20%3D%20mo.ui.file(kind%3D%22area%22)%0Afile_upload</marimo-cell-code>
 </marimo-island>
@@ -397,7 +397,7 @@ Python.</span></span></div><div><span class="markdown prose dark:prose-invert"><
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="TqIu" data-reactive="true">
     <marimo-cell-output>
-    <span class="markdown prose dark:prose-invert"><span class="paragraph">To see more examples, use this dropdown: <marimo-ui-element object-id="aqbW-0" random-id="098a3910-c13d-8a1a-a40c-cdb32e0ba855"><marimo-dropdown data-initial-value="[]" data-label="null" data-options="[&quot;button&quot;, &quot;checkbox&quot;, &quot;date&quot;, &quot;dropdown&quot;, &quot;file&quot;, &quot;multiselect&quot;, &quot;number&quot;, &quot;radio&quot;, &quot;range_slider&quot;, &quot;slider&quot;, &quot;switch&quot;, &quot;table&quot;, &quot;tabs&quot;, &quot;text&quot;, &quot;text_area&quot;]" data-allow-select-none="true" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element></span></span>
+    <span class="markdown prose dark:prose-invert"><span class="paragraph">To see more examples, use this dropdown: <marimo-ui-element object-id="aqbW-0" random-id="61621fb6-4b25-8c6c-0b6e-c02f531a4e67"><marimo-dropdown data-initial-value="[]" data-label="null" data-options="[&quot;button&quot;, &quot;checkbox&quot;, &quot;date&quot;, &quot;dropdown&quot;, &quot;file&quot;, &quot;multiselect&quot;, &quot;number&quot;, &quot;radio&quot;, &quot;range_slider&quot;, &quot;slider&quot;, &quot;switch&quot;, &quot;table&quot;, &quot;tabs&quot;, &quot;text&quot;, &quot;text_area&quot;]" data-allow-select-none="true" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element></span></span>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.md(f%22To%20see%20more%20examples%2C%20use%20this%20dropdown%3A%20%7Bbasic_ui_elements%7D%22)</marimo-cell-code>
 </marimo-island>
@@ -432,32 +432,32 @@ variables in your program.</code></pre>
 <p>This first example shows how to create an array of UI elements using <code>mo.ui.array</code>. When you interact with an element in the array, all cells that reference the array are reactively run. If you instead used a regular Python list, cells referring to the list would <em>not</em> be run.</p>
 <marimo-island data-app-id="main" data-cell-id="ecfG" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="ecfG-6" random-id="e253cb09-96f6-f1fc-dea7-a30c1975d4ca"><marimo-dict data-initial-value="{&quot;0&quot;: &quot;&quot;, &quot;1&quot;: 1, &quot;2&quot;: &quot;2025-05-03&quot;}" data-label="null" data-element-ids="{&quot;ecfG-3&quot;: &quot;0&quot;, &quot;ecfG-4&quot;: &quot;1&quot;, &quot;ecfG-5&quot;: &quot;2&quot;}"><marimo-json-output data-json-data="[&quot;text/html:<marimo-ui-element object-id='ecfG-3' random-id='b17a1998-c49c-0d51-ccf8-fab514a4bc58'><marimo-text data-initial-value='&amp;quot;&amp;quot;' data-label='null' data-placeholder='&amp;quot;&amp;quot;' data-kind='&amp;quot;text&amp;quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element>&quot;, &quot;text/html:<marimo-ui-element object-id='ecfG-4' random-id='a87ec0af-0a8a-b395-15e1-0552cb9988a5'><marimo-slider data-initial-value='1' data-label='null' data-start='1' data-stop='10' data-steps='[]' data-debounce='false' data-orientation='&amp;quot;horizontal&amp;quot;' data-show-value='false' data-full-width='false'></marimo-slider></marimo-ui-element>&quot;, &quot;text/html:<marimo-ui-element object-id='ecfG-5' random-id='c361eadc-7293-8ec1-7264-c3c02a07669e'><marimo-date data-initial-value='&amp;quot;2025-05-03&amp;quot;' data-label='null' data-start='&amp;quot;0001-01-01&amp;quot;' data-stop='&amp;quot;9999-12-31&amp;quot;' data-full-width='false'></marimo-date></marimo-ui-element>&quot;]" data-value-types="&quot;python&quot;" data-name="&quot;array&quot;"></marimo-json-output></marimo-dict></marimo-ui-element>
+    <marimo-ui-element object-id="ecfG-6" random-id="696da17b-740a-ea09-4598-88326c0da013"><marimo-dict data-initial-value="{&quot;0&quot;: &quot;&quot;, &quot;1&quot;: 1, &quot;2&quot;: &quot;2025-05-08&quot;}" data-label="null" data-element-ids="{&quot;ecfG-3&quot;: &quot;0&quot;, &quot;ecfG-4&quot;: &quot;1&quot;, &quot;ecfG-5&quot;: &quot;2&quot;}"><marimo-json-output data-json-data="[&quot;text/html:<marimo-ui-element object-id='ecfG-3' random-id='ff2081f7-01b4-943a-49bd-72df62caa64e'><marimo-text data-initial-value='&amp;quot;&amp;quot;' data-label='null' data-placeholder='&amp;quot;&amp;quot;' data-kind='&amp;quot;text&amp;quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element>&quot;, &quot;text/html:<marimo-ui-element object-id='ecfG-4' random-id='afdd6e19-a82c-785e-77ef-f96fafeca360'><marimo-slider data-initial-value='1' data-label='null' data-start='1' data-stop='10' data-steps='[]' data-debounce='false' data-orientation='&amp;quot;horizontal&amp;quot;' data-show-value='false' data-full-width='false'></marimo-slider></marimo-ui-element>&quot;, &quot;text/html:<marimo-ui-element object-id='ecfG-5' random-id='babe8c75-315e-128a-a3cf-8e5e28fb12cf'><marimo-date data-initial-value='&amp;quot;2025-05-08&amp;quot;' data-label='null' data-start='&amp;quot;0001-01-01&amp;quot;' data-stop='&amp;quot;9999-12-31&amp;quot;' data-full-width='false'></marimo-date></marimo-ui-element>&quot;]" data-value-types="&quot;python&quot;" data-name="&quot;array&quot;"></marimo-json-output></marimo-dict></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">array%20%3D%20mo.ui.array(%0A%20%20%20%20%5Bmo.ui.text()%2C%20mo.ui.slider(start%3D1%2C%20stop%3D10)%2C%20mo.ui.date()%5D%0A)%0Aarray</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Pvdt" data-reactive="true">
     <marimo-cell-output>
-    <marimo-json-output data-json-data="[&quot;&quot;, 1, &quot;text/plain:2025-05-03&quot;]" data-value-types="&quot;python&quot;"></marimo-json-output>
+    <marimo-json-output data-json-data="[&quot;&quot;, 1, &quot;text/plain:2025-05-08&quot;]" data-value-types="&quot;python&quot;"></marimo-json-output>
     </marimo-cell-output>
     <marimo-cell-code hidden="">array.value</marimo-cell-code>
 </marimo-island>
 <p>marimo also comes with <code>mo.ui.dictionary</code>, which is analogous to <code>mo.ui.array</code></p>
 <marimo-island data-app-id="main" data-cell-id="ZBYS" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="ZBYS-6" random-id="d6efd240-2798-818a-0357-c94289ec80a0"><marimo-dict data-initial-value="{&quot;text&quot;: &quot;&quot;, &quot;slider&quot;: 1, &quot;date&quot;: &quot;2025-05-03&quot;}" data-label="null" data-element-ids="{&quot;ZBYS-3&quot;: &quot;text&quot;, &quot;ZBYS-4&quot;: &quot;slider&quot;, &quot;ZBYS-5&quot;: &quot;date&quot;}"><marimo-json-output data-json-data="{&quot;text&quot;: &quot;text/html:<marimo-ui-element object-id='ZBYS-3' random-id='7874bb8e-c19c-5173-3bba-8ec3b1e5e37a'><marimo-text data-initial-value='&amp;quot;&amp;quot;' data-label='null' data-placeholder='&amp;quot;&amp;quot;' data-kind='&amp;quot;text&amp;quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element>&quot;, &quot;slider&quot;: &quot;text/html:<marimo-ui-element object-id='ZBYS-4' random-id='e38094a4-eb11-aead-8255-21ae7cfc2b88'><marimo-slider data-initial-value='1' data-label='null' data-start='1' data-stop='10' data-steps='[]' data-debounce='false' data-orientation='&amp;quot;horizontal&amp;quot;' data-show-value='false' data-full-width='false'></marimo-slider></marimo-ui-element>&quot;, &quot;date&quot;: &quot;text/html:<marimo-ui-element object-id='ZBYS-5' random-id='299f42fd-bff9-4964-9095-2ae496f20888'><marimo-date data-initial-value='&amp;quot;2025-05-03&amp;quot;' data-label='null' data-start='&amp;quot;0001-01-01&amp;quot;' data-stop='&amp;quot;9999-12-31&amp;quot;' data-full-width='false'></marimo-date></marimo-ui-element>&quot;}" data-value-types="&quot;python&quot;" data-name="&quot;dictionary&quot;"></marimo-json-output></marimo-dict></marimo-ui-element>
+    <marimo-ui-element object-id="ZBYS-6" random-id="6c9d1c1d-6a97-159d-f720-476238d98d62"><marimo-dict data-initial-value="{&quot;text&quot;: &quot;&quot;, &quot;slider&quot;: 1, &quot;date&quot;: &quot;2025-05-08&quot;}" data-label="null" data-element-ids="{&quot;ZBYS-3&quot;: &quot;text&quot;, &quot;ZBYS-4&quot;: &quot;slider&quot;, &quot;ZBYS-5&quot;: &quot;date&quot;}"><marimo-json-output data-json-data="{&quot;text&quot;: &quot;text/html:<marimo-ui-element object-id='ZBYS-3' random-id='b66149b5-8bb2-bc9d-e531-44d920633a1b'><marimo-text data-initial-value='&amp;quot;&amp;quot;' data-label='null' data-placeholder='&amp;quot;&amp;quot;' data-kind='&amp;quot;text&amp;quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element>&quot;, &quot;slider&quot;: &quot;text/html:<marimo-ui-element object-id='ZBYS-4' random-id='fbfb973b-c79c-d5fb-b500-4cbb38251b1f'><marimo-slider data-initial-value='1' data-label='null' data-start='1' data-stop='10' data-steps='[]' data-debounce='false' data-orientation='&amp;quot;horizontal&amp;quot;' data-show-value='false' data-full-width='false'></marimo-slider></marimo-ui-element>&quot;, &quot;date&quot;: &quot;text/html:<marimo-ui-element object-id='ZBYS-5' random-id='61950437-4f1a-ad41-fc47-5bcef5392d03'><marimo-date data-initial-value='&amp;quot;2025-05-08&amp;quot;' data-label='null' data-start='&amp;quot;0001-01-01&amp;quot;' data-stop='&amp;quot;9999-12-31&amp;quot;' data-full-width='false'></marimo-date></marimo-ui-element>&quot;}" data-value-types="&quot;python&quot;" data-name="&quot;dictionary&quot;"></marimo-json-output></marimo-dict></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">dictionary%20%3D%20mo.ui.dictionary(%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22text%22%3A%20mo.ui.text()%2C%0A%20%20%20%20%20%20%20%20%22slider%22%3A%20mo.ui.slider(start%3D1%2C%20stop%3D10)%2C%0A%20%20%20%20%20%20%20%20%22date%22%3A%20mo.ui.date()%2C%0A%20%20%20%20%7D%0A)%0Adictionary</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="aLJB" data-reactive="true">
     <marimo-cell-output>
-    <marimo-json-output data-json-data="{&quot;text&quot;: &quot;&quot;, &quot;slider&quot;: 1, &quot;date&quot;: &quot;text/plain:2025-05-03&quot;}" data-value-types="&quot;python&quot;"></marimo-json-output>
+    <marimo-json-output data-json-data="{&quot;text&quot;: &quot;&quot;, &quot;slider&quot;: 1, &quot;date&quot;: &quot;text/plain:2025-05-08&quot;}" data-value-types="&quot;python&quot;"></marimo-json-output>
     </marimo-cell-output>
     <marimo-cell-code hidden="">dictionary.value</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="nHfw" data-reactive="true">
     <marimo-cell-output>
-    <span class="markdown prose dark:prose-invert"><span class="paragraph">To see additional composite elements, use this dropdown: <marimo-ui-element object-id="NCOB-0" random-id="f5ea18e1-7e87-7c75-552c-6d6f10f6b71b"><marimo-dropdown data-initial-value="[]" data-label="null" data-options="[&quot;array&quot;, &quot;batch&quot;, &quot;dictionary&quot;, &quot;form&quot;]" data-allow-select-none="true" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element></span></span>
+    <span class="markdown prose dark:prose-invert"><span class="paragraph">To see additional composite elements, use this dropdown: <marimo-ui-element object-id="NCOB-0" random-id="6cf7ac91-aee1-2521-466f-7e2e580d8c69"><marimo-dropdown data-initial-value="[]" data-label="null" data-options="[&quot;array&quot;, &quot;batch&quot;, &quot;dictionary&quot;, &quot;form&quot;]" data-allow-select-none="true" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element></span></span>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.md(%0A%20%20%20%20f%22To%20see%20additional%20composite%20elements%2C%20use%20this%20dropdown%3A%20%7Bcomposite_elements%7D%22%0A)</marimo-cell-code>
 </marimo-island>
