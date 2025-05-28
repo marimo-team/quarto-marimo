@@ -41,7 +41,17 @@ filters:
 ```python {.marimo}
 #| echo: true
 import marimo as mo
-mo.md("Hello World!")
+slider = mo.ui.slider(1, 10, 1, label="Look, a slider!")
+slider
+```
+
+## More things
+
+And we can respond!
+
+```python {.marimo}
+# No echo here means we do not show the code
+mo.md("NaN" * slider.value + " Batman!")
 ```
 ````
 
