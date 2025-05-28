@@ -15,9 +15,14 @@ enabling markdown documents to be executed in a `marimo` environment, and
 reactive in page.
 
 ```python {.marimo}
+slider = mo.ui.slider(start=1, stop=10)
+slider
+```
+
+```python {.marimo}
 #| echo: true
-mo.md('''
-  # Hello from marimo!
+mo.md(f'''
+  # Hello from marimo!{'!' * slider.value}
 
   This is a raw, reactive python cell.
   You can edit it, and the output will change on run.
