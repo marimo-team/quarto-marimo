@@ -1,8 +1,5 @@
 # marimo + quarto = :palm_tree: :heart:
 
-> [!WARNING]
-> The Quarto marimo plugin is under active development. Features and documentation are being continuously updated and expanded.
-
 ## marimo
 
 marimo is a next generation python notebook that is embeddable anywhere.
