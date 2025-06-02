@@ -12,11 +12,24 @@ from xml.etree.ElementTree import Element
 
 import marimo
 from marimo import MarimoIslandGenerator
-from marimo._cli.convert.markdown import (
-    MARIMO_MD,
-    MarimoParser,
-    SafeWrap,
-)
+
+try:
+    from marimo._ast.app import App
+    from marimo._convert.markdown.markdown import (
+        MARIMO_MD,
+        MarimoMdParser as MarimoParser,
+        SafeWrap as SafeWrapGeneric,
+    )
+
+    SafeWrap = SafeWrapGeneric[App]
+except ImportError:
+    # Fallback for marimo < 0.13.16
+    from marimo._cli.convert.markdown import (  # type: ignore[import, no-redef]
+        MARIMO_MD,
+        MarimoParser,
+        SafeWrap,
+    )
+
 from marimo._islands import MarimoIslandStub
 
 __version__ = "0.0.1"
@@ -196,6 +209,7 @@ def build_export_with_mime_context(
 class MarimoPandocParser(MarimoParser):
     """Parses Markdown to marimo notebook string."""
 
+    # TODO: Could upstream generic for keys- but this is fine.
     output_formats = {  # type: ignore[assignment, misc]
         "marimo-pandoc-export": build_export_with_mime_context(mime_sensitive=False),  # type: ignore[dict-item]
         "marimo-pandoc-export-with-mime": build_export_with_mime_context(
@@ -208,9 +222,9 @@ def convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[st
     if not text:
         return {"header": "", "outputs": []}
     if mime_sensitive:
-        parser = MarimoPandocParser(output_format="marimo-pandoc-export-with-mime")
+        parser = MarimoPandocParser(output_format="marimo-pandoc-export-with-mime")  # type: ignore[arg-type]
     else:
-        parser = MarimoPandocParser(output_format="marimo-pandoc-export")
+        parser = MarimoPandocParser(output_format="marimo-pandoc-export")  # type: ignore[arg-type]
     return parser.convert(text)  # type: ignore[arg-type, return-value]
 
 
