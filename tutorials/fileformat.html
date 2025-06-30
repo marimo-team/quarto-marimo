@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.43">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <link href="../tutorials/markdown_format.html" rel="next">
 <link href="../tutorials/layout.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-57aeafd204d37760c8f95d570416c4f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-21d89a2ac82de0ec5c67e1699cac70ec.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -102,17 +104,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.13.15/dist/main.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.13.15/dist/style.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
-    <meta property="og:title" content="Fileformat – marimo-quarto">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.8/dist/main.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.8/dist/style.css" rel="stylesheet" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
+<meta property="og:title" content="Fileformat – marimo-quarto">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="marimo-quarto">
-</head><body class="nav-sidebar docked"><marimo-filename hidden=""></marimo-filename>
-<marimo-mode data-mode="read" hidden=""></marimo-mode>
+</head><body class="nav-sidebar docked quarto-light"><marimo-filename hidden=""></marimo-filename>
 
 
 
@@ -488,7 +489,7 @@ Python files.</span></span></div></marimo-accordion>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="BYtC" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="BYtC-0" random-id="329bb8ed-286c-94bf-dfc7-2ba6164821f3"><marimo-code-editor data-initial-value="&quot;#!/usr/bin/env python3\n\nimport asyncio\nimport json\nimport os\nimport re\nimport sys\nfrom typing import Any, Callable, Optional\n\n# Native to python\nfrom xml.etree.ElementTree import Element\n\nimport marimo\nfrom marimo import MarimoIslandGenerator\n\ntry:\n    from marimo._ast.app import App\n    from marimo._convert.markdown.markdown import (\n        MARIMO_MD,\n        MarimoMdParser as MarimoParser,\n        SafeWrap as SafeWrapGeneric,\n    )\n\n    SafeWrap = SafeWrapGeneric[App]\nexcept ImportError:\n    # Fallback for marimo < 0.13.16\n    from marimo._cli.convert.markdown import (  # type: ignore[import, no-redef]\n        MARIMO_MD,\n        MarimoParser,\n        SafeWrap,\n    )\n\nfrom marimo._islands import MarimoIslandStub\n\n__version__ = \&quot;0.0.1\&quot;\n\n# See https://quarto.org/docs/computations/execution-options.html\ndefault_config = {\n    \&quot;eval\&quot;: True,\n    \&quot;echo\&quot;: False,\n    \&quot;output\&quot;: True,\n    \&quot;warning\&quot;: True,\n    \&quot;error\&quot;: True,\n    \&quot;include\&quot;: True,\n    # Particular to marimo\n    \&quot;editor\&quot;: False,\n}\n\n\ndef extract_and_strip_quarto_config(block: str) -> tuple[dict[str, Any], str]:\n    pattern = r\&quot;^\\s*\\#\\|\\s*(.*?)\\s*:\\s*(.*?)(?=\\n|\\Z)\&quot;\n    config: dict[str, Any] = {}\n    lines = block.split(\&quot;\\n\&quot;)\n    if not lines:\n        return config, block\n\n    split_index = 0\n    for i, line in enumerate(lines):\n        split_index = i\n        line = line.strip()\n        if not line:\n            continue\n        source_match = re.search(pattern, line)\n        if not source_match:\n            break\n        key, value = source_match.groups()\n        config[key] = json.loads(value)\n    return config, \&quot;\\n\&quot;.join(lines[split_index:])\n\n\ndef get_mime_render(\n    global_options: dict[str, Any],\n    stub: Optional[MarimoIslandStub],\n    config: dict[str, bool],\n    mime_sensitive: bool,\n) -> dict[str, Any]:\n    # Local supersede global supersedes default options\n    config = {**global_options, **config}\n    if not config[\&quot;include\&quot;] or stub is None:\n        return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;}\n\n    output = stub.output\n    render_options = {\n        \&quot;display_code\&quot;: config[\&quot;echo\&quot;],\n        \&quot;reactive\&quot;: config[\&quot;eval\&quot;] and not mime_sensitive,\n        \&quot;code\&quot;: stub.code,\n    }\n\n    if output:\n        mimetype = output.mimetype\n        if config[\&quot;output\&quot;] and mime_sensitive:\n            if mimetype.startswith(\&quot;image\&quot;):\n                return {\&quot;type\&quot;: \&quot;figure\&quot;, \&quot;value\&quot;: f\&quot;{output.data}\&quot;, **render_options}\n            if mimetype.startswith(\&quot;text/plain\&quot;) or mimetype.startswith(\n                \&quot;text/markdown\&quot;\n            ):\n                return {\&quot;type\&quot;: \&quot;para\&quot;, \&quot;value\&quot;: f\&quot;{output.data}\&quot;, **render_options}\n            if mimetype == \&quot;application/vnd.marimo+error\&quot;:\n                if config[\&quot;error\&quot;]:\n                    return {\n                        \&quot;type\&quot;: \&quot;blockquote\&quot;,\n                        \&quot;value\&quot;: f\&quot;{output.data}\&quot;,\n                        **render_options,\n                    }\n                # Suppress errors otherwise\n                return {\&quot;type\&quot;: \&quot;para\&quot;, \&quot;value\&quot;: \&quot;\&quot;, **render_options}\n\n        elif mimetype == \&quot;application/vnd.marimo+error\&quot;:\n            if config[\&quot;warning\&quot;]:\n                sys.stderr.write(\n                    \&quot;Warning: Only the `disabled` codeblock attribute is utilized\&quot;\n                    \&quot; for pandoc export. Be sure to set desired code attributes \&quot;\n                    \&quot;in quarto form.\&quot;\n                )\n            if not config[\&quot;error\&quot;]:\n                return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;}\n\n    # HTML as catch all default\n    return {\n        \&quot;type\&quot;: \&quot;html\&quot;,\n        \&quot;value\&quot;: stub.render(\n            display_code=config[\&quot;echo\&quot;],\n            display_output=config[\&quot;output\&quot;],\n            is_reactive=bool(render_options[\&quot;reactive\&quot;]),\n            as_raw=mime_sensitive,\n        ),\n        **render_options,\n    }\n\n\ndef app_config_from_root(root: Element) -> dict[str, Any]:\n    # Extract meta data from root attributes.\n    config_keys = {\&quot;title\&quot;: \&quot;app_title\&quot;, \&quot;marimo-layout\&quot;: \&quot;layout_file\&quot;}\n    config = {\n        config_keys[key]: value for key, value in root.items() if key in config_keys\n    }\n    # Try to pass on other attributes as is\n    config.update({k: v for k, v in root.items() if k not in config_keys})\n    # Remove values particular to markdown saves.\n    config.pop(\&quot;marimo-version\&quot;, None)\n    return config\n\n\ndef build_export_with_mime_context(\n    mime_sensitive: bool,\n) -> Callable[[Element], SafeWrap]:\n    def tree_to_pandoc_export(root: Element) -> SafeWrap:\n        global_options = {**default_config, **app_config_from_root(root)}\n        app = MarimoIslandGenerator()\n\n        has_attrs: bool = False\n        stubs: list[tuple[dict[str, bool], Optional[MarimoIslandStub]]] = []\n        for child in root:\n            # only process code cells\n            if child.tag == MARIMO_MD:\n                continue\n            # We only care about the disabled attribute.\n            if child.attrib.get(\&quot;disabled\&quot;) == \&quot;true\&quot;:\n                # Don't even add to generator\n                stubs.append(({\&quot;include\&quot;: False}, None))\n                continue\n            # Check to see id attrs are defined on the tag\n            has_attrs = has_attrs | bool(child.attrib.items())\n\n            code = str(child.text)\n            config, code = extract_and_strip_quarto_config(code)\n\n            try:\n                stub = app.add_code(\n                    code,\n                    is_raw=True,\n                )\n            except Exception:\n                stubs.append((config, None))\n                continue\n\n            assert isinstance(stub, MarimoIslandStub), \&quot;Unexpected error, please report\&quot;\n\n            stubs.append(\n                (\n                    config,\n                    stub,\n                )\n            )\n\n        if has_attrs and global_options.get(\&quot;warning\&quot;, True):\n            pass\n\n        _ = asyncio.run(app.build())\n        dev_server = os.environ.get(\&quot;QUARTO_MARIMO_DEBUG_ENDPOINT\&quot;, False)\n        header = app.render_head(\n            _development_url=dev_server, version_override=marimo.__version__\n        )\n\n        return SafeWrap(\n            {\n                \&quot;header\&quot;: header,\n                \&quot;outputs\&quot;: [\n                    get_mime_render(global_options, stub, config, mime_sensitive)\n                    for config, stub in stubs\n                ],\n                \&quot;count\&quot;: len(stubs),\n            }  # type: ignore[arg-type]\n        )\n\n    return tree_to_pandoc_export\n\n\nclass MarimoPandocParser(MarimoParser):\n    \&quot;\&quot;\&quot;Parses Markdown to marimo notebook string.\&quot;\&quot;\&quot;\n\n    # TODO: Could upstream generic for keys- but this is fine.\n    output_formats = {  # type: ignore[assignment, misc]\n        \&quot;marimo-pandoc-export\&quot;: build_export_with_mime_context(mime_sensitive=False),  # type: ignore[dict-item]\n        \&quot;marimo-pandoc-export-with-mime\&quot;: build_export_with_mime_context(\n            mime_sensitive=True\n        ),  # type: ignore[dict-item]\n    }\n\n\ndef convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[str, Any]:\n    if not text:\n        return {\&quot;header\&quot;: \&quot;\&quot;, \&quot;outputs\&quot;: []}\n    if mime_sensitive:\n        parser = MarimoPandocParser(output_format=\&quot;marimo-pandoc-export-with-mime\&quot;)  # type: ignore[arg-type]\n    else:\n        parser = MarimoPandocParser(output_format=\&quot;marimo-pandoc-export\&quot;)  # type: ignore[arg-type]\n    return parser.convert(text)  # type: ignore[arg-type, return-value]\n\n\nif __name__ == \&quot;__main__\&quot;:\n    assert len(sys.argv) == 3, f\&quot;Unexpected call format got {sys.argv}\&quot;\n    _, reference_file, mime_sensitive = sys.argv\n\n    file = sys.stdin.read()\n    if not file:\n        with open(reference_file) as f:\n            file = f.read()\n    no_js = mime_sensitive.lower() == \&quot;yes\&quot;\n    os.environ[\&quot;MARIMO_NO_JS\&quot;] = str(no_js).lower()\n\n    conversion = convert_from_md_to_pandoc_export(file, no_js)\n    sys.stdout.write(json.dumps(conversion))\n&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
+    <marimo-ui-element object-id="BYtC-0" random-id="3b5817e5-a86e-9f29-721e-e55e5f11456d"><marimo-code-editor data-initial-value="&quot;#!/usr/bin/env python3\n\nimport asyncio\nimport json\nimport os\nimport re\nimport sys\nfrom typing import Any, Callable, Optional\n\n# Native to python\nfrom xml.etree.ElementTree import Element\n\nimport marimo\nfrom marimo import MarimoIslandGenerator\n\ntry:\n    from marimo._ast.app import App\n    from marimo._convert.markdown.markdown import (\n        MARIMO_MD,\n        MarimoMdParser as MarimoParser,\n        SafeWrap as SafeWrapGeneric,\n    )\n\n    SafeWrap = SafeWrapGeneric[App]\nexcept ImportError:\n    # Fallback for marimo < 0.13.16\n    from marimo._cli.convert.markdown import (  # type: ignore[import, no-redef]\n        MARIMO_MD,\n        MarimoParser,\n        SafeWrap,\n    )\n\nfrom marimo._islands import MarimoIslandStub\n\n__version__ = \&quot;0.0.1\&quot;\n\n# See https://quarto.org/docs/computations/execution-options.html\ndefault_config = {\n    \&quot;eval\&quot;: True,\n    \&quot;echo\&quot;: False,\n    \&quot;output\&quot;: True,\n    \&quot;warning\&quot;: True,\n    \&quot;error\&quot;: True,\n    \&quot;include\&quot;: True,\n    # Particular to marimo\n    \&quot;editor\&quot;: False,\n}\n\n\ndef extract_and_strip_quarto_config(block: str) -> tuple[dict[str, Any], str]:\n    pattern = r\&quot;^\\s*\\#\\|\\s*(.*?)\\s*:\\s*(.*?)(?=\\n|\\Z)\&quot;\n    config: dict[str, Any] = {}\n    lines = block.split(\&quot;\\n\&quot;)\n    if not lines:\n        return config, block\n\n    split_index = 0\n    for i, line in enumerate(lines):\n        split_index = i\n        line = line.strip()\n        if not line:\n            continue\n        source_match = re.search(pattern, line)\n        if not source_match:\n            break\n        key, value = source_match.groups()\n        config[key] = json.loads(value)\n    return config, \&quot;\\n\&quot;.join(lines[split_index:])\n\n\ndef get_mime_render(\n    global_options: dict[str, Any],\n    stub: Optional[MarimoIslandStub],\n    config: dict[str, bool],\n    mime_sensitive: bool,\n) -> dict[str, Any]:\n    # Local supersede global supersedes default options\n    config = {**global_options, **config}\n    if not config[\&quot;include\&quot;] or stub is None:\n        return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;}\n\n    output = stub.output\n    render_options = {\n        \&quot;display_code\&quot;: config[\&quot;echo\&quot;],\n        \&quot;reactive\&quot;: config[\&quot;eval\&quot;] and not mime_sensitive,\n        \&quot;code\&quot;: stub.code,\n    }\n\n    if output:\n        mimetype = output.mimetype\n        if config[\&quot;output\&quot;] and mime_sensitive:\n            if mimetype.startswith(\&quot;image\&quot;):\n                return {\&quot;type\&quot;: \&quot;figure\&quot;, \&quot;value\&quot;: f\&quot;{output.data}\&quot;, **render_options}\n            if mimetype.startswith(\&quot;text/plain\&quot;) or mimetype.startswith(\n                \&quot;text/markdown\&quot;\n            ):\n                return {\&quot;type\&quot;: \&quot;para\&quot;, \&quot;value\&quot;: f\&quot;{output.data}\&quot;, **render_options}\n            if mimetype == \&quot;application/vnd.marimo+error\&quot;:\n                if config[\&quot;error\&quot;]:\n                    return {\n                        \&quot;type\&quot;: \&quot;blockquote\&quot;,\n                        \&quot;value\&quot;: f\&quot;{output.data}\&quot;,\n                        **render_options,\n                    }\n                # Suppress errors otherwise\n                return {\&quot;type\&quot;: \&quot;para\&quot;, \&quot;value\&quot;: \&quot;\&quot;, **render_options}\n\n        elif mimetype == \&quot;application/vnd.marimo+error\&quot;:\n            if config[\&quot;warning\&quot;]:\n                sys.stderr.write(\n                    \&quot;Warning: Only the `disabled` codeblock attribute is utilized\&quot;\n                    \&quot; for pandoc export. Be sure to set desired code attributes \&quot;\n                    \&quot;in quarto form.\&quot;\n                )\n            if not config[\&quot;error\&quot;]:\n                return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;}\n\n    # HTML as catch all default\n    return {\n        \&quot;type\&quot;: \&quot;html\&quot;,\n        \&quot;value\&quot;: stub.render(\n            display_code=config[\&quot;echo\&quot;],\n            display_output=config[\&quot;output\&quot;],\n            is_reactive=bool(render_options[\&quot;reactive\&quot;]),\n            as_raw=mime_sensitive,\n        ),\n        **render_options,\n    }\n\n\ndef app_config_from_root(root: Element) -> dict[str, Any]:\n    # Extract meta data from root attributes.\n    config_keys = {\&quot;title\&quot;: \&quot;app_title\&quot;, \&quot;marimo-layout\&quot;: \&quot;layout_file\&quot;}\n    config = {\n        config_keys[key]: value for key, value in root.items() if key in config_keys\n    }\n    # Try to pass on other attributes as is\n    config.update({k: v for k, v in root.items() if k not in config_keys})\n    # Remove values particular to markdown saves.\n    config.pop(\&quot;marimo-version\&quot;, None)\n    return config\n\n\ndef build_export_with_mime_context(\n    mime_sensitive: bool,\n) -> Callable[[Element], SafeWrap]:\n    def tree_to_pandoc_export(root: Element) -> SafeWrap:\n        global_options = {**default_config, **app_config_from_root(root)}\n        app = MarimoIslandGenerator()\n\n        has_attrs: bool = False\n        stubs: list[tuple[dict[str, bool], Optional[MarimoIslandStub]]] = []\n        for child in root:\n            # only process code cells\n            if child.tag == MARIMO_MD:\n                continue\n            # We only care about the disabled attribute.\n            if child.attrib.get(\&quot;disabled\&quot;) == \&quot;true\&quot;:\n                # Don't even add to generator\n                stubs.append(({\&quot;include\&quot;: False}, None))\n                continue\n            # Check to see id attrs are defined on the tag\n            has_attrs = has_attrs | bool(child.attrib.items())\n\n            code = str(child.text)\n            config, code = extract_and_strip_quarto_config(code)\n\n            try:\n                stub = app.add_code(\n                    code,\n                    is_raw=True,\n                )\n            except Exception:\n                stubs.append((config, None))\n                continue\n\n            assert isinstance(stub, MarimoIslandStub), \&quot;Unexpected error, please report\&quot;\n\n            stubs.append(\n                (\n                    config,\n                    stub,\n                )\n            )\n\n        if has_attrs and global_options.get(\&quot;warning\&quot;, True):\n            pass\n\n        _ = asyncio.run(app.build())\n        dev_server = os.environ.get(\&quot;QUARTO_MARIMO_DEBUG_ENDPOINT\&quot;, False)\n        version_override = os.environ.get(\&quot;QUARTO_MARIMO_VERSION\&quot;, marimo.__version__)\n        header = app.render_head(\n            _development_url=dev_server, version_override=version_override\n        )\n\n        return SafeWrap(\n            {\n                \&quot;header\&quot;: header,\n                \&quot;outputs\&quot;: [\n                    get_mime_render(global_options, stub, config, mime_sensitive)\n                    for config, stub in stubs\n                ],\n                \&quot;count\&quot;: len(stubs),\n            }  # type: ignore[arg-type]\n        )\n\n    return tree_to_pandoc_export\n\n\nclass MarimoPandocParser(MarimoParser):\n    \&quot;\&quot;\&quot;Parses Markdown to marimo notebook string.\&quot;\&quot;\&quot;\n\n    # TODO: Could upstream generic for keys- but this is fine.\n    output_formats = {  # type: ignore[assignment, misc]\n        \&quot;marimo-pandoc-export\&quot;: build_export_with_mime_context(mime_sensitive=False),  # type: ignore[dict-item]\n        \&quot;marimo-pandoc-export-with-mime\&quot;: build_export_with_mime_context(\n            mime_sensitive=True\n        ),  # type: ignore[dict-item]\n    }\n\n\ndef convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[str, Any]:\n    if not text:\n        return {\&quot;header\&quot;: \&quot;\&quot;, \&quot;outputs\&quot;: []}\n    if mime_sensitive:\n        parser = MarimoPandocParser(output_format=\&quot;marimo-pandoc-export-with-mime\&quot;)  # type: ignore[arg-type]\n    else:\n        parser = MarimoPandocParser(output_format=\&quot;marimo-pandoc-export\&quot;)  # type: ignore[arg-type]\n    return parser.convert(text)  # type: ignore[arg-type, return-value]\n\n\nif __name__ == \&quot;__main__\&quot;:\n    assert len(sys.argv) == 3, f\&quot;Unexpected call format got {sys.argv}\&quot;\n    _, reference_file, mime_sensitive = sys.argv\n\n    file = sys.stdin.read()\n    if not file:\n        with open(reference_file) as f:\n            file = f.read()\n    no_js = mime_sensitive.lower() == \&quot;yes\&quot;\n    os.environ[\&quot;MARIMO_NO_JS\&quot;] = str(no_js).lower()\n\n    conversion = convert_from_md_to_pandoc_export(file, no_js)\n    sys.stdout.write(json.dumps(conversion))\n&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.ui.code_editor(contents)</marimo-cell-code>
 </marimo-island>
@@ -502,287 +503,293 @@ Python files.</span></span></div></marimo-accordion>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
         }
-        return container.innerHTML
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -790,185 +797,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../tutorials/layout.html" class="pagination-link" aria-label="Layout">
@@ -991,12 +974,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="setup"}</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="in">import dataclasses</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="in">import random</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dataclasses</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="in">import marimo as mo</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="fu"># File Format</span></span>
@@ -1087,111 +1070,111 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a>We explain some properties of marimo's file format below.</span>
 <span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="in">````python {.marimo hide_code="true"}</span></span>
-<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a><span class="in">mo.accordion(</span></span>
-<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="in">    {</span></span>
-<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a><span class="in">        "Cells are functions": """</span></span>
-<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a><span class="in">    In the `dataflow` tutorial, we saw that cells are like functions mapping</span></span>
-<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a><span class="in">    their refs (the global  variables they uses but don't define) to their</span></span>
-<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="in">    defs (the global variables they define). The generated code makes this</span></span>
-<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="in">    analogy explicit.</span></span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>mo.accordion(</span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cells are functions"</span>: <span class="st">"""</span></span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a><span class="st">    In the `dataflow` tutorial, we saw that cells are like functions mapping</span></span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a><span class="st">    their refs (the global  variables they uses but don't define) to their</span></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="st">    defs (the global variables they define). The generated code makes this</span></span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="st">    analogy explicit.</span></span>
 <span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a><span class="in">    In the generated code, there is a function for each cell. The arguments</span></span>
-<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a><span class="in">    of  the function are the cell's refs , and its returned variables are</span></span>
-<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a><span class="in">    its defs that are referenced by other cells.</span></span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a><span class="st">    In the generated code, there is a function for each cell. The arguments</span></span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a><span class="st">    of  the function are the cell's refs , and its returned variables are</span></span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a><span class="st">    its defs that are referenced by other cells.</span></span>
 <span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a><span class="in">    For example, the code</span></span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a><span class="st">    For example, the code</span></span>
 <span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a><span class="in">    ```python3</span></span>
-<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="in">    @app.cell</span></span>
-<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="in">    def _(mo):</span></span>
-<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="in">        text = mo.ui.text(value="Hello, World!")</span></span>
-<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="in">        text</span></span>
-<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="in">        return text,</span></span>
-<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="st">    def _(mo):</span></span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="st">        text = mo.ui.text(value="Hello, World!")</span></span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="st">        text</span></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="st">        return text,</span></span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
 <span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a><span class="in">    says that the cell takes as input a variable called `mo`, and it creates</span></span>
-<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="in">    a global variable called `text` (that is read by another cell).</span></span>
+<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a><span class="st">    says that the cell takes as input a variable called `mo`, and it creates</span></span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="st">    a global variable called `text` (that is read by another cell).</span></span>
 <span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="in">    In contrast, the code</span></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="st">    In contrast, the code</span></span>
 <span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a><span class="in">    ```python3</span></span>
-<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="in">    @app.cell</span></span>
-<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="in">    def _():</span></span>
-<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="in">        import marimo as mo</span></span>
-<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="in">        return mo,</span></span>
-<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="st">    def _():</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="st">        import marimo as mo</span></span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="st">        return mo,</span></span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
 <span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="in">    says that the cell doesn't depend on any other cells (its argument list</span></span>
-<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="in">    is  empty), though it does create the variable `mo` which the previous</span></span>
-<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="in">    cell requires as input.</span></span>
-<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="in">    """,</span></span>
-<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="in">        "Cells are stored in presentation order": """</span></span>
-<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="in">    Cells are stored in the order that they are arranged in the marimo</span></span>
-<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="in">    editor. So if you want to rearrange</span></span>
-<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="in">    your cells using your favorite text editor, just rearrange the</span></span>
-<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="in">    order that they're defined in the file.</span></span>
-<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="in">    """,</span></span>
-<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a><span class="in">        "Text formatting is preserved": """</span></span>
-<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a><span class="in">    marimo guarantees that however your source code was</span></span>
-<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="in">    formatted in the marimo editor is exactly how it will be stored in</span></span>
-<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="in">    the generated code. For example, whitespace, line breaks, and so on are</span></span>
-<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a><span class="in">    all preserved exactly. This means that you can touch up formatting in</span></span>
-<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="in">    your text editor, either manually or using automated formatters like</span></span>
-<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a><span class="in">    Black, and be confident that your changes will be preserved.</span></span>
-<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a><span class="in">    """,</span></span>
-<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a><span class="in">        "Cell functions can have names": """</span></span>
-<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a><span class="in">    If you want to, you can replace the default names for cell functions</span></span>
-<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a><span class="in">    with meaningful ones.</span></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="st">    says that the cell doesn't depend on any other cells (its argument list</span></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="st">    is  empty), though it does create the variable `mo` which the previous</span></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="st">    cell requires as input.</span></span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cells are stored in presentation order"</span>: <span class="st">"""</span></span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="st">    Cells are stored in the order that they are arranged in the marimo</span></span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="st">    editor. So if you want to rearrange</span></span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="st">    your cells using your favorite text editor, just rearrange the</span></span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="st">    order that they're defined in the file.</span></span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Text formatting is preserved"</span>: <span class="st">"""</span></span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a><span class="st">    marimo guarantees that however your source code was</span></span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="st">    formatted in the marimo editor is exactly how it will be stored in</span></span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="st">    the generated code. For example, whitespace, line breaks, and so on are</span></span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a><span class="st">    all preserved exactly. This means that you can touch up formatting in</span></span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="st">    your text editor, either manually or using automated formatters like</span></span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a><span class="st">    Black, and be confident that your changes will be preserved.</span></span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cell functions can have names"</span>: <span class="st">"""</span></span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a><span class="st">    If you want to, you can replace the default names for cell functions</span></span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a><span class="st">    with meaningful ones.</span></span>
 <span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a><span class="in">    For example, change</span></span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a><span class="st">    For example, change</span></span>
 <span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a><span class="in">    ```python3</span></span>
-<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a><span class="in">    @app.cell</span></span>
-<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a><span class="in">    def _(text):</span></span>
-<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="in">        print(text.value)</span></span>
-<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a><span class="in">        return</span></span>
-<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a><span class="st">    def _(text):</span></span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="st">        print(text.value)</span></span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a><span class="st">        return</span></span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
 <span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a><span class="in">    to</span></span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a><span class="st">    to</span></span>
 <span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a><span class="in">    ```python3</span></span>
-<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a><span class="in">    @app.cell</span></span>
-<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a><span class="in">    def echo(text):</span></span>
-<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="in">        print(text.value)</span></span>
-<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a><span class="in">        return</span></span>
-<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
+<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a><span class="st">    def echo(text):</span></span>
+<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="st">        print(text.value)</span></span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a><span class="st">        return</span></span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
 <span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a><span class="in">    This can make the generated code more readable.</span></span>
-<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a><span class="in">    """,</span></span>
-<span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a><span class="in">        "No magical tokens": """</span></span>
-<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a><span class="in">    marimo's generated code is pure Python; no magical syntax.</span></span>
-<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a><span class="in">    """,</span></span>
-<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a><span class="in">        "Cell signatures automatically maintained": """</span></span>
-<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a><span class="in">    If when editing a cell, you forget to include all a cell's refs in its</span></span>
-<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a><span class="in">    argument list, or all its defs in its returns, marimo will fix them he next</span></span>
-<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a><span class="in">    time you try to open it in the marimo editor. So don't worry that you'll</span></span>
-<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a><span class="in">    botch a cell's signature when editing it.</span></span>
-<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="in">    """,</span></span>
-<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a><span class="in">        "The `app` object": """</span></span>
-<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a><span class="in">    At the top of the generated code, a variable named `app` is created.</span></span>
-<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a><span class="in">    This object collects the cells into a dataflow graph, using the `cell`</span></span>
-<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a><span class="in">    decorator.</span></span>
-<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a><span class="in">    """,</span></span>
-<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a><span class="in">        "Runnable as a script": """</span></span>
-<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a><span class="in">    You can run marimo apps as scripts at the command line,</span></span>
-<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a><span class="in">    using Python. This will execute the cells in a</span></span>
-<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a><span class="in">    topologically sorted order, just as they would run if you opened the app</span></span>
-<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a><span class="in">    with `marimo edit`.</span></span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a><span class="st">    This can make the generated code more readable.</span></span>
+<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No magical tokens"</span>: <span class="st">"""</span></span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a><span class="st">    marimo's generated code is pure Python; no magical syntax.</span></span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cell signatures automatically maintained"</span>: <span class="st">"""</span></span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a><span class="st">    If when editing a cell, you forget to include all a cell's refs in its</span></span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a><span class="st">    argument list, or all its defs in its returns, marimo will fix them he next</span></span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a><span class="st">    time you try to open it in the marimo editor. So don't worry that you'll</span></span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a><span class="st">    botch a cell's signature when editing it.</span></span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a>        <span class="st">"The `app` object"</span>: <span class="st">"""</span></span>
+<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a><span class="st">    At the top of the generated code, a variable named `app` is created.</span></span>
+<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a><span class="st">    This object collects the cells into a dataflow graph, using the `cell`</span></span>
+<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a><span class="st">    decorator.</span></span>
+<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Runnable as a script"</span>: <span class="st">"""</span></span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a><span class="st">    You can run marimo apps as scripts at the command line,</span></span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a><span class="st">    using Python. This will execute the cells in a</span></span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a><span class="st">    topologically sorted order, just as they would run if you opened the app</span></span>
+<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a><span class="st">    with `marimo edit`.</span></span>
 <span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a><span class="in">    For example: running our example as a script would print `Hello</span></span>
-<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a><span class="in">    World!` to the console.</span></span>
-<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a><span class="in">    """,</span></span>
-<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a><span class="in">        """Usable as a module""": """</span></span>
-<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a><span class="in">    Import top-level functions and classes from the notebook into other</span></span>
-<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a><span class="in">    Python files.</span></span>
-<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a><span class="in">    """,</span></span>
-<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a><span class="st">    For example: running our example as a script would print `Hello</span></span>
+<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a><span class="st">    World!` to the console.</span></span>
+<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a>        <span class="st">"""Usable as a module"""</span>: <span class="st">"""</span></span>
+<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a><span class="st">    Import top-level functions and classes from the notebook into other</span></span>
+<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a><span class="st">    Python files.</span></span>
+<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb11-212"><a href="#cb11-212" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
 <span id="cb11-213"><a href="#cb11-213" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-214"><a href="#cb11-214" aria-hidden="true" tabindex="-1"></a><span class="fu">## Importing functions and classes from notebooks</span></span>
@@ -1223,20 +1206,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-240"><a href="#cb11-240" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-241"><a href="#cb11-241" aria-hidden="true" tabindex="-1"></a>Modules imported in a setup cell can be used in "top-level" functions or</span>
 <span id="cb11-242"><a href="#cb11-242" aria-hidden="true" tabindex="-1"></a>classes. You can add the setup cell from the general menu of the editor under:</span>
-<span id="cb11-243"><a href="#cb11-243" aria-hidden="true" tabindex="-1"></a>::lucide:diamond-plus:: Add setup cell.</span>
+<span id="cb11-243"><a href="#cb11-243" aria-hidden="true" tabindex="-1"></a>:<span class="sc">:lucide:</span>diamond-plus:: Add setup cell.</span>
 <span id="cb11-244"><a href="#cb11-244" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
 <span id="cb11-245"><a href="#cb11-245" aria-hidden="true" tabindex="-1"></a><span class="fu">### Functions and classes</span></span>
 <span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-247"><a href="#cb11-247" aria-hidden="true" tabindex="-1"></a>Notebook files expose functions and classes that depend only on variables defined in the setup cell (or on other such functions or classes). For example, the following cell:</span>
 <span id="cb11-248"><a href="#cb11-248" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-249"><a href="#cb11-249" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="*roll_die"}</span></span>
-<span id="cb11-250"><a href="#cb11-250" aria-hidden="true" tabindex="-1"></a><span class="in">def roll_die():</span></span>
-<span id="cb11-251"><a href="#cb11-251" aria-hidden="true" tabindex="-1"></a><span class="in">    """</span></span>
-<span id="cb11-252"><a href="#cb11-252" aria-hidden="true" tabindex="-1"></a><span class="in">    A reusable function.</span></span>
+<span id="cb11-250"><a href="#cb11-250" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roll_die():</span>
+<span id="cb11-251"><a href="#cb11-251" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-252"><a href="#cb11-252" aria-hidden="true" tabindex="-1"></a><span class="co">    A reusable function.</span></span>
 <span id="cb11-253"><a href="#cb11-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-254"><a href="#cb11-254" aria-hidden="true" tabindex="-1"></a><span class="in">    Notice the indicator in the bottom right of the cell.</span></span>
-<span id="cb11-255"><a href="#cb11-255" aria-hidden="true" tabindex="-1"></a><span class="in">    """</span></span>
-<span id="cb11-256"><a href="#cb11-256" aria-hidden="true" tabindex="-1"></a><span class="in">    return random.randint(1, 7)</span></span>
+<span id="cb11-254"><a href="#cb11-254" aria-hidden="true" tabindex="-1"></a><span class="co">    Notice the indicator in the bottom right of the cell.</span></span>
+<span id="cb11-255"><a href="#cb11-255" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-256"><a href="#cb11-256" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> random.randint(<span class="dv">1</span>, <span class="dv">7</span>)</span>
 <span id="cb11-257"><a href="#cb11-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-258"><a href="#cb11-258" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-259"><a href="#cb11-259" aria-hidden="true" tabindex="-1"></a>... is saved in the notebook file as</span>
@@ -1262,12 +1245,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-279"><a href="#cb11-279" aria-hidden="true" tabindex="-1"></a>Standalone classes are also exposed:</span>
 <span id="cb11-280"><a href="#cb11-280" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-281"><a href="#cb11-281" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="*SimulationExample"}</span></span>
-<span id="cb11-282"><a href="#cb11-282" aria-hidden="true" tabindex="-1"></a><span class="in">@dataclasses.dataclass</span></span>
-<span id="cb11-283"><a href="#cb11-283" aria-hidden="true" tabindex="-1"></a><span class="in">class SimulationExample:</span></span>
-<span id="cb11-284"><a href="#cb11-284" aria-hidden="true" tabindex="-1"></a><span class="in">    n_rolls: int</span></span>
+<span id="cb11-282"><a href="#cb11-282" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclasses.dataclass</span></span>
+<span id="cb11-283"><a href="#cb11-283" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimulationExample:</span>
+<span id="cb11-284"><a href="#cb11-284" aria-hidden="true" tabindex="-1"></a>    n_rolls: <span class="bu">int</span></span>
 <span id="cb11-285"><a href="#cb11-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-286"><a href="#cb11-286" aria-hidden="true" tabindex="-1"></a><span class="in">    def simulate(self) -&gt; list[int]:</span></span>
-<span id="cb11-287"><a href="#cb11-287" aria-hidden="true" tabindex="-1"></a><span class="in">        return [roll_die() for _ in range(self.n_rolls)]</span></span>
+<span id="cb11-286"><a href="#cb11-286" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> simulate(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">int</span>]:</span>
+<span id="cb11-287"><a href="#cb11-287" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [roll_die() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.n_rolls)]</span>
 <span id="cb11-288"><a href="#cb11-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-289"><a href="#cb11-289" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-290"><a href="#cb11-290" aria-hidden="true" tabindex="-1"></a>This class is saved in the file as</span>
@@ -1293,18 +1276,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-310"><a href="#cb11-310" aria-hidden="true" tabindex="-1"></a>For example, this function will not be exposed:</span>
 <span id="cb11-311"><a href="#cb11-311" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-312"><a href="#cb11-312" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
-<span id="cb11-313"><a href="#cb11-313" aria-hidden="true" tabindex="-1"></a><span class="in">variable = 123</span></span>
+<span id="cb11-313"><a href="#cb11-313" aria-hidden="true" tabindex="-1"></a>variable <span class="op">=</span> <span class="dv">123</span></span>
 <span id="cb11-314"><a href="#cb11-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-315"><a href="#cb11-315" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-316"><a href="#cb11-316" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="wrapped_function_example"}</span></span>
-<span id="cb11-317"><a href="#cb11-317" aria-hidden="true" tabindex="-1"></a><span class="in">def not_a_top_level_function():</span></span>
-<span id="cb11-318"><a href="#cb11-318" aria-hidden="true" tabindex="-1"></a><span class="in">    """</span></span>
-<span id="cb11-319"><a href="#cb11-319" aria-hidden="true" tabindex="-1"></a><span class="in">    This function depends on a variable declared in another cell.</span></span>
+<span id="cb11-317"><a href="#cb11-317" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> not_a_top_level_function():</span>
+<span id="cb11-318"><a href="#cb11-318" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-319"><a href="#cb11-319" aria-hidden="true" tabindex="-1"></a><span class="co">    This function depends on a variable declared in another cell.</span></span>
 <span id="cb11-320"><a href="#cb11-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-321"><a href="#cb11-321" aria-hidden="true" tabindex="-1"></a><span class="in">    As a result this function isn't exposed in the file — and the tooltip in the</span></span>
-<span id="cb11-322"><a href="#cb11-322" aria-hidden="true" tabindex="-1"></a><span class="in">    bottom-right corner indicates this.</span></span>
-<span id="cb11-323"><a href="#cb11-323" aria-hidden="true" tabindex="-1"></a><span class="in">    """</span></span>
-<span id="cb11-324"><a href="#cb11-324" aria-hidden="true" tabindex="-1"></a><span class="in">    return variable</span></span>
+<span id="cb11-321"><a href="#cb11-321" aria-hidden="true" tabindex="-1"></a><span class="co">    As a result this function isn't exposed in the file — and the tooltip in the</span></span>
+<span id="cb11-322"><a href="#cb11-322" aria-hidden="true" tabindex="-1"></a><span class="co">    bottom-right corner indicates this.</span></span>
+<span id="cb11-323"><a href="#cb11-323" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-324"><a href="#cb11-324" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> variable</span>
 <span id="cb11-325"><a href="#cb11-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-326"><a href="#cb11-326" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-327"><a href="#cb11-327" aria-hidden="true" tabindex="-1"></a><span class="fu">## FAQ</span></span>
@@ -1327,12 +1310,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-344"><a href="#cb11-344" aria-hidden="true" tabindex="-1"></a>The source code of this notebook is shown below:</span>
 <span id="cb11-345"><a href="#cb11-345" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-346"><a href="#cb11-346" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
-<span id="cb11-347"><a href="#cb11-347" aria-hidden="true" tabindex="-1"></a><span class="in">with open(__file__, "r", encoding="utf-8") as f:</span></span>
-<span id="cb11-348"><a href="#cb11-348" aria-hidden="true" tabindex="-1"></a><span class="in">    contents = f.read()</span></span>
+<span id="cb11-347"><a href="#cb11-347" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="va">__file__</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb11-348"><a href="#cb11-348" aria-hidden="true" tabindex="-1"></a>    contents <span class="op">=</span> f.read()</span>
 <span id="cb11-349"><a href="#cb11-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-350"><a href="#cb11-350" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-351"><a href="#cb11-351" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo}</span></span>
-<span id="cb11-352"><a href="#cb11-352" aria-hidden="true" tabindex="-1"></a><span class="in">mo.ui.code_editor(contents)</span></span>
+<span id="cb11-352"><a href="#cb11-352" aria-hidden="true" tabindex="-1"></a>mo.ui.code_editor(contents)</span>
 <span id="cb11-353"><a href="#cb11-353" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
