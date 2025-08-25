@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.9"
 resolution-markers = [
     "python_full_version >= '3.11'",
@@ -585,7 +585,7 @@ wheels = [
 
 [[package]]
 name = "marimo"
-version = "0.14.8"
+version = "0.15.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click", version = "8.1.8", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
@@ -607,9 +607,9 @@ dependencies = [
     { name = "uvicorn" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/df/06/bcda71830e4a77f4226820ab63637b78a1d343a31a5197a26e831c806aee/marimo-0.14.8.tar.gz", hash = "sha256:05ff02baf0516484b565c1573cc22589d211e6a05f01df59fc95ae3ed9fff9c6", size = 29132795, upload-time = "2025-06-26T17:24:29.04Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/02/00/b10b887a8242cdf05941dbfe15ae0c04dace745f8a3d89b13478627c8ad0/marimo-0.15.0.tar.gz", hash = "sha256:021c3a77eda44b1c880f317449c4a5354a5bbf581491e101551d3812fde1acd4", size = 31143943, upload-time = "2025-08-21T21:06:52.11Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/16/23/f930e2976ad8b30c8cff418b2613117d878da5b9d3ffae1c83c0d6c3add8/marimo-0.14.8-py3-none-any.whl", hash = "sha256:c2cab2ac3b6bf92262a272e41a8eb81087c3e454931b5e74c07d82445f45473e", size = 29609039, upload-time = "2025-06-26T17:24:23.949Z" },
+    { url = "https://files.pythonhosted.org/packages/b6/4b/6ae6b73d67981ee8d95fd38d1e6bd2e7247ee9bfb52eaf9510f95b9378f2/marimo-0.15.0-py3-none-any.whl", hash = "sha256:b089b51b625e59dffff36a19293684b458440045e5c600cf426b6a5ca69ce924", size = 31382684, upload-time = "2025-08-21T21:06:56.578Z" },
 ]
 
 [[package]]
@@ -989,7 +989,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "marimo", specifier = ">=0.14.8" },
+    { name = "marimo", specifier = "<=0.15.0,>=0.15.0" },
     { name = "packaging" },
     { name = "quarto" },
     { name = "ruff" },

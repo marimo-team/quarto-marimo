@@ -8,7 +8,7 @@ description = "marimo package for quarto"
 dynamic = ["version"]
 dependencies = [
     # for marimo
-    "marimo>=0.14.8,<=0.14.16",
+    "marimo>=0.15.0,<=0.15.0",
     # quarto itself
     "quarto",
     # uv is used in the script calls
@@ -52,7 +52,7 @@ ci = "quarto install tinytex --no-prompt && quarto render"
 refresh = "./scripts/export.sh"
 
 [tool.pixi.dependencies]
-marimo = ">=0.14.8,<=0.14.16"
+marimo = ">=0.15.0,<=0.15.0"
 quarto = ">=1.6.43,<2"
 pandoc = ">=3.4,<4"
 pyyaml = ">=6.0.2,<7"
