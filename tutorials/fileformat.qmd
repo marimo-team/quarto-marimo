@@ -3,8 +3,6 @@ title: Fileformat
 marimo-version: 0.13.2
 header: |-
   # Copyright 2025 Marimo. All rights reserved
-filters:
-- marimo-team/marimo
 ---
 
 ```python {.marimo name="setup"}
@@ -12,7 +10,7 @@ import dataclasses
 import random
 ```
 
-```python {.marimo}
+```{python .marimo}
 import marimo as mo
 ```
 
@@ -309,7 +307,7 @@ be exposed top-level.
 
 For example, this function will not be exposed:
 
-```python {.marimo}
+```{python .marimo}
 variable = 123
 ```
 
@@ -343,11 +341,11 @@ See the docs on [testing](https://docs.marimo.io/guides/testing/).
 
 The source code of this notebook is shown below:
 
-```python {.marimo}
+```{python .marimo}
 with open(__file__, "r", encoding="utf-8") as f:
     contents = f.read()
 ```
 
-```python {.marimo}
+```{python .marimo}
 mo.ui.code_editor(contents)
 ```

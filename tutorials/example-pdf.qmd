@@ -1,22 +1,21 @@
 ---
 title: PDF example
 format: pdf
+engine: marimo
 pyproject: |
     requires-python = ">=3.11"
     dependencies = [
         "numpy",
         "pandas",
         "matplotlib",
-        "marimo>=0.13.3"
+        "marimo>=0.14.8,<=0.14.16"
     ]
-filters:
-  - marimo
 extract-media: _site/media
 ---
 
 # PDF Output
 
-```{.python.marimo}
+```{python .marimo}
 check = """
 Quarto can handle images and tables in PDF output, but not rich HTML outputs.
 Here's an example of what can be acccomplished with the `marimo` exports to pdf.
@@ -40,7 +39,7 @@ import matplotlib.pyplot as plt
 plt.plot([1, 2])
 ```
 
-```{.python.marimo}
+```{python .marimo}
 plt.plot([1, 2])
 plt.gca()
 ```
@@ -58,7 +57,7 @@ df = pd.DataFrame({
 df
 ```
 
-```{.python.marimo}
+```{python .marimo}
 df = pd.DataFrame({
     'A': [1, 2, 3],
     'B': [4, 5, 6]
@@ -68,14 +67,14 @@ df
 
 ## Text / Markdown
 
-```{.python.marimo}
+```{python .marimo}
 f"""You can also include text or markdown in the PDF output.
 Which can be useful for embedding computed values like the fact
 that this was rendered by Marimo {mo.__version__} on {datetime.datetime.now()}.
 """
 ```
 
-```{.python.marimo}
+```{python .marimo}
 try:
     import matplotlib
     import matplotlib.pyplot as plt
@@ -91,6 +90,6 @@ if not missing_packages:
 ```
 
 
-```{.python.marimo}
+```{python .marimo}
 import marimo as mo
 ```

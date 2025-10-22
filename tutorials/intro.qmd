@@ -3,21 +3,19 @@ title: Intro
 marimo-version: 0.13.2
 header: |-
   # Copyright 2024 Marimo. All rights reserved.
-filters:
-- marimo-team/marimo
 ---
 
-```python {.marimo}
+```{python .marimo}
 import marimo as mo
 
 mo.md("# Welcome to marimo! 🌊🍃")
 ```
 
-```python {.marimo}
+```{python .marimo}
 slider = mo.ui.slider(1, 22)
 ```
 
-```python {.marimo}
+```{python .marimo}
 mo.md(
     f"""
     marimo is a **reactive** Python notebook.
@@ -98,7 +96,7 @@ happen.
 )
 ```
 
-```python {.marimo}
+```{python .marimo}
 changed = False
 ```
 
@@ -160,19 +158,19 @@ marimo provides a library of UI elements to choose from under
 <!---->
 **🌊 Some UI elements.** Try interacting with the below elements.
 
-```python {.marimo}
+```{python .marimo}
 icon = mo.ui.dropdown(["🍃", "🌊", "✨"], value="🍃")
 ```
 
-```python {.marimo}
+```{python .marimo}
 repetitions = mo.ui.slider(1, 16, label=f"number of {icon.value}: ")
 ```
 
-```python {.marimo}
+```{python .marimo}
 icon, repetitions
 ```
 
-```python {.marimo}
+```{python .marimo}
 mo.md("# " + icon.value * repetitions.value)
 ```
 
@@ -254,7 +252,7 @@ In addition to tutorials, we have examples in our
 
 Here are some tips to help you get started with the marimo editor.
 
-```python {.marimo}
+```{python .marimo}
 mo.accordion(tips)
 ```
 

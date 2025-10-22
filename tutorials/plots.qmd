@@ -26,7 +26,7 @@ import matplotlib.pyplot as plt
 plt.plot([1, 2])
 ```
 
-```python {.marimo}
+```{python .marimo}
 plt.plot([1, 2])
 ```
 
@@ -38,7 +38,7 @@ plt.plot([1, 2])
 plt.gca()
 ```
 
-```python {.marimo}
+```{python .marimo}
 plt.plot([1, 2])
 # ... do some work ...
 # make plt.gca() the last line of the cell
@@ -52,31 +52,31 @@ mo.accordion(plt_show_explainer)
 **A new figure every cell.** Every cell starts with an empty figure for
 the imperative `pyplot` API.
 
-```python {.marimo}
+```{python .marimo}
 x = np.linspace(start=-4, stop=4, num=100, dtype=float)
 ```
 
-```python {.marimo}
+```{python .marimo}
 plt.plot(x, x)
 plt.plot(x, x**2)
 plt.gca()
 ```
 
-```python {.marimo}
+```{python .marimo}
 plt.plot(x, x**3)
 ```
 
 To build a figure over multiple cells, use the object-oriented API and
 create your own axis:
 
-```python {.marimo}
+```{python .marimo}
 _, axis = plt.subplots()
 axis.plot(x, x)
 axis.plot(x, x**2)
 axis
 ```
 
-```python {.marimo}
+```{python .marimo}
 axis.plot(x, x**3)
 axis
 ```
@@ -85,7 +85,7 @@ axis
 
 Draw plots interactively by parametrizing them with UI elements.
 
-```python {.marimo}
+```{python .marimo}
 exponent = mo.ui.slider(1, 5, value=1, step=1, label='exponent')
 
 mo.md(
@@ -97,14 +97,14 @@ mo.md(
 )
 ```
 
-```python {.marimo}
+```{python .marimo}
 @mo.cache
 def plot_power(exponent):
     plt.plot(x, x**exponent)
     return plt.gca()
 ```
 
-```python {.marimo}
+```{python .marimo}
 _tex = (
     f"$$f(x) = x^{exponent.value}$$" if exponent.value > 1 else "$$f(x) = x$$"
 )
@@ -169,7 +169,7 @@ plt_show_explainer = {
 }
 ```
 
-```python {.marimo}
+```{python .marimo}
 try:
     import matplotlib
     import matplotlib.pyplot as plt
@@ -182,6 +182,6 @@ if not missing_packages:
     matplotlib.rcParams['figure.figsize'] = (6, 2.4)
 ```
 
-```python {.marimo}
+```{python .marimo}
 import marimo as mo
 ```

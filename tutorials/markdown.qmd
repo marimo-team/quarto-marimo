@@ -97,7 +97,7 @@ markdown whose contents depend on data that changes at runtime.
 
 Here are some examples.
 
-````python {.marimo}
+````{python .marimo}
 def _sine_plot():
     _x = np.linspace(start=0, stop=2 * np.pi)
     plt.plot(_x, np.sin(_x))
@@ -120,7 +120,7 @@ mo.md(
 )
 ````
 
-````python {.marimo}
+````{python .marimo}
 leaves = mo.ui.slider(1, 32, label="🍃: ")
 
 mo.md(
@@ -141,7 +141,7 @@ mo.md(
 )
 ````
 
-```python {.marimo}
+```{python .marimo}
 mo.md(f"Your leaves: {'🍃' * leaves.value}")
 ```
 
@@ -156,7 +156,7 @@ mo.accordion(
 )
 ```
 
-```python {.marimo}
+```{python .marimo}
 import polars as pl
 
 def make_dataframe():
@@ -202,7 +202,7 @@ Here's a more interesting example that puts together
 everything we've learned: rendering markdown with LaTeX that depends on
 the values of Python objects.
 
-```python {.marimo}
+```{python .marimo}
 amplitude = mo.ui.slider(1, 2, step=0.1, label="amplitude: ")
 period = mo.ui.slider(
     math.pi / 4,
@@ -213,7 +213,7 @@ period = mo.ui.slider(
 )
 ```
 
-```python {.marimo}
+```{python .marimo}
 @mo.cache
 def plotsin(amplitude, period):
     x = np.linspace(0, 2 * np.pi, 256)
@@ -222,7 +222,7 @@ def plotsin(amplitude, period):
     return plt.gca()
 ```
 
-```python {.marimo}
+```{python .marimo}
 mo.md(
     f"""
     **A sin curve.**
@@ -233,7 +233,7 @@ mo.md(
 )
 ```
 
-```python {.marimo}
+```{python .marimo}
 mo.md(
     rf"""
     You're viewing the graph of

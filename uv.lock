@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.9"
 resolution-markers = [
     "python_full_version >= '3.11'",
@@ -989,7 +989,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "marimo", specifier = ">=0.14.8" },
+    { name = "marimo", specifier = ">=0.14.8,<=0.14.16" },
     { name = "packaging" },
     { name = "quarto" },
     { name = "ruff" },

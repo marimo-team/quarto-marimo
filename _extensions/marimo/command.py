@@ -31,7 +31,7 @@ def extract_command(header: str) -> list[str]:
         mode="w", delete=False, suffix=".txt"
     ) as temp_file:
         flags = construct_uv_flags(pyproject, temp_file, [], [])
-
+        temp_file.flush()
     return ["run"] + flags
 
 
