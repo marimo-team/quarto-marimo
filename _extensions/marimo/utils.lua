@@ -56,7 +56,7 @@ function _construct_uv_command(header)
     return pandoc.json.decode(
         pandoc.pipe(
             "uv",
-            { "run", "--with", "marimo", command_script },
+            { "run", "--with", "marimo==0.14.16", command_script },
             header
         )
     )
