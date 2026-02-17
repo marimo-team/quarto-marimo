@@ -1,11 +1,10 @@
 ---
 title: marimo + quarto
 format: html
-filters:
-  - marimo
 ---
 
 # 🟢 🔵 🏝️
+
 ---
 
 
@@ -14,12 +13,12 @@ This repository provides a framework for integrating
 enabling markdown documents to be executed in a `marimo` environment, and
 reactive in page.
 
-```python {.marimo}
+```{python .marimo}
 slider = mo.ui.slider(start=1, stop=10)
 slider
 ```
 
-```python {.marimo}
+```{python .marimo}
 #| echo: true
 mo.md(f'''
   # Hello from marimo!{'!' * slider.value}
@@ -53,7 +52,7 @@ Write a `qmd` document with `{marimo}` cells.
 For instance the following cell
 
 ````python
-```python {.marimo}
+```{python .marimo}
 print("remember that stdout is not shown")
 result = "Only outputs!"
 result,
@@ -62,7 +61,7 @@ result,
 
 produces the following output:
 
-```python {.marimo}
+```{python .marimo}
 print("remember that stdout is not shown")
 result = "Only outputs!"
 result,
@@ -73,14 +72,14 @@ result,
 We can make it editable:
 
 ````python
-```python {.marimo}
+```{python .marimo}
 #| editor: true
 editor_result = "Change me" + ("!" * 3)
 editor_result,
 ```
 ````
 
-```python {.marimo}
+```{python .marimo}
 #| echo: true
 editor_result = "Change me" + ("!" * 3)
 editor_result,
@@ -90,7 +89,7 @@ but the default is to show the output only.
 
 ---
 
-```python {.marimo}
+```{python .marimo}
 mo.md(
   f"The value of `editor_result` in the previous cell: **{editor_result}**")
 ```
@@ -107,7 +106,7 @@ You can also export existing notebooks into quarto format: `marimo export md myn
 
 ## Background cells shown for illustration
 
-```python {.marimo}
+```{python .marimo}
 #| echo: true
 # Bug: Cells are not runnable if no output
 import marimo as mo

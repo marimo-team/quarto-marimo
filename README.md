@@ -103,4 +103,16 @@ Javascript.
 
 ---
 
+## Development
+
+To build the TypeScript engine extension:
+
+```bash
+quarto call build-ts-extension
+```
+
+This bundles `src/marimo-engine.ts` into `_extensions/marimo/marimo-engine.js`.
+
+---
+
 Credits: [holoviz-quarto](https://github.com/awesome-panel/holoviz-quarto) for ideas on layout

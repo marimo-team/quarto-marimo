@@ -3,8 +3,6 @@ title: Ui
 marimo-version: 0.13.2
 header: |-
   # Copyright 2024 Marimo. All rights reserved.
-filters:
-- marimo-team/marimo
 ---
 
 # UI Elements
@@ -15,7 +13,7 @@ with a UI element will automatically run cells that reference it.
 <!---->
 ## marimo.ui
 
-```python {.marimo}
+```{python .marimo}
 slider = mo.ui.slider(start=1, stop=10, step=1)
 slider
 
@@ -28,7 +26,7 @@ mo.md(
 )
 ```
 
-```python {.marimo}
+```{python .marimo}
 mo.md(f"and here's its value: **{slider.value}**.")
 ```
 
@@ -82,83 +80,83 @@ mo.md(
 ).callout()
 ```
 
-```python {.marimo}
+```{python .marimo}
 number = mo.ui.number(start=1, stop=10, step=1)
 number
 ```
 
-```python {.marimo}
+```{python .marimo}
 number.value
 ```
 
-```python {.marimo}
+```{python .marimo}
 checkbox = mo.ui.checkbox(label="checkbox")
 checkbox
 ```
 
-```python {.marimo}
+```{python .marimo}
 checkbox.value
 ```
 
-```python {.marimo}
+```{python .marimo}
 text = mo.ui.text(placeholder="type some text ...")
 text
 ```
 
-```python {.marimo}
+```{python .marimo}
 text.value
 ```
 
-```python {.marimo}
+```{python .marimo}
 text_area = mo.ui.text_area(placeholder="type some text ...")
 text_area
 ```
 
-```python {.marimo}
+```{python .marimo}
 text_area.value
 ```
 
-```python {.marimo}
+```{python .marimo}
 dropdown = mo.ui.dropdown(["a", "b", "c"])
 dropdown
 ```
 
-```python {.marimo}
+```{python .marimo}
 dropdown.value
 ```
 
-```python {.marimo}
+```{python .marimo}
 run_button = mo.ui.run_button(label="click me")
 run_button
 ```
 
-```python {.marimo}
+```{python .marimo}
 "Run button was clicked!" if run_button.value else "Click the run button!"
 ```
 
-```python {.marimo}
+```{python .marimo}
 file_upload = mo.ui.file(kind="area")
 file_upload
 ```
 
-```python {.marimo}
+```{python .marimo}
 file_upload.value
 ```
 
-```python {.marimo}
+```{python .marimo}
 mo.md(f"To see more examples, use this dropdown: {basic_ui_elements}")
 ```
 
-```python {.marimo}
+```{python .marimo}
 selected_element = construct_element(basic_ui_elements.value)
 show_element(selected_element)
 ```
 
-```python {.marimo}
+```{python .marimo}
 value(selected_element)
 ```
 
-```python {.marimo}
+```{python .marimo}
 documentation(basic_ui_elements.value)
 ```
 
@@ -175,20 +173,20 @@ This first example shows how to create an array of UI elements using `mo.ui.arra
 When you interact with an element in the array, all cells that reference the
 array are reactively run. If you instead used a regular Python list, cells referring to the list would _not_ be run.
 
-```python {.marimo}
+```{python .marimo}
 array = mo.ui.array(
     [mo.ui.text(), mo.ui.slider(start=1, stop=10), mo.ui.date()]
 )
 array
 ```
 
-```python {.marimo}
+```{python .marimo}
 array.value
 ```
 
 marimo also comes with `mo.ui.dictionary`, which is analogous to `mo.ui.array`
 
-```python {.marimo}
+```{python .marimo}
 dictionary = mo.ui.dictionary(
     {
         "text": mo.ui.text(),
@@ -199,7 +197,7 @@ dictionary = mo.ui.dictionary(
 dictionary
 ```
 
-```python {.marimo}
+```{python .marimo}
 dictionary.value
 ```
 
@@ -209,16 +207,16 @@ mo.md(
 )
 ```
 
-```python {.marimo}
+```{python .marimo}
 composite_element = construct_element(composite_elements.value)
 show_element(composite_element)
 ```
 
-```python {.marimo}
+```{python .marimo}
 value(composite_element)
 ```
 
-```python {.marimo}
+```{python .marimo}
 documentation(composite_elements.value)
 ```
 
@@ -234,7 +232,7 @@ The remaining cells are helper data structures and functions.
 You can look at their code if you're curious how certain parts of this
 tutorial were implemented.
 
-```python {.marimo}
+```{python .marimo}
 composite_elements = mo.ui.dropdown(
     options=dict(
         sorted(
@@ -250,7 +248,7 @@ composite_elements = mo.ui.dropdown(
 )
 ```
 
-```python {.marimo}
+```{python .marimo}
 basic_ui_elements = mo.ui.dropdown(
     options=dict(
         sorted(
@@ -276,7 +274,7 @@ basic_ui_elements = mo.ui.dropdown(
 )
 ```
 
-```python {.marimo}
+```{python .marimo}
 def construct_element(value):
     if value == mo.ui.array:
         return mo.ui.array(
@@ -357,13 +355,13 @@ def construct_element(value):
     return None
 ```
 
-```python {.marimo}
+```{python .marimo}
 def show_element(element):
     if element is not None:
         return mo.hstack([element], justify="center")
 ```
 
-```python {.marimo}
+```{python .marimo}
 def value(element):
     if element is not None:
         v = (
@@ -378,7 +376,7 @@ def value(element):
         )
 ```
 
-```python {.marimo}
+```{python .marimo}
 def documentation(element):
     if element is not None:
         return mo.accordion(
@@ -390,6 +388,6 @@ def documentation(element):
         )
 ```
 
-```python {.marimo}
+```{python .marimo}
 import marimo as mo
 ```

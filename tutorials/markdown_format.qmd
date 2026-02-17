@@ -42,7 +42,7 @@ When you do need to create a Python cell in the markdown format, you can use a
 special code block:
 
 ````md
-```python {.marimo}
+```{python .marimo}
 import matplotlib.pyplot as plt
 plt.plot([1, 2, 3, 4])
 ```
@@ -50,7 +50,7 @@ plt.plot([1, 2, 3, 4])
 
 This will create the following cell:
 
-```python {.marimo}
+```{python .marimo}
 import matplotlib.pyplot as plt
 
 plt.plot([1, 2, 3, 4])
@@ -113,7 +113,7 @@ print("This code cell is disabled, there should be no output!")
 Additionally, marimo knows when your code has a syntax issue:
 
 ````md
-```python {.marimo}
+```{python .marimo}
 print("This code cell has a syntax error"
 ```
 ````
@@ -138,7 +138,7 @@ just give you the raw string. This lets you clearly delineate what values are
 supposed to be computed, and what values are static. To interpolate Python
 values, just use a Python cell:
 
-```python {.marimo}
+```{python .marimo}
 mo.md(f"""Like so: {"🍃" * 7}""")
 ```
 
@@ -147,7 +147,7 @@ mo.md(f"""Like so: {"🍃" * 7}""")
 Whenever you try to implement a cell block like this:
 
 ````md
-```python {.marimo}
+```{python .marimo}
 mo.md("This is a markdown cell")
 ```
 ````
@@ -155,11 +155,11 @@ mo.md("This is a markdown cell")
 The markdown format will know to automatically keep this as markdown. However,
 some ambiguous cases can't be converted to markdown like this:
 
-````python {.marimo}
+````{python .marimo}
 mo.md(
     """
     This is a markdown cell with an execution block in it
-    ```python {.marimo}
+    ```{python .marimo}
     # Too ambiguous to convert
     ```
     """

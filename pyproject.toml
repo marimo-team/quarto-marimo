@@ -45,7 +45,8 @@ name = "quarto-marimo"
 platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
 
 [tool.pixi.tasks]
-lint = "ruff check && mypy _extensions/marimo/ && stylua -c _extensions/marimo/"
+# todo: add typescript lint?
+lint = "ruff check && mypy _extensions/marimo/"
 serve = "quarto preview"
 render = "quarto render"
 ci = "quarto install tinytex --no-prompt && quarto render"

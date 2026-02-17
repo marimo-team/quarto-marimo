@@ -23,3 +23,5 @@ result
 # pixi environments
 .pixi
 *.egg-info
+
+**/*.quarto_ipynb
