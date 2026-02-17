@@ -251,8 +251,9 @@ def convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[st
 
 
 if __name__ == "__main__":
-    assert len(sys.argv) == 3, f"Unexpected call format got {sys.argv}"
-    _, reference_file, mime_sensitive = sys.argv
+    assert len(sys.argv) in (3, 4), f"Unexpected call format got {sys.argv}"
+    _, reference_file, mime_sensitive = sys.argv[:3]
+    global_eval = sys.argv[3].lower() == "yes" if len(sys.argv) == 4 else True
 
     file = sys.stdin.read()
     if not file:
@@ -260,6 +261,9 @@ if __name__ == "__main__":
             file = f.read()
     no_js = mime_sensitive.lower() == "yes"
     os.environ["MARIMO_NO_JS"] = str(no_js).lower()
+
+    if not global_eval:
+        default_config["eval"] = False
 
     conversion = convert_from_md_to_pandoc_export(file, no_js)
     sys.stdout.write(json.dumps(conversion))
