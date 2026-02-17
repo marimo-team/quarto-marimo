@@ -4,14 +4,18 @@
 
 marimo is a next generation python notebook that is embeddable anywhere.
 As such, it is a great fit for quarto, which has reactive and robust a publishing system.
-This repo is a quarto filter that lets you use marimo in your quarto documents; just follow the setup below.
+This repo is a quarto engine extension that lets you use marimo in your quarto documents; just follow the setup below.
+
+> [!IMPORTANT]
+> **Requires Quarto >= 1.9.20** (pre-release). This extension uses the [engine extension API](https://quarto.org/docs/extensions/engines.html) introduced in 1.9.20.
+> Install with: `quarto update --pre-release`
 
 ### Quick Start
 
 **1.** Tool Installation
 
  - Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
- - Install [Quarto](https://quarto.org/docs/get-started/) (if you have brew: `brew install quarto`)
+ - Install [Quarto](https://quarto.org/docs/get-started/) (>= 1.9.20 pre-release)
 
 **2.** Create a project
 
@@ -29,8 +33,7 @@ quarto add marimo-team/quarto-marimo
 
 ````yaml
 ---
-filters:
-    - marimo-team/marimo
+title: My Document
 ---
 
 # Just another Quarto project
@@ -112,6 +115,13 @@ quarto call build-ts-extension
 ```
 
 This bundles `src/marimo-engine.ts` into `_extensions/marimo/marimo-engine.js`.
+
+### Migrating from v0.4.x (Lua filter)
+
+If you were using `filters: marimo-team/marimo` in your YAML frontmatter,
+you can remove that line. The extension now auto-detects `{python .marimo}`
+code blocks. The old `filters:` syntax still works but will print a
+deprecation warning.
 
 ---
 
