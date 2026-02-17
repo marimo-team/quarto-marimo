@@ -11,26 +11,34 @@ from typing import Any, Callable, Optional
 from xml.etree.ElementTree import Element
 
 import marimo
-from marimo import MarimoIslandGenerator
+from marimo import App, MarimoIslandGenerator
 
 try:
-    from marimo._ast.app import App
-    from marimo._convert.markdown.markdown import (
+    from marimo._internal.convert.markdown import (
         MARIMO_MD,
+        MarimoIslandStub,
         MarimoMdParser as MarimoParser,
         SafeWrap as SafeWrapGeneric,
     )
 
     SafeWrap = SafeWrapGeneric[App]
 except ImportError:
-    # Fallback for marimo < 0.13.16
-    from marimo._cli.convert.markdown import (  # type: ignore[import, no-redef]
-        MARIMO_MD,
-        MarimoParser,
-        SafeWrap,
-    )
+    try:
+        from marimo._convert.markdown.markdown import (  # type: ignore[import, no-redef]
+            MARIMO_MD,
+            MarimoMdParser as MarimoParser,
+            SafeWrap as SafeWrapGeneric,
+        )
 
-from marimo._islands import MarimoIslandStub
+        SafeWrap = SafeWrapGeneric[App]
+    except ImportError:
+        # Fallback for marimo < 0.13.16
+        from marimo._cli.convert.markdown import (  # type: ignore[import, no-redef]
+            MARIMO_MD,
+            MarimoParser,
+            SafeWrap,
+        )
+    from marimo._islands import MarimoIslandStub  # type: ignore[no-redef]
 
 __version__ = "0.0.1"
 
