@@ -199,7 +199,7 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
 
         // Determine MIME sensitivity
         const outputFormat = format.pandoc.to || "html";
-        const mimeSensitive = outputFormat === "pdf" || outputFormat === "latex";
+        const mimeSensitive = outputFormat === "pdf" || outputFormat === "latex" || outputFormat === "typst";
 
         // Setup environment based on metadata
         const useExternalEnv = target.metadata["external-env"] === true;
@@ -225,14 +225,17 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
             args = [...uvFlags, extractPath];
           }
 
-          // Add file and MIME sensitivity arguments
-          args.push(target.input, mimeSensitive ? "yes" : "no");
-
-          // Log the command being run
-          quarto.console.info(`Running: ${command} ${args.join(" ")}`);
+          // Add file, MIME sensitivity, and global eval arguments
+          const globalEval = target.metadata["eval"] !== false;
+          args.push(target.input, mimeSensitive ? "yes" : "no", globalEval ? "yes" : "no");
 
           // Execute Python script to get cell outputs
-          const result = await executePython(command, args, markdown);
+          const result = await quarto.console.withSpinner(
+            { message: "Executing marimo cells..." },
+            async () => {
+              return await executePython(command, args, markdown);
+            },
+          );
           const marimoExecution: MarimoExecutionResult = JSON.parse(result);
 
           // Break markdown into cells using custom regex for marimo syntax
