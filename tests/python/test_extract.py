@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from unittest.mock import MagicMock
 from xml.etree.ElementTree import Element
 
-from extract import app_config_from_root, extract_and_strip_quarto_config
+from extract import app_config_from_root, default_config, extract_and_strip_quarto_config, get_mime_render
 
 
 class TestExtractAndStripQuartoConfig:
@@ -62,3 +63,50 @@ class TestAppConfigFromRoot:
         root = Element("root")
         config = app_config_from_root(root)
         assert config == {}
+
+
+class TestGetMimeRender:
+    def _make_stub(self, code="x = 1", output=None):
+        stub = MagicMock()
+        stub.code = code
+        stub.output = output
+        return stub
+
+    def test_eval_false_echo_false_returns_empty(self):
+        """When eval=false and echo=false (defaults), return empty HTML."""
+        stub = self._make_stub()
+        global_options = {**default_config, "eval": False}
+        result = get_mime_render(global_options, stub, {}, mime_sensitive=False)
+        assert result["value"] == ""
+        assert result["type"] == "html"
+
+    def test_eval_false_echo_true_shows_code(self):
+        """When eval=false but echo=true, should call stub.render with display_code=True."""
+        stub = self._make_stub()
+        stub.render.return_value = "<div>code</div>"
+        global_options = {**default_config, "eval": False, "echo": True}
+        result = get_mime_render(global_options, stub, {}, mime_sensitive=False)
+        stub.render.assert_called_once()
+        assert result["display_code"] is True
+
+    def test_include_false_returns_empty(self):
+        """When include=false, return empty HTML."""
+        stub = self._make_stub()
+        global_options = {**default_config}
+        result = get_mime_render(global_options, stub, {"include": False}, mime_sensitive=False)
+        assert result["value"] == ""
+
+    def test_none_stub_returns_empty(self):
+        """When stub is None, return empty HTML."""
+        global_options = {**default_config}
+        result = get_mime_render(global_options, None, {}, mime_sensitive=False)
+        assert result["value"] == ""
+
+    def test_eval_true_calls_render(self):
+        """Normal case: eval=true should call stub.render."""
+        stub = self._make_stub()
+        stub.render.return_value = "<div>output</div>"
+        global_options = {**default_config}
+        result = get_mime_render(global_options, stub, {}, mime_sensitive=False)
+        stub.render.assert_called_once()
+        assert result["value"] == "<div>output</div>"

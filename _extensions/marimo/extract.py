@@ -15,19 +15,19 @@ import marimo
 from marimo import App, MarimoIslandGenerator
 
 try:
-    from marimo._internal.convert.markdown import (
+    from marimo._convert.markdown.to_ir import (
         MARIMO_MD,
-        MarimoIslandStub,
         MarimoMdParser as MarimoParser,
         SafeWrap as SafeWrapGeneric,
     )
 except ImportError:
-    from marimo._convert.markdown.to_ir import (  # type: ignore[no-redef]
+    from marimo._convert.markdown.markdown import (  # type: ignore[no-redef]
         MARIMO_MD,
         MarimoMdParser as MarimoParser,
         SafeWrap as SafeWrapGeneric,
     )
-    from marimo._islands import MarimoIslandStub  # type: ignore[no-redef]
+
+from marimo._islands import MarimoIslandStub
 
 SafeWrap = SafeWrapGeneric[App]
 
@@ -129,6 +129,10 @@ def get_mime_render(
             if not config["error"]:
                 return {"type": "html", "value": ""}
 
+    # Nothing to display (e.g. eval=false with echo=false)
+    if not config["echo"] and not show_output:
+        return {"type": "html", "value": "", **render_options}
+
     # HTML as catch all default
     return {
         "type": "html",
@@ -200,7 +204,8 @@ def build_export_with_mime_context(
         if has_attrs and global_options.get("warning", True):
             pass
 
-        _ = asyncio.run(app.build())
+        if global_options.get("eval", True):
+            _ = asyncio.run(app.build())
         dev_server = os.environ.get("QUARTO_MARIMO_DEBUG_ENDPOINT", False)
         version_override = os.environ.get("QUARTO_MARIMO_VERSION", marimo.__version__)
         header = app.render_head(
