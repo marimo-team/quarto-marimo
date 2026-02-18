@@ -8,7 +8,7 @@ description = "marimo package for quarto"
 dynamic = ["version"]
 dependencies = [
     # for marimo
-    "marimo>=0.14.8,<=0.14.16",
+    "marimo>=0.19.11",
     # quarto itself
     "quarto",
     # uv is used in the script calls
@@ -21,7 +21,7 @@ dependencies = [
 ]
 readme = "README.md"
 license = { file = "LICENSE" }
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
     "Operating System :: OS Independent",
     "License :: OSI Approved :: Apache Software License",
@@ -56,7 +56,7 @@ test-py = "uv run --with pytest pytest tests/python -v"
 test = { cmd = "deno test --no-check --allow-read --allow-write --allow-env && uv run --with pytest pytest tests/python -v" }
 
 [tool.pixi.dependencies]
-marimo = ">=0.14.8,<=0.14.16"
+marimo = ">=0.19.11"
 quarto = ">=1.6.43,<2"
 pandoc = ">=3.4,<4"
 pyyaml = ">=6.0.2,<7"
@@ -216,6 +216,10 @@ fixture-parentheses = false
 [tool.mypy]
 strict = true
 warn_unused_ignores = false
+
+[[tool.mypy.overrides]]
+module = ["marimo._internal.*", "marimo._convert.*"]
+ignore_missing_imports = true
 
 [tool.typos.default]
 extend-ignore-re = ["[0-9a-zA-Z]{43}"]

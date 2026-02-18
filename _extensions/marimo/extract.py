@@ -5,7 +5,8 @@ import json
 import os
 import re
 import sys
-from typing import Any, Callable, Optional
+from collections.abc import Callable
+from typing import Any, Optional
 
 # Native to python
 from xml.etree.ElementTree import Element
@@ -166,8 +167,8 @@ def app_config_from_root(root: Element) -> dict[str, Any]:
 
 def build_export_with_mime_context(
     mime_sensitive: bool,
-) -> Callable[[Element], SafeWrap]:
-    def tree_to_pandoc_export(root: Element) -> SafeWrap:
+) -> Callable[[Element], SafeWrap]:  # type: ignore[valid-type]
+    def tree_to_pandoc_export(root: Element) -> SafeWrap:  # type: ignore[valid-type]
         global_options = {**default_config, **app_config_from_root(root)}
         app = MarimoIslandGenerator()
 
@@ -216,7 +217,7 @@ def build_export_with_mime_context(
             _development_url=dev_server, version_override=version_override
         )
 
-        return SafeWrap(
+        return SafeWrap(  # type: ignore[no-any-return]
             {
                 "header": header,
                 "outputs": [
@@ -230,7 +231,7 @@ def build_export_with_mime_context(
     return tree_to_pandoc_export
 
 
-class MarimoPandocParser(MarimoParser):
+class MarimoPandocParser(MarimoParser):  # type: ignore[misc]
     """Parses Markdown to marimo notebook string."""
 
     # TODO: Could upstream generic for keys- but this is fine.
@@ -249,7 +250,7 @@ def convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[st
         parser = MarimoPandocParser(output_format="marimo-pandoc-export-with-mime")  # type: ignore[arg-type]
     else:
         parser = MarimoPandocParser(output_format="marimo-pandoc-export")  # type: ignore[arg-type]
-    return parser.convert(text)  # type: ignore[arg-type, return-value]
+    return parser.convert(text)  # type: ignore[arg-type, return-value, no-any-return]
 
 
 if __name__ == "__main__":

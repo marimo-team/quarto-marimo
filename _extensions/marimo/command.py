@@ -38,7 +38,7 @@ def extract_command(header: str) -> list[str]:
     ) as temp_file:
         flags = construct_uv_flags(pyproject, temp_file, [], [])
         temp_file.flush()
-    return ["run"] + flags
+    return ["run"] + flags  # type: ignore[no-any-return]
 
 
 if __name__ == "__main__":
