@@ -20,7 +20,7 @@ jobs:
 
       - uses: denoland/setup-deno@v2
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
 
       - name: Build engine bundle
         run: make build
