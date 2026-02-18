@@ -64,7 +64,7 @@ stylua = ">=2.0.2,<3"
 uv = ">=0.10.3,<0.11"
 mypy = ">=1.15.0,<2"
 hatch = ">=1.14.1,<2"
-pytest = ">=8.0,<9"
+pytest = ">=9,<10"
 
 [project.urls]
 homepage = "https://github.com/marimo-team/quarto-marimo"
