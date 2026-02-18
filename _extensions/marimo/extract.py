@@ -31,7 +31,7 @@ except ImportError:
 
 SafeWrap = SafeWrapGeneric[App]
 
-__version__ = "0.4.3"
+__version__ = "0.4.4"
 
 # See https://quarto.org/docs/computations/execution-options.html
 default_config = {
