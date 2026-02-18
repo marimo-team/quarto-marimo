@@ -95,14 +95,26 @@ def get_mime_render(
             # Handle mimebundle - extract image data if present
             if mimetype == "application/vnd.marimo+mimebundle":
                 try:
-                    bundle = json.loads(output.data) if isinstance(output.data, str) else output.data
+                    bundle = (
+                        json.loads(output.data)
+                        if isinstance(output.data, str)
+                        else output.data
+                    )
                     # Look for image data in the bundle
                     for key in ["image/png", "image/jpeg", "image/svg+xml"]:
                         if key in bundle:
-                            return {"type": "figure", "value": bundle[key], **render_options}
+                            return {
+                                "type": "figure",
+                                "value": bundle[key],
+                                **render_options,
+                            }
                     # Fall back to text if no image
                     if "text/plain" in bundle:
-                        return {"type": "para", "value": bundle["text/plain"], **render_options}
+                        return {
+                            "type": "para",
+                            "value": bundle["text/plain"],
+                            **render_options,
+                        }
                 except (json.JSONDecodeError, TypeError):
                     pass  # Fall through to default handling
             if mimetype.startswith("text/plain") or mimetype.startswith(

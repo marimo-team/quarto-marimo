@@ -3,7 +3,12 @@ from __future__ import annotations
 from unittest.mock import MagicMock
 from xml.etree.ElementTree import Element
 
-from extract import app_config_from_root, default_config, extract_and_strip_quarto_config, get_mime_render
+from extract import (
+    app_config_from_root,
+    default_config,
+    extract_and_strip_quarto_config,
+    get_mime_render,
+)
 
 
 class TestExtractAndStripQuartoConfig:
@@ -93,7 +98,9 @@ class TestGetMimeRender:
         """When include=false, return empty HTML."""
         stub = self._make_stub()
         global_options = {**default_config}
-        result = get_mime_render(global_options, stub, {"include": False}, mime_sensitive=False)
+        result = get_mime_render(
+            global_options, stub, {"include": False}, mime_sensitive=False
+        )
         assert result["value"] == ""
 
     def test_none_stub_returns_empty(self):
