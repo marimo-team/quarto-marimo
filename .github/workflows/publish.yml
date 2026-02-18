@@ -29,7 +29,7 @@ jobs:
         run: make test
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: engine-bundle
           path: _extensions/marimo/marimo-engine-v*.js
@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Download build artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: engine-bundle
           path: dist/
