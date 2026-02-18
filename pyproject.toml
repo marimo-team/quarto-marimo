@@ -94,7 +94,7 @@ installer = "uv"
 dependencies = [
     "uv>=0.4.17", # so we can bump the version used by hatch
     # Typo checking
-    "typos~=1.23.6",
+    "typos~=1.43.5",
 ]
 
 [tool.hatch.envs.default.scripts]
