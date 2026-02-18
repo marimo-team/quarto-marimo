@@ -8,25 +8,11 @@ from textwrap import dedent
 
 try:
     from marimo._internal.sandbox import PyProjectReader, construct_uv_flags
-except ImportError as e:
-    try:
-        from marimo._cli.sandbox import construct_uv_flags  # type: ignore[no-redef]
-        from marimo._utils.inline_script_metadata import (
-            PyProjectReader,  # type: ignore[no-redef]
-        )
-    except ImportError:
-        try:
-            from marimo._cli.sandbox import (  # type: ignore[attr-defined, no-redef]
-                PyProjectReader,
-                construct_uv_flags,
-            )
-        except ImportError:
-            from marimo import __version__
-
-            raise ImportError(
-                "Potential version incompatibility quartom-marimo requires marimo "
-                f">=0.13.3. marimo version {__version__} is detected. "
-            ) from e
+except ImportError:
+    from marimo._cli.sandbox import construct_uv_flags  # type: ignore[no-redef]
+    from marimo._utils.inline_script_metadata import (
+        PyProjectReader,  # type: ignore[no-redef]
+    )
 
 
 def extract_command(header: str) -> list[str]:

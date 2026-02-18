@@ -21,25 +21,15 @@ try:
         MarimoMdParser as MarimoParser,
         SafeWrap as SafeWrapGeneric,
     )
-
-    SafeWrap = SafeWrapGeneric[App]
 except ImportError:
-    try:
-        from marimo._convert.markdown.markdown import (  # type: ignore[import, no-redef]
-            MARIMO_MD,
-            MarimoMdParser as MarimoParser,
-            SafeWrap as SafeWrapGeneric,
-        )
-
-        SafeWrap = SafeWrapGeneric[App]
-    except ImportError:
-        # Fallback for marimo < 0.13.16
-        from marimo._cli.convert.markdown import (  # type: ignore[import, no-redef]
-            MARIMO_MD,
-            MarimoParser,
-            SafeWrap,
-        )
+    from marimo._convert.markdown.to_ir import (  # type: ignore[no-redef]
+        MARIMO_MD,
+        MarimoMdParser as MarimoParser,
+        SafeWrap as SafeWrapGeneric,
+    )
     from marimo._islands import MarimoIslandStub  # type: ignore[no-redef]
+
+SafeWrap = SafeWrapGeneric[App]
 
 __version__ = "0.0.1"
 
