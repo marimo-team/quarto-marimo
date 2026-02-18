@@ -46,5 +46,8 @@ jobs:
 
       - uses: astral-sh/setup-uv@v5
 
+      - name: Build engine bundle
+        run: make build
+
       - name: Smoke test render
         run: quarto render tutorials/intro.qmd --to html

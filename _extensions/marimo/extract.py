@@ -87,16 +87,18 @@ def get_mime_render(
     if not config["include"] or stub is None:
         return {"type": "html", "value": ""}
 
+    eval_enabled = config["eval"]
+    show_output = config["output"] and eval_enabled
     output = stub.output
     render_options = {
         "display_code": config["echo"],
-        "reactive": config["eval"] and not mime_sensitive,
+        "reactive": eval_enabled and not mime_sensitive,
         "code": stub.code,
     }
 
     if output:
         mimetype = output.mimetype
-        if config["output"] and mime_sensitive:
+        if show_output and mime_sensitive:
             if mimetype.startswith("image"):
                 return {"type": "figure", "value": f"{output.data}", **render_options}
             # Handle mimebundle - extract image data if present
@@ -141,7 +143,7 @@ def get_mime_render(
         "type": "html",
         "value": stub.render(
             display_code=config["echo"],
-            display_output=config["output"],
+            display_output=show_output,
             is_reactive=bool(render_options["reactive"]),
             as_raw=mime_sensitive,
         ),

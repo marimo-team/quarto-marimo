@@ -1,6 +1,7 @@
 ---
 title: Plots
 marimo-version: 0.13.2
+eval: false
 ---
 
 # Plotting

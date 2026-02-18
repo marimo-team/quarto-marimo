@@ -1,0 +1,62 @@
+name: Build and Publish
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: pre-release
+
+      - uses: denoland/setup-deno@v2
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Build engine bundle
+        run: make build
+
+      - name: Run tests
+        run: make test
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine-bundle
+          path: _extensions/marimo/marimo-engine-v*.js
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: engine-bundle
+          path: dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/marimo-engine-v*.js
+
+      - name: Notify release result
+        if: always()
+        uses: marimo-team/internal-gh-actions/release-notification@main
+        with:
+          status: ${{ job.status }}
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL_RELEASES }}
+          artifact-url: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}
