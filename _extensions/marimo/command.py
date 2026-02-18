@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 
 import json
 import sys
@@ -6,21 +7,12 @@ import tempfile
 from textwrap import dedent
 
 try:
-    from marimo._cli.sandbox import construct_uv_flags
-    from marimo._utils.inline_script_metadata import PyProjectReader
-except ImportError as e:
-    try:
-        from marimo._cli.sandbox import (  # type: ignore[attr-defined, no-redef]
-            PyProjectReader,
-            construct_uv_flags,
-        )
-    except ImportError:
-        from marimo import __version__
-
-        raise ImportError(
-            "Potential version incompatibility quartom-marimo requires marimo "
-            f">=0.13.3. marimo version {__version__} is detected. "
-        ) from e
+    from marimo._internal.sandbox import PyProjectReader, construct_uv_flags
+except ImportError:
+    from marimo._cli.sandbox import construct_uv_flags  # type: ignore[no-redef]
+    from marimo._utils.inline_script_metadata import (
+        PyProjectReader,  # type: ignore[no-redef]
+    )
 
 
 def extract_command(header: str) -> list[str]:
@@ -32,7 +24,7 @@ def extract_command(header: str) -> list[str]:
     ) as temp_file:
         flags = construct_uv_flags(pyproject, temp_file, [], [])
         temp_file.flush()
-    return ["run"] + flags
+    return ["run"] + flags  # type: ignore[no-any-return]
 
 
 if __name__ == "__main__":

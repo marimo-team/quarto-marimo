@@ -2,116 +2,208 @@
  * cell-execution-regex.test.ts
  *
  * Tests for marimo cell syntax regex
- * Run with: deno run tests/cell-execution-regex.test.ts
  */
 
+import { assert, assertEquals } from "jsr:@std/assert";
 import { MARIMO_CELL_REGEX } from "../lib/cell-execution-regex.ts";
 
-function assert(condition: boolean, message: string): void {
-  if (!condition) {
-    throw new Error(`FAILED: ${message}`);
-  }
-}
-
-function testMatch(
+function assertMatch(
   line: string,
   expectedLanguage: string,
-  description: string
+  description: string,
 ): void {
   const match = line.match(MARIMO_CELL_REGEX);
   assert(match !== null, `${description}: should match but didn't`);
-  // Language is always in group 2
-  const actualLanguage = match[2];
-  assert(
-    actualLanguage === expectedLanguage,
-    `${description}: expected language "${expectedLanguage}" but got "${actualLanguage}"`
+  assertEquals(
+    match[2],
+    expectedLanguage,
+    `${description}: expected language "${expectedLanguage}" but got "${match[2]}"`,
   );
-  console.log(`✓ ${description}`);
 }
 
-function testNoMatch(line: string, description: string): void {
+function assertNoMatch(line: string, description: string): void {
   const match = line.match(MARIMO_CELL_REGEX);
   assert(match === null, `${description}: should NOT match but did`);
-  console.log(`✓ ${description}`);
 }
 
-// ============================================================================
-// Positive cases - should match
-// ============================================================================
+// === Positive cases ===
 
-console.log("\n=== Positive cases ===\n");
+Deno.test("{python .marimo} basic", () => {
+  assertMatch("```{python .marimo}", "python", "{python .marimo} basic");
+});
 
-// Preferred syntax: {python .marimo}
-testMatch("```{python .marimo}", "python", "{python .marimo} basic");
-testMatch("```{python .marimo}", "python", "{python .marimo} with space");
-testMatch(
-  "```{python .marimo echo=FALSE}",
-  "python",
-  "{python .marimo} with attributes"
-);
-testMatch(
-  "```{python .marimo .foo}",
-  "python",
-  "{python .marimo} with extra class"
-);
-testMatch(
-  "```{python .marimo .foo qux=2}",
-  "python",
-  "{python .marimo} with extra class and attributes"
-);
-testMatch("  ```{python .marimo}", "python", "{python .marimo} with leading whitespace");
-testMatch("```{python .marimo}  ", "python", "{python .marimo} with trailing whitespace");
+Deno.test("{python .marimo} with space", () => {
+  assertMatch("```{python .marimo}", "python", "{python .marimo} with space");
+});
 
-// Pampa/dot-joined syntax: {python.marimo}
-testMatch("```{python.marimo}", "python.marimo", "{python.marimo} basic");
-testMatch(
-  "```{python.marimo echo=FALSE}",
-  "python.marimo",
-  "{python.marimo} with attributes"
-);
-testMatch("  ```{python.marimo}", "python.marimo", "{python.marimo} with leading whitespace");
-testMatch("```{python.marimo}  ", "python.marimo", "{python.marimo} with trailing whitespace");
+Deno.test("{python .marimo} with attributes", () => {
+  assertMatch(
+    "```{python .marimo echo=FALSE}",
+    "python",
+    "{python .marimo} with attributes",
+  );
+});
 
-// Legacy syntax: python {.marimo}
-testMatch("```python {.marimo}", "python", "python {.marimo} legacy basic");
-testMatch(
-  "```python {.marimo echo=FALSE}",
-  "python",
-  "python {.marimo} legacy with attributes"
-);
-testMatch("  ```python {.marimo}", "python", "python {.marimo} legacy with leading whitespace");
+Deno.test("{python .marimo} with extra class", () => {
+  assertMatch(
+    "```{python .marimo .foo}",
+    "python",
+    "{python .marimo} with extra class",
+  );
+});
 
-// Multiple backticks
-testMatch("````{python .marimo}", "python", "four backticks {python .marimo}");
-testMatch("````{python.marimo}", "python.marimo", "four backticks {python.marimo}");
-testMatch("`````{python .marimo}", "python", "five backticks {python .marimo}");
+Deno.test("{python .marimo} with extra class and attributes", () => {
+  assertMatch(
+    "```{python .marimo .foo qux=2}",
+    "python",
+    "{python .marimo} with extra class and attributes",
+  );
+});
 
-// ============================================================================
-// Negative cases - should NOT match
-// ============================================================================
+Deno.test("{python .marimo} with leading whitespace", () => {
+  assertMatch(
+    "  ```{python .marimo}",
+    "python",
+    "{python .marimo} with leading whitespace",
+  );
+});
 
-console.log("\n=== Negative cases ===\n");
+Deno.test("{python .marimo} with trailing whitespace", () => {
+  assertMatch(
+    "```{python .marimo}  ",
+    "python",
+    "{python .marimo} with trailing whitespace",
+  );
+});
 
-// Regular python (no marimo)
-testNoMatch("```{python}", "regular {python} without marimo");
-testNoMatch("```{python echo=FALSE}", "regular {python} with attributes");
-// Note: comma syntax like ```{python .marimo, echo=FALSE} is accepted but will fail pampa parsing
-testNoMatch("```python", "bare python without braces");
+Deno.test("{python.marimo} basic", () => {
+  assertMatch("```{python.marimo}", "python.marimo", "{python.marimo} basic");
+});
 
-// Wrong language
-testNoMatch("```{r .marimo}", "{r .marimo} wrong language");
-testNoMatch("```{julia .marimo}", "{julia .marimo} wrong language");
-testNoMatch("```{javascript.marimo}", "{javascript.marimo} wrong language");
+Deno.test("{python.marimo} with attributes", () => {
+  assertMatch(
+    "```{python.marimo echo=FALSE}",
+    "python.marimo",
+    "{python.marimo} with attributes",
+  );
+});
 
-// Malformed
-testNoMatch("```{pythonmarimo}", "{pythonmarimo} no dot separator");
-testNoMatch("```{python marimo}", "{python marimo} space but no dot");
-testNoMatch("```{python.marimo", "{python.marimo unclosed brace");
-// Note: ```python.marimo} (unbalanced brace) is accepted by regex but will fail pampa parsing
-testNoMatch("```{.marimo}", "{.marimo} no language");
+Deno.test("{python.marimo} with leading whitespace", () => {
+  assertMatch(
+    "  ```{python.marimo}",
+    "python.marimo",
+    "{python.marimo} with leading whitespace",
+  );
+});
 
-// Not code fences
-testNoMatch("``{python .marimo}", "only two backticks");
-testNoMatch("{python .marimo}", "no backticks at all");
+Deno.test("{python.marimo} with trailing whitespace", () => {
+  assertMatch(
+    "```{python.marimo}  ",
+    "python.marimo",
+    "{python.marimo} with trailing whitespace",
+  );
+});
 
-console.log("\n=== All tests passed! ===\n");
+Deno.test("python {.marimo} legacy basic", () => {
+  assertMatch(
+    "```python {.marimo}",
+    "python",
+    "python {.marimo} legacy basic",
+  );
+});
+
+Deno.test("python {.marimo} legacy with attributes", () => {
+  assertMatch(
+    "```python {.marimo echo=FALSE}",
+    "python",
+    "python {.marimo} legacy with attributes",
+  );
+});
+
+Deno.test("python {.marimo} legacy with leading whitespace", () => {
+  assertMatch(
+    "  ```python {.marimo}",
+    "python",
+    "python {.marimo} legacy with leading whitespace",
+  );
+});
+
+Deno.test("four backticks {python .marimo}", () => {
+  assertMatch(
+    "````{python .marimo}",
+    "python",
+    "four backticks {python .marimo}",
+  );
+});
+
+Deno.test("four backticks {python.marimo}", () => {
+  assertMatch(
+    "````{python.marimo}",
+    "python.marimo",
+    "four backticks {python.marimo}",
+  );
+});
+
+Deno.test("five backticks {python .marimo}", () => {
+  assertMatch(
+    "`````{python .marimo}",
+    "python",
+    "five backticks {python .marimo}",
+  );
+});
+
+// === Negative cases ===
+
+Deno.test("regular {python} without marimo", () => {
+  assertNoMatch("```{python}", "regular {python} without marimo");
+});
+
+Deno.test("regular {python} with attributes", () => {
+  assertNoMatch(
+    "```{python echo=FALSE}",
+    "regular {python} with attributes",
+  );
+});
+
+Deno.test("bare python without braces", () => {
+  assertNoMatch("```python", "bare python without braces");
+});
+
+Deno.test("{r .marimo} wrong language", () => {
+  assertNoMatch("```{r .marimo}", "{r .marimo} wrong language");
+});
+
+Deno.test("{julia .marimo} wrong language", () => {
+  assertNoMatch("```{julia .marimo}", "{julia .marimo} wrong language");
+});
+
+Deno.test("{javascript.marimo} wrong language", () => {
+  assertNoMatch(
+    "```{javascript.marimo}",
+    "{javascript.marimo} wrong language",
+  );
+});
+
+Deno.test("{pythonmarimo} no dot separator", () => {
+  assertNoMatch("```{pythonmarimo}", "{pythonmarimo} no dot separator");
+});
+
+Deno.test("{python marimo} space but no dot", () => {
+  assertNoMatch("```{python marimo}", "{python marimo} space but no dot");
+});
+
+Deno.test("{python.marimo unclosed brace", () => {
+  assertNoMatch("```{python.marimo", "{python.marimo unclosed brace");
+});
+
+Deno.test("{.marimo} no language", () => {
+  assertNoMatch("```{.marimo}", "{.marimo} no language");
+});
+
+Deno.test("only two backticks", () => {
+  assertNoMatch("``{python .marimo}", "only two backticks");
+});
+
+Deno.test("no backticks at all", () => {
+  assertNoMatch("{python .marimo}", "no backticks at all");
+});

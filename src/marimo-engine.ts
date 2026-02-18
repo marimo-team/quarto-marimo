@@ -20,21 +20,15 @@ import type {
   PostProcessOptions,
   EngineProjectContext,
   QuartoAPI,
-  QuartoMdCell,
 } from "@quarto/types";
 
 import { MARIMO_CELL_REGEX } from "../lib/cell-execution-regex.ts";
+import { isMarimoCell } from "../lib/is-marimo-cell.ts";
+import { renderOutput } from "../lib/render-output.ts";
+import type { MarimoOutput } from "../lib/render-output.ts";
 
 let quarto: QuartoAPI;
 
-// Type for marimo cell output from extract.py
-interface MarimoOutput {
-  type: "html" | "figure" | "para" | "blockquote";
-  value: string;
-  display_code: boolean;
-  reactive: boolean;
-  code: string;
-}
 
 // Type for marimo execution result from extract.py
 interface MarimoExecutionResult {
@@ -106,24 +100,6 @@ async function constructUvCommand(header: string): Promise<string[]> {
   return JSON.parse(result);
 }
 
-// Check if a cell is a marimo code block
-function isMarimoCell(cell: QuartoMdCell): boolean {
-  if (typeof cell.cell_type !== "object" || !("language" in cell.cell_type)) {
-    return false;
-  }
-  const lang = cell.cell_type.language;
-  // Handle {python.marimo} syntax (quarto parses as language "python.marimo")
-  if (lang === "python.marimo") {
-    return true;
-  }
-  // Handle {python .marimo} and legacy python {.marimo} syntax
-  if (lang === "python") {
-    const firstLine = cell.sourceVerbatim.value.split('\n')[0] || '';
-    return /\.marimo/.test(firstLine);
-  }
-  return false;
-}
-
 // Convert HTML to markdown using pandoc (for PDF output)
 async function htmlToMarkdown(html: string): Promise<string> {
   const result = await quarto.system.pandoc(
@@ -135,64 +111,6 @@ async function htmlToMarkdown(html: string): Promise<string> {
     return html; // Fall back to original HTML
   }
   return result.stdout || "";
-}
-
-// Render a single marimo output to markdown
-async function renderOutput(
-  output: MarimoOutput,
-  mimeSensitive: boolean
-): Promise<string> {
-  let result = "";
-
-  // Add code block if display_code is true
-  if (output.display_code && output.code) {
-    result += "```python\n" + output.code + "\n```\n\n";
-  }
-
-  // Render based on output type and format
-  if (!mimeSensitive) {
-    // HTML output - wrap everything in raw HTML blocks
-    if (output.value) {
-      result += "```{=html}\n" + output.value + "\n```\n\n";
-    }
-  } else {
-    // PDF/LaTeX output - handle based on type
-    switch (output.type) {
-      case "figure":
-        if (output.value) {
-          result += `![Generated Figure](${output.value})\n\n`;
-        }
-        break;
-
-      case "para":
-        if (output.value) {
-          result += output.value + "\n\n";
-        }
-        break;
-
-      case "blockquote":
-        if (output.value) {
-          result += "> " + output.value + "\n\n";
-        }
-        break;
-
-      case "html":
-      default:
-        if (output.value) {
-          // Check if HTML contains a table - if so, use raw HTML block
-          if (/<table[\s>]/i.test(output.value)) {
-            result += "```{=html}\n" + output.value + "\n```\n\n";
-          } else {
-            // Convert HTML to markdown using pandoc
-            const markdown = await htmlToMarkdown(output.value);
-            result += markdown + "\n\n";
-          }
-        }
-        break;
-    }
-  }
-
-  return result;
 }
 
 const marimoEngineDiscovery: ExecutionEngineDiscovery = {
@@ -281,7 +199,7 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
 
         // Determine MIME sensitivity
         const outputFormat = format.pandoc.to || "html";
-        const mimeSensitive = outputFormat === "pdf" || outputFormat === "latex";
+        const mimeSensitive = outputFormat === "pdf" || outputFormat === "latex" || outputFormat === "typst";
 
         // Setup environment based on metadata
         const useExternalEnv = target.metadata["external-env"] === true;
@@ -307,14 +225,17 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
             args = [...uvFlags, extractPath];
           }
 
-          // Add file and MIME sensitivity arguments
-          args.push(target.input, mimeSensitive ? "yes" : "no");
-
-          // Log the command being run
-          quarto.console.info(`Running: ${command} ${args.join(" ")}`);
+          // Add file, MIME sensitivity, and global eval arguments
+          const globalEval = target.metadata["eval"] !== false;
+          args.push(target.input, mimeSensitive ? "yes" : "no", globalEval ? "yes" : "no");
 
           // Execute Python script to get cell outputs
-          const result = await executePython(command, args, markdown);
+          const result = await quarto.console.withSpinner(
+            { message: "Executing marimo cells..." },
+            async () => {
+              return await executePython(command, args, markdown);
+            },
+          );
           const marimoExecution: MarimoExecutionResult = JSON.parse(result);
 
           // Break markdown into cells using custom regex for marimo syntax
@@ -334,7 +255,7 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
               // Replace marimo cell with rendered output
               if (marimoIndex < marimoExecution.outputs.length) {
                 const output = marimoExecution.outputs[marimoIndex];
-                const rendered = await renderOutput(output, mimeSensitive);
+                const rendered = await renderOutput(output, mimeSensitive, htmlToMarkdown);
                 processedCells.push(rendered);
               } else {
                 quarto.console.warning(

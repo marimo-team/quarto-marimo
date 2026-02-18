@@ -1,3 +1,4 @@
+__marimo__/
 *_files/
 script.py
 script.*
@@ -24,4 +25,10 @@ result
 .pixi
 *.egg-info
 
+# local quarto pre-release
+.quarto-dev/
+
 **/*.quarto_ipynb
+
+# Cached engine bundles (downloaded by shim or built locally)
+_extensions/marimo/marimo-engine-v*.js

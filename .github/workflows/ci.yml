@@ -1,5 +1,7 @@
 name: CI
 
+on: [push, pull_request]
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -12,3 +14,40 @@ jobs:
 
       - name: Lint
         run: pixi run lint
+
+  test-ts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+
+      - name: Run TypeScript tests
+        run: deno test --no-check --allow-read --allow-write --allow-env
+
+  test-py:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Run Python tests
+        run: uv run --with pytest pytest tests/python -v
+
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: pre-release
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Build engine bundle
+        run: make build
+
+      - name: Smoke test render
+        run: quarto render tutorials/intro.qmd --to html

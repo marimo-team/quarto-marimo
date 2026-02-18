@@ -5,34 +5,33 @@ import json
 import os
 import re
 import sys
-from typing import Any, Callable, Optional
+from collections.abc import Callable
+from typing import Any, Optional
 
 # Native to python
 from xml.etree.ElementTree import Element
 
 import marimo
-from marimo import MarimoIslandGenerator
+from marimo import App, MarimoIslandGenerator
 
 try:
-    from marimo._ast.app import App
-    from marimo._convert.markdown.markdown import (
+    from marimo._internal.convert.markdown import (
+        MARIMO_MD,
+        MarimoIslandStub,
+        MarimoMdParser as MarimoParser,
+        SafeWrap as SafeWrapGeneric,
+    )
+except ImportError:
+    from marimo._convert.markdown.to_ir import (  # type: ignore[no-redef]
         MARIMO_MD,
         MarimoMdParser as MarimoParser,
         SafeWrap as SafeWrapGeneric,
     )
+    from marimo._islands import MarimoIslandStub  # type: ignore[no-redef]
 
-    SafeWrap = SafeWrapGeneric[App]
-except ImportError:
-    # Fallback for marimo < 0.13.16
-    from marimo._cli.convert.markdown import (  # type: ignore[import, no-redef]
-        MARIMO_MD,
-        MarimoParser,
-        SafeWrap,
-    )
+SafeWrap = SafeWrapGeneric[App]
 
-from marimo._islands import MarimoIslandStub
-
-__version__ = "0.0.1"
+__version__ = "0.4.3"
 
 # See https://quarto.org/docs/computations/execution-options.html
 default_config = {
@@ -79,16 +78,18 @@ def get_mime_render(
     if not config["include"] or stub is None:
         return {"type": "html", "value": ""}
 
+    eval_enabled = config["eval"]
+    show_output = config["output"] and eval_enabled
     output = stub.output
     render_options = {
         "display_code": config["echo"],
-        "reactive": config["eval"] and not mime_sensitive,
+        "reactive": eval_enabled and not mime_sensitive,
         "code": stub.code,
     }
 
     if output:
         mimetype = output.mimetype
-        if config["output"] and mime_sensitive:
+        if show_output and mime_sensitive:
             if mimetype.startswith("image"):
                 return {"type": "figure", "value": f"{output.data}", **render_options}
             # Handle mimebundle - extract image data if present
@@ -133,7 +134,7 @@ def get_mime_render(
         "type": "html",
         "value": stub.render(
             display_code=config["echo"],
-            display_output=config["output"],
+            display_output=show_output,
             is_reactive=bool(render_options["reactive"]),
             as_raw=mime_sensitive,
         ),
@@ -156,8 +157,8 @@ def app_config_from_root(root: Element) -> dict[str, Any]:
 
 def build_export_with_mime_context(
     mime_sensitive: bool,
-) -> Callable[[Element], SafeWrap]:
-    def tree_to_pandoc_export(root: Element) -> SafeWrap:
+) -> Callable[[Element], SafeWrap]:  # type: ignore[valid-type]
+    def tree_to_pandoc_export(root: Element) -> SafeWrap:  # type: ignore[valid-type]
         global_options = {**default_config, **app_config_from_root(root)}
         app = MarimoIslandGenerator()
 
@@ -206,7 +207,7 @@ def build_export_with_mime_context(
             _development_url=dev_server, version_override=version_override
         )
 
-        return SafeWrap(
+        return SafeWrap(  # type: ignore[no-any-return]
             {
                 "header": header,
                 "outputs": [
@@ -220,7 +221,7 @@ def build_export_with_mime_context(
     return tree_to_pandoc_export
 
 
-class MarimoPandocParser(MarimoParser):
+class MarimoPandocParser(MarimoParser):  # type: ignore[misc]
     """Parses Markdown to marimo notebook string."""
 
     # TODO: Could upstream generic for keys- but this is fine.
@@ -239,12 +240,13 @@ def convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[st
         parser = MarimoPandocParser(output_format="marimo-pandoc-export-with-mime")  # type: ignore[arg-type]
     else:
         parser = MarimoPandocParser(output_format="marimo-pandoc-export")  # type: ignore[arg-type]
-    return parser.convert(text)  # type: ignore[arg-type, return-value]
+    return parser.convert(text)  # type: ignore[arg-type, return-value, no-any-return]
 
 
 if __name__ == "__main__":
-    assert len(sys.argv) == 3, f"Unexpected call format got {sys.argv}"
-    _, reference_file, mime_sensitive = sys.argv
+    assert len(sys.argv) in (3, 4), f"Unexpected call format got {sys.argv}"
+    _, reference_file, mime_sensitive = sys.argv[:3]
+    global_eval = sys.argv[3].lower() == "yes" if len(sys.argv) == 4 else True
 
     file = sys.stdin.read()
     if not file:
@@ -252,6 +254,9 @@ if __name__ == "__main__":
             file = f.read()
     no_js = mime_sensitive.lower() == "yes"
     os.environ["MARIMO_NO_JS"] = str(no_js).lower()
+
+    if not global_eval:
+        default_config["eval"] = False
 
     conversion = convert_from_md_to_pandoc_export(file, no_js)
     sys.stdout.write(json.dumps(conversion))
