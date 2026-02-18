@@ -61,10 +61,10 @@ quarto = ">=1.6.43,<2"
 pandoc = ">=3.4,<4"
 pyyaml = ">=6.0.2,<7"
 stylua = ">=2.0.2,<3"
-uv = ">=0.6.14,<0.7"
+uv = ">=0.10.3,<0.11"
 mypy = ">=1.15.0,<2"
 hatch = ">=1.14.1,<2"
-pytest = ">=8.0,<9"
+pytest = ">=9,<10"
 
 [project.urls]
 homepage = "https://github.com/marimo-team/quarto-marimo"
@@ -94,7 +94,7 @@ installer = "uv"
 dependencies = [
     "uv>=0.4.17", # so we can bump the version used by hatch
     # Typo checking
-    "typos~=1.23.6",
+    "typos~=1.43.5",
 ]
 
 [tool.hatch.envs.default.scripts]
