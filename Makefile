@@ -43,6 +43,9 @@ lint:
 	ruff check
 	uv tool run --with marimo mypy _extensions/marimo/
 
+preview:
+	quarto preview
+
 render:
 	quarto render tutorials/intro.qmd --to html
 
