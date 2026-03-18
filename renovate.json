@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
+    "local>marimo-team/.github:renovate-config",
     "config:recommended"
   ]
 }
