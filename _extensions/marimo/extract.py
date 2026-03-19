@@ -6,7 +6,7 @@ import os
 import re
 import sys
 from collections.abc import Callable
-from typing import Any, Optional
+from typing import Any, ClassVar, Optional
 
 # Native to python
 from xml.etree.ElementTree import Element
@@ -95,10 +95,10 @@ def get_mime_render(
             # Handle mimebundle - extract image data if present
             if mimetype == "application/vnd.marimo+mimebundle":
                 try:
-                    bundle = (
+                    bundle: dict[str, Any] = (
                         json.loads(output.data)
                         if isinstance(output.data, str)
-                        else output.data
+                        else output.data  # type: ignore[assignment]
                     )
                     # Look for image data in the bundle
                     for key in ["image/png", "image/jpeg", "image/svg+xml"]:
@@ -117,9 +117,7 @@ def get_mime_render(
                         }
                 except (json.JSONDecodeError, TypeError):
                     pass  # Fall through to default handling
-            if mimetype.startswith("text/plain") or mimetype.startswith(
-                "text/markdown"
-            ):
+            if mimetype.startswith(("text/plain", "text/markdown")):
                 return {"type": "para", "value": f"{output.data}", **render_options}
             if mimetype == "application/vnd.marimo+error":
                 if config["error"]:
@@ -200,7 +198,7 @@ def build_export_with_mime_context(
                     code,
                     is_raw=True,
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 stubs.append((config, None))
                 continue
 
@@ -218,7 +216,7 @@ def build_export_with_mime_context(
 
         if global_options.get("eval", True):
             _ = asyncio.run(app.build())
-        dev_server = os.environ.get("QUARTO_MARIMO_DEBUG_ENDPOINT", False)
+        dev_server = os.environ.get("QUARTO_MARIMO_DEBUG_ENDPOINT") or False
         version_override = os.environ.get("QUARTO_MARIMO_VERSION", marimo.__version__)
         header = app.render_head(
             _development_url=dev_server, version_override=version_override
@@ -242,7 +240,7 @@ class MarimoPandocParser(MarimoParser):  # type: ignore[misc]
     """Parses Markdown to marimo notebook string."""
 
     # TODO: Could upstream generic for keys- but this is fine.
-    output_formats = {  # type: ignore[assignment, misc]
+    output_formats: ClassVar[dict[str, Any]] = {  # type: ignore[assignment, misc]
         "marimo-pandoc-export": build_export_with_mime_context(mime_sensitive=False),  # type: ignore[dict-item]
         "marimo-pandoc-export-with-mime": build_export_with_mime_context(
             mime_sensitive=True

@@ -26,7 +26,7 @@ class TestExtractAndStripQuartoConfig:
         assert code == block
 
     def test_empty_string(self):
-        config, code = extract_and_strip_quarto_config("")
+        config, _code = extract_and_strip_quarto_config("")
         assert config == {}
 
     def test_config_with_blank_lines(self):
