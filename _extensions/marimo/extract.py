@@ -95,10 +95,10 @@ def get_mime_render(
             # Handle mimebundle - extract image data if present
             if mimetype == "application/vnd.marimo+mimebundle":
                 try:
-                    bundle = (
+                    bundle: dict[str, Any] = (
                         json.loads(output.data)
                         if isinstance(output.data, str)
-                        else output.data
+                        else output.data  # type: ignore[assignment]
                     )
                     # Look for image data in the bundle
                     for key in ["image/png", "image/jpeg", "image/svg+xml"]:
