@@ -37,6 +37,12 @@ interface MarimoExecutionResult {
   count: number;
 }
 
+function containsMarimoFence(markdown: string): boolean {
+  return markdown
+    .split(/\r?\n/)
+    .some((line) => MARIMO_CELL_REGEX.test(line));
+}
+
 // Helper function to execute external processes
 async function executePython(
   command: string,
@@ -134,8 +140,19 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
 
   validExtensions: () => [".qmd", ".md"],
 
-  claimsFile: (_file: string, _ext: string) => {
-    return false; // Don't claim files automatically
+  // When Quarto's language discovery sees `python {...}`
+  // then it will route to Python engine without scanning block contents.
+  // We want `python {.marimo}` blocks route to our engine, so we override the default claim logic.
+  claimsFile: (file: string, ext: string) => {
+    if (![".qmd", ".md"].includes(ext.toLowerCase())) {
+      return false;
+    }
+
+    try {
+      return containsMarimoFence(Deno.readTextFileSync(file));
+    } catch {
+      return false;
+    }
   },
 
   claimsLanguage: (language: string, firstClass?: string): boolean | number => {

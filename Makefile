@@ -40,7 +40,7 @@ test-py:
 	uv run --with pytest pytest tests/python -v
 
 lint:
-	ruff check
+	uv run ruff check
 	uv tool run --with marimo mypy _extensions/marimo/
 
 preview:
