@@ -66,9 +66,55 @@ Deno.test("validExtensions returns [.qmd, .md]", () => {
   assertEquals(marimoEngineDiscovery.validExtensions(), [".qmd", ".md"]);
 });
 
-Deno.test("claimsFile always returns false", () => {
-  assertEquals(marimoEngineDiscovery.claimsFile("test.qmd", ".qmd"), false);
-  assertEquals(marimoEngineDiscovery.claimsFile("test.py", ".py"), false);
+function withTempFile(ext: string, contents: string, fn: (file: string) => void) {
+  const dir = Deno.makeTempDirSync();
+  const file = `${dir}/test${ext}`;
+  try {
+    Deno.writeTextFileSync(file, contents);
+    fn(file);
+  } finally {
+    Deno.removeSync(dir, { recursive: true });
+  }
+}
+
+Deno.test("claimsFile returns true for legacy marimo fences", () => {
+  withTempFile(
+    ".qmd",
+    "```python {.marimo}\nimport marimo as mo\nslider\n```",
+    (file) => {
+      assertEquals(marimoEngineDiscovery.claimsFile(file, ".qmd"), true);
+    },
+  );
+});
+
+Deno.test("claimsFile returns true for braced marimo fences", () => {
+  withTempFile(
+    ".qmd",
+    "```{python .marimo}\nimport marimo as mo\nslider\n```",
+    (file) => {
+      assertEquals(marimoEngineDiscovery.claimsFile(file, ".qmd"), true);
+    },
+  );
+});
+
+Deno.test("claimsFile returns false for plain python fences", () => {
+  withTempFile(
+    ".qmd",
+    "```{python}\nprint('hello')\n```",
+    (file) => {
+      assertEquals(marimoEngineDiscovery.claimsFile(file, ".qmd"), false);
+    },
+  );
+});
+
+Deno.test("claimsFile returns false for unsupported extensions", () => {
+  withTempFile(
+    ".py",
+    "```python {.marimo}\nimport marimo as mo\nslider\n```",
+    (file) => {
+      assertEquals(marimoEngineDiscovery.claimsFile(file, ".py"), false);
+    },
+  );
 });
 
 Deno.test("name is marimo", () => {
