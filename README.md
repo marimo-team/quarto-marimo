@@ -10,7 +10,7 @@ This repo is a quarto engine extension that lets you use marimo in your quarto d
 > **Requires Quarto >= 1.9.20**. This extension uses the [engine extension API](https://quarto.org/docs/extensions/engines.html) introduced in 1.9.20.
 
 > [!NOTE]
-> **This extension works best with marimo 0.14.16.** As such, it is currently pinned to marimo ==0.14.16. This notice will be updated when compatibility with future marimo versions is confirmed. You can override the pinned version by setting the `QUARTO_MARIMO_VERSION` environment variable.
+> **This extension requires marimo >=0.23.1.**
 
 ### Quick Start
 
