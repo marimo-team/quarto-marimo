@@ -107,8 +107,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.16/dist/main.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.16/dist/style.css" rel="stylesheet" crossorigin="anonymous">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/main.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/style.css" rel="stylesheet" title="marimo-islands" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -294,40 +294,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The next four cells plot a sine wave with a given period and amplitude. Each cell is labeled with its refs and defs.</p>
 <marimo-island data-app-id="main" data-cell-id="Hbol" data-reactive="true">
             <marimo-cell-output>
-            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Tip: inspecting refs and defs</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert"><span class="paragraph">Use <code>mo.refs()</code> and <code>mo.defs()</code> to inspect the refs and defs of any
+            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Tip: inspecting refs and defs</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">Use <code>mo.refs()</code> and <code>mo.defs()</code> to inspect the refs and defs of any
 given cell. This can help with debugging complex notebooks.</span>
 <span class="paragraph">For example, here are the refs and defs of this cell:</span>
-<span class="paragraph"><marimo-json-output data-json-data="{&quot;refs&quot;: [&quot;mo&quot;], &quot;defs&quot;: []}" data-value-types="&quot;python&quot;"></marimo-json-output></span></span></div></marimo-accordion>
+<span class="paragraph"><marimo-json-output data-json-data="{&quot;refs&quot;:[&quot;mo&quot;],&quot;defs&quot;:[]}" data-value-types="&quot;python&quot;"></marimo-json-output></span></span></div></marimo-accordion>
             </marimo-cell-output>
             <marimo-cell-code hidden="">mo.accordion(%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22Tip%3A%20inspecting%20refs%20and%20defs%22%3A%20f%22%22%22%0A%20%20%20%20%20%20%20%20Use%20%60mo.refs()%60%20and%20%60mo.defs()%60%20to%20inspect%20the%20refs%20and%20defs%20of%20any%0A%20%20%20%20%20%20%20%20given%20cell.%20This%20can%20help%20with%20debugging%20complex%20notebooks.%0A%0A%20%20%20%20%20%20%20%20For%20example%2C%20here%20are%20the%20refs%20and%20defs%20of%20this%20cell%3A%0A%0A%20%20%20%20%20%20%20%20%7Bmo.as_html(%7B%22refs%22%3A%20mo.refs()%2C%20%22defs%22%3A%20mo.defs()%7D)%7D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%7D%0A)</marimo-cell-code>
         </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="MJUe" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;An ancestor raised an exception (ModuleNotFoundError): &quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: &quot;ecfG&quot;, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;An ancestor raised an exception (ModuleNotFoundError): &quot;,&quot;exception_type&quot;:&quot;Ancestor raised&quot;,&quot;raising_cell&quot;:&quot;ecfG&quot;,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20%7Bmo.as_html(plot_wave(amplitude%2C%20period))%7D%0A%0A%20%20%20%20-%20%60refs%3A%20%7Bmo.refs()%7D%60%0A%20%20%20%20-%20%60defs%3A%20%7Bmo.defs()%7D%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="vblA" data-reactive="true">
-            <marimo-cell-output>
-            <span class="markdown prose dark:prose-invert"><ul>
-<li><code>refs: ('mo',)</code></li>
-<li><code>defs: ('period',)</code></li>
-</ul></span>
-            </marimo-cell-output>
-            <marimo-cell-code hidden="">period%20%3D%202%20*%203.14159%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20-%20%60refs%3A%20%7Bmo.refs()%7D%60%0A%20%20%20%20-%20%60defs%3A%20%7Bmo.defs()%7D%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
-        </marimo-island>
+    <marimo-cell-output>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><ul>\n<li><code>refs: ('mo',)</code></li>\n<li><code>defs: ('period',)</code></li>\n</ul></span>&quot;"></marimo-mime-renderer>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">period%20%3D%202%20*%203.14159%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20-%20%60refs%3A%20%7Bmo.refs()%7D%60%0A%20%20%20%20-%20%60defs%3A%20%7Bmo.defs()%7D%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
 <marimo-island data-app-id="main" data-cell-id="bkHC" data-reactive="true">
-            <marimo-cell-output>
-            <span class="markdown prose dark:prose-invert"><ul>
-<li><code>refs: ('mo',)</code></li>
-<li><code>defs: ('amplitude',)</code></li>
-</ul></span>
-            </marimo-cell-output>
-            <marimo-cell-code hidden="">amplitude%20%3D%201%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20-%20%60refs%3A%20%7Bmo.refs()%7D%60%0A%20%20%20%20-%20%60defs%3A%20%7Bmo.defs()%7D%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
-        </marimo-island>
+    <marimo-cell-output>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><ul>\n<li><code>refs: ('mo',)</code></li>\n<li><code>defs: ('amplitude',)</code></li>\n</ul></span>&quot;"></marimo-mime-renderer>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">amplitude%20%3D%201%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20-%20%60refs%3A%20%7Bmo.refs()%7D%60%0A%20%20%20%20-%20%60defs%3A%20%7Bmo.defs()%7D%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
 <marimo-island data-app-id="main" data-cell-id="lEQa" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;An ancestor raised an exception (ModuleNotFoundError): &quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: &quot;ecfG&quot;, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;An ancestor raised an exception (ModuleNotFoundError): &quot;,&quot;exception_type&quot;:&quot;Ancestor raised&quot;,&quot;raising_cell&quot;:&quot;ecfG&quot;,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">def%20plot_wave(amplitude%2C%20period)%3A%0A%20%20%20%20x%20%3D%20np.linspace(0%2C%202%20*%20np.pi%2C%20256)%0A%20%20%20%20plt.plot(x%2C%20amplitude%20*%20np.sin(2%20*%20np.pi%20%2F%20period%20*%20x))%0A%20%20%20%20plt.xlim(0%2C%202%20*%20np.pi)%0A%20%20%20%20plt.ylim(-2%2C%202)%0A%20%20%20%20plt.xticks(%0A%20%20%20%20%20%20%20%20%5B0%2C%20np.pi%20%2F%202%2C%20np.pi%2C%203%20*%20np.pi%20%2F%202%2C%202%20*%20np.pi%5D%2C%0A%20%20%20%20%20%20%20%20%5B0%2C%20r%22%24%5Cpi%2F2%24%22%2C%20r%22%24%5Cpi%24%22%2C%20r%22%243%5Cpi%2F2%24%22%2C%20r%22%242%5Cpi%24%22%5D%2C%0A%20%20%20%20)%0A%20%20%20%20plt.yticks(%5B-2%2C%20-1%2C%200%2C%201%2C%202%5D)%0A%20%20%20%20plt.gcf().set_size_inches(6.5%2C%202.4)%0A%20%20%20%20return%20plt.gca()%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20-%20%60refs%3A%20%7Bmo.refs()%7D%60%0A%20%20%20%20-%20%60defs%3A%20%7Bmo.defs()%7D%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
 </marimo-island>
@@ -353,13 +347,13 @@ given cell. This can help with debugging complex notebooks.</span>
 <p>If you violate this constraint, marimo provides a helpful error message, like below:</p>
 <marimo-island data-app-id="main" data-cell-id="PKri" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;name&quot;: &quot;planet&quot;, &quot;cells&quot;: [&quot;Xref&quot;], &quot;type&quot;: &quot;multiple-defs&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;multiple-defs&quot;,&quot;name&quot;:&quot;planet&quot;,&quot;cells&quot;:[&quot;Xref&quot;]}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">planet%20%3D%20%22Mars%22%0Aplanet</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Xref" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;name&quot;: &quot;planet&quot;, &quot;cells&quot;: [&quot;PKri&quot;], &quot;type&quot;: &quot;multiple-defs&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;multiple-defs&quot;,&quot;name&quot;:&quot;planet&quot;,&quot;cells&quot;:[&quot;PKri&quot;]}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">planet%20%3D%20%22Earth%22%0Aplanet</marimo-cell-code>
 </marimo-island>
@@ -367,13 +361,13 @@ given cell. This can help with debugging complex notebooks.</span>
 <p><strong>🌊 Try it!</strong> Get rid of the following errors by merging the next two cells into a single cell.</p>
 <marimo-island data-app-id="main" data-cell-id="SFPL" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;name&quot;: &quot;count&quot;, &quot;cells&quot;: [&quot;BYtC&quot;], &quot;type&quot;: &quot;multiple-defs&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;multiple-defs&quot;,&quot;name&quot;:&quot;count&quot;,&quot;cells&quot;:[&quot;BYtC&quot;]}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">count%20%3D%200</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="BYtC" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;name&quot;: &quot;count&quot;, &quot;cells&quot;: [&quot;SFPL&quot;], &quot;type&quot;: &quot;multiple-defs&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;multiple-defs&quot;,&quot;name&quot;:&quot;count&quot;,&quot;cells&quot;:[&quot;SFPL&quot;]}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">count%20%2B%3D%201</marimo-cell-code>
 </marimo-island>
@@ -383,19 +377,19 @@ given cell. This can help with debugging complex notebooks.</span>
 <p><strong>Example</strong>.</p>
 <marimo-island data-app-id="main" data-cell-id="RGSE" data-reactive="true">
     <marimo-cell-output>
-    <marimo-json-output data-json-data="[1, 2]" data-value-types="&quot;python&quot;"></marimo-json-output>
+    <marimo-json-output data-json-data="[1,2]" data-value-types="&quot;python&quot;"></marimo-json-output>
     </marimo-cell-output>
     <marimo-cell-code hidden="">_private_variable%2C%20_%20%3D%201%2C%202%0A_private_variable%2C%20_</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Kclp" data-reactive="true">
     <marimo-cell-output>
-    <marimo-json-output data-json-data="[3, 4]" data-value-types="&quot;python&quot;"></marimo-json-output>
+    <marimo-json-output data-json-data="[3,4]" data-value-types="&quot;python&quot;"></marimo-json-output>
     </marimo-cell-output>
     <marimo-cell-code hidden="">_private_variable%2C%20_%20%3D%203%2C%204%0A_private_variable%2C%20_</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="emfo" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;name '_private_variable' is not defined&quot;, &quot;exception_type&quot;: &quot;NameError&quot;, &quot;raising_cell&quot;: null, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;name '_private_variable' is not defined&quot;,&quot;exception_type&quot;:&quot;NameError&quot;,&quot;raising_cell&quot;:null,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">%23%20%60_private_variable%60%20and%20%60_%60%20are%20not%20defined%20in%20this%20cell%0A_private_variable%2C%20_</marimo-cell-code>
 </marimo-island>
@@ -404,15 +398,14 @@ given cell. This can help with debugging complex notebooks.</span>
 <h3 class="anchored" data-anchor-id="deleting-a-cell-deletes-its-variables">Deleting a cell deletes its variables</h3>
 <p>Deleting a cell deletes its global variables and then runs all cells that reference them. This prevents severe bugs that can arise when state has been deleted from the editor but not from the program memory.</p>
 <marimo-island data-app-id="main" data-cell-id="Hstk" data-reactive="true">
-            <marimo-cell-output>
-            <span class="markdown prose dark:prose-invert"><span class="paragraph">🌊 <strong>Try it!</strong></span>
-<span class="paragraph">Delete this cell by clicking the trash bin icon.</span></span>
-            </marimo-cell-output>
-            <marimo-cell-code hidden="">to_be_deleted%20%3D%20%22variable%20still%20exists%22%0A%0Amo.md(%0A%20%20%20%20%22%22%22%0A%20%20%20%20%F0%9F%8C%8A%20**Try%20it!**%0A%0A%20%20%20%20Delete%20this%20cell%20by%20clicking%20the%20trash%20bin%20icon.%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
-        </marimo-island>
+    <marimo-cell-output>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>🌊 <strong>Try it!</strong></span>\n<span class=\&quot;paragraph\&quot;>Delete this cell by clicking the trash bin icon.</span></span>&quot;"></marimo-mime-renderer>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">to_be_deleted%20%3D%20%22variable%20still%20exists%22%0A%0Amo.md(%0A%20%20%20%20%22%22%22%0A%20%20%20%20%F0%9F%8C%8A%20**Try%20it!**%0A%0A%20%20%20%20Delete%20this%20cell%20by%20clicking%20the%20trash%20bin%20icon.%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
 <marimo-island data-app-id="main" data-cell-id="nWHF" data-reactive="true">
     <marimo-cell-output>
-    <pre style="font-size: 12px">'variable still exists'</pre>
+    <pre class="text-xs">'variable still exists'</pre>
     </marimo-cell-output>
     <marimo-cell-code hidden="">to_be_deleted</marimo-cell-code>
 </marimo-island>
@@ -422,13 +415,13 @@ given cell. This can help with debugging complex notebooks.</span>
 <p>Cycles among cells are not allowed. For example:</p>
 <marimo-island data-app-id="main" data-cell-id="iLit" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;edges_with_vars&quot;: [[&quot;iLit&quot;, [&quot;one&quot;], &quot;ZHCJ&quot;], [&quot;ZHCJ&quot;, [&quot;two&quot;], &quot;iLit&quot;]], &quot;type&quot;: &quot;cycle&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;cycle&quot;,&quot;edges_with_vars&quot;:[[&quot;ZHCJ&quot;,[&quot;two&quot;],&quot;iLit&quot;],[&quot;iLit&quot;,[&quot;one&quot;],&quot;ZHCJ&quot;]]}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">one%20%3D%20two%20-%201</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="ZHCJ" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;edges_with_vars&quot;: [[&quot;iLit&quot;, [&quot;one&quot;], &quot;ZHCJ&quot;], [&quot;ZHCJ&quot;, [&quot;two&quot;], &quot;iLit&quot;]], &quot;type&quot;: &quot;cycle&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;cycle&quot;,&quot;edges_with_vars&quot;:[[&quot;ZHCJ&quot;,[&quot;two&quot;],&quot;iLit&quot;],[&quot;iLit&quot;,[&quot;one&quot;],&quot;ZHCJ&quot;]]}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">two%20%3D%20one%20%2B%201</marimo-cell-code>
 </marimo-island>
@@ -445,7 +438,7 @@ given cell. This can help with debugging complex notebooks.</span>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="qnkX" data-reactive="true">
     <marimo-cell-output>
-    <pre style="font-size: 12px">1</pre>
+    <pre class="text-xs">1</pre>
     </marimo-cell-output>
     <marimo-cell-code hidden="">state.number</marimo-cell-code>
 </marimo-island>
@@ -457,7 +450,7 @@ given cell. This can help with debugging complex notebooks.</span>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Vxnm" data-reactive="true">
             <marimo-cell-output>
-            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Why not track attributes?</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert"><span class="paragraph">marimo can't reliably trace attributes 
+            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Why not track attributes?</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">marimo can't reliably trace attributes 
 to cells that define them. For example, attributes are routinely 
 created or modified by library code.</span></span></div></marimo-accordion>
             </marimo-cell-output>
@@ -469,7 +462,7 @@ created or modified by library code.</span></span></div></marimo-accordion>
 <p>In Python, it’s impossible to know whether code will mutate an object without running it. So: mutations (such as appending to a list) will not trigger reactive execution.</p>
 <marimo-island data-app-id="main" data-cell-id="DnEU" data-reactive="true">
             <marimo-cell-output>
-            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Tip (advanced): mutable state</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert"><span class="paragraph">You can use the fact that marimo does not track attributes or 
+            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Tip (advanced): mutable state</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">You can use the fact that marimo does not track attributes or 
 mutations to implement mutable state in marimo. An example of
 this is shown in the <code>ui</code> tutorial.</span></span></div></marimo-accordion>
             </marimo-cell-output>
@@ -483,13 +476,13 @@ this is shown in the <code>ui</code> tutorial.</span></span></div></marimo-accor
 <p>Follow these tips to stay on the marimo way:</p>
 <marimo-island data-app-id="main" data-cell-id="ulZA" data-reactive="true">
             <marimo-cell-output>
-            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Use global variables sparingly</span></span>&quot;, &quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Use descriptive names</span></span>&quot;, &quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Use functions</span></span>&quot;, &quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Minimize mutations</span></span>&quot;, &quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Write idempotent cells</span></span>&quot;, &quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Cache intermediate computations with <code>@mo.cache</code></span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert"><span class="paragraph">Keep the number of global variables in your program small to avoid
+            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Use global variables sparingly</span></span>&quot;,&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Use descriptive names</span></span>&quot;,&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Use functions</span></span>&quot;,&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Minimize mutations</span></span>&quot;,&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Write idempotent cells</span></span>&quot;,&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Cache intermediate computations with <code>@mo.cache</code></span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">Keep the number of global variables in your program small to avoid
 name collisions across cells. Keep the number of global variables 
 defined by any one cell small to make sure that the units of
-reactive execution are small. </span></span></div><div><span class="markdown prose dark:prose-invert"><span class="paragraph">Use descriptive variable names, especially for global variables.
+reactive execution are small. </span></span></div><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">Use descriptive variable names, especially for global variables.
 This will help you minimize name clashes, and will also result in
-better code.</span></span></div><div><span class="markdown prose dark:prose-invert"><span class="paragraph">Encapsulate logic into functions to avoid polluting the global
-namespace with temporary or intermediate variables.</span></span></div><div><span class="markdown prose dark:prose-invert"><span class="paragraph">We saw earlier that marimo cannot track object mutations. So try
+better code.</span></span></div><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">Encapsulate logic into functions to avoid polluting the global
+namespace with temporary or intermediate variables.</span></span></div><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">We saw earlier that marimo cannot track object mutations. So try
 to only mutate an object in the cell that creates it, or create
 new objects instead of mutating existing ones.</span>
 <span class="paragraph">For example, don't do this:</span>
@@ -510,10 +503,10 @@ new objects instead of mutating existing ones.</span>
 </code></pre></div>
 <div class="language-python3 codehilite"><pre><span></span><code><span class="c1"># another cell</span>
 <span class="n">more_numbers</span> <span class="o">=</span> <span class="n">numbers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-</code></pre></div></span></div><div><span class="markdown prose dark:prose-invert"><span class="paragraph">Write cells whose outputs and behavior are the same when given
+</code></pre></div></span></div><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">Write cells whose outputs and behavior are the same when given
 the same inputs (refs); such cells are called <em>idempotent</em>. This will
 help you avoid bugs, and let you cache expensive intermediate
-computations (see the next tip).</span></span></div><div><span class="markdown prose dark:prose-invert"><span class="paragraph">Use <code>mo.cache</code> to cache the return value of expensive functions.
+computations (see the next tip).</span></span></div><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">Use <code>mo.cache</code> to cache the return value of expensive functions.
 You can do this if you abstract complex logic into idempotent
 functions, following earlier tips.</span>
 <span class="paragraph">For example:</span>
@@ -540,7 +533,7 @@ if the cell defining the function is re-run.</span></span></div></marimo-accordi
 <pre><code>marimo tutorial ui</code></pre>
 <marimo-island data-app-id="main" data-cell-id="ecfG" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;No module named 'matplotlib'&quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: null, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;No module named 'matplotlib'&quot;,&quot;exception_type&quot;:&quot;ModuleNotFoundError&quot;,&quot;raising_cell&quot;:null,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">import%20matplotlib.pyplot%20as%20plt%0Aimport%20numpy%20as%20np</marimo-cell-code>
 </marimo-island>

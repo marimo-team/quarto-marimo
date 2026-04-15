@@ -107,8 +107,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.16/dist/main.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.16/dist/style.css" rel="stylesheet" crossorigin="anonymous">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/main.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/style.css" rel="stylesheet" title="marimo-islands" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -310,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This will create the following cell:</p>
 <marimo-island data-app-id="main" data-cell-id="Hbol" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;No module named 'matplotlib'&quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: null, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;No module named 'matplotlib'&quot;,&quot;exception_type&quot;:&quot;ModuleNotFoundError&quot;,&quot;raising_cell&quot;:null,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">import%20matplotlib.pyplot%20as%20plt%0A%0Aplt.plot(%5B1%2C%202%2C%203%2C%204%5D)%0Aplt.gca()</marimo-cell-code>
 </marimo-island>
@@ -330,9 +330,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <marimo-island data-app-id="main" data-cell-id="MJUe" data-reactive="true">
             <marimo-cell-output>
-            <marimo-ui-element object-id="MJUe-8" random-id="9dff22d8-86f3-09bf-b141-e87b5d2a1cb3"><marimo-form data-initial-value="null" data-label="null" data-element-id="&quot;MJUe-7&quot;" data-loading="false" data-bordered="false" data-submit-button-label="&quot;Submit&quot;" data-submit-button-disabled="false" data-clear-on-submit="false" data-show-clear-button="true" data-clear-button-label="&quot;Clear&quot;" data-should-validate="false"><marimo-ui-element object-id="MJUe-7" random-id="ee787f8c-4c0a-8828-3d69-e10592b74e18"><marimo-dict data-initial-value="{&quot;markdown_is_awesome&quot;: &quot;&quot;, &quot;marimo_is_amazing&quot;: 11}" data-label="null" data-element-ids="{&quot;MJUe-5&quot;: &quot;markdown_is_awesome&quot;, &quot;MJUe-6&quot;: &quot;marimo_is_amazing&quot;}"><span class="markdown prose dark:prose-invert"><span class="paragraph"><strong>Just how great is markdown?.</strong></span>
-<span class="paragraph"><marimo-ui-element object-id="MJUe-5" random-id="b6218f5d-fb76-943e-65ad-04d3ed071af6"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>How much do you like markdown?</span></span>&quot;" data-placeholder="&quot;It is pretty swell \ud83c\udf0a&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element></span>
-<span class="paragraph"><marimo-ui-element object-id="MJUe-6" random-id="4fff88aa-f5a4-b2cb-5281-f2518354a3b6"><marimo-slider data-initial-value="11" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>How much do you like marimo?</span></span>&quot;" data-start="0" data-stop="11" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span></marimo-dict></marimo-ui-element></marimo-form></marimo-ui-element>
+            <marimo-ui-element object-id="MJUe-8" random-id="36afc8bf-3628-a560-361e-1fd02bd2b400"><marimo-form data-initial-value="null" data-label="null" data-element-id="&quot;MJUe-7&quot;" data-loading="false" data-bordered="false" data-submit-button-label="&quot;Submit&quot;" data-submit-button-disabled="false" data-clear-on-submit="false" data-show-clear-button="true" data-clear-button-label="&quot;Clear&quot;" data-should-validate="false"><marimo-ui-element object-id="MJUe-7" random-id="ccab5184-bd89-3dac-6cb4-255054f2fbda"><marimo-dict data-initial-value="{&quot;markdown_is_awesome&quot;:&quot;&quot;,&quot;marimo_is_amazing&quot;:11}" data-label="null" data-element-ids="{&quot;MJUe-5&quot;:&quot;markdown_is_awesome&quot;,&quot;MJUe-6&quot;:&quot;marimo_is_amazing&quot;}"><span class="markdown prose dark:prose-invert contents"><span class="paragraph"><strong>Just how great is markdown?.</strong></span>
+<span class="paragraph"><marimo-ui-element object-id="MJUe-5" random-id="b5d5ba34-91a4-4542-0e5a-1e50a040c624"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>How much do you like markdown?</span></span>&quot;" data-placeholder="&quot;It is pretty swell 🌊&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element></span>
+<span class="paragraph"><marimo-ui-element object-id="MJUe-6" random-id="95abee49-8e64-497f-a7e8-677d7dbcac93"><marimo-slider data-initial-value="11" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>How much do you like marimo?</span></span>&quot;" data-start="0" data-stop="11" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span></marimo-dict></marimo-ui-element></marimo-form></marimo-ui-element>
             </marimo-cell-output>
             <marimo-cell-code hidden="">form%20%3D%20(%0A%20%20%20%20mo.md('''%0A%20%20%20%20**Just%20how%20great%20is%20markdown%3F.**%0A%0A%20%20%20%20%7Bmarkdown_is_awesome%7D%0A%0A%20%20%20%20%7Bmarimo_is_amazing%7D%0A''')%0A%20%20%20%20.batch(%0A%20%20%20%20%20%20%20%20markdown_is_awesome%3Dmo.ui.text(label%3D%22How%20much%20do%20you%20like%20markdown%3F%22%2C%20placeholder%3D%22It%20is%20pretty%20swell%20%F0%9F%8C%8A%22)%2C%0A%20%20%20%20%20%20%20%20marimo_is_amazing%3Dmo.ui.slider(label%3D%22How%20much%20do%20you%20like%20marimo%3F%22%2C%20start%3D0%2C%20stop%3D11%2C%20value%3D11)%2C%0A%20%20%20%20)%0A%20%20%20%20.form(show_clear_button%3DTrue%2C%20bordered%3DFalse)%0A)%0Aform</marimo-cell-code>
         </marimo-island>
@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>marimo’s markdown support treats markdown as just plain old markdown. This means that trying to use string interpolation (like this <code>f"{'🍃' * 7}"</code>) will just give you the raw string. This lets you clearly delineate what values are supposed to be computed, and what values are static. To interpolate Python values, just use a Python cell:</p>
 <marimo-island data-app-id="main" data-cell-id="bkHC" data-reactive="true">
     <marimo-cell-output>
-    <span class="markdown prose dark:prose-invert"><span class="paragraph">Like so: 🍃🍃🍃🍃🍃🍃🍃</span></span>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Like so: 🍃🍃🍃🍃🍃🍃🍃</span></span>&quot;"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.md(f%22%22%22Like%20so%3A%20%7B%22%F0%9F%8D%83%22%20*%207%7D%22%22%22)</marimo-cell-code>
 </marimo-island>
@@ -366,13 +366,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The markdown format will know to automatically keep this as markdown. However, some ambiguous cases can’t be converted to markdown like this:</p>
 <marimo-island data-app-id="main" data-cell-id="lEQa" data-reactive="true">
-            <marimo-cell-output>
-            <span class="markdown prose dark:prose-invert"><span class="paragraph">This is a markdown cell with an execution block in it
-<div class="language-text codehilite"><pre><span></span><code># Too ambiguous to convert
-</code></pre></div></span></span>
-            </marimo-cell-output>
-            <marimo-cell-code hidden="">mo.md(%0A%20%20%20%20%22%22%22%0A%20%20%20%20This%20is%20a%20markdown%20cell%20with%20an%20execution%20block%20in%20it%0A%20%20%20%20%60%60%60%7Bpython%20.marimo%7D%0A%20%20%20%20%23%20Too%20ambiguous%20to%20convert%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
-        </marimo-island>
+    <marimo-cell-output>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>This is a markdown cell with an execution block in it\n<div class=\&quot;language-text codehilite\&quot;><pre><span></span><code># Too ambiguous to convert\n</code></pre></div></span></span>&quot;"></marimo-mime-renderer>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">mo.md(%0A%20%20%20%20%22%22%22%0A%20%20%20%20This%20is%20a%20markdown%20cell%20with%20an%20execution%20block%20in%20it%0A%20%20%20%20%60%60%60%7Bpython%20.marimo%7D%0A%20%20%20%20%23%20Too%20ambiguous%20to%20convert%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
 <p>It’s not likely that you’ll run into this issue, but rest assured that marimo is working behind the scenes to keep your notebooks unambiguous and clean as possible. <!----> ### Saving multicolumn mode</p>
 <p>Multicolumn mode works, but the first cell in a column must be a python cell in order to specify column start and to save correctly:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo column="1"}</span></span>
@@ -430,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Be sure to checkout the markdown.py tutorial (<code>marimo tutorial markdown</code>) for more information on to type-set and render markdown in marimo.</p>
 <marimo-island data-app-id="main" data-cell-id="SFPL" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="SFPL-0" random-id="cfb16118-43ef-be62-4234-de30191cdf47"><marimo-slider data-initial-value="1000" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Sample Count</span></span>&quot;" data-start="1" data-stop="1000" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element>
+    <marimo-ui-element object-id="SFPL-0" random-id="7e1eeec8-e50a-5350-5299-392ecd26a170"><marimo-slider data-initial-value="1000" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Sample Count</span></span>&quot;" data-start="1" data-stop="1000" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">sample_count%20%3D%20mo.ui.slider(1%2C%201000%2C%20value%3D1000%2C%20label%3D%22Sample%20Count%22)%0Asample_count</marimo-cell-code>
 </marimo-island>

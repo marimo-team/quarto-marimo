@@ -106,8 +106,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.16/dist/main.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.16/dist/style.css" rel="stylesheet" crossorigin="anonymous">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/main.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/style.css" rel="stylesheet" title="marimo-islands" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -281,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This repository provides a framework for integrating <a href="https://quarto.org"><code>Quarto</code></a> with <a href="https://marimo.io"><code>marimo</code></a>, enabling markdown documents to be executed in a <code>marimo</code> environment, and reactive in page.</p>
 <marimo-island data-app-id="main" data-cell-id="Hbol" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="Hbol-0" random-id="3a75c88b-19de-c6de-2f64-e05a75097c0b"><marimo-slider data-initial-value="1" data-label="null" data-start="1" data-stop="10" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element>
+    <marimo-ui-element object-id="Hbol-0" random-id="2a54a56e-16c6-2a88-de9c-5bd713301c18"><marimo-slider data-initial-value="1" data-label="null" data-start="1" data-stop="10" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">slider%20%3D%20mo.ui.slider(start%3D1%2C%20stop%3D10)%0Aslider</marimo-cell-code>
 </marimo-island>
@@ -293,9 +293,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">'''</span>).callout(<span class="st">"info"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <marimo-island data-app-id="main" data-cell-id="MJUe" data-reactive="true">
     <marimo-cell-output>
-    <marimo-callout-output data-html="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><h1 id=\&quot;hello-from-marimo\&quot;>Hello from marimo!!</h1>\n<span class=\&quot;paragraph\&quot;>This is a raw, reactive python cell.\nYou can edit it, and the output will change on run.</span></span>&quot;" data-kind="&quot;info&quot;"></marimo-callout-output>
+    <marimo-callout-output data-html="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><h1 id=\&quot;hello-from-marimo\&quot;>Hello from marimo!!</h1>\n<span class=\&quot;paragraph\&quot;>This is a raw, reactive python cell.\nYou can edit it, and the output will change on run.</span></span>&quot;" data-kind="&quot;info&quot;"></marimo-callout-output>
     </marimo-cell-output>
-    <marimo-ui-element object-id="3a75c88b-19de-c6de-2f64-e05a75097c0b" random-id="3a75c88b-19de-c6de-2f64-e05a75097c0b"><marimo-code-editor data-initial-value="&quot;mo.md(f'''\n  # Hello from marimo!{'!' * slider.value}\n\n  This is a raw, reactive python cell.\n  You can edit it, and the output will change on run.\n''').callout(\&quot;info\&quot;)&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
+    <marimo-ui-element object-id="52232ff5-4b82-1a33-bcca-2b2a19e382a9" random-id="52232ff5-4b82-1a33-bcca-2b2a19e382a9"><marimo-code-editor data-initial-value="&quot;mo.md(f'''\n  # Hello from marimo!{'!' * slider.value}\n\n  This is a raw, reactive python cell.\n  You can edit it, and the output will change on run.\n''').callout(\&quot;info\&quot;)&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
 </marimo-island>
 <section id="what" class="level2">
 <h2 class="anchored" data-anchor-id="what">What?</h2>
@@ -333,13 +333,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <marimo-cell-output>
     <marimo-json-output data-json-data="[&quot;Change me!!!&quot;]" data-value-types="&quot;python&quot;"></marimo-json-output>
     </marimo-cell-output>
-    <marimo-ui-element object-id="818d5f2f-954f-5b02-fe83-04a21cb69abc" random-id="818d5f2f-954f-5b02-fe83-04a21cb69abc"><marimo-code-editor data-initial-value="&quot;editor_result = \&quot;Change me\&quot; + (\&quot;!\&quot; * 3)\neditor_result,&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
+    <marimo-ui-element object-id="ee5f27d7-4055-3ab8-476b-3306fb66ff2d" random-id="ee5f27d7-4055-3ab8-476b-3306fb66ff2d"><marimo-code-editor data-initial-value="&quot;editor_result = \&quot;Change me\&quot; + (\&quot;!\&quot; * 3)\neditor_result,&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
 </marimo-island>
 <p>but the default is to show the output only.</p>
 <hr>
 <marimo-island data-app-id="main" data-cell-id="lEQa" data-reactive="true">
     <marimo-cell-output>
-    <span class="markdown prose dark:prose-invert"><span class="paragraph">The value of <code>editor_result</code> in the previous cell: <strong>Change me!!!</strong></span></span>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>The value of <code>editor_result</code> in the previous cell: <strong>Change me!!!</strong></span></span>&quot;"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.md(%0A%20%20f%22The%20value%20of%20%60editor_result%60%20in%20the%20previous%20cell%3A%20**%7Beditor_result%7D**%22)</marimo-cell-code>
 </marimo-island>
@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <marimo-cell-output>
     <span></span>
     </marimo-cell-output>
-    <marimo-ui-element object-id="1dd1d09a-d5b8-21ba-ff9d-3c7d1dcccee4" random-id="1dd1d09a-d5b8-21ba-ff9d-3c7d1dcccee4"><marimo-code-editor data-initial-value="&quot;# Bug: Cells are not runnable if no output\nimport marimo as mo&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
+    <marimo-ui-element object-id="04e02e93-ed40-467e-6c59-4b10819df7ea" random-id="04e02e93-ed40-467e-6c59-4b10819df7ea"><marimo-code-editor data-initial-value="&quot;# Bug: Cells are not runnable if no output\nimport marimo as mo&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
 </marimo-island>
 
 

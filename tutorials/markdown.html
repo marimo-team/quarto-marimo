@@ -107,8 +107,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.16/dist/main.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.14.16/dist/style.css" rel="stylesheet" crossorigin="anonymous">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/main.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/style.css" rel="stylesheet" title="marimo-islands" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -333,16 +333,16 @@ window.Quarto = {
 <p>[ f: . ]</p>
 <marimo-island data-app-id="main" data-cell-id="Hbol" data-reactive="true">
     <marimo-cell-output>
-    <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Tip: <code>r''</code> strings</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert"><span class="paragraph">Use <code>r''</code> strings to remove the need to escape backslashes when writing LaTeX.</span></span></div></marimo-accordion>
+    <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Tip: <code>r''</code> strings</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">Use <code>r''</code> strings to remove the need to escape backslashes when writing LaTeX.</span></span></div></marimo-accordion>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.accordion(%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22Tip%3A%20%60r''%60%20strings%22%3A%20mo.md(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Use%20%60r''%60%20strings%20to%20remove%20the%20need%20to%20escape%20backslashes%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%20when%20writing%20LaTeX.%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%7D%0A)</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="MJUe" data-reactive="true">
             <marimo-cell-output>
-            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Note: KaTeX</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert"><span class="paragraph">marimo actually uses KaTeX, a math typesetting library for the
+            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Note: KaTeX</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">marimo actually uses KaTeX, a math typesetting library for the
 web which supports a subset of LaTeX. For a list of
 (un)supported commands, visit
-<a href="https://katex.org/docs/support_table" rel="noopener" target="_blank">https://katex.org/docs/support_table</a></span></span></div></marimo-accordion>
+<a href="https://katex.org/docs/support_table" rel="noopener noreferrer" target="_blank">https://katex.org/docs/support_table</a></span></span></div></marimo-accordion>
             </marimo-cell-output>
             <marimo-cell-code hidden="">mo.accordion(%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22Note%3A%20KaTeX%22%3A%20mo.md(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20marimo%20actually%20uses%20KaTeX%2C%20a%20math%20typesetting%20library%20for%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20web%20which%20supports%20a%20subset%20of%20LaTeX.%20For%20a%20list%20of%0A%20%20%20%20%20%20%20%20%20%20%20%20(un)supported%20commands%2C%20visit%0A%20%20%20%20%20%20%20%20%20%20%20%20https%3A%2F%2Fkatex.org%2Fdocs%2Fsupport_table%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%7D%0A)</marimo-cell-code>
         </marimo-island>
@@ -352,44 +352,38 @@ web which supports a subset of LaTeX. For a list of
 <p>Here are some examples.</p>
 <marimo-island data-app-id="main" data-cell-id="vblA" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;An ancestor raised an exception (ModuleNotFoundError): &quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: &quot;Hstk&quot;, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;An ancestor raised an exception (ModuleNotFoundError): &quot;,&quot;exception_type&quot;:&quot;Ancestor raised&quot;,&quot;raising_cell&quot;:&quot;Hstk&quot;,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">def%20_sine_plot()%3A%0A%20%20%20%20_x%20%3D%20np.linspace(start%3D0%2C%20stop%3D2%20*%20np.pi)%0A%20%20%20%20plt.plot(_x%2C%20np.sin(_x))%0A%20%20%20%20return%20plt.gca()%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20%23%23%23%20Plots%0A%20%20%20%20A%20matplotlib%20figure%3A%0A%0A%20%20%20%20%60%60%60python3%0A%20%20%20%20_x%20%3D%20np.linspace(start%3D0%2C%20stop%3D2*np.pi)%0A%20%20%20%20sine_plot%20%3D%20plt.plot(_x%2C%20np.sin(_x))%0A%20%20%20%20mo.md(f%22%7B%7Bmo.as_html(sine_plot)%7D%7D%22)%0A%20%20%20%20%60%60%60%0A%20%20%20%20yields%0A%0A%20%20%20%20%7Bmo.as_html(_sine_plot())%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="bkHC" data-reactive="true">
-            <marimo-cell-output>
-            <span class="markdown prose dark:prose-invert"><h3 id="ui-elements" class="anchored">UI elements</h3>
-<span class="paragraph">A <code>marimo.ui</code> object:</span>
-<div class="language-python3 codehilite"><pre><span></span><code><span class="n">leaves</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"🍃: "</span><span class="p">)</span>
-<span class="n">mo</span><span class="o">.</span><span class="n">md</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">leaves</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</code></pre></div>
-<span class="paragraph">yields</span>
-<span class="paragraph"><marimo-ui-element object-id="bkHC-0" random-id="8f208628-fb71-c293-8ccb-6e12981b7f14"><marimo-slider data-initial-value="1" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>\ud83c\udf43: </span></span>&quot;" data-start="1" data-stop="32" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span>
-            </marimo-cell-output>
-            <marimo-cell-code hidden="">leaves%20%3D%20mo.ui.slider(1%2C%2032%2C%20label%3D%22%F0%9F%8D%83%3A%20%22)%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20%23%23%23%20UI%20elements%0A%0A%20%20%20%20A%20%60marimo.ui%60%20object%3A%0A%0A%20%20%20%20%60%60%60python3%0A%20%20%20%20leaves%20%3D%20mo.ui.slider(1%2C%2016%2C%20label%3D%22%F0%9F%8D%83%3A%20%22)%0A%20%20%20%20mo.md(f%22%7B%7Bleaves%7D%7D%22)%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20yields%0A%0A%20%20%20%20%7Bleaves%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
-        </marimo-island>
+    <marimo-cell-output>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><h3 id=\&quot;ui-elements\&quot;>UI elements</h3>\n<span class=\&quot;paragraph\&quot;>A <code>marimo.ui</code> object:</span>\n<div class=\&quot;language-python3 codehilite\&quot;><pre><span></span><code><span class=\&quot;n\&quot;>leaves</span> <span class=\&quot;o\&quot;>=</span> <span class=\&quot;n\&quot;>mo</span><span class=\&quot;o\&quot;>.</span><span class=\&quot;n\&quot;>ui</span><span class=\&quot;o\&quot;>.</span><span class=\&quot;n\&quot;>slider</span><span class=\&quot;p\&quot;>(</span><span class=\&quot;mi\&quot;>1</span><span class=\&quot;p\&quot;>,</span> <span class=\&quot;mi\&quot;>16</span><span class=\&quot;p\&quot;>,</span> <span class=\&quot;n\&quot;>label</span><span class=\&quot;o\&quot;>=</span><span class=\&quot;s2\&quot;>&amp;quot;🍃: &amp;quot;</span><span class=\&quot;p\&quot;>)</span>\n<span class=\&quot;n\&quot;>mo</span><span class=\&quot;o\&quot;>.</span><span class=\&quot;n\&quot;>md</span><span class=\&quot;p\&quot;>(</span><span class=\&quot;sa\&quot;>f</span><span class=\&quot;s2\&quot;>&amp;quot;</span><span class=\&quot;si\&quot;>{</span><span class=\&quot;n\&quot;>leaves</span><span class=\&quot;si\&quot;>}</span><span class=\&quot;s2\&quot;>&amp;quot;</span><span class=\&quot;p\&quot;>)</span>\n</code></pre></div>\n<span class=\&quot;paragraph\&quot;>yields</span>\n<span class=\&quot;paragraph\&quot;><marimo-ui-element object-id='bkHC-0' random-id='899312ee-8452-120d-7826-b427b217bd77'><marimo-slider data-initial-value='1' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;🍃: &amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-start='1' data-stop='32' data-steps='[]' data-debounce='false' data-disabled='false' data-orientation='&amp;quot;horizontal&amp;quot;' data-show-value='false' data-include-input='false' data-full-width='false'></marimo-slider></marimo-ui-element></span></span>&quot;"></marimo-mime-renderer>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">leaves%20%3D%20mo.ui.slider(1%2C%2032%2C%20label%3D%22%F0%9F%8D%83%3A%20%22)%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20%23%23%23%20UI%20elements%0A%0A%20%20%20%20A%20%60marimo.ui%60%20object%3A%0A%0A%20%20%20%20%60%60%60python3%0A%20%20%20%20leaves%20%3D%20mo.ui.slider(1%2C%2016%2C%20label%3D%22%F0%9F%8D%83%3A%20%22)%0A%20%20%20%20mo.md(f%22%7B%7Bleaves%7D%7D%22)%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20yields%0A%0A%20%20%20%20%7Bleaves%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
 <marimo-island data-app-id="main" data-cell-id="lEQa" data-reactive="true">
     <marimo-cell-output>
-    <span class="markdown prose dark:prose-invert"><span class="paragraph">Your leaves: 🍃</span></span>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Your leaves: 🍃</span></span>&quot;"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.md(f%22Your%20leaves%3A%20%7B'%F0%9F%8D%83'%20*%20leaves.value%7D%22)</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="PKri" data-reactive="true">
             <marimo-cell-output>
-            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Tip: UI elements can format themselves</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert"><span class="paragraph">marimo objects know how to format themselves, so you can omit the
+            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Tip: UI elements can format themselves</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">marimo objects know how to format themselves, so you can omit the
 call to <code>as_html</code>.</span></span></div></marimo-accordion>
             </marimo-cell-output>
             <marimo-cell-code hidden="">mo.accordion(%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22Tip%3A%20UI%20elements%20can%20format%20themselves%22%3A%20%22%22%22%0A%20%20%20%20%20%20%20%20marimo%20objects%20know%20how%20to%20format%20themselves%2C%20so%20you%20can%20omit%20the%0A%20%20%20%20%20%20%20%20call%20to%20%60as_html%60.%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%7D%0A)</marimo-cell-code>
         </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Xref" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;An ancestor raised an exception (ModuleNotFoundError): &quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: &quot;Hstk&quot;, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;An ancestor raised an exception (ModuleNotFoundError): &quot;,&quot;exception_type&quot;:&quot;Ancestor raised&quot;,&quot;raising_cell&quot;:&quot;Hstk&quot;,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">import%20polars%20as%20pl%0A%0Adef%20make_dataframe()%3A%0A%20%20%20%20x%20%3D%20np.linspace(0%2C%202%20*%20np.pi%2C%2010)%0A%20%20%20%20y%20%3D%20np.sin(x)%0A%20%20%20%20return%20pl.DataFrame(%7B%22x%22%3A%20x%2C%20%22sin(x)%22%3A%20y%7D)%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20%23%23%23%20Other%20objects%0A%0A%20%20%20%20Use%20%60mo.as_html%60%20to%20convert%20objects%20to%20HTML.%20This%20function%0A%20%20%20%20generates%20rich%20HTML%20for%20many%20Python%20types%2C%20including%3A%0A%0A%20%20%20%20-%20lists%2C%20dicts%2C%20and%20tuples%2C%0A%20%20%20%20-%20%60pandas%60%20dataframes%20and%20series%2C%0A%20%20%20%20-%20%60seaborn%60%20figures%2C%0A%20%20%20%20-%20%60plotly%60%20figures%2C%20and%0A%20%20%20%20-%20%60altair%60%20figures.%0A%0A%20%20%20%20For%20example%2C%20here's%20a%20Polars%20dataframe%3A%0A%0A%20%20%20%20%7Bmo.as_html(make_dataframe())%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="SFPL" data-reactive="true">
             <marimo-cell-output>
-            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>Tip: outputs are automatically converted to HTML</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert"><span class="paragraph"><code>mo.as_html</code> is only needed when interpolating objects into
+            <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Tip: outputs are automatically converted to HTML</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph"><code>mo.as_html</code> is only needed when interpolating objects into
 markdown; the last expression of a cell (its output) is
 converted to HTML automatically.</span></span></div></marimo-accordion>
             </marimo-cell-output>
@@ -407,29 +401,25 @@ converted to HTML automatically.</span></span></div></marimo-accordion>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="RGSE" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;An ancestor raised an exception (ModuleNotFoundError): &quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: &quot;Hstk&quot;, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;An ancestor raised an exception (ModuleNotFoundError): &quot;,&quot;exception_type&quot;:&quot;Ancestor raised&quot;,&quot;raising_cell&quot;:&quot;Hstk&quot;,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">%40mo.cache%0Adef%20plotsin(amplitude%2C%20period)%3A%0A%20%20%20%20x%20%3D%20np.linspace(0%2C%202%20*%20np.pi%2C%20256)%0A%20%20%20%20plt.plot(x%2C%20amplitude%20*%20np.sin(2%20*%20np.pi%20%2F%20period%20*%20x))%0A%20%20%20%20plt.ylim(-2.2%2C%202.2)%0A%20%20%20%20return%20plt.gca()</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Kclp" data-reactive="true">
-            <marimo-cell-output>
-            <span class="markdown prose dark:prose-invert"><span class="paragraph"><strong>A sin curve.</strong></span>
-<ul>
-<li><marimo-ui-element object-id="BYtC-0" random-id="b4e71a41-204a-11c2-4f49-97c7d10d8636"><marimo-slider data-initial-value="1" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>amplitude: </span></span>&quot;" data-start="1" data-stop="2" data-step="0.1" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></li>
-<li><marimo-ui-element object-id="BYtC-1" random-id="65132654-9712-983e-c315-3e8f8792d0d6"><marimo-slider data-initial-value="6.283185307179586" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert\&quot;><span class=\&quot;paragraph\&quot;>period: </span></span>&quot;" data-start="0.7853981633974483" data-stop="12.566370614359172" data-step="0.39269908169872414" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></li>
-</ul></span>
-            </marimo-cell-output>
-            <marimo-cell-code hidden="">mo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20**A%20sin%20curve.**%0A%0A%20%20%20%20-%20%7Bamplitude%7D%0A%20%20%20%20-%20%7Bperiod%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
-        </marimo-island>
+    <marimo-cell-output>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;><strong>A sin curve.</strong></span>\n<ul>\n<li><marimo-ui-element object-id='BYtC-0' random-id='9322ea0b-68ee-e729-a31b-3c6ff5efc52c'><marimo-slider data-initial-value='1' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;amplitude: &amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-start='1' data-stop='2' data-step='0.1' data-steps='[]' data-debounce='false' data-disabled='false' data-orientation='&amp;quot;horizontal&amp;quot;' data-show-value='false' data-include-input='false' data-full-width='false'></marimo-slider></marimo-ui-element></li>\n<li><marimo-ui-element object-id='BYtC-1' random-id='911203d5-bb5c-3a6e-c18f-3c3fb06b2d6c'><marimo-slider data-initial-value='6.283185307179586' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;period: &amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-start='0.7853981633974483' data-stop='12.566370614359172' data-step='0.39269908169872414' data-steps='[]' data-debounce='false' data-disabled='false' data-orientation='&amp;quot;horizontal&amp;quot;' data-show-value='false' data-include-input='false' data-full-width='false'></marimo-slider></marimo-ui-element></li>\n</ul></span>&quot;"></marimo-mime-renderer>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">mo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20**A%20sin%20curve.**%0A%0A%20%20%20%20-%20%7Bamplitude%7D%0A%20%20%20%20-%20%7Bperiod%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
 <marimo-island data-app-id="main" data-cell-id="emfo" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;An ancestor raised an exception (ModuleNotFoundError): &quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: &quot;Hstk&quot;, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;An ancestor raised an exception (ModuleNotFoundError): &quot;,&quot;exception_type&quot;:&quot;Ancestor raised&quot;,&quot;raising_cell&quot;:&quot;Hstk&quot;,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.md(%0A%20%20%20%20rf%22%22%22%0A%20%20%20%20You're%20viewing%20the%20graph%20of%0A%0A%20%20%20%20%5C%5B%0A%20%20%20%20f(x)%20%3D%20%7Bamplitude.value%7D%5Csin((2%5Cpi%2F%7Bperiod.value%3A0.2f%7D)x)%2C%0A%20%20%20%20%5C%5D%0A%0A%20%20%20%20with%20%24x%24%20ranging%20from%20%240%24%20to%20%242%5Cpi%24.%0A%20%20%20%20%7Bmo.as_html(plotsin(amplitude.value%2C%20period.value))%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Hstk" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;msg&quot;: &quot;No module named 'matplotlib'&quot;, &quot;exception_type&quot;: &quot;ModuleNotFoundError&quot;, &quot;raising_cell&quot;: null, &quot;type&quot;: &quot;exception&quot;}]"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;No module named 'matplotlib'&quot;,&quot;exception_type&quot;:&quot;ModuleNotFoundError&quot;,&quot;raising_cell&quot;:null,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">import%20matplotlib.pyplot%20as%20plt%0Aimport%20numpy%20as%20np</marimo-cell-code>
 </marimo-island>
