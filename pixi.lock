@@ -108,7 +108,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/typing_extensions-4.15.0-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/userpath-1.9.2-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/uv-0.10.11-h0f56927_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/uv-0.11.6-h0f56927_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/uvicorn-0.42.0-pyhc90fa1f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/virtualenv-21.2.0-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/websockets-16.0-py313h54dd161_1.conda
@@ -231,7 +231,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/typing_extensions-4.15.0-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/userpath-1.9.2-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/uv-0.10.11-hbc54fe3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/uv-0.11.6-hbc54fe3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/uvicorn-0.42.0-pyhc90fa1f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/virtualenv-21.2.0-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/websockets-16.0-py313h16366db_1.conda
@@ -356,7 +356,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/typing_extensions-4.15.0-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/userpath-1.9.2-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/uv-0.10.11-h2a61971_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/uv-0.11.6-h2a61971_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/uvicorn-0.42.0-pyhc90fa1f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/virtualenv-21.2.0-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/websockets-16.0-py313h6688731_1.conda
@@ -479,7 +479,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/ucrt-10.0.26100.0-h57928b3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/userpath-1.9.2-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/uv-0.10.11-hd149a40_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/uv-0.11.6-hd149a40_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/uvicorn-0.42.0-pyh6dadd2b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/vc-14.3-h41ae7f8_34.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/vc14_runtime-14.44.35208-h818238b_34.conda
@@ -3284,54 +3284,54 @@ packages:
   version: 0.10.11
   sha256: 2a2663b6e02890aa3f57e14166d5dad67249208cdc0d4d3623915b437a7b0524
   requires_python: '>=3.8'
-- conda: https://conda.anaconda.org/conda-forge/linux-64/uv-0.10.11-h0f56927_0.conda
-  sha256: f9b63d8b97bff153eb99568c1d65ebcbd180a857cf625b3c018ee775cfc64352
-  md5: 6cc4b5044e736ab13efa5c5b759edf21
+- conda: https://conda.anaconda.org/conda-forge/linux-64/uv-0.11.6-h0f56927_0.conda
+  sha256: b4e119c6776d5f752f7f10a1e4810dcbcfe0a6b32cc23689b0009f93af76bf6c
+  md5: f78bab5fcaf462a4309c88c18def5574
   depends:
-  - __glibc >=2.17,<3.0.a0
-  - libgcc >=14
   - libstdcxx >=14
+  - libgcc >=14
+  - __glibc >=2.17,<3.0.a0
   constrains:
   - __glibc >=2.17
   license: Apache-2.0 OR MIT
   purls: []
-  size: 18489195
-  timestamp: 1773754276762
-- conda: https://conda.anaconda.org/conda-forge/osx-64/uv-0.10.11-hbc54fe3_0.conda
-  sha256: 714b75522649621e9923c6f13de89506617c642ba2131b373d5c0fe07d571002
-  md5: 976dde65383f3f59a3bd9bcff45d3e9e
+  size: 19227106
+  timestamp: 1775743419931
+- conda: https://conda.anaconda.org/conda-forge/osx-64/uv-0.11.6-hbc54fe3_0.conda
+  sha256: 24822d8208858642296c0c8d6c21ec2d5f2fe539a5f69496bb18efc37d71dec1
+  md5: ad278d10bbd4b8071ad92047bf21ccfc
   depends:
-  - libcxx >=19
   - __osx >=11.0
+  - libcxx >=19
   constrains:
   - __osx >=10.13
   license: Apache-2.0 OR MIT
   purls: []
-  size: 17076431
-  timestamp: 1773754382805
-- conda: https://conda.anaconda.org/conda-forge/osx-arm64/uv-0.10.11-h2a61971_0.conda
-  sha256: c9d84ab2e76f266d59ed9259ad85074a282c834a5665e621763580208f249429
-  md5: 2c3093ad3a62a7e2eed57d840ebeaa3d
+  size: 18079608
+  timestamp: 1775743678156
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/uv-0.11.6-h2a61971_0.conda
+  sha256: c16152d7ebd6d65f1438f242e423517c1f17b7ea5552c56538edd5347f034ed0
+  md5: 8113c6d9c8790242a21c8c7525bc1e8f
   depends:
-  - __osx >=11.0
   - libcxx >=19
+  - __osx >=11.0
   constrains:
   - __osx >=11.0
   license: Apache-2.0 OR MIT
   purls: []
-  size: 15707196
-  timestamp: 1773754261180
-- conda: https://conda.anaconda.org/conda-forge/win-64/uv-0.10.11-hd149a40_0.conda
-  sha256: cda2ab29ccb133d97f3b308e1fd056a891843c3cb39219ffd51bc562d7f158ed
-  md5: 3bc79f67153ddf8ac0ea6508e69af8cf
+  size: 16629923
+  timestamp: 1775743692957
+- conda: https://conda.anaconda.org/conda-forge/win-64/uv-0.11.6-hd149a40_0.conda
+  sha256: e15160c5a582d709b9c01322ea5c7fa64791940986fee150fe7cccf232665843
+  md5: 02ccf43156a1dbf466755b12c6467bc6
   depends:
   - vc >=14.3,<15
   - vc14_runtime >=14.44.35208
   - ucrt >=10.0.20348.0
   license: Apache-2.0 OR MIT
   purls: []
-  size: 18937034
-  timestamp: 1773754121053
+  size: 19717414
+  timestamp: 1775743487572
 - conda: https://conda.anaconda.org/conda-forge/noarch/uvicorn-0.42.0-pyh6dadd2b_0.conda
   sha256: 26c88a08bb662e4d9ea556cd7d3210a5a3d2f45df52a059c0f32002071d93758
   md5: 6993b3ab6ae44ff0deaa7e712b95c116
