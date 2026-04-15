@@ -10,7 +10,7 @@ This repo is a quarto engine extension that lets you use marimo in your quarto d
 > **Requires Quarto >= 1.9.20**. This extension uses the [engine extension API](https://quarto.org/docs/extensions/engines.html) introduced in 1.9.20.
 
 > [!NOTE]
-> **This extension requires marimo >=0.23.1.**
+> **This extension requires marimo >=0.23.1.** You can override the version used by setting the `QUARTO_MARIMO_VERSION` environment variable.
 
 ### Quick Start
 
@@ -99,7 +99,7 @@ and setting the yaml `pyproject` value in your notebook.
 To disable sandboxed behavior, set `external-env: true` in your notebook yaml; this requires an active virtual environment with marimo installed.
 
 > [!NOTE]
-> You can add `pyproject` or `enternal-env` to your `_quarto.yml` file for global behavior
+> You can add `pyproject` or `external-env` to your `_quarto.yml` file for global behavior
 
 Note, that local files are not bound to be accessible in WASM runtimes- and on
 web load, dependencies are installed via [`micropip`](https://github.com/pyodide/micropip).
