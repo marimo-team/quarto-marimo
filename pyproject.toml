@@ -57,11 +57,10 @@ test = { cmd = "deno test --no-check --allow-read --allow-write --allow-env && u
 
 [tool.pixi.dependencies]
 marimo = "==0.14.16"
-quarto = ">=1.6.43,<2"
 pandoc = ">=3.4,<4"
 pyyaml = ">=6.0.2,<7"
 stylua = ">=2.0.2,<3"
-uv = ">=0.10.3,<0.11"
+uv = ">=0.11,<0.12"
 mypy = ">=1.15.0,<2"
 hatch = ">=1.14.1,<2"
 pytest = ">=9,<10"
