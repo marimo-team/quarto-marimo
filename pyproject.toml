@@ -57,7 +57,6 @@ test = { cmd = "deno test --no-check --allow-read --allow-write --allow-env && u
 
 [tool.pixi.dependencies]
 marimo = "==0.14.16"
-quarto = ">=1.6.43,<2"
 pandoc = ">=3.4,<4"
 pyyaml = ">=6.0.2,<7"
 stylua = ">=2.0.2,<3"
