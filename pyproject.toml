@@ -8,7 +8,7 @@ description = "marimo package for quarto"
 dynamic = ["version"]
 dependencies = [
     # for marimo
-    "marimo==0.14.16",
+    "marimo>=0.23.1",
     # quarto itself
     "quarto",
     # uv is used in the script calls
@@ -56,7 +56,7 @@ test-py = "uv run --with pytest pytest tests/python -v"
 test = { cmd = "deno test --no-check --allow-read --allow-write --allow-env && uv run --with pytest pytest tests/python -v" }
 
 [tool.pixi.dependencies]
-marimo = "==0.14.16"
+marimo = ">=0.23.1"
 pandoc = ">=3.4,<4"
 pyyaml = ">=6.0.2,<7"
 stylua = ">=2.0.2,<3"

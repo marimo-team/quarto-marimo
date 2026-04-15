@@ -8,7 +8,7 @@ pyproject: |
         "numpy",
         "pandas",
         "matplotlib",
-        "marimo>=0.14.8,<=0.14.16"
+        "marimo>=0.23.1"
     ]
 extract-media: _site/media
 ---
