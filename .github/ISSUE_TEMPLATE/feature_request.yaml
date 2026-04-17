@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/github-issue-forms.json
+name: "🚀 Feature request"
+description: Propose a new feature or improvement for quarto-marimo
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to propose a new feature!
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What are you trying to do that is currently difficult or impossible?
+      placeholder: I'm trying to ... but I can't because ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the feature or behavior you'd like to see. Include example `.qmd` usage if applicable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds or alternative approaches you've tried?
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots, links, prior art, or anything else that helps explain the request.
+
+  - type: checkboxes
+    id: will-submit-pr
+    attributes:
+      label: Are you willing to submit a PR?
+      description: Please confirm with the team before starting work on a large feature.
+      options:
+        - label: "Yes, I'd like to implement this"
