@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discord Chat
+    url: https://marimo.io/discord?ref=issues
+    about: Ask questions and chat with the marimo community.
+  - name: GitHub Discussions
+    url: https://github.com/marimo-team/quarto-marimo/discussions
+    about: Use Discussions for questions, ideas, and general conversation.

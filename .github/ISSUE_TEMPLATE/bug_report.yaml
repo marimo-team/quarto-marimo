@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/github-issue-forms.json
+name: "🐞 Bug report"
+description: Report an issue with the quarto-marimo extension
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for filing this bug report!
+
+        **Tip:** You can override the marimo version used by the extension without reinstalling:
+        ```bash
+        QUARTO_MARIMO_VERSION=0.X.Y quarto render your-file.qmd
+        ```
+        If you can identify the last marimo version where things worked, please include it below — it speeds up debugging significantly.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: What went wrong? Include any error messages or stack traces.
+      placeholder: |
+        Running `quarto render ...` fails with:
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal .qmd to reproduce
+      description: The smallest `.qmd` that triggers the bug. This is the most helpful thing you can provide.
+      placeholder: |
+        ```markdown
+        ---
+        title: Repro
+        filters:
+          - marimo
+        ---
+
+        ```{.marimo}
+        # your cell here
+        ```
+        ```
+    validations:
+      required: false
+
+  - type: input
+    id: last-working-version
+    attributes:
+      label: Last working marimo version (if known)
+      description: |
+        Use `QUARTO_MARIMO_VERSION=0.X.Y quarto render` to bisect. What's the highest version that still works?
+      placeholder: "e.g. 0.23.1"
+    validations:
+      required: false
+
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      value: |
+        - **quarto version** (`quarto --version`):
+        - **marimo version** (`marimo --version`):
+        - **quarto-marimo version** (from `_extensions/marimo/_extension.yml`):
+        - **OS**:
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: will-submit-pr
+    attributes:
+      label: Will you submit a PR?
+      options:
+        - label: "Yes, I'd like to fix this"
