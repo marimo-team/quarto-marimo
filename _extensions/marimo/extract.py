@@ -31,7 +31,7 @@ from marimo._islands import MarimoIslandStub
 
 SafeWrap = SafeWrapGeneric[App]
 
-__version__ = "0.4.4"
+__version__ = "0.4.5"
 
 # See https://quarto.org/docs/computations/execution-options.html
 default_config = {

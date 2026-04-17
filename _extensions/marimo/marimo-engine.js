@@ -1,6 +1,6 @@
 // Loader shim — downloads the engine bundle from GitHub releases on first
 // use and caches it locally so import.meta.url resolves to a file:// path.
-const VERSION = "0.4.4";
+const VERSION = "0.4.5";
 const baseUrl = new URL(".", import.meta.url);
 const bundleName = `marimo-engine-v${VERSION}.js`;
 const bundlePath = new URL(bundleName, baseUrl);
