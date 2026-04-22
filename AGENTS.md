@@ -62,8 +62,14 @@ Called by the TS engine before `extract.py` to construct the `uv run` flags. Rea
 | Variable | Purpose |
 |---|---|
 | `QUARTO_MARIMO_VERSION` | Override the marimo JS version loaded by islands (default: installed version). Use to bisect regressions. |
-| `QUARTO_MARIMO_DEBUG_ENDPOINT` | Point islands at a local marimo dev server instead of CDN |
+| `QUARTO_MARIMO_DEBUG_ENDPOINT` | Override the islands runtime location. Leave unset for CDN, use `/marimo-frontend` for a site-local copied bundle, or an absolute URL for an already-running local server. |
+| `QUARTO_MARIMO_LOCAL_FRONTEND_ROOT` | Override the local `marimo/frontend` checkout used by `scripts/sync_local_frontend.py` when `QUARTO_MARIMO_DEBUG_ENDPOINT` is a relative site path. |
 | `MARIMO_NO_JS` | Set to `true` for non-JS output formats (PDF etc.); disables interactive islands |
+
+For local preview/debugging against a sibling `marimo` checkout, prefer
+`QUARTO_MARIMO_DEBUG_ENDPOINT=/marimo-frontend`. `_quarto.yml` runs
+`scripts/sync_local_frontend.py` after render so `_site/marimo-frontend/dist`
+matches the runtime path referenced by the generated pages.
 
 ## Document-level Options
 

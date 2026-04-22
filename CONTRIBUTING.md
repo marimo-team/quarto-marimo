@@ -58,6 +58,74 @@ deno test --no-check --allow-read --allow-write --allow-env
 uv run --with pytest pytest tests/python -v
 ```
 
+### Using a local marimo frontend build
+
+Most changes in this repo do not need a local frontend bundle. If you are only
+working on extraction, docs, or Quarto wiring, leave the runtime env vars unset
+and Quarto will load the published islands package.
+
+Use a local frontend build when you are debugging the islands runtime together
+with a local `marimo` checkout, for example when a page renders correctly on
+the server but fails to hydrate in the browser.
+
+The examples below assume this local checkout layout:
+
+```text
+.../<some-parent-folder>/
+├── marimo/
+└── quarto-marimo/
+```
+
+In other words, this section assumes you have a local clone of
+`https://github.com/marimo-team/marimo` as a sibling of this repo. If your
+checkout lives somewhere else, set `QUARTO_MARIMO_LOCAL_FRONTEND_ROOT`
+explicitly.
+
+1. Build the islands bundle in the sibling `marimo` repo:
+
+```bash
+cd ../marimo/frontend
+pnpm build:islands
+```
+
+2. Return to this repo and render or preview with a site-local runtime path:
+
+```bash
+cd ../../quarto-marimo
+QUARTO_MARIMO_DEBUG_ENDPOINT=/marimo-frontend quarto render
+# or
+QUARTO_MARIMO_DEBUG_ENDPOINT=/marimo-frontend quarto preview
+```
+
+When `QUARTO_MARIMO_DEBUG_ENDPOINT` is a relative site path such as
+`/marimo-frontend`, `_quarto.yml` runs `scripts/sync_local_frontend.py` after
+render. That script copies the local `marimo/frontend/dist` bundle into
+`_site/marimo-frontend/dist`, so the generated page and the local server agree
+about where the islands runtime lives.
+
+Related env vars:
+
+- `QUARTO_MARIMO_DEBUG_ENDPOINT`
+  - Leave unset for the normal published runtime.
+  - Set to a relative path such as `/marimo-frontend` when you want Quarto to
+    serve a local built bundle out of `_site`.
+  - Set to an absolute URL only if you already have a separate frontend server
+    or static host. In that case the sync script intentionally does nothing.
+- `QUARTO_MARIMO_LOCAL_FRONTEND_ROOT`
+  - Override the local `marimo/frontend` checkout path used by
+    `scripts/sync_local_frontend.py`.
+  - The default assumes a sibling repo at `../marimo/frontend`.
+  - Use this when your local `marimo` clone is not next to `quarto-marimo`.
+- `QUARTO_MARIMO_VERSION`
+  - Override the islands package version used when you are not pointing at a
+    local debug endpoint.
+
+If the page references `../marimo-frontend/dist/main.js` but `_site` does not
+contain `marimo-frontend/dist`, the browser will mount empty islands and no
+marimo blocks will appear. The local debug flow above is the right fix when you
+want to test a local frontend build; if you do not need a local build, unset
+`QUARTO_MARIMO_DEBUG_ENDPOINT` and use the published runtime instead.
+
 ### Pre-commit hooks
 
 Install once, then hooks run automatically on `git commit`:
