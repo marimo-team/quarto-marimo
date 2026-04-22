@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from command import extract_command
+from _extensions.marimo.command import extract_command
 
 
 class TestExtractCommand:

@@ -1,13 +1,17 @@
 from __future__ import annotations
 
+import re
 from unittest.mock import MagicMock
+from urllib.parse import unquote
 from xml.etree.ElementTree import Element
 
-from extract import (
+from _extensions.marimo.extract import (
     app_config_from_root,
+    convert_from_md_to_pandoc_export,
     default_config,
     extract_and_strip_quarto_config,
     get_mime_render,
+    pyproject_to_script_metadata,
 )
 
 
@@ -68,6 +72,64 @@ class TestAppConfigFromRoot:
         root = Element("root")
         config = app_config_from_root(root)
         assert config == {}
+
+
+class TestPyprojectToScriptMetadata:
+    def test_empty_string(self):
+        assert pyproject_to_script_metadata("") == ""
+
+    def test_wraps_plain_pyproject(self):
+        metadata = pyproject_to_script_metadata(
+            'requires-python = ">=3.11"\ndependencies = ["marimo", "wigglystuff"]'
+        )
+        assert metadata.startswith("# /// script\n")
+        assert '# requires-python = ">=3.11"' in metadata
+        assert '# dependencies = ["marimo", "wigglystuff"]' in metadata
+        assert metadata.endswith("# ///\n")
+
+    def test_preserves_existing_script_metadata(self):
+        metadata = pyproject_to_script_metadata(
+            "# /// script\n# dependencies = []\n# ///"
+        )
+        assert metadata == "# /// script\n# dependencies = []\n# ///\n"
+
+
+class TestConvertFromMdToPandocExport:
+    def test_injects_pyproject_into_exported_notebook(self):
+        markdown = """---
+title: External dependencies
+pyproject: |
+  requires-python = ">=3.11"
+  dependencies = [
+    "marimo>=0.23.1",
+    "wigglystuff",
+  ]
+---
+
+```{python .marimo}
+import marimo as mo
+widget = mo.ui.slider(1, 10)
+widget
+```
+"""
+        result = convert_from_md_to_pandoc_export(markdown, mime_sensitive=False)
+        header = result["header"]
+        html = result["outputs"][0]["value"]
+        assert "__MARIMO_EXPORT_CONTEXT__" in header
+        assert "<marimo-code hidden>" in header
+        assert "<marimo-cell-code hidden>" in html
+        notebook_match = re.search(r"<marimo-code hidden>(.*?)</marimo-code>", header)
+        assert notebook_match is not None
+        notebook_code = unquote(notebook_match.group(1))
+        assert notebook_code.startswith("# /// script\n")
+        assert '# requires-python = ">=3.11"' in notebook_code
+        assert "app = marimo.App(" in notebook_code
+        match = re.search(r"<marimo-cell-code hidden>(.*?)</marimo-cell-code>", html)
+        assert match is not None
+        hidden_code = unquote(match.group(1))
+        assert (
+            hidden_code == "import marimo as mo\nwidget = mo.ui.slider(1, 10)\nwidget"
+        )
 
 
 class TestGetMimeRender:

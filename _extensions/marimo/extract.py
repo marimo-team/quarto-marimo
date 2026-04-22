@@ -1,18 +1,33 @@
 #!/usr/bin/env python3
 
+"""Execute Quarto marimo cells and build the bundle the engine consumes.
+
+This module is the Python side of the extension: it parses the document with
+marimo's markdown pipeline, builds the app once, and returns a shared page
+header plus one rendered payload per marimo block.
+
+For HTML output the header also carries the exported notebook source and a
+trusted export marker. That gives islands the original notebook back during
+hydration, including document-level metadata that would be lost in a pure
+cell-by-cell reconstruction.
+"""
+
 import asyncio
 import json
 import os
 import re
 import sys
 from collections.abc import Callable
+from textwrap import dedent
 from typing import Any, ClassVar, Optional
+from urllib.parse import quote
 
 # Native to python
 from xml.etree.ElementTree import Element
 
 import marimo
 from marimo import App, MarimoIslandGenerator
+from marimo._session.notebook import AppFileManager
 
 try:
     from marimo._convert.markdown.to_ir import (
@@ -73,6 +88,13 @@ def get_mime_render(
     config: dict[str, bool],
     mime_sensitive: bool,
 ) -> dict[str, Any]:
+    """Map one executed island stub to the payload Quarto should splice in.
+
+    This is where the export path forks between browser-hydrated HTML and
+    MIME-sensitive outputs like PDF. For HTML we prefer marimo's island HTML so
+    the page can hydrate later; for MIME-sensitive targets we degrade to static
+    figures or text because there is no browser runtime to finish the job.
+    """
     # Local supersede global supersedes default options
     config = {**global_options, **config}
     if not config["include"] or stub is None:
@@ -95,11 +117,14 @@ def get_mime_render(
             # Handle mimebundle - extract image data if present
             if mimetype == "application/vnd.marimo+mimebundle":
                 try:
-                    bundle: dict[str, Any] = (
+                    bundle_data = (
                         json.loads(output.data)
                         if isinstance(output.data, str)
-                        else output.data  # type: ignore[assignment]
+                        else output.data
                     )
+                    if not isinstance(bundle_data, dict):
+                        raise TypeError("Expected mimebundle dictionary")
+                    bundle: dict[str, Any] = bundle_data
                     # Look for image data in the bundle
                     for key in ["image/png", "image/jpeg", "image/svg+xml"]:
                         if key in bundle:
@@ -169,12 +194,91 @@ def app_config_from_root(root: Element) -> dict[str, Any]:
     return config
 
 
+def pyproject_to_script_metadata(pyproject: str) -> str:
+    """Lift Quarto frontmatter into the top-of-file metadata marimo exports use.
+
+    The browser-side islands runtime only sees notebook source, not the
+    original YAML frontmatter. Re-encoding the document-level ``pyproject`` as
+    script metadata lets the exported notebook carry dependency declarations in
+    the one place marimo already knows how to read during hydration.
+    """
+    body = dedent(pyproject).strip()
+    if not body:
+        return ""
+    if body.startswith("# /// script"):
+        return f"{body}\n"
+
+    commented_lines = ["# /// script"]
+    for line in body.splitlines():
+        commented_lines.append(f"# {line}" if line else "#")
+    commented_lines.append("# ///")
+    return "\n".join(commented_lines) + "\n"
+
+
+def build_export_notebook_code(app: MarimoIslandGenerator, script_metadata: str) -> str:
+    """Serialize the executed app as a standalone marimo notebook source string."""
+    notebook_code = AppFileManager.from_app(app._app).to_code()
+    if script_metadata:
+        notebook_code = f"{script_metadata}{notebook_code}"
+    return notebook_code
+
+
+def render_hidden_marimo_code(notebook_code: str) -> str:
+    return f"<marimo-code hidden>{quote(notebook_code, safe='')}</marimo-code>"
+
+
+def json_script(value: str) -> str:
+    return (
+        json.dumps(value)
+        .replace("<", "\\u003C")
+        .replace(">", "\\u003E")
+        .replace("&", "\\u0026")
+    )
+
+
+def render_export_context_script(notebook_code: str) -> str:
+    """Emit the trusted export marker consumed by marimo islands at runtime.
+
+    The hidden notebook source alone is not a trust signal because page markup
+    can be spoofed. This script installs a runtime-owned context object that
+    marimo core can validate before it trusts export-only affordances such as
+    inline virtual-file ``data:`` URLs.
+    """
+    return dedent(
+        f"""
+        <script data-marimo="true">
+            Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {{
+                value: Object.freeze({{
+                    trusted: true,
+                    notebookCode: {json_script(notebook_code)},
+                }}),
+                writable: false,
+                configurable: false,
+            }});
+        </script>
+        """
+    ).strip()
+
+
 def build_export_with_mime_context(
     mime_sensitive: bool,
 ) -> Callable[[Element], SafeWrap]:  # type: ignore[valid-type]
+    """Create the parser callback that turns a Quarto AST into export payloads.
+
+    Quarto asks for two variants of the same document:
+    (1) an HTML-oriented one for browser output and
+    (2) a MIME-sensitive one for formats like PDF.
+
+    The callback keeps those paths together so both are derived from one executed marimo app,
+    while only the HTML path receives notebook provenance and hydration metadata.
+    """
+
     def tree_to_pandoc_export(root: Element) -> SafeWrap:  # type: ignore[valid-type]
         global_options = {**default_config, **app_config_from_root(root)}
         app = MarimoIslandGenerator()
+        script_metadata = pyproject_to_script_metadata(
+            str(global_options.get("pyproject", ""))
+        )
 
         has_attrs: bool = False
         stubs: list[tuple[dict[str, bool], Optional[MarimoIslandStub]]] = []
@@ -221,14 +325,22 @@ def build_export_with_mime_context(
         header = app.render_head(
             _development_url=dev_server, version_override=version_override
         )
+        notebook_code = build_export_notebook_code(app, script_metadata)
+        outputs = [
+            get_mime_render(global_options, stub, config, mime_sensitive)
+            for config, stub in stubs
+        ]
+        if not mime_sensitive:
+            header = (
+                render_export_context_script(notebook_code)
+                + render_hidden_marimo_code(notebook_code)
+                + header
+            )
 
         return SafeWrap(  # type: ignore[no-any-return]
             {
                 "header": header,
-                "outputs": [
-                    get_mime_render(global_options, stub, config, mime_sensitive)
-                    for config, stub in stubs
-                ],
+                "outputs": outputs,
                 "count": len(stubs),
             }  # type: ignore[arg-type]
         )
@@ -249,6 +361,12 @@ class MarimoPandocParser(MarimoParser):  # type: ignore[misc]
 
 
 def convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[str, Any]:
+    """Entry point used by the engine subprocess contract.
+
+    The TypeScript engine sends full markdown over stdin and expects a JSON bundle back.
+    Keeping that contract in one function makes the extension easier to test directly from Python
+    without going through Quarto itself.
+    """
     if not text:
         return {"header": "", "outputs": []}
     if mime_sensitive:
