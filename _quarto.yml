@@ -1,7 +1,7 @@
 project:
   type: website
   output-dir: _site
-  post-render: python3 scripts/sync_local_frontend.py
+  post-render: python scripts/sync_local_frontend.py
   preview:
     port: 7777
 

@@ -276,9 +276,6 @@ def build_export_with_mime_context(
     def tree_to_pandoc_export(root: Element) -> SafeWrap:  # type: ignore[valid-type]
         global_options = {**default_config, **app_config_from_root(root)}
         app = MarimoIslandGenerator()
-        script_metadata = pyproject_to_script_metadata(
-            str(global_options.get("pyproject", ""))
-        )
 
         has_attrs: bool = False
         stubs: list[tuple[dict[str, bool], Optional[MarimoIslandStub]]] = []
@@ -325,12 +322,15 @@ def build_export_with_mime_context(
         header = app.render_head(
             _development_url=dev_server, version_override=version_override
         )
-        notebook_code = build_export_notebook_code(app, script_metadata)
         outputs = [
             get_mime_render(global_options, stub, config, mime_sensitive)
             for config, stub in stubs
         ]
         if not mime_sensitive:
+            script_metadata = pyproject_to_script_metadata(
+                str(global_options.get("pyproject", ""))
+            )
+            notebook_code = build_export_notebook_code(app, script_metadata)
             header = (
                 render_export_context_script(notebook_code)
                 + render_hidden_marimo_code(notebook_code)
