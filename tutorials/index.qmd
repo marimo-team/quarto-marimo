@@ -20,4 +20,5 @@ Recommended sequence:
 - [plots](plots.html)
 - [layout](layout.html)
 - [fileformat](fileformat.html)
+- [external-dependencies](external_dependencies.html)
 - [for-jupyter-users](marimo_for_jupyter_users.html)
