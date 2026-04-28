@@ -18,7 +18,7 @@
     "href": "CONTRIBUTING.html#development-workflow",
     "title": "",
     "section": "Development workflow",
-    "text": "Development workflow\n\nMake targets\n\n\n\n\n\n\n\nCommand\nWhat it does\n\n\n\n\nmake build\nCompile src/marimo-engine.ts → _extensions/marimo/marimo-engine.js\n\n\nmake test\nRun all TypeScript + Python tests\n\n\nmake test-ts\nRun only TypeScript tests (via Deno)\n\n\nmake test-py\nRun only Python tests (via uv + pytest)\n\n\nmake lint\nRun ruff + mypy\n\n\nmake render\nRender the documentation site\n\n\nmake preview\nServe the site locally with live reload\n\n\nmake clean\nRemove build artifacts\n\n\n\n\n\nLinting and formatting\n# Lint + type-check\nmake lint\n\n# Auto-fix formatting\nuv run ruff format\nuv run ruff check --fix\n\n\nRunning tests\n# All tests\nmake test\n\n# TypeScript only\ndeno test --no-check --allow-read --allow-write --allow-env\n\n# Python only\nuv run --with pytest pytest tests/python -v\n\n\nPre-commit hooks\nInstall once, then hooks run automatically on git commit:\npip install pre-commit\npre-commit install\nRun manually against all files:\npre-commit run --all-files"
+    "text": "Development workflow\n\nMake targets\n\n\n\n\n\n\n\nCommand\nWhat it does\n\n\n\n\nmake build\nCompile src/marimo-engine.ts → _extensions/marimo/marimo-engine.js\n\n\nmake test\nRun all TypeScript + Python tests\n\n\nmake test-ts\nRun only TypeScript tests (via Deno)\n\n\nmake test-py\nRun only Python tests (via uv + pytest)\n\n\nmake lint\nRun ruff + mypy\n\n\nmake render\nRender the documentation site\n\n\nmake preview\nServe the site locally with live reload\n\n\nmake clean\nRemove build artifacts\n\n\n\n\n\nLinting and formatting\n# Lint + type-check\nmake lint\n\n# Auto-fix formatting\nuv run ruff format\nuv run ruff check --fix\n\n\nRunning tests\n# All tests\nmake test\n\n# TypeScript only\ndeno test --no-check --allow-read --allow-write --allow-env\n\n# Python only\nuv run --with pytest pytest tests/python -v\n\n\nUsing a local marimo frontend build\nMost changes in this repo do not need a local frontend bundle. If you are only working on extraction, docs, or Quarto wiring, leave the runtime env vars unset and Quarto will load the published islands package.\nUse a local frontend build when you are debugging the islands runtime together with a local marimo checkout, for example when a page renders correctly on the server but fails to hydrate in the browser.\nThe examples below assume this local checkout layout:\n.../&lt;some-parent-folder&gt;/\n├── marimo/\n└── quarto-marimo/\nIn other words, this section assumes you have a local clone of https://github.com/marimo-team/marimo as a sibling of this repo. If your checkout lives somewhere else, set QUARTO_MARIMO_LOCAL_FRONTEND_ROOT explicitly.\n\nBuild the islands bundle in the sibling marimo repo:\n\ncd ../marimo/frontend\npnpm build:islands\n\nReturn to this repo and render or preview with a site-local runtime path:\n\ncd ../../quarto-marimo\nQUARTO_MARIMO_DEBUG_ENDPOINT=/marimo-frontend quarto render\n# or\nQUARTO_MARIMO_DEBUG_ENDPOINT=/marimo-frontend quarto preview\nWhen QUARTO_MARIMO_DEBUG_ENDPOINT is a relative site path such as /marimo-frontend, _quarto.yml runs scripts/sync_local_frontend.py after render. That script copies the local marimo/frontend/dist bundle into _site/marimo-frontend/dist, so the generated page and the local server agree about where the islands runtime lives.\nRelated env vars:\n\nQUARTO_MARIMO_DEBUG_ENDPOINT\n\nLeave unset for the normal published runtime.\nSet to a relative path such as /marimo-frontend when you want Quarto to serve a local built bundle out of _site.\nSet to an absolute URL only if you already have a separate frontend server or static host. In that case the sync script intentionally does nothing.\n\nQUARTO_MARIMO_LOCAL_FRONTEND_ROOT\n\nOverride the local marimo/frontend checkout path used by scripts/sync_local_frontend.py.\nThe default assumes a sibling repo at ../marimo/frontend.\nUse this when your local marimo clone is not next to quarto-marimo.\n\nQUARTO_MARIMO_VERSION\n\nOverride the islands package version used when you are not pointing at a local debug endpoint.\n\n\nIf the page references ../marimo-frontend/dist/main.js but _site does not contain marimo-frontend/dist, the browser will mount empty islands and no marimo blocks will appear. The local debug flow above is the right fix when you want to test a local frontend build; if you do not need a local build, unset QUARTO_MARIMO_DEBUG_ENDPOINT and use the published runtime instead.\n\n\nPre-commit hooks\nInstall once, then hooks run automatically on git commit:\npip install pre-commit\npre-commit install\nRun manually against all files:\npre-commit run --all-files"
   },
   {
     "objectID": "CONTRIBUTING.html#project-structure",
@@ -46,7 +46,7 @@
     "href": "tutorials/index.html",
     "title": "marimo tutorials",
     "section": "",
-    "text": "Open a tutorial.\nmarimo is a powerful library for making reactive notebooks and apps. To get the most out of marimo, get started with a few tutorials, starting with the intro:\n    marimo tutorial intro\nRecommended sequence:\n\nintro\ndataflow\nui\nmarkdown\nplots\nlayout\nfileformat\nfor-jupyter-users\n\n\n\n\n\n\n Back to top",
+    "text": "Open a tutorial.\nmarimo is a powerful library for making reactive notebooks and apps. To get the most out of marimo, get started with a few tutorials, starting with the intro:\n    marimo tutorial intro\nRecommended sequence:\n\nintro\ndataflow\nui\nmarkdown\nplots\nlayout\nfileformat\nexternal-dependencies\nfor-jupyter-users\n\n\n\n\n\n\n Back to top",
     "crumbs": [
       "Tutorials"
     ]
@@ -239,27 +239,6 @@
     ]
   },
   {
-    "objectID": "SECURITY.html",
-    "href": "SECURITY.html",
-    "title": "",
-    "section": "",
-    "text": "Code"
-  },
-  {
-    "objectID": "SECURITY.html#supported-versions",
-    "href": "SECURITY.html#supported-versions",
-    "title": "",
-    "section": "Supported Versions",
-    "text": "Supported Versions\nOnly the latest release of quarto-marimo receives security fixes.\n\n\n\nVersion\nSupported\n\n\n\n\nlatest\n✅\n\n\nolder\n❌"
-  },
-  {
-    "objectID": "SECURITY.html#reporting-a-vulnerability",
-    "href": "SECURITY.html#reporting-a-vulnerability",
-    "title": "",
-    "section": "Reporting a Vulnerability",
-    "text": "Reporting a Vulnerability\nPlease do not open a public GitHub issue for security vulnerabilities.\nReport vulnerabilities via GitHub’s private security advisory feature.\nWe aim to: - Acknowledge receipt within 3 business days - Triage and assess severity within 7 business days - Release a patch within 90 days (sooner for critical issues)\nWe appreciate responsible disclosure and will credit reporters in the release notes unless you prefer to remain anonymous."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "marimo + quarto",
@@ -297,6 +276,49 @@
     "text": "# Bug: Cells are not runnable if no output\nimport marimo as mo",
     "crumbs": [
       "marimo + quarto"
+    ]
+  },
+  {
+    "objectID": "SECURITY.html",
+    "href": "SECURITY.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "SECURITY.html#supported-versions",
+    "href": "SECURITY.html#supported-versions",
+    "title": "",
+    "section": "Supported Versions",
+    "text": "Supported Versions\nOnly the latest release of quarto-marimo receives security fixes.\n\n\n\nVersion\nSupported\n\n\n\n\nlatest\n✅\n\n\nolder\n❌"
+  },
+  {
+    "objectID": "SECURITY.html#reporting-a-vulnerability",
+    "href": "SECURITY.html#reporting-a-vulnerability",
+    "title": "",
+    "section": "Reporting a Vulnerability",
+    "text": "Reporting a Vulnerability\nPlease do not open a public GitHub issue for security vulnerabilities.\nReport vulnerabilities via GitHub’s private security advisory feature.\nWe aim to: - Acknowledge receipt within 3 business days - Triage and assess severity within 7 business days - Release a patch within 90 days (sooner for critical issues)\nWe appreciate responsible disclosure and will credit reporters in the release notes unless you prefer to remain anonymous."
+  },
+  {
+    "objectID": "tutorials/external_dependencies.html",
+    "href": "tutorials/external_dependencies.html",
+    "title": "External dependencies",
+    "section": "",
+    "text": "By default, quarto-marimo creates a sandboxed Python environment with uv. To add a package for one document, declare it in the document frontmatter under pyproject.\n---\npyproject: |\n  requires-python = \"&gt;=3.11\"\n  dependencies = [\n    \"marimo&gt;=0.23.1\",\n    \"wigglystuff\",\n  ]\n---\nAfter that, you can import the package normally inside marimo cells. If the package exposes an anywidget, wrap it with mo.ui.anywidget so marimo can keep the UI reactive in Quarto output.\n\n\n\n    \n    \n    \n    import%20marimo%20as%20mo%0Afrom%20wigglystuff%20import%20Slider2D%0A%0Awidget%20%3D%20mo.ui.anywidget(%0A%20%20%20%20Slider2D(%0A%20%20%20%20%20%20%20%20width%3D320%2C%0A%20%20%20%20%20%20%20%20height%3D320%2C%0A%20%20%20%20%20%20%20%20x_bounds%3D(-2.0%2C%202.0)%2C%0A%20%20%20%20%20%20%20%20y_bounds%3D(-1.0%2C%201.5)%2C%0A%20%20%20%20)%0A)%0A%0Awidget\n\n\n    \n    \n    \n    mo.callout(%0A%20%20%20%20f%22x%20%3D%20%7Bwidget.x%3A.3f%7D%2C%20y%20%3D%20%7Bwidget.y%3A.3f%7D%3B%20bounds%20%7Bwidget.x_bounds%7D%20%2F%20%7Bwidget.y_bounds%7D%22%0A)",
+    "crumbs": [
+      "Tutorials",
+      "External dependencies"
+    ]
+  },
+  {
+    "objectID": "tutorials/external_dependencies.html#example-wigglystuff.slider2d",
+    "href": "tutorials/external_dependencies.html#example-wigglystuff.slider2d",
+    "title": "External dependencies",
+    "section": "",
+    "text": "import%20marimo%20as%20mo%0Afrom%20wigglystuff%20import%20Slider2D%0A%0Awidget%20%3D%20mo.ui.anywidget(%0A%20%20%20%20Slider2D(%0A%20%20%20%20%20%20%20%20width%3D320%2C%0A%20%20%20%20%20%20%20%20height%3D320%2C%0A%20%20%20%20%20%20%20%20x_bounds%3D(-2.0%2C%202.0)%2C%0A%20%20%20%20%20%20%20%20y_bounds%3D(-1.0%2C%201.5)%2C%0A%20%20%20%20)%0A)%0A%0Awidget\n\n\n    \n    \n    \n    mo.callout(%0A%20%20%20%20f%22x%20%3D%20%7Bwidget.x%3A.3f%7D%2C%20y%20%3D%20%7Bwidget.y%3A.3f%7D%3B%20bounds%20%7Bwidget.x_bounds%7D%20%2F%20%7Bwidget.y_bounds%7D%22%0A)",
+    "crumbs": [
+      "Tutorials",
+      "External dependencies"
     ]
   },
   {

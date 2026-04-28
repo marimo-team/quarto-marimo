@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>marimo tutorials – marimo-quarto</title>
+<title>External dependencies – marimo-quarto</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../tutorials/intro.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../tutorials/markdown_format.html" rel="next">
+<link href="../tutorials/fileformat.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -107,14 +107,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-
-
-<meta property="og:title" content="marimo tutorials – marimo-quarto">
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
+        value: Object.freeze({
+            trusted: true,
+            notebookCode: "# /// script\n# requires-python = \"\u003E=3.11\"\n# dependencies = [\n#     \"marimo\u003E=0.23.1\",\n#     \"wigglystuff\",\n# ]\n# ///\nimport marimo\n\n__generated_with = \"0.23.4\"\napp = marimo.App()\n\n\n@app.cell\ndef _():\n    import marimo as mo\n    from wigglystuff import Slider2D\n\n    widget = mo.ui.anywidget(\n        Slider2D(\n            width=320,\n            height=320,\n            x_bounds=(-2.0, 2.0),\n            y_bounds=(-1.0, 1.5),\n        )\n    )\n\n    widget\n    return mo, widget\n\n\n@app.cell\ndef _(mo, widget):\n    mo.callout(\n        f\"x = {widget.x:.3f}, y = {widget.y:.3f}; bounds {widget.x_bounds} / {widget.y_bounds}\"\n    )\n    return\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script><meta property="og:title" content="External dependencies – marimo-quarto">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="marimo-quarto">
-</head>
+</head><body class="nav-sidebar docked quarto-light"><marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.11%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22marimo%3E%3D0.23.1%22%2C%0A%23%20%20%20%20%20%22wigglystuff%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.23.4%22%0Aapp%20%3D%20marimo.App%28%29%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20from%20wigglystuff%20import%20Slider2D%0A%0A%20%20%20%20widget%20%3D%20mo.ui.anywidget%28%0A%20%20%20%20%20%20%20%20Slider2D%28%0A%20%20%20%20%20%20%20%20%20%20%20%20width%3D320%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20height%3D320%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20x_bounds%3D%28-2.0%2C%202.0%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20y_bounds%3D%28-1.0%2C%201.5%29%2C%0A%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%29%0A%0A%20%20%20%20widget%0A%20%20%20%20return%20mo%2C%20widget%0A%0A%0A%40app.cell%0Adef%20_%28mo%2C%20widget%29%3A%0A%20%20%20%20mo.callout%28%0A%20%20%20%20%20%20%20%20f%22x%20%3D%20%7Bwidget.x%3A.3f%7D%2C%20y%20%3D%20%7Bwidget.y%3A.3f%7D%3B%20bounds%20%7Bwidget.x_bounds%7D%20%2F%20%7Bwidget.y_bounds%7D%22%0A%20%20%20%20%29%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run%28%29%0A</marimo-code><script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.4/dist/main.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.4/dist/style.css" rel="stylesheet" title="marimo-islands" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
+<marimo-filename hidden=""></marimo-filename>
 
-<body class="nav-sidebar docked quarto-light">
+
+
+
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -123,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Tutorials</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/external_dependencies.html">External dependencies</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -156,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../tutorials/index.html" class="sidebar-item-text sidebar-link active">
+            <a href="../tutorials/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tutorials</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -207,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/external_dependencies.html" class="sidebar-item-text sidebar-link">
+  <a href="../tutorials/external_dependencies.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">External dependencies</span></a>
   </div>
 </li>
@@ -236,15 +252,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#external-dependencies" id="toc-external-dependencies" class="nav-link active" data-scroll-target="#external-dependencies">External dependencies</a>
+  <ul class="collapse">
+  <li><a href="#example-wigglystuff.slider2d" id="toc-example-wigglystuff.slider2d" class="nav-link" data-scroll-target="#example-wigglystuff.slider2d">Example: <code>wigglystuff.Slider2D</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/external_dependencies.html">External dependencies</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">marimo tutorials</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">External dependencies</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -261,25 +286,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Open a tutorial.</p>
-<p>marimo is a powerful library for making reactive notebooks and apps. To get the most out of marimo, get started with a few tutorials, starting with the intro:</p>
-<pre><code>    marimo tutorial intro</code></pre>
-<p>Recommended sequence:</p>
-<ul>
-<li><a href="intro.html">intro</a></li>
-<li><a href="dataflow.html">dataflow</a></li>
-<li><a href="ui.html">ui</a></li>
-<li><a href="markdown.html">markdown</a></li>
-<li><a href="plots.html">plots</a></li>
-<li><a href="layout.html">layout</a></li>
-<li><a href="fileformat.html">fileformat</a></li>
-<li><a href="external_dependencies.html">external-dependencies</a></li>
-<li><a href="marimo_for_jupyter_users.html">for-jupyter-users</a></li>
-</ul>
+<section id="external-dependencies" class="level1">
+<h1>External dependencies</h1>
+<p>By default, <code>quarto-marimo</code> creates a sandboxed Python environment with <code>uv</code>. To add a package for one document, declare it in the document frontmatter under <code>pyproject</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pyproject</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  requires-python = "&gt;=3.11"</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  dependencies = [</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    "marimo&gt;=0.23.1",</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    "wigglystuff",</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>After that, you can import the package normally inside marimo cells. If the package exposes an anywidget, wrap it with <code>mo.ui.anywidget</code> so marimo can keep the UI reactive in Quarto output.</p>
+<section id="example-wigglystuff.slider2d" class="level2">
+<h2 class="anchored" data-anchor-id="example-wigglystuff.slider2d">Example: <code>wigglystuff.Slider2D</code></h2>
+<marimo-island data-app-id="main" data-cell-id="Hbol" data-reactive="true">
+    <marimo-cell-output>
+    <marimo-ui-element object-id="Hbol-0" random-id="dc404a7f-8477-4ea8-7d2e-3d49c17d4549"><marimo-anywidget data-initial-value="{&quot;model_id&quot;:&quot;73eaf0e7b4774ea4b7679ce37791fe41&quot;}" data-label="null" data-js-url="&quot;data:text/javascript;base64,ZnVuY3Rpb24gcmVuZGVyKHsgbW9kZWwsIGVsIH0pIHsKICBjb25zdCBjYW52YXMgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJjYW52YXMiKTsKICBjYW52YXMuc2V0QXR0cmlidXRlKCJpZCIsICJzbGlkZXJDYW52YXMiKTsKICBjYW52YXMuc2V0QXR0cmlidXRlKCJ3aWR0aCIsIG1vZGVsLmdldCgid2lkdGgiKS50b1N0cmluZygpKTsKICBjYW52YXMuc2V0QXR0cmlidXRlKCJoZWlnaHQiLCBtb2RlbC5nZXQoImhlaWdodCIpLnRvU3RyaW5nKCkpOwogIGNhbnZhcy5zZXRBdHRyaWJ1dGUoInN0eWxlIiwgImJvcmRlcjogMXB4IHNvbGlkICNjY2M7IGJhY2tncm91bmQ6ICNlZWU7Iik7CgogIGNvbnN0IHNsaWRlclZhbHVlc0RpdiA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogIHNsaWRlclZhbHVlc0Rpdi5zZXRBdHRyaWJ1dGUoImlkIiwgInNsaWRlclZhbHVlcyIpOwoKICBlbC5hcHBlbmRDaGlsZChjYW52YXMpOwogIGVsLmFwcGVuZENoaWxkKHNsaWRlclZhbHVlc0Rpdik7CgogIGNvbnN0IGN0eCA9IGNhbnZhcy5nZXRDb250ZXh0KCcyZCcpOwoKICBjb25zdCBjZW50ZXJYID0gY2FudmFzLndpZHRoIC8gMjsKICBjb25zdCBjZW50ZXJZID0gY2FudmFzLmhlaWdodCAvIDI7CiAgY29uc3QgcmFkaXVzID0gTWF0aC5taW4oY2VudGVyWCwgY2VudGVyWSkgLSAyMDsKCiAgbGV0IGlzRHJhZ2dpbmcgPSBmYWxzZTsKICBsZXQgY3VycmVudFggPSAwOwogIGxldCBjdXJyZW50WSA9IDA7CgogIGZ1bmN0aW9uIGRyYXdTbGlkZXIodXBkYXRlTW9kZWwgPSB0cnVlKSB7CiAgICAgIGN0eC5jbGVhclJlY3QoMCwgMCwgY2FudmFzLndpZHRoLCBjYW52YXMuaGVpZ2h0KTsKCiAgICAgIGN0eC5iZWdpblBhdGgoKTsKICAgICAgY3R4LmFyYyhjZW50ZXJYICsgY3VycmVudFgsIGNlbnRlclkgKyBjdXJyZW50WSwgMTAsIDAsIDIgKiBNYXRoLlBJKTsKICAgICAgY3R4LmZpbGxTdHlsZSA9ICcjZWVlJzsKICAgICAgY3R4LnN0cm9rZVN0eWxlID0gIiM2NjYiOwogICAgICBjdHgubGluZVdpZHRoID0gMjsKICAgICAgY3R4LmZpbGwoKTsKICAgICAgY3R4LnN0cm9rZSgpOwoKICAgICAgY29uc3QgW3hfbWluLCB4X21heF0gPSBtb2RlbC5nZXQoInhfYm91bmRzIik7CiAgICAgIGNvbnN0IFt5X21pbiwgeV9tYXhdID0gbW9kZWwuZ2V0KCJ5X2JvdW5kcyIpOwoKICAgICAgY29uc3QgbWFwcGVkWCA9IHhfbWluICsgKChjdXJyZW50WCAvIHJhZGl1cykgKyAxKSAvIDIgKiAoeF9tYXggLSB4X21pbik7CiAgICAgIGNvbnN0IG1hcHBlZFkgPSB5X21pbiArICgoLWN1cnJlbnRZIC8gcmFkaXVzKSArIDEpIC8gMiAqICh5X21heCAtIHlfbWluKTsgLy8gWSBpcyBpbnZlcnRlZAoKICAgICAgc2xpZGVyVmFsdWVzRGl2LnRleHRDb250ZW50ID0gYFg6ICR7bWFwcGVkWC50b0ZpeGVkKDIpfSwgWTogJHttYXBwZWRZLnRvRml4ZWQoMil9YDsKICAgICAgaWYgKHVwZGF0ZU1vZGVsKSB7CiAgICAgICAgbW9kZWwuc2V0KCd4JywgbWFwcGVkWCk7CiAgICAgICAgbW9kZWwuc2V0KCd5JywgbWFwcGVkWSk7CiAgICAgICAgbW9kZWwuc2F2ZV9jaGFuZ2VzKCk7CiAgICAgIH0KICB9CgogIGZ1bmN0aW9uIHN5bmNGcm9tTW9kZWwoKSB7CiAgICAgIGNvbnN0IFt4X21pbiwgeF9tYXhdID0gbW9kZWwuZ2V0KCJ4X2JvdW5kcyIpOwogICAgICBjb25zdCBbeV9taW4sIHlfbWF4XSA9IG1vZGVsLmdldCgieV9ib3VuZHMiKTsKICAgICAgY29uc3QgbW9kZWxYID0gbW9kZWwuZ2V0KCd4Jyk7CiAgICAgIGNvbnN0IG1vZGVsWSA9IG1vZGVsLmdldCgneScpOwoKICAgICAgLy8gSW52ZXJzZSBtYXBwaW5nIGZyb20gdXNlciBjb29yZGluYXRlcyB0byBwaXhlbCBjb29yZGluYXRlcwogICAgICBjdXJyZW50WCA9IHJhZGl1cyAqICgyICogKG1vZGVsWCAtIHhfbWluKSAvICh4X21heCAtIHhfbWluKSAtIDEpOwogICAgICBjdXJyZW50WSA9IC1yYWRpdXMgKiAoMiAqIChtb2RlbFkgLSB5X21pbikgLyAoeV9tYXggLSB5X21pbikgLSAxKTsgLy8gWSBpcyBpbnZlcnRlZAoKICAgICAgaWYgKCFpc0RyYWdnaW5nKSB7CiAgICAgICAgZHJhd1NsaWRlcihmYWxzZSk7ICAvLyBEb24ndCB1cGRhdGUgbW9kZWwgd2hlbiBzeW5jaW5nIGZyb20gbW9kZWwKICAgICAgfQogIH0KCiAgZnVuY3Rpb24gaGFuZGxlTW91c2VEb3duKGV2ZW50KSB7CiAgICAgIGlzRHJhZ2dpbmcgPSB0cnVlOwogICAgICBoYW5kbGVNb3VzZU1vdmUoZXZlbnQpOwogIH0KCiAgZnVuY3Rpb24gaGFuZGxlTW91c2VNb3ZlKGV2ZW50KSB7CiAgICAgIGlmIChpc0RyYWdnaW5nKSB7CiAgICAgICAgICBjdXJyZW50WCA9IGV2ZW50Lm9mZnNldFggLSBjZW50ZXJYOwogICAgICAgICAgY3VycmVudFkgPSBldmVudC5vZmZzZXRZIC0gY2VudGVyWTsKICAgICAgICAgIGN1cnJlbnRYID0gTWF0aC5tYXgoLXJhZGl1cywgTWF0aC5taW4ocmFkaXVzLCBjdXJyZW50WCkpOwogICAgICAgICAgY3VycmVudFkgPSBNYXRoLm1heCgtcmFkaXVzLCBNYXRoLm1pbihyYWRpdXMsIGN1cnJlbnRZKSk7CiAgICAgICAgICBkcmF3U2xpZGVyKCk7CiAgICAgIH0KICB9CgogIGZ1bmN0aW9uIGhhbmRsZU1vdXNlVXAoKSB7CiAgICAgIGlzRHJhZ2dpbmcgPSBmYWxzZTsKICB9CgogIGNhbnZhcy5hZGRFdmVudExpc3RlbmVyKCdtb3VzZWRvd24nLCBoYW5kbGVNb3VzZURvd24pOwogIGNhbnZhcy5hZGRFdmVudExpc3RlbmVyKCdtb3VzZW1vdmUnLCBoYW5kbGVNb3VzZU1vdmUpOwogIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNldXAnLCBoYW5kbGVNb3VzZVVwKTsKCiAgbW9kZWwub24oImNoYW5nZTp4Iiwgc3luY0Zyb21Nb2RlbCk7CiAgbW9kZWwub24oImNoYW5nZTp5Iiwgc3luY0Zyb21Nb2RlbCk7CiAgbW9kZWwub24oImNoYW5nZTp4X2JvdW5kcyIsIHN5bmNGcm9tTW9kZWwpOwogIG1vZGVsLm9uKCJjaGFuZ2U6eV9ib3VuZHMiLCBzeW5jRnJvbU1vZGVsKTsKICAKICBzeW5jRnJvbU1vZGVsKCk7Cn0KCmV4cG9ydCBkZWZhdWx0IHsgcmVuZGVyIH07Cg==&quot;" data-js-hash="&quot;3ecb9222ec3ee7c88f10565061636904&quot;" data-model-id="&quot;73eaf0e7b4774ea4b7679ce37791fe41&quot;"></marimo-anywidget></marimo-ui-element>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">import%20marimo%20as%20mo%0Afrom%20wigglystuff%20import%20Slider2D%0A%0Awidget%20%3D%20mo.ui.anywidget(%0A%20%20%20%20Slider2D(%0A%20%20%20%20%20%20%20%20width%3D320%2C%0A%20%20%20%20%20%20%20%20height%3D320%2C%0A%20%20%20%20%20%20%20%20x_bounds%3D(-2.0%2C%202.0)%2C%0A%20%20%20%20%20%20%20%20y_bounds%3D(-1.0%2C%201.5)%2C%0A%20%20%20%20)%0A)%0A%0Awidget</marimo-cell-code>
+</marimo-island>
+<marimo-island data-app-id="main" data-cell-id="MJUe" data-reactive="true">
+    <marimo-cell-output>
+    <marimo-callout-output data-html="&quot;<span>x = 0.000, y = 0.000; bounds (-2.0, 2.0) / (-1.0, 1.5)</span>&quot;" data-kind="&quot;neutral&quot;"></marimo-callout-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">mo.callout(%0A%20%20%20%20f%22x%20%3D%20%7Bwidget.x%3A.3f%7D%2C%20y%20%3D%20%7Bwidget.y%3A.3f%7D%3B%20bounds%20%7Bwidget.x_bounds%7D%20%2F%20%7Bwidget.y_bounds%7D%22%0A)</marimo-cell-code>
+</marimo-island>
 
 
 <!-- -->
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -735,40 +773,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="marimo + quarto">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">marimo + quarto</span>
+      <a href="../tutorials/fileformat.html" class="pagination-link" aria-label="Fileformat">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Fileformat</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../tutorials/intro.html" class="pagination-link" aria-label="Intro">
-        <span class="nav-page-text">Intro</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../tutorials/markdown_format.html" class="pagination-link" aria-label="Markdown">
+        <span class="nav-page-text">Markdown</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> marimo tutorials</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Open a tutorial.</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>marimo is a powerful library for making reactive notebooks and apps. To get</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>the most out of marimo, get started with a few tutorials, starting with the</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>intro:</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">        marimo tutorial intro</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>Recommended sequence:</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">intro</span><span class="co">](intro.html)</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">dataflow</span><span class="co">](dataflow.html)</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">ui</span><span class="co">](ui.html)</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">markdown</span><span class="co">](markdown.html)</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">plots</span><span class="co">](plots.html)</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">layout</span><span class="co">](layout.html)</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">fileformat</span><span class="co">](fileformat.html)</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">external-dependencies</span><span class="co">](external_dependencies.html)</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">for-jupyter-users</span><span class="co">](marimo_for_jupyter_users.html)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> External dependencies</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">pyproject:</span><span class="co"> |</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    requires-python = "&gt;=3.11"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    dependencies = [</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">        "marimo&gt;=0.23.1",</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">        "wigglystuff",</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    ]</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># External dependencies</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>By default, <span class="in">`quarto-marimo`</span> creates a sandboxed Python environment with <span class="in">`uv`</span>.</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>To add a package for one document, declare it in the document frontmatter</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>under <span class="in">`pyproject`</span>.</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">pyproject</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  requires-python = "&gt;=3.11"</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  dependencies = [</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    "marimo&gt;=0.23.1",</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    "wigglystuff",</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>After that, you can import the package normally inside marimo cells. If the</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>package exposes an anywidget, wrap it with <span class="in">`mo.ui.anywidget`</span> so marimo</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>can keep the UI reactive in Quarto output.</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example: `wigglystuff.Slider2D`</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wigglystuff <span class="im">import</span> Slider2D</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>widget <span class="op">=</span> mo.ui.anywidget(</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    Slider2D(</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        width<span class="op">=</span><span class="dv">320</span>,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        height<span class="op">=</span><span class="dv">320</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        x_bounds<span class="op">=</span>(<span class="op">-</span><span class="fl">2.0</span>, <span class="fl">2.0</span>),</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        y_bounds<span class="op">=</span>(<span class="op">-</span><span class="fl">1.0</span>, <span class="fl">1.5</span>),</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>widget</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>mo.callout(</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"x = </span><span class="sc">{</span>widget<span class="sc">.</span>x<span class="sc">:.3f}</span><span class="ss">, y = </span><span class="sc">{</span>widget<span class="sc">.</span>y<span class="sc">:.3f}</span><span class="ss">; bounds </span><span class="sc">{</span>widget<span class="sc">.</span>x_bounds<span class="sc">}</span><span class="ss"> / </span><span class="sc">{</span>widget<span class="sc">.</span>y_bounds<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

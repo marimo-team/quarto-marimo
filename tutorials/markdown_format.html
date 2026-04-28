@@ -69,7 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../tutorials/for_jupyter_users.html" rel="next">
-<link href="../tutorials/fileformat.html" rel="prev">
+<link href="../tutorials/external_dependencies.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -107,16 +107,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/main.js"></script>
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
+        value: Object.freeze({
+            trusted: true,
+            notebookCode: "import marimo\n\n__generated_with = \"0.23.1\"\napp = marimo.App()\n\n\n@app.cell\ndef _():\n    import matplotlib.pyplot as plt\n\n    plt.plot([1, 2, 3, 4])\n    plt.gca()\n    return\n\n\n@app.cell\ndef _(mo):\n    form = (\n        mo.md('''\n        **Just how great is markdown?.**\n\n        {markdown_is_awesome}\n\n        {marimo_is_amazing}\n    ''')\n        .batch(\n            markdown_is_awesome=mo.ui.text(label=\"How much do you like markdown?\", placeholder=\"It is pretty swell \ud83c\udf0a\"),\n            marimo_is_amazing=mo.ui.slider(label=\"How much do you like marimo?\", start=0, stop=11, value=11),\n        )\n        .form(show_clear_button=True, bordered=False)\n    )\n    form\n    return\n\n\n@app.cell\ndef _(mo):\n    mo.md(f\"\"\"Like so: {\"\ud83c\udf43\" * 7}\"\"\")\n    return\n\n\n@app.cell\ndef _(mo):\n    mo.md(\"\"\"\n    This is a markdown cell with an execution block in it\n    ```{python .marimo}\n    # Too ambiguous to convert\n    ```\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    # But here's my `cell_id`, so call me, `maybe` \ud83c\udfb6\n    return\n\n\n@app.cell\ndef _(mo):\n    sample_count = mo.ui.slider(1, 1000, value=1000, label=\"Sample Count\")\n    sample_count\n    return\n\n\n@app.cell\ndef _():\n    import marimo as mo\n\n    return (mo,)\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script><meta property="og:title" content="Markdown – marimo-quarto">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="marimo-quarto">
+</head><body class="nav-sidebar docked quarto-light"><marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.23.1%22%0Aapp%20%3D%20marimo.App%28%29%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%0A%20%20%20%20plt.plot%28%5B1%2C%202%2C%203%2C%204%5D%29%0A%20%20%20%20plt.gca%28%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28mo%29%3A%0A%20%20%20%20form%20%3D%20%28%0A%20%20%20%20%20%20%20%20mo.md%28%27%27%27%0A%20%20%20%20%20%20%20%20%2A%2AJust%20how%20great%20is%20markdown%3F.%2A%2A%0A%0A%20%20%20%20%20%20%20%20%7Bmarkdown_is_awesome%7D%0A%0A%20%20%20%20%20%20%20%20%7Bmarimo_is_amazing%7D%0A%20%20%20%20%27%27%27%29%0A%20%20%20%20%20%20%20%20.batch%28%0A%20%20%20%20%20%20%20%20%20%20%20%20markdown_is_awesome%3Dmo.ui.text%28label%3D%22How%20much%20do%20you%20like%20markdown%3F%22%2C%20placeholder%3D%22It%20is%20pretty%20swell%20%F0%9F%8C%8A%22%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20marimo_is_amazing%3Dmo.ui.slider%28label%3D%22How%20much%20do%20you%20like%20marimo%3F%22%2C%20start%3D0%2C%20stop%3D11%2C%20value%3D11%29%2C%0A%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%20%20%20.form%28show_clear_button%3DTrue%2C%20bordered%3DFalse%29%0A%20%20%20%20%29%0A%20%20%20%20form%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28mo%29%3A%0A%20%20%20%20mo.md%28f%22%22%22Like%20so%3A%20%7B%22%F0%9F%8D%83%22%20%2A%207%7D%22%22%22%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28mo%29%3A%0A%20%20%20%20mo.md%28%22%22%22%0A%20%20%20%20This%20is%20a%20markdown%20cell%20with%20an%20execution%20block%20in%20it%0A%20%20%20%20%60%60%60%7Bpython%20.marimo%7D%0A%20%20%20%20%23%20Too%20ambiguous%20to%20convert%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20%23%20But%20here%27s%20my%20%60cell_id%60%2C%20so%20call%20me%2C%20%60maybe%60%20%F0%9F%8E%B6%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28mo%29%3A%0A%20%20%20%20sample_count%20%3D%20mo.ui.slider%281%2C%201000%2C%20value%3D1000%2C%20label%3D%22Sample%20Count%22%29%0A%20%20%20%20sample_count%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20%28mo%2C%29%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run%28%29%0A</marimo-code><script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/main.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/style.css" rel="stylesheet" title="marimo-islands" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
-<meta property="og:title" content="Markdown – marimo-quarto">
-<meta property="og:description" content="">
-<meta property="og:site_name" content="marimo-quarto">
-</head><body class="nav-sidebar docked quarto-light"><marimo-filename hidden=""></marimo-filename>
+<marimo-filename hidden=""></marimo-filename>
 
 
 
@@ -210,6 +219,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../tutorials/fileformat.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Fileformat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/external_dependencies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">External dependencies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -330,9 +345,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <marimo-island data-app-id="main" data-cell-id="MJUe" data-reactive="true">
             <marimo-cell-output>
-            <marimo-ui-element object-id="MJUe-8" random-id="6d85818e-df58-0d74-47ee-9adfde17c56a"><marimo-form data-initial-value="null" data-label="null" data-element-id="&quot;MJUe-7&quot;" data-loading="false" data-bordered="false" data-submit-button-label="&quot;Submit&quot;" data-submit-button-disabled="false" data-clear-on-submit="false" data-show-clear-button="true" data-clear-button-label="&quot;Clear&quot;" data-should-validate="false"><marimo-ui-element object-id="MJUe-7" random-id="45ffd3bf-8b9f-7798-84ee-464876cba553"><marimo-dict data-initial-value="{&quot;markdown_is_awesome&quot;:&quot;&quot;,&quot;marimo_is_amazing&quot;:11}" data-label="null" data-element-ids="{&quot;MJUe-5&quot;:&quot;markdown_is_awesome&quot;,&quot;MJUe-6&quot;:&quot;marimo_is_amazing&quot;}"><span class="markdown prose dark:prose-invert contents"><span class="paragraph"><strong>Just how great is markdown?.</strong></span>
-<span class="paragraph"><marimo-ui-element object-id="MJUe-5" random-id="d01a392f-ec86-4a26-b0f9-94d68738abbc"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>How much do you like markdown?</span></span>&quot;" data-placeholder="&quot;It is pretty swell 🌊&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element></span>
-<span class="paragraph"><marimo-ui-element object-id="MJUe-6" random-id="6b19b423-ce3e-dd58-a2a5-40a1454e4fee"><marimo-slider data-initial-value="11" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>How much do you like marimo?</span></span>&quot;" data-start="0" data-stop="11" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span></marimo-dict></marimo-ui-element></marimo-form></marimo-ui-element>
+            <marimo-ui-element object-id="MJUe-8" random-id="4cadb51f-a88e-1141-bcba-77f4e7699a9a"><marimo-form data-initial-value="null" data-label="null" data-element-id="&quot;MJUe-7&quot;" data-loading="false" data-bordered="false" data-submit-button-label="&quot;Submit&quot;" data-submit-button-disabled="false" data-clear-on-submit="false" data-show-clear-button="true" data-clear-button-label="&quot;Clear&quot;" data-should-validate="false"><marimo-ui-element object-id="MJUe-7" random-id="7bf75ea9-8d60-a8a0-9e1f-2d1bc27d46b5"><marimo-dict data-initial-value="{&quot;markdown_is_awesome&quot;:&quot;&quot;,&quot;marimo_is_amazing&quot;:11}" data-label="null" data-element-ids="{&quot;MJUe-5&quot;:&quot;markdown_is_awesome&quot;,&quot;MJUe-6&quot;:&quot;marimo_is_amazing&quot;}"><span class="markdown prose dark:prose-invert contents"><span class="paragraph"><strong>Just how great is markdown?.</strong></span>
+<span class="paragraph"><marimo-ui-element object-id="MJUe-5" random-id="d39bc946-9d1e-edc1-78c0-e1f4a4a81d9c"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>How much do you like markdown?</span></span>&quot;" data-placeholder="&quot;It is pretty swell 🌊&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element></span>
+<span class="paragraph"><marimo-ui-element object-id="MJUe-6" random-id="156b641f-be54-d194-06fd-3d7f9d866b18"><marimo-slider data-initial-value="11" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>How much do you like marimo?</span></span>&quot;" data-start="0" data-stop="11" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></span></span></marimo-dict></marimo-ui-element></marimo-form></marimo-ui-element>
             </marimo-cell-output>
             <marimo-cell-code hidden="">form%20%3D%20(%0A%20%20%20%20mo.md('''%0A%20%20%20%20**Just%20how%20great%20is%20markdown%3F.**%0A%0A%20%20%20%20%7Bmarkdown_is_awesome%7D%0A%0A%20%20%20%20%7Bmarimo_is_amazing%7D%0A''')%0A%20%20%20%20.batch(%0A%20%20%20%20%20%20%20%20markdown_is_awesome%3Dmo.ui.text(label%3D%22How%20much%20do%20you%20like%20markdown%3F%22%2C%20placeholder%3D%22It%20is%20pretty%20swell%20%F0%9F%8C%8A%22)%2C%0A%20%20%20%20%20%20%20%20marimo_is_amazing%3Dmo.ui.slider(label%3D%22How%20much%20do%20you%20like%20marimo%3F%22%2C%20start%3D0%2C%20stop%3D11%2C%20value%3D11)%2C%0A%20%20%20%20)%0A%20%20%20%20.form(show_clear_button%3DTrue%2C%20bordered%3DFalse)%0A)%0Aform</marimo-cell-code>
         </marimo-island>
@@ -428,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Be sure to checkout the markdown.py tutorial (<code>marimo tutorial markdown</code>) for more information on to type-set and render markdown in marimo.</p>
 <marimo-island data-app-id="main" data-cell-id="SFPL" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="SFPL-0" random-id="c0c462d2-2632-83b6-8f53-a2258721a4f5"><marimo-slider data-initial-value="1000" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Sample Count</span></span>&quot;" data-start="1" data-stop="1000" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element>
+    <marimo-ui-element object-id="SFPL-0" random-id="8f832901-bebc-41ca-57ae-dd7a66971e34"><marimo-slider data-initial-value="1000" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Sample Count</span></span>&quot;" data-start="1" data-stop="1000" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">sample_count%20%3D%20mo.ui.slider(1%2C%201000%2C%20value%3D1000%2C%20label%3D%22Sample%20Count%22)%0Asample_count</marimo-cell-code>
 </marimo-island>
@@ -899,8 +914,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../tutorials/fileformat.html" class="pagination-link" aria-label="Fileformat">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Fileformat</span>
+      <a href="../tutorials/external_dependencies.html" class="pagination-link" aria-label="External dependencies">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">External dependencies</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
