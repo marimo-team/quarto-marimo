@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: _site
+  post-render: python scripts/sync_local_frontend.py
   preview:
     port: 7777
 
@@ -30,6 +31,7 @@ website:
           - href: tutorials/plots.qmd
           - href: tutorials/layout.qmd
           - href: tutorials/fileformat.qmd
+          - href: tutorials/external_dependencies.qmd
           - href: tutorials/markdown_format.qmd
           - href: tutorials/for_jupyter_users.qmd
       - href: tutorials/example-pdf.qmd
