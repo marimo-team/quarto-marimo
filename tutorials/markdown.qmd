@@ -1,6 +1,16 @@
 ---
 title: Markdown
-marimo-version: 0.13.2
+marimo-version: 0.23.1
+header: |-
+  # Copyright 2026 Marimo. All rights reserved
+pyproject: |
+    requires-python = ">=3.11"
+    dependencies = [
+        "marimo>=0.23.1",
+        "matplotlib",
+        "numpy",
+        "polars",
+    ]
 ---
 
 # Hello, Markdown!
@@ -22,6 +32,7 @@ mo.md(
 )
 ```
 <!---->
+
 **Tip: toggling between the Markdown and Python editor**
 
 Although markdown is written with `mo.md`, marimo provides a markdown editor
@@ -36,6 +47,7 @@ also **hide** the markdown editor through the cell actions menu.
 need to use `mo.md(f"...")` directly; the markdown view does not support
 f-strings.
 <!---->
+
 ## LaTeX
 You can embed LaTeX in Markdown.
 

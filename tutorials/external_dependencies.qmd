@@ -1,5 +1,7 @@
 ---
 title: External dependencies
+header: |-
+  # Copyright 2026 Marimo. All rights reserved
 pyproject: |
     requires-python = ">=3.11"
     dependencies = [

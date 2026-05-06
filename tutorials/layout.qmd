@@ -1,8 +1,8 @@
 ---
 title: Layout
-marimo-version: 0.13.2
+marimo-version: 0.23.1
 header: |-
-  # Copyright 2024 Marimo. All rights reserved.
+  # Copyright 2026 Marimo. All rights reserved
 ---
 
 # Layout
@@ -10,6 +10,7 @@ header: |-
 `marimo` provides functions to help you lay out your output, such as
 in rows and columns, accordions, tabs, and callouts.
 <!---->
+
 ## Rows and columns
 
 Arrange objects into rows and columns with `mo.hstack` and `mo.vstack`.
@@ -116,6 +117,7 @@ using `mo.hstack`, `Html` objects (returned by most marimo
 functions, and subclassed by most marimo classes) have a shortcut using
 via their `center`, `right`, and `left` methods.
 <!---->
+
 This markdown is left-justified.
 
 ```{python .marimo}
@@ -140,6 +142,7 @@ mo.accordion(
 
 Create expandable shelves of content using `mo.accordion`:
 <!---->
+
 An accordion can contain multiple items:
 
 ```{python .marimo}

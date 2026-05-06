@@ -1,8 +1,8 @@
 ---
-title: Ui
-marimo-version: 0.13.2
+title: UI
+marimo-version: 0.23.1
 header: |-
-  # Copyright 2024 Marimo. All rights reserved.
+  # Copyright 2026 Marimo. All rights reserved
 ---
 
 # UI Elements
@@ -11,6 +11,7 @@ One of marimo's most powerful features is its first-class
 support for interactive user interface (UI) elements: interacting
 with a UI element will automatically run cells that reference it.
 <!---->
+
 ## marimo.ui
 
 ```{python .marimo}
@@ -45,14 +46,14 @@ mo.accordion(
     {
         "Tip: assign UI elements to global variables": (
             """
-            Interacting with a displayed UI element will only 
+            Interacting with a displayed UI element will only
             trigger reactive execution if the UI element is assigned
             to a global variable.
             """
         ),
         "Tip: accessing an element's value": (
             """
-            Every UI element has a value attribute that you can access in 
+            Every UI element has a value attribute that you can access in
             Python.
             """
         ),
@@ -69,6 +70,7 @@ mo.accordion(
 
 ### Simple elements
 <!---->
+
 marimo has a [large library of simple UI elements](https://docs.marimo.io/api/inputs/index.html). Here are a just few examples:
 
 ```python {.marimo hide_code="true"}
@@ -169,6 +171,7 @@ documentation(basic_ui_elements.value)
     create a dynamic set of UI elements, or reduce the number of global
     variables in your program.
 <!---->
+
 This first example shows how to create an array of UI elements using `mo.ui.array`.
 When you interact with an element in the array, all cells that reference the
 array are reactively run. If you instead used a regular Python list, cells referring to the list would _not_ be run.
@@ -227,6 +230,7 @@ your own interactive UI elements, or use widgets built by others in the
 community. To learn more, [see our
 docs](https://docs.marimo.io/guides/integrating_with_marimo/custom_ui_plugins.html).
 <!---->
+
 ## Appendix
 The remaining cells are helper data structures and functions.
 You can look at their code if you're curious how certain parts of this

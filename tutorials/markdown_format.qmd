@@ -1,6 +1,14 @@
 ---
 title: Markdown
-marimo-version: 0.13.2
+marimo-version: 0.23.1
+header: |-
+  # Copyright 2026 Marimo. All rights reserved
+pyproject: |
+    requires-python = ">=3.11"
+    dependencies = [
+        "marimo[sql]>=0.23.1",
+        "matplotlib",
+    ]
 ---
 
 # Markdown file format
@@ -27,6 +35,7 @@ To run it as an app, use
 $ marimo run notebook.md
 ```
 <!---->
+
 ## Exporting from Python
 
 You can export marimo notebooks that are stored as Python to the markdown format
@@ -36,6 +45,7 @@ by running the following command:
 $ marimo export md notebook.py > notebook.md
 ```
 <!---->
+
 ## Creating Python cells
 
 When you do need to create a Python cell in the markdown format, you can use a
@@ -64,8 +74,10 @@ As long as your code block contains the word `marimo` in a brace, like
 
 You can break up markdown into multiple cells by using an empty html tag `<!---->`:
 <!---->
+
 View the source of this notebook to see how this cell was created.
 <!---->
+
 You can still hide cell code in markdown notebooks:
 
 ````md
@@ -170,6 +182,7 @@ It's not likely that you'll run into this issue, but rest assured that marimo
 is working behind the scenes to keep your notebooks unambiguous and clean as
 possible.
 <!---->
+
 ### Saving multicolumn mode
 
 Multicolumn mode works, but the first cell in a column must be a python cell in
@@ -181,6 +194,7 @@ print("First cell in column 1")
 ```
 ````
 <!---->
+
 ### Naming cells
 
 Since the markdown notebook really is just markdown, you can't import from a
@@ -255,6 +269,7 @@ format. You can always convert back to a Python notebook if you need to:
 $ marimo convert my_marimo.md > my_marimo.py
 ```
 <!---->
+
 ## More on markdown
 
 Be sure to checkout the markdown.py tutorial (`marimo tutorial markdown`) for

@@ -1,6 +1,15 @@
 ---
 title: Dataflow
-marimo-version: 0.13.2
+marimo-version: 0.23.1
+header: |-
+  # Copyright 2026 Marimo. All rights reserved
+pyproject: |
+    requires-python = ">=3.11"
+    dependencies = [
+        "marimo>=0.23.1",
+        "matplotlib",
+        "numpy",
+    ]
 ---
 
 # How marimo notebooks run
@@ -12,6 +21,7 @@ automatically.
 To provide reactive execution, marimo creates a dataflow graph out of your
 cells.
 <!---->
+
 **Tip: disabling automatic execution.**
 
 marimo lets you disable automatic execution: just go into the notebook settings
@@ -24,6 +34,7 @@ descendants as stale instead of automatically running them. The lazy
 runtime puts you in control over when cells are run, while still giving
 guarantees about the notebook state.
 <!---->
+
 ## References and definitions
 
 A marimo notebook is a directed acyclic graph in which nodes represent
@@ -39,6 +50,7 @@ global variables defined by the former cell.
 The rule for reactive execution can be restated in terms of the graph: when
 a cell is run, its descendants are run automatically.
 <!---->
+
 ### Example
 
 The next four cells plot a sine wave with a given period and amplitude.
@@ -118,6 +130,7 @@ mo.md(
 `ampltitude`, then click the run button ( ▷ ) to register your changes.
 See what happens to the sine wave.
 <!---->
+
 Here is the dataflow graph for the cells that make the sine wave plot, plus
 the cells that import libraries. Each cell is labeled with its defs.
 
@@ -140,12 +153,14 @@ the cells that import libraries. Each cell is labeled with its defs.
 
 The last cell, which doesn't define anything, produces the plot.
 <!---->
+
 ## Dataflow programming
 
 marimo's runtime rule has some important consequences that may seem
 surprising if you are not used to dataflow programming. We list these
 below.
 <!---->
+
 ### Execution order is not cell order
 
 The order in which cells are executed is determined entirely by the
@@ -153,6 +168,7 @@ dataflow graph. This makes marimo notebooks more reproducible than
 traditional notebooks. It also lets you place boilerplate, like
 imports or long markdown strings, at the bottom of the editor.
 <!---->
+
 ### Global variable names must be unique
 
 Every global variable can be defined by only one cell. Without this
@@ -175,6 +191,7 @@ planet
 **🌊 Try it!** In the previous cell, change the name `planet` to `home`,
 then run the cell.
 <!---->
+
 Because defs must be unique, global variables cannot be modified with
 operators like `+=` or `-=` in cells other than the one that created
 them; these operators count as redefinitions of a name.
@@ -277,8 +294,8 @@ state.number = 0
 mo.accordion(
     {
         "Why not track attributes?": """
-        marimo can't reliably trace attributes 
-        to cells that define them. For example, attributes are routinely 
+        marimo can't reliably trace attributes
+        to cells that define them. For example, attributes are routinely
         created or modified by library code.
         """
     }
@@ -296,7 +313,7 @@ mo.accordion(
     {
         "Tip (advanced): mutable state": (
             """
-        You can use the fact that marimo does not track attributes or 
+        You can use the fact that marimo does not track attributes or
         mutations to implement mutable state in marimo. An example of
         this is shown in the `ui` tutorial.
         """
@@ -339,9 +356,9 @@ tips = {
     "Use global variables sparingly": (
         """
         Keep the number of global variables in your program small to avoid
-        name collisions across cells. Keep the number of global variables 
+        name collisions across cells. Keep the number of global variables
         defined by any one cell small to make sure that the units of
-        reactive execution are small. 
+        reactive execution are small.
         """
     ),
     "Use descriptive names": (
@@ -397,7 +414,7 @@ tips = {
         """
     ),
     "Write idempotent cells": (
-        """  
+        """
         Write cells whose outputs and behavior are the same when given
         the same inputs (refs); such cells are called _idempotent_. This will
         help you avoid bugs, and let you cache expensive intermediate
@@ -423,7 +440,7 @@ tips = {
         Whenever `compute_predictions` is called with a value of
         `problem_parameters` it has not seen, it will compute the predictions
         and store them in a cache. The next time it is called with the same
-        parameters, instead of recomputing the predictions, it will just 
+        parameters, instead of recomputing the predictions, it will just
         fetch the previously computed ones from the cache.
 
         If you are familiar with `functools.cache`, `mo.cache` is
