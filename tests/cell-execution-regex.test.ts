@@ -128,6 +128,26 @@ Deno.test("python {.marimo} legacy with leading whitespace", () => {
   );
 });
 
+Deno.test("sql {.marimo} legacy basic", () => {
+  assertMatch("```sql {.marimo}", "sql", "sql {.marimo} legacy basic");
+});
+
+Deno.test("sql {.marimo} with query attribute", () => {
+  assertMatch(
+    '```sql {.marimo query="result"}',
+    "sql",
+    "sql {.marimo} with query attribute",
+  );
+});
+
+Deno.test("{sql .marimo} class syntax", () => {
+  assertMatch("```{sql .marimo}", "sql", "{sql .marimo} class syntax");
+});
+
+Deno.test("{sql.marimo} basic", () => {
+  assertMatch("```{sql.marimo}", "sql.marimo", "{sql.marimo} basic");
+});
+
 Deno.test("four backticks {python .marimo}", () => {
   assertMatch(
     "````{python .marimo}",
