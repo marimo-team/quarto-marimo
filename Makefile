@@ -1,4 +1,4 @@
-.PHONY: build test test-ts test-py lint render clean setup
+.PHONY: build test test-ts test-py lint preview render clean setup
 
 VERSION := $(shell grep '^version:' _extensions/marimo/_extension.yml | sed 's/.*: *//')
 
@@ -47,7 +47,7 @@ preview:
 	quarto preview
 
 render:
-	quarto render tutorials/intro.qmd --to html
+	quarto render
 
 clean:
 	rm -rf _site .quarto _extensions/marimo/marimo-engine-v*.js
