@@ -99,22 +99,38 @@ class TestSqlCodeToPython:
     def test_without_query_renders_sql_expression(self):
         result = sql_code_to_python("SELECT * FROM df;", None)
 
-        assert result == 'mo.sql(fr"""\nSELECT * FROM df;\n""")'
+        assert "_df = mo.sql(" in result
+        assert "SELECT * FROM df;" in result
 
     def test_with_query_assigns_result(self):
         result = sql_code_to_python("SELECT * FROM df;", "filtered")
 
-        assert result == 'filtered = mo.sql(fr"""\nSELECT * FROM df;\n""")'
+        assert "filtered = mo.sql(" in result
+        assert "SELECT * FROM df;" in result
 
-    def test_invalid_query_falls_back_to_expression(self):
+    def test_invalid_query_falls_back_to_default_target(self):
         result = sql_code_to_python("SELECT * FROM df;", "not-valid")
 
-        assert result == 'mo.sql(fr"""\nSELECT * FROM df;\n""")'
+        assert "_df = mo.sql(" in result
+        assert "not-valid = mo.sql(" not in result
 
-    def test_keyword_query_falls_back_to_expression(self):
+    def test_keyword_query_falls_back_to_default_target(self):
         result = sql_code_to_python("SELECT * FROM df;", "class")
 
-        assert result == 'mo.sql(fr"""\nSELECT * FROM df;\n""")'
+        assert "_df = mo.sql(" in result
+        assert "class = mo.sql(" not in result
+
+    def test_forwards_sql_options_to_marimo_formatter(self):
+        result = sql_code_to_python(
+            "SELECT * FROM df;",
+            "filtered",
+            hide_output=True,
+            engine="engine",
+        )
+
+        assert "filtered = mo.sql(" in result
+        assert "output=False" in result
+        assert "engine=engine" in result
 
 
 class TestConvertFromMdToPandocExport:
@@ -177,7 +193,23 @@ SELECT * FROM df;
         result = self._convert_without_eval(markdown)
 
         notebook_code = self._extract_notebook_code(result["header"])
-        assert 'result = mo.sql(fr"""' in notebook_code
+        assert "result = mo.sql(" in notebook_code
+        assert "SELECT * FROM df;" in notebook_code
+        assert result["count"] == 1
+
+    def test_converts_sql_marimo_cell_without_query_to_default_target(self):
+        markdown = """---
+eval: false
+---
+
+```sql {.marimo}
+SELECT * FROM df;
+```
+"""
+        result = self._convert_without_eval(markdown)
+
+        notebook_code = self._extract_notebook_code(result["header"])
+        assert "_df = mo.sql(" in notebook_code
         assert "SELECT * FROM df;" in notebook_code
         assert result["count"] == 1
 
@@ -193,7 +225,7 @@ SELECT * FROM df;
         result = self._convert_without_eval(markdown)
 
         notebook_code = self._extract_notebook_code(result["header"])
-        assert 'result = mo.sql(fr"""' in notebook_code
+        assert "result = mo.sql(" in notebook_code
         assert "SELECT * FROM df;" in notebook_code
         assert result["count"] == 1
 

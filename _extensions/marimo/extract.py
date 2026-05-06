@@ -28,6 +28,7 @@ from xml.etree.ElementTree import Element
 
 import marimo
 from marimo import App, MarimoIslandGenerator
+from marimo._convert.common.format import sql_to_marimo
 from marimo._session.notebook import AppFileManager
 
 try:
@@ -61,35 +62,35 @@ default_config = {
     "editor": False,
 }
 
-SQL_LANGUAGES = {"sql", "sql.marimo"}
 SQL_DOT_FENCE_REGEX = re.compile(
     r"^(\s*`{3,})\s*\{\s*sql\.marimo(?P<attrs>[^}]*)\}\s*$",
     re.MULTILINE,
 )
+DEFAULT_SQL_QUERY_TARGET = "_df"
 
 
 def is_valid_python_identifier(name: str) -> bool:
     return name.isidentifier() and not keyword.iskeyword(name)
 
 
-def sql_code_to_python(code: str, query: Optional[str]) -> str:
-    """Convert a marimo markdown SQL cell into executable Python."""
-    escaped = code.strip("\n").replace('"""', r"\"\"\"")
-    sql_call = f'mo.sql(fr"""\n{escaped}\n""")'
+def sql_query_target(query: Optional[str]) -> str:
     if query and is_valid_python_identifier(query):
-        return f"{query} = {sql_call}"
-    return sql_call
+        return query
+    return DEFAULT_SQL_QUERY_TARGET
 
 
-def normalize_sql_marimo_fences(text: str) -> str:
-    """Rewrite dot-joined SQL fences into the parser's supported SQL form."""
+def is_true_attr(value: Optional[str]) -> bool:
+    return str(value or "false").lower() == "true"
 
-    def replace(match: re.Match[str]) -> str:
-        attrs = match.group("attrs").strip()
-        suffix = f" {attrs}" if attrs else ""
-        return f"{match.group(1)}sql {{.marimo{suffix}}}"
 
-    return SQL_DOT_FENCE_REGEX.sub(replace, text)
+def sql_code_to_python(
+    code: str,
+    query: Optional[str],
+    hide_output: bool = False,
+    engine: Optional[str] = None,
+) -> str:
+    """Convert a marimo markdown SQL cell into executable Python."""
+    return sql_to_marimo(code, sql_query_target(query), hide_output, engine)
 
 
 def extract_and_strip_quarto_config(block: str) -> tuple[dict[str, Any], str]:
@@ -324,8 +325,13 @@ def build_export_with_mime_context(
 
             code = str(child.text)
             config, code = extract_and_strip_quarto_config(code)
-            if child.attrib.get("language") in SQL_LANGUAGES:
-                code = sql_code_to_python(code, child.attrib.get("query"))
+            if child.attrib.get("language") == "sql":
+                code = sql_code_to_python(
+                    code,
+                    child.attrib.get("query"),
+                    hide_output=is_true_attr(child.attrib.get("hide_output")),
+                    engine=child.attrib.get("engine"),
+                )
 
             try:
                 stub = app.add_code(
@@ -402,7 +408,7 @@ def convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[st
     """
     if not text:
         return {"header": "", "outputs": []}
-    text = normalize_sql_marimo_fences(text)
+    text = SQL_DOT_FENCE_REGEX.sub(r"\1sql {.marimo\g<attrs>}", text)
     if mime_sensitive:
         parser = MarimoPandocParser(output_format="marimo-pandoc-export-with-mime")  # type: ignore[arg-type]
     else:

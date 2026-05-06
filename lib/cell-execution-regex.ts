@@ -7,6 +7,7 @@
  *   ```{python.marimo}      ← pampa/dot-joined syntax
  *   ```{python .marimo}     ← preferred class syntax
  *   ```python {.marimo}     ← legacy (language outside braces)
+ *   ```{sql.marimo}         ← SQL dot-joined syntax
  *   ```sql {.marimo}        ← SQL marimo cells
  *
  * Groups:
@@ -18,6 +19,7 @@
 //   ```{python.marimo}      → group 2: "python.marimo"
 //   ```{python .marimo}     → group 2: "python"
 //   ```python {.marimo}     → group 2: "python" (legacy)
+//   ```{sql.marimo}         → group 2: "sql.marimo"
 //   ```sql {.marimo}        → group 2: "sql" (SQL cells)
 //
 // Structure:
