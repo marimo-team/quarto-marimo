@@ -14,6 +14,7 @@ cell-by-cell reconstruction.
 
 import asyncio
 import json
+import keyword
 import os
 import re
 import sys
@@ -60,16 +61,35 @@ default_config = {
     "editor": False,
 }
 
-_PYTHON_IDENTIFIER = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+SQL_LANGUAGES = {"sql", "sql.marimo"}
+SQL_DOT_FENCE_REGEX = re.compile(
+    r"^(\s*`{3,})\s*\{\s*sql\.marimo(?P<attrs>[^}]*)\}\s*$",
+    re.MULTILINE,
+)
+
+
+def is_valid_python_identifier(name: str) -> bool:
+    return name.isidentifier() and not keyword.iskeyword(name)
 
 
 def sql_code_to_python(code: str, query: Optional[str]) -> str:
     """Convert a marimo markdown SQL cell into executable Python."""
     escaped = code.strip("\n").replace('"""', r"\"\"\"")
     sql_call = f'mo.sql(fr"""\n{escaped}\n""")'
-    if query and _PYTHON_IDENTIFIER.match(query):
+    if query and is_valid_python_identifier(query):
         return f"{query} = {sql_call}"
     return sql_call
+
+
+def normalize_sql_marimo_fences(text: str) -> str:
+    """Rewrite dot-joined SQL fences into the parser's supported SQL form."""
+
+    def replace(match: re.Match[str]) -> str:
+        attrs = match.group("attrs").strip()
+        suffix = f" {attrs}" if attrs else ""
+        return f"{match.group(1)}sql {{.marimo{suffix}}}"
+
+    return SQL_DOT_FENCE_REGEX.sub(replace, text)
 
 
 def extract_and_strip_quarto_config(block: str) -> tuple[dict[str, Any], str]:
@@ -304,7 +324,7 @@ def build_export_with_mime_context(
 
             code = str(child.text)
             config, code = extract_and_strip_quarto_config(code)
-            if child.attrib.get("language") == "sql":
+            if child.attrib.get("language") in SQL_LANGUAGES:
                 code = sql_code_to_python(code, child.attrib.get("query"))
 
             try:
@@ -382,6 +402,7 @@ def convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[st
     """
     if not text:
         return {"header": "", "outputs": []}
+    text = normalize_sql_marimo_fences(text)
     if mime_sensitive:
         parser = MarimoPandocParser(output_format="marimo-pandoc-export-with-mime")  # type: ignore[arg-type]
     else:

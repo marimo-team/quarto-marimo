@@ -8,8 +8,10 @@ pyproject: |
     requires-python = ">=3.11"
     dependencies = [
         "marimo[sql]>=0.23.1",
+        "altair",
         "matplotlib",
         "pandas",
+        "plotly",
     ]
 ---
 

@@ -111,8 +111,26 @@ class TestSqlCodeToPython:
 
         assert result == 'mo.sql(fr"""\nSELECT * FROM df;\n""")'
 
+    def test_keyword_query_falls_back_to_expression(self):
+        result = sql_code_to_python("SELECT * FROM df;", "class")
+
+        assert result == 'mo.sql(fr"""\nSELECT * FROM df;\n""")'
+
 
 class TestConvertFromMdToPandocExport:
+    def _extract_notebook_code(self, header: str) -> str:
+        notebook_match = re.search(r"<marimo-code hidden>(.*?)</marimo-code>", header)
+        assert notebook_match is not None
+        return unquote(notebook_match.group(1))
+
+    def _convert_without_eval(self, markdown: str) -> dict:
+        original_eval = default_config["eval"]
+        default_config["eval"] = False
+        try:
+            return convert_from_md_to_pandoc_export(markdown, mime_sensitive=False)
+        finally:
+            default_config["eval"] = original_eval
+
     def test_injects_pyproject_into_exported_notebook(self):
         markdown = """---
 title: External dependencies
@@ -136,9 +154,7 @@ widget
         assert "__MARIMO_EXPORT_CONTEXT__" in header
         assert "<marimo-code hidden>" in header
         assert "<marimo-cell-code hidden>" in html
-        notebook_match = re.search(r"<marimo-code hidden>(.*?)</marimo-code>", header)
-        assert notebook_match is not None
-        notebook_code = unquote(notebook_match.group(1))
+        notebook_code = self._extract_notebook_code(header)
         assert notebook_code.startswith("# /// script\n")
         assert '# requires-python = ">=3.11"' in notebook_code
         assert "app = marimo.App(" in notebook_code
@@ -148,6 +164,38 @@ widget
         assert (
             hidden_code == "import marimo as mo\nwidget = mo.ui.slider(1, 10)\nwidget"
         )
+
+    def test_converts_sql_marimo_cell_with_query(self):
+        markdown = """---
+eval: false
+---
+
+```sql {.marimo query="result"}
+SELECT * FROM df;
+```
+"""
+        result = self._convert_without_eval(markdown)
+
+        notebook_code = self._extract_notebook_code(result["header"])
+        assert 'result = mo.sql(fr"""' in notebook_code
+        assert "SELECT * FROM df;" in notebook_code
+        assert result["count"] == 1
+
+    def test_converts_dot_joined_sql_marimo_cell(self):
+        markdown = """---
+eval: false
+---
+
+```{sql.marimo query="result"}
+SELECT * FROM df;
+```
+"""
+        result = self._convert_without_eval(markdown)
+
+        notebook_code = self._extract_notebook_code(result["header"])
+        assert 'result = mo.sql(fr"""' in notebook_code
+        assert "SELECT * FROM df;" in notebook_code
+        assert result["count"] == 1
 
 
 class TestGetMimeRender:
