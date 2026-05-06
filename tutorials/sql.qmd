@@ -1,13 +1,23 @@
 ---
-title: Sql
-marimo-version: 0.13.2
+title: SQL
+marimo-version: 0.23.1
 width: medium
+header: |-
+  # Copyright 2026 Marimo. All rights reserved
+pyproject: |
+    requires-python = ">=3.11"
+    dependencies = [
+        "marimo[sql]>=0.23.1",
+        "matplotlib",
+        "pandas",
+    ]
 ---
 
 # Hello, SQL!
 
 _Let's dive into the world of SQL where we don't just address tables, we also join them!_
 <!---->
+
 With marimo, you can mix-and-match both **Python and SQL**. To create a
 SQL cell, you first need to install some additional dependencies,
 including [duckdb](https://duckdb.org/). Obtain these dependencies with
@@ -71,10 +81,10 @@ else:
 Once the required dependencies are installed, you can create SQL cells
 in one of the following ways:
 
-- right click the **Add Cell** ::lucide:circle-plus:: buttons on the left of
+- right click the **Add Cell** buttons on the left of
 a cell;
--  click the **Convert to SQL** ::lucide:database:: button in the cell menu ::lucide:ellipsis::
--  click the **Add SQL Cell** at the bottom of the page;
+- click the **Convert to SQL** button in the cell menu
+- click the **Add SQL Cell** at the bottom of the page;
 
 ## Python representation
 marimo is still just Python, even when using SQL. Here is an example of
@@ -93,14 +103,17 @@ The SQL statement itself is an formatted string (f-string), so this
 means they can contain any valid Python code, such as the values of UI
 elements. This means your SQL statement and results can be reactive! 🚀
 <!---->
+
 ## Querying dataframes with SQL
 <!---->
-/// Tip | "Data sources panel"
 
-    Click the database "barrel" icon in the left toolbar to see all dataframes and in-
-    memory tables that your notebook has access to.
-///
+::: {.callout-tip title="Data sources panel"}
+
+Click the database "barrel" icon in the left toolbar to see all dataframes and in-memory tables that your notebook has access to.
+
+:::
 <!---->
+
 Let's take a look at a SQL cell. The next cell generates a dataframe called `df`.
 
 ```python {.marimo hide_code="true"}
@@ -156,6 +169,7 @@ SELECT * FROM df;
 
 ## From Python to SQL and back
 <!---->
+
 You can create SQL statements that depend on Python values, such as UI elements:
 
 ```python {.marimo hide_code="true"}
@@ -249,6 +263,7 @@ def render_plotly():
 
 ## CSVs, Parquet, Postgres, and more ...
 <!---->
+
 We're not limited to querying dataframes. We can also query an **HTTP URL, S3 path, or a file path to a local csv or parquet file**.
 
 ```sql
@@ -262,12 +277,65 @@ SELECT * FROM read_parquet('path/to/example.parquet');
 
 With a bit of boilerplate, you can even read and write to **Postgres**, and join Postgres tables with dataframes in the same query. For a full list of supported data sources, check out the [duckdb extensions](https://duckdb.org/docs/extensions/overview) and our [example notebook on duckdb connections](https://github.com/marimo-team/marimo/blob/main/examples/sql/duckdb_connections.**py**).
 
-For this example, we will query an HTTP endpoint of a csv.
+For this example, we will query a dataframe loaded from a csv.
+
+```python {.marimo hide_code="true"}
+# We use pandas for the CSV fetch because DuckDB in Pyodide does not support HTTPFS extensions
+def read_cars_df():
+    import pandas as pd
+
+    try:
+        return pd.read_csv("https://datasets.marimo.app/cars.csv")
+    except Exception:
+        # datasets.marimo.app returns 403 from time to time, so we add this as a fallback
+        return pd.DataFrame(
+            [
+                {
+                    "Name": "Honda Civic",
+                    "Origin": "Asia",
+                    "Cylinders": 4,
+                    "MPG_City": 30,
+                    "MPG_Highway": 38,
+                },
+                {
+                    "Name": "Toyota Camry",
+                    "Origin": "Asia",
+                    "Cylinders": 4,
+                    "MPG_City": 28,
+                    "MPG_Highway": 39,
+                },
+                {
+                    "Name": "Ford F-150",
+                    "Origin": "USA",
+                    "Cylinders": 6,
+                    "MPG_City": 20,
+                    "MPG_Highway": 26,
+                },
+                {
+                    "Name": "BMW 328i",
+                    "Origin": "Europe",
+                    "Cylinders": 4,
+                    "MPG_City": 23,
+                    "MPG_Highway": 34,
+                },
+                {
+                    "Name": "Mazda MX-5",
+                    "Origin": "Asia",
+                    "Cylinders": 4,
+                    "MPG_City": 26,
+                    "MPG_Highway": 34,
+                },
+            ]
+        )
+
+cars_df = read_cars_df()
+```
 
 ```sql {.marimo query="cars"}
 -- Download a CSV and create an in-memory table; this is optional.
-CREATE OR replace TABLE cars as
-FROM 'https://datasets.marimo.app/cars.csv';
+CREATE OR replace TABLE cars as (
+    SELECT * FROM cars_df
+);
 
 -- Query the table
 SELECT * from cars;

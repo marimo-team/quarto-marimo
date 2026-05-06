@@ -12,6 +12,7 @@ from _extensions.marimo.extract import (
     extract_and_strip_quarto_config,
     get_mime_render,
     pyproject_to_script_metadata,
+    sql_code_to_python,
 )
 
 
@@ -59,7 +60,7 @@ class TestAppConfigFromRoot:
         assert config["layout_file"] == "grid.json"
 
     def test_marimo_version_stripped(self):
-        root = Element("root", attrib={"marimo-version": "0.14.0"})
+        root = Element("root", attrib={"marimo-version": "0.23.1"})
         config = app_config_from_root(root)
         assert "marimo-version" not in config
 
@@ -92,6 +93,23 @@ class TestPyprojectToScriptMetadata:
             "# /// script\n# dependencies = []\n# ///"
         )
         assert metadata == "# /// script\n# dependencies = []\n# ///\n"
+
+
+class TestSqlCodeToPython:
+    def test_without_query_renders_sql_expression(self):
+        result = sql_code_to_python("SELECT * FROM df;", None)
+
+        assert result == 'mo.sql(fr"""\nSELECT * FROM df;\n""")'
+
+    def test_with_query_assigns_result(self):
+        result = sql_code_to_python("SELECT * FROM df;", "filtered")
+
+        assert result == 'filtered = mo.sql(fr"""\nSELECT * FROM df;\n""")'
+
+    def test_invalid_query_falls_back_to_expression(self):
+        result = sql_code_to_python("SELECT * FROM df;", "not-valid")
+
+        assert result == 'mo.sql(fr"""\nSELECT * FROM df;\n""")'
 
 
 class TestConvertFromMdToPandocExport:

@@ -11,12 +11,12 @@ export function isMarimoCell(cell: QuartoMdCell): boolean {
     return false;
   }
   const lang = cell.cell_type.language;
-  // Handle {python.marimo} syntax (quarto parses as language "python.marimo")
-  if (lang === "python.marimo") {
+  // Handle {python.marimo}/{sql.marimo} syntax.
+  if (lang === "python.marimo" || lang === "sql.marimo") {
     return true;
   }
-  // Handle {python .marimo} and legacy python {.marimo} syntax
-  if (lang === "python") {
+  // Handle class syntax and legacy language-outside-braces syntax.
+  if (lang === "python" || lang === "sql") {
     const firstLine = cell.sourceVerbatim.value.split('\n')[0] || '';
     return /\.marimo/.test(firstLine);
   }
