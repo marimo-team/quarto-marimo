@@ -71,9 +71,15 @@ mo.md(
 
 renders the display math
 
-\[
-f: \mathbf{R} \to \mathbf{R}.
-\]
+```python {.marimo hide_code="true"}
+mo.md(
+    r'''
+    \[
+    f: \mathbf{R} \to \mathbf{R}
+    \]
+    '''
+)
+```
 
 ```python {.marimo hide_code="true"}
 mo.accordion(
