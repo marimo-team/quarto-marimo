@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../tutorials/ui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ui</span></a>
+ <span class="menu-text">UI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -219,6 +219,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../tutorials/fileformat.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Fileformat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SQL</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -259,6 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#layout" id="toc-layout" class="nav-link active" data-scroll-target="#layout">Layout</a>
   <ul class="collapse">
+  <li><a href="#rows-and-columns" id="toc-rows-and-columns" class="nav-link" data-scroll-target="#rows-and-columns">Rows and columns</a></li>
   <li><a href="#accordion" id="toc-accordion" class="nav-link" data-scroll-target="#accordion">Accordion</a></li>
   <li><a href="#tabs" id="toc-tabs" class="nav-link" data-scroll-target="#tabs">Tabs</a></li>
   <li><a href="#callout" id="toc-callout" class="nav-link" data-scroll-target="#callout">Callout</a></li>
@@ -290,36 +297,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="layout" class="level1">
 <h1>Layout</h1>
-<p><code>marimo</code> provides functions to help you lay out your output, such as in rows and columns, accordions, tabs, and callouts. <!----> ## Rows and columns</p>
+<p><code>marimo</code> provides functions to help you lay out your output, such as in rows and columns, accordions, tabs, and callouts. <!----></p>
+<section id="rows-and-columns" class="level2">
+<h2 class="anchored" data-anchor-id="rows-and-columns">Rows and columns</h2>
 <p>Arrange objects into rows and columns with <code>mo.hstack</code> and <code>mo.vstack</code>.</p>
 <marimo-island data-app-id="main" data-cell-id="Hbol" data-reactive="true">
     <marimo-cell-output>
-    <div style="display: flex;flex: 1;flex-direction: row;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><marimo-ui-element object-id="Hbol-0" random-id="674dd13f-538d-9b52-b3cc-e4c4306f4a9b"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>hello</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element><marimo-ui-element object-id="Hbol-1" random-id="1149bb06-7664-7c66-bbc3-882ee9103678"><marimo-slider data-initial-value="1" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>slider</span></span>&quot;" data-start="1" data-stop="10" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></div>
+    <div style="display: flex;flex: 1;flex-direction: row;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><marimo-ui-element object-id="Hbol-0" random-id="de64f455-da4c-4116-5f2a-17c614753b0a"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>hello</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element><marimo-ui-element object-id="Hbol-1" random-id="688e49ff-5256-a6ea-088c-056002d547f5"><marimo-slider data-initial-value="1" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>slider</span></span>&quot;" data-start="1" data-stop="10" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></div>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.hstack(%0A%20%20%20%20%5Bmo.ui.text(label%3D%22hello%22)%2C%20mo.ui.slider(1%2C%2010%2C%20label%3D%22slider%22)%5D%2C%0A%20%20%20%20justify%3D%22start%22%2C%0A)</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="MJUe" data-reactive="true">
     <marimo-cell-output>
-    <div style="display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><marimo-ui-element object-id="MJUe-0" random-id="9aa2d834-8636-8fa2-d39c-49976844a4df"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>world</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element><marimo-ui-element object-id="MJUe-1" random-id="a44bf8b7-aa48-a9a7-983c-88d9ed963135"><marimo-number data-initial-value="1" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>number</span></span>&quot;" data-start="1" data-stop="10" data-debounce="false" data-full-width="false" data-disabled="false"></marimo-number></marimo-ui-element></div>
+    <div style="display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><marimo-ui-element object-id="MJUe-0" random-id="bb110b71-ec83-1c0e-08d9-e5aace409253"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>world</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element><marimo-ui-element object-id="MJUe-1" random-id="f05d9b13-68b6-22b2-7dd2-6fa43904188b"><marimo-number data-initial-value="1" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>number</span></span>&quot;" data-start="1" data-stop="10" data-debounce="false" data-full-width="false" data-disabled="false"></marimo-number></marimo-ui-element></div>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.vstack(%5Bmo.ui.text(label%3D%22world%22)%2C%20mo.ui.number(1%2C%2010%2C%20label%3D%22number%22)%5D)</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="vblA" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Combine <code>mo.hstack</code> with <code>mo.vstack</code> to make grids:</span>\n<div style='display: flex;flex: 1;flex-direction: row;justify-content: center;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><div style='display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-ui-element object-id='vblA-0' random-id='7520b978-6821-cbd6-1b25-9b9bccb4f76f'><marimo-text data-initial-value='&amp;quot;&amp;quot;' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;hello&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-placeholder='&amp;quot;&amp;quot;' data-kind='&amp;quot;text&amp;quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element><marimo-ui-element object-id='vblA-1' random-id='e4fe91a0-b114-b021-13b1-bff706ece0fd'><marimo-slider data-initial-value='1' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;slider&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-start='1' data-stop='10' data-steps='[]' data-debounce='false' data-disabled='false' data-orientation='&amp;quot;horizontal&amp;quot;' data-show-value='false' data-include-input='false' data-full-width='false'></marimo-slider></marimo-ui-element></div><div style='display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-ui-element object-id='vblA-2' random-id='687aeb13-c16c-284f-695a-de615e75c05c'><marimo-text data-initial-value='&amp;quot;&amp;quot;' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;world&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-placeholder='&amp;quot;&amp;quot;' data-kind='&amp;quot;text&amp;quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element><marimo-ui-element object-id='vblA-3' random-id='ce9c1d56-1e0d-5368-fb60-8a9e4cd4606e'><marimo-number data-initial-value='1' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;number&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-start='1' data-stop='10' data-debounce='false' data-full-width='false' data-disabled='false'></marimo-number></marimo-ui-element></div></div></div>\n\n<span class=\&quot;paragraph\&quot;>You can pass anything to <code>mo.hstack</code> to <code>mo.vstack</code> (including\nplots!).</span></span>&quot;"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Combine <code>mo.hstack</code> with <code>mo.vstack</code> to make grids:</span>\n<div style='display: flex;flex: 1;flex-direction: row;justify-content: center;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><div style='display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-ui-element object-id='vblA-0' random-id='d5003d91-b98f-87a4-6c48-49ae691760b6'><marimo-text data-initial-value='&amp;quot;&amp;quot;' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;hello&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-placeholder='&amp;quot;&amp;quot;' data-kind='&amp;quot;text&amp;quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element><marimo-ui-element object-id='vblA-1' random-id='600b0fa8-7aca-7002-e963-755c5c0a678d'><marimo-slider data-initial-value='1' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;slider&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-start='1' data-stop='10' data-steps='[]' data-debounce='false' data-disabled='false' data-orientation='&amp;quot;horizontal&amp;quot;' data-show-value='false' data-include-input='false' data-full-width='false'></marimo-slider></marimo-ui-element></div><div style='display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-ui-element object-id='vblA-2' random-id='586cf450-a22e-1ecf-4371-ef84cad49c01'><marimo-text data-initial-value='&amp;quot;&amp;quot;' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;world&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-placeholder='&amp;quot;&amp;quot;' data-kind='&amp;quot;text&amp;quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element><marimo-ui-element object-id='vblA-3' random-id='2c76080b-a135-0a4e-9605-61883bcff596'><marimo-number data-initial-value='1' data-label='&amp;quot;&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;number&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;' data-start='1' data-stop='10' data-debounce='false' data-full-width='false' data-disabled='false'></marimo-number></marimo-ui-element></div></div></div>\n\n<span class=\&quot;paragraph\&quot;>You can pass anything to <code>mo.hstack</code> to <code>mo.vstack</code> (including\nplots!).</span></span>&quot;"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">grid%20%3D%20mo.vstack(%0A%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20mo.hstack(%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Bmo.ui.text(label%3D%22hello%22)%2C%20mo.ui.slider(1%2C%2010%2C%20label%3D%22slider%22)%5D%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20mo.hstack(%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Bmo.ui.text(label%3D%22world%22)%2C%20mo.ui.number(1%2C%2010%2C%20label%3D%22number%22)%5D%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%5D%2C%0A).center()%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20Combine%20%60mo.hstack%60%20with%20%60mo.vstack%60%20to%20make%20grids%3A%0A%0A%20%20%20%20%7Bgrid%7D%0A%0A%20%20%20%20You%20can%20pass%20anything%20to%20%60mo.hstack%60%20to%20%60mo.vstack%60%20(including%0A%20%20%20%20plots!).%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
 </marimo-island>
 <p><strong>Customization.</strong> The presentation of stacked elements can be customized with some arguments that are best understood by example.</p>
 <marimo-island data-app-id="main" data-cell-id="bkHC" data-reactive="true">
     <marimo-cell-output>
-    <div style="display: flex;flex: 1;flex-direction: row;justify-content: center;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><marimo-ui-element object-id="bkHC-0" random-id="f3375b62-4815-eff3-3c7c-df34da3099e5"><marimo-dropdown data-initial-value="[&quot;space-between&quot;]" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>justify</span></span>&quot;" data-options="[&quot;start&quot;,&quot;center&quot;,&quot;end&quot;,&quot;space-between&quot;,&quot;space-around&quot;]" data-allow-select-none="false" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element><marimo-ui-element object-id="bkHC-1" random-id="d8104e39-699c-a8e7-be64-6300d648c5ad"><marimo-dropdown data-initial-value="[&quot;center&quot;]" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>align</span></span>&quot;" data-options="[&quot;start&quot;,&quot;center&quot;,&quot;end&quot;,&quot;stretch&quot;]" data-allow-select-none="false" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element><marimo-ui-element object-id="bkHC-2" random-id="d095a5c6-c2a8-ef25-c675-fee078676c5e"><marimo-number data-initial-value="0.5" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>gap</span></span>&quot;" data-start="0" data-stop="2" data-step="0.25" data-debounce="false" data-full-width="false" data-disabled="false"></marimo-number></marimo-ui-element><marimo-ui-element object-id="bkHC-3" random-id="0ddb6fb7-0bd3-ea42-8c55-69650e838675"><marimo-checkbox data-initial-value="false" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>wrap</span></span>&quot;" data-disabled="false"></marimo-checkbox></marimo-ui-element></div>
+    <div style="display: flex;flex: 1;flex-direction: row;justify-content: center;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><marimo-ui-element object-id="bkHC-0" random-id="d06c2e60-1307-32c5-9bb3-9f1a3a2bd6e5"><marimo-dropdown data-initial-value="[&quot;space-between&quot;]" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>justify</span></span>&quot;" data-options="[&quot;start&quot;,&quot;center&quot;,&quot;end&quot;,&quot;space-between&quot;,&quot;space-around&quot;]" data-allow-select-none="false" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element><marimo-ui-element object-id="bkHC-1" random-id="49d8089c-8fc7-005f-9273-d4c1842d7fae"><marimo-dropdown data-initial-value="[&quot;center&quot;]" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>align</span></span>&quot;" data-options="[&quot;start&quot;,&quot;center&quot;,&quot;end&quot;,&quot;stretch&quot;]" data-allow-select-none="false" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element><marimo-ui-element object-id="bkHC-2" random-id="6c1a4c46-2aac-18ac-47a8-c8a8cebaf641"><marimo-number data-initial-value="0.5" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>gap</span></span>&quot;" data-start="0" data-stop="2" data-step="0.25" data-debounce="false" data-full-width="false" data-disabled="false"></marimo-number></marimo-ui-element><marimo-ui-element object-id="bkHC-3" random-id="daa944c4-c773-a4f4-5e39-2f047c2de8c7"><marimo-checkbox data-initial-value="false" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>wrap</span></span>&quot;" data-disabled="false"></marimo-checkbox></marimo-ui-element></div>
     </marimo-cell-output>
     <marimo-cell-code hidden="">justify%20%3D%20mo.ui.dropdown(%0A%20%20%20%20%5B%22start%22%2C%20%22center%22%2C%20%22end%22%2C%20%22space-between%22%2C%20%22space-around%22%5D%2C%0A%20%20%20%20value%3D%22space-between%22%2C%0A%20%20%20%20label%3D%22justify%22%2C%0A)%0Aalign%20%3D%20mo.ui.dropdown(%0A%20%20%20%20%5B%22start%22%2C%20%22center%22%2C%20%22end%22%2C%20%22stretch%22%5D%2C%20value%3D%22center%22%2C%20label%3D%22align%22%0A)%0Agap%20%3D%20mo.ui.number(start%3D0%2C%20step%3D0.25%2C%20stop%3D2%2C%20value%3D0.5%2C%20label%3D%22gap%22)%0Awrap%20%3D%20mo.ui.checkbox(label%3D%22wrap%22)%0A%0Amo.hstack(%5Bjustify%2C%20align%2C%20gap%2C%20wrap%5D%2C%20justify%3D%22center%22)</marimo-cell-code>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="lEQa" data-reactive="true">
     <marimo-cell-output>
-    <div style="display: flex;flex: 1;flex-direction: row;justify-content: center;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><marimo-ui-element object-id="lEQa-0" random-id="983438bc-10d4-d8cb-a2aa-8c2c1e92c492"><marimo-slider data-initial-value="60" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>box size</span></span>&quot;" data-start="60" data-stop="500" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></div>
+    <div style="display: flex;flex: 1;flex-direction: row;justify-content: center;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><marimo-ui-element object-id="lEQa-0" random-id="fb515a84-64d5-5c45-d4a5-76cde5494aa7"><marimo-slider data-initial-value="60" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>box size</span></span>&quot;" data-start="60" data-stop="500" data-steps="[]" data-debounce="false" data-disabled="false" data-orientation="&quot;horizontal&quot;" data-show-value="false" data-include-input="false" data-full-width="false"></marimo-slider></marimo-ui-element></div>
     </marimo-cell-output>
     <marimo-cell-code hidden="">size%20%3D%20mo.ui.slider(label%3D%22box%20size%22%2C%20start%3D60%2C%20stop%3D500)%0Amo.hstack(%5Bsize%5D%2C%20justify%3D%22center%22)</marimo-cell-code>
 </marimo-island>
@@ -421,6 +430,7 @@ using `mo.hstack`, `Html` objects (returned by most marimo
 functions, and subclassed by most marimo classes) have a shortcut using
 via their `center`, `right`, and `left` methods.
 &lt;!----&gt;
+
 This markdown is left-justified.
 
 ```{=html}
@@ -467,9 +477,11 @@ This markdown is left-justified.
             </marimo-cell-output>
             <marimo-cell-code hidden="">mo.accordion(%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22Documentation%3A%20%60Html.center%60%22%3A%20mo.doc(mo.Html.center)%2C%0A%20%20%20%20%20%20%20%20%22Documentation%3A%20%60Html.right%60%22%3A%20mo.doc(mo.Html.right)%2C%0A%20%20%20%20%20%20%20%20%22Documentation%3A%20%60Html.left%60%22%3A%20mo.doc(mo.Html.left)%2C%0A%20%20%20%20%7D%0A)</marimo-cell-code>
         </marimo-island>
+</marimo-accordion></marimo-cell-output></marimo-island></section>
 <section id="accordion" class="level2">
 <h2 class="anchored" data-anchor-id="accordion">Accordion</h2>
-<p>Create expandable shelves of content using <code>mo.accordion</code>: <!----> An accordion can contain multiple items:</p>
+<p>Create expandable shelves of content using <code>mo.accordion</code>: <!----></p>
+<p>An accordion can contain multiple items:</p>
 <marimo-island data-app-id="main" data-cell-id="Hstk" data-reactive="true">
             <marimo-cell-output>
             <marimo-accordion data-labels="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Multiple items</span></span>&quot;,&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Allow multiple items to be open</span></span>&quot;]" data-multiple="false"><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">By default, only one item can be open at a time</span></span></div><div><span class="markdown prose dark:prose-invert contents"><span class="paragraph">Use the keyword argument <code>multiple=True</code> to allow multiple items
@@ -483,7 +495,7 @@ to be open at the same time</span></span></div></marimo-accordion>
 <p>Use <code>mo.ui.tabs</code> to display multiple objects in a single tabbed output:</p>
 <marimo-island data-app-id="main" data-cell-id="nWHF" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="nWHF-4" random-id="ae24503a-275d-63fd-aa52-03c0b33faef0"><marimo-tabs data-initial-value="&quot;&quot;" data-label="null" data-tabs="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>🧙‍♀ User</span></span>&quot;,&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>🏢 Organization</span></span>&quot;]"><div data-kind="tab"><div style="display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><span class="markdown prose dark:prose-invert contents"><span class="paragraph"><strong>Edit User</strong></span></span><marimo-ui-element object-id="nWHF-0" random-id="587da41e-6561-f20d-483d-0da191ee70f6"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>First Name</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element><marimo-ui-element object-id="nWHF-1" random-id="a8c91630-12b5-60c4-502c-a211cb5f9efd"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Last Name</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element></div></div><div data-kind="tab"><div style="display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><span class="markdown prose dark:prose-invert contents"><span class="paragraph"><strong>Edit Organization</strong></span></span><marimo-ui-element object-id="nWHF-2" random-id="353506ce-59a2-cb82-5f5d-53480d870500"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Organization Name</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element><marimo-ui-element object-id="nWHF-3" random-id="555f266e-fbab-47a9-e311-1bec33519c1e"><marimo-number data-initial-value="0" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Number of employees</span></span>&quot;" data-start="0" data-stop="1000" data-debounce="false" data-full-width="false" data-disabled="false"></marimo-number></marimo-ui-element></div></div></marimo-tabs></marimo-ui-element>
+    <marimo-ui-element object-id="nWHF-4" random-id="6d406b24-5284-7a8a-a0bd-9ecbe08e0d8b"><marimo-tabs data-initial-value="&quot;&quot;" data-label="null" data-tabs="[&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>🧙‍♀ User</span></span>&quot;,&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>🏢 Organization</span></span>&quot;]"><div data-kind="tab"><div style="display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><span class="markdown prose dark:prose-invert contents"><span class="paragraph"><strong>Edit User</strong></span></span><marimo-ui-element object-id="nWHF-0" random-id="afe4c4ea-cfbb-1b92-62f6-cf3c2f0c53d7"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>First Name</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element><marimo-ui-element object-id="nWHF-1" random-id="f11a0e78-26b4-b677-b5f1-ced3dfb6f083"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Last Name</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element></div></div><div data-kind="tab"><div style="display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><span class="markdown prose dark:prose-invert contents"><span class="paragraph"><strong>Edit Organization</strong></span></span><marimo-ui-element object-id="nWHF-2" random-id="cd030759-dfe7-7d36-5b91-359f4f89437f"><marimo-text data-initial-value="&quot;&quot;" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Organization Name</span></span>&quot;" data-placeholder="&quot;&quot;" data-kind="&quot;text&quot;" data-full-width="false" data-disabled="false" data-debounce="true"></marimo-text></marimo-ui-element><marimo-ui-element object-id="nWHF-3" random-id="2b4d0c62-4d4a-8297-6f63-fbb836865964"><marimo-number data-initial-value="0" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Number of employees</span></span>&quot;" data-start="0" data-stop="1000" data-debounce="false" data-full-width="false" data-disabled="false"></marimo-number></marimo-ui-element></div></div></marimo-tabs></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">_settings%20%3D%20mo.vstack(%0A%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20mo.md(%22**Edit%20User**%22)%2C%0A%20%20%20%20%20%20%20%20mo.ui.text(label%3D%22First%20Name%22)%2C%0A%20%20%20%20%20%20%20%20mo.ui.text(label%3D%22Last%20Name%22)%2C%0A%20%20%20%20%5D%0A)%0A%0A_organization%20%3D%20mo.vstack(%0A%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20mo.md(%22**Edit%20Organization**%22)%2C%0A%20%20%20%20%20%20%20%20mo.ui.text(label%3D%22Organization%20Name%22)%2C%0A%20%20%20%20%20%20%20%20mo.ui.number(label%3D%22Number%20of%20employees%22%2C%20start%3D0%2C%20stop%3D1000)%2C%0A%20%20%20%20%5D%0A)%0A%0Amo.ui.tabs(%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22%F0%9F%A7%99%E2%80%8D%E2%99%80%20User%22%3A%20_settings%2C%0A%20%20%20%20%20%20%20%20%22%F0%9F%8F%A2%20Organization%22%3A%20_organization%2C%0A%20%20%20%20%7D%0A)</marimo-cell-code>
 </marimo-island>
@@ -529,7 +541,7 @@ to be open at the same time</span></span></div></marimo-accordion>
         </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="ZHCJ" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><h2 id=\&quot;tree\&quot;>Tree</h2>\n<span class=\&quot;paragraph\&quot;>Display a nested structure of lists, dictionaries, and tuples with\n<code>mo.tree</code>:</span>\n<span class=\&quot;paragraph\&quot;><marimo-json-output data-json-data='[&amp;quot;text/markdown:&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;&amp;lt;strong&amp;gt;Hello!&amp;lt;/strong&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;,&amp;quot;text/markdown:&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;&amp;lt;marimo-tex class=&amp;#92;&amp;quot;arithmatex&amp;#92;&amp;quot;&amp;gt;||(f(x)||)&amp;lt;/marimo-tex&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;,{&amp;quot;c&amp;quot;:&amp;quot;text/html:&amp;lt;marimo-ui-element object-id=&amp;#x27;ZHCJ-0&amp;#x27; random-id=&amp;#x27;15fe247f-16d4-fe64-fdad-73b5581abafd&amp;#x27;&amp;gt;&amp;lt;marimo-slider data-initial-value=&amp;#x27;1&amp;#x27; data-label=&amp;#x27;null&amp;#x27; data-start=&amp;#x27;1&amp;#x27; data-stop=&amp;#x27;10&amp;#x27; data-steps=&amp;#x27;[]&amp;#x27; data-debounce=&amp;#x27;false&amp;#x27; data-disabled=&amp;#x27;false&amp;#x27; data-orientation=&amp;#x27;&amp;amp;quot;horizontal&amp;amp;quot;&amp;#x27; data-show-value=&amp;#x27;false&amp;#x27; data-include-input=&amp;#x27;false&amp;#x27; data-full-width=&amp;#x27;false&amp;#x27;&amp;gt;&amp;lt;/marimo-slider&amp;gt;&amp;lt;/marimo-ui-element&amp;gt;&amp;quot;,&amp;quot;d&amp;quot;:[&amp;quot;text/html:&amp;lt;marimo-ui-element object-id=&amp;#x27;ZHCJ-1&amp;#x27; random-id=&amp;#x27;a380e14f-7812-77d9-d187-7440ea2b827a&amp;#x27;&amp;gt;&amp;lt;marimo-checkbox data-initial-value=&amp;#x27;false&amp;#x27; data-label=&amp;#x27;null&amp;#x27; data-disabled=&amp;#x27;false&amp;#x27;&amp;gt;&amp;lt;/marimo-checkbox&amp;gt;&amp;lt;/marimo-ui-element&amp;gt;&amp;quot;,&amp;quot;text/html:&amp;lt;marimo-ui-element object-id=&amp;#x27;ZHCJ-2&amp;#x27; random-id=&amp;#x27;663f2678-2093-ced2-4b9d-201b65610b1d&amp;#x27;&amp;gt;&amp;lt;marimo-switch data-initial-value=&amp;#x27;false&amp;#x27; data-label=&amp;#x27;null&amp;#x27; data-disabled=&amp;#x27;false&amp;#x27;&amp;gt;&amp;lt;/marimo-switch&amp;gt;&amp;lt;/marimo-ui-element&amp;gt;&amp;quot;]}]' data-value-types='&amp;quot;python&amp;quot;'></marimo-json-output></span></span>&quot;"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><h2 id=\&quot;tree\&quot;>Tree</h2>\n<span class=\&quot;paragraph\&quot;>Display a nested structure of lists, dictionaries, and tuples with\n<code>mo.tree</code>:</span>\n<span class=\&quot;paragraph\&quot;><marimo-json-output data-json-data='[&amp;quot;text/markdown:&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;&amp;lt;strong&amp;gt;Hello!&amp;lt;/strong&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;,&amp;quot;text/markdown:&amp;lt;span class=&amp;#92;&amp;quot;markdown prose dark:prose-invert contents&amp;#92;&amp;quot;&amp;gt;&amp;lt;span class=&amp;#92;&amp;quot;paragraph&amp;#92;&amp;quot;&amp;gt;&amp;lt;marimo-tex class=&amp;#92;&amp;quot;arithmatex&amp;#92;&amp;quot;&amp;gt;||(f(x)||)&amp;lt;/marimo-tex&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;,{&amp;quot;c&amp;quot;:&amp;quot;text/html:&amp;lt;marimo-ui-element object-id=&amp;#x27;ZHCJ-0&amp;#x27; random-id=&amp;#x27;5a6473b6-cf8d-24d0-effd-5b0913323b5c&amp;#x27;&amp;gt;&amp;lt;marimo-slider data-initial-value=&amp;#x27;1&amp;#x27; data-label=&amp;#x27;null&amp;#x27; data-start=&amp;#x27;1&amp;#x27; data-stop=&amp;#x27;10&amp;#x27; data-steps=&amp;#x27;[]&amp;#x27; data-debounce=&amp;#x27;false&amp;#x27; data-disabled=&amp;#x27;false&amp;#x27; data-orientation=&amp;#x27;&amp;amp;quot;horizontal&amp;amp;quot;&amp;#x27; data-show-value=&amp;#x27;false&amp;#x27; data-include-input=&amp;#x27;false&amp;#x27; data-full-width=&amp;#x27;false&amp;#x27;&amp;gt;&amp;lt;/marimo-slider&amp;gt;&amp;lt;/marimo-ui-element&amp;gt;&amp;quot;,&amp;quot;d&amp;quot;:[&amp;quot;text/html:&amp;lt;marimo-ui-element object-id=&amp;#x27;ZHCJ-1&amp;#x27; random-id=&amp;#x27;d05be7be-d8ea-dd34-594d-e111a1fb1b15&amp;#x27;&amp;gt;&amp;lt;marimo-checkbox data-initial-value=&amp;#x27;false&amp;#x27; data-label=&amp;#x27;null&amp;#x27; data-disabled=&amp;#x27;false&amp;#x27;&amp;gt;&amp;lt;/marimo-checkbox&amp;gt;&amp;lt;/marimo-ui-element&amp;gt;&amp;quot;,&amp;quot;text/html:&amp;lt;marimo-ui-element object-id=&amp;#x27;ZHCJ-2&amp;#x27; random-id=&amp;#x27;371f1e0e-4b9b-9b41-1e27-5d4340b6d1ed&amp;#x27;&amp;gt;&amp;lt;marimo-switch data-initial-value=&amp;#x27;false&amp;#x27; data-label=&amp;#x27;null&amp;#x27; data-disabled=&amp;#x27;false&amp;#x27;&amp;gt;&amp;lt;/marimo-switch&amp;gt;&amp;lt;/marimo-ui-element&amp;gt;&amp;quot;]}]' data-value-types='&amp;quot;python&amp;quot;'></marimo-json-output></span></span>&quot;"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">_t%20%3D%20%5B%0A%20%20%20%20mo.md(%22**Hello!**%22)%2C%0A%20%20%20%20mo.md(r%22%24f(x)%24%22)%2C%0A%20%20%20%20%7B%22c%22%3A%20mo.ui.slider(1%2C%2010)%2C%20%22d%22%3A%20(mo.ui.checkbox()%2C%20mo.ui.switch())%7D%2C%0A%5D%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20%23%23%20Tree%0A%0A%20%20%20%20Display%20a%20nested%20structure%20of%20lists%2C%20dictionaries%2C%20and%20tuples%20with%0A%20%20%20%20%60mo.tree%60%3A%0A%0A%20%20%20%20%7Bmo.tree(_t)%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
 </marimo-island>
@@ -564,7 +576,7 @@ to be open at the same time</span></span></div></marimo-accordion>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="TqIu" data-reactive="true">
     <marimo-cell-output>
-    <marimo-callout-output data-html="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;><strong>This is a callout!</strong></span>\n<span class=\&quot;paragraph\&quot;>You can turn any HTML or markdown into an emphasized callout.\nYou can choose from a variety of different callout kind. This one is:\n<marimo-ui-element object-id='qnkX-0' random-id='d661888c-4b91-9ae7-513b-082b322db5bc'><marimo-dropdown data-initial-value='[&amp;quot;neutral&amp;quot;]' data-label='null' data-options='[&amp;quot;neutral&amp;quot;,&amp;quot;warn&amp;quot;,&amp;quot;success&amp;quot;,&amp;quot;info&amp;quot;,&amp;quot;danger&amp;quot;]' data-allow-select-none='false' data-searchable='false' data-full-width='false'></marimo-dropdown></marimo-ui-element></span></span>&quot;" data-kind="&quot;neutral&quot;"></marimo-callout-output>
+    <marimo-callout-output data-html="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;><strong>This is a callout!</strong></span>\n<span class=\&quot;paragraph\&quot;>You can turn any HTML or markdown into an emphasized callout.\nYou can choose from a variety of different callout kind. This one is:\n<marimo-ui-element object-id='qnkX-0' random-id='371c2db1-8adf-a9a9-beaa-fdee593ab41b'><marimo-dropdown data-initial-value='[&amp;quot;neutral&amp;quot;]' data-label='null' data-options='[&amp;quot;neutral&amp;quot;,&amp;quot;warn&amp;quot;,&amp;quot;success&amp;quot;,&amp;quot;info&amp;quot;,&amp;quot;danger&amp;quot;]' data-allow-select-none='false' data-searchable='false' data-full-width='false'></marimo-dropdown></marimo-ui-element></span></span>&quot;" data-kind="&quot;neutral&quot;"></marimo-callout-output>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20**This%20is%20a%20callout!**%0A%0A%20%20%20%20You%20can%20turn%20any%20HTML%20or%20markdown%20into%20an%20emphasized%20callout.%0A%20%20%20%20You%20can%20choose%20from%20a%20variety%20of%20different%20callout%20kind.%20This%20one%20is%3A%0A%20%20%20%20%7Bcallout_kind%7D%0A%20%20%20%20%22%22%22%0A).callout(kind%3Dcallout_kind.value)</marimo-cell-code>
 </marimo-island>
@@ -593,7 +605,7 @@ to be open at the same time</span></span></div></marimo-accordion>
 <!-- -->
 
 </section>
-</marimo-accordion></marimo-cell-output></marimo-island></section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1061,9 +1073,9 @@ to be open at the same time</span></span></div></marimo-accordion>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Layout</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">marimo-version:</span><span class="co"> 0.13.2</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">marimo-version:</span><span class="co"> 0.23.1</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">header:</span><span class="co"> |-</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">  # Copyright 2024 Marimo. All rights reserved.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">  # Copyright 2026 Marimo. All rights reserved</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># Layout</span></span>
@@ -1071,238 +1083,241 @@ to be open at the same time</span></span></div></marimo-accordion>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="in">`marimo`</span> provides functions to help you lay out your output, such as</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>in rows and columns, accordions, tabs, and callouts.</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Rows and columns</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>Arrange objects into rows and columns with <span class="in">`mo.hstack`</span> and <span class="in">`mo.vstack`</span>.</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>mo.hstack(</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    [mo.ui.text(label<span class="op">=</span><span class="st">"hello"</span>), mo.ui.slider(<span class="dv">1</span>, <span class="dv">10</span>, label<span class="op">=</span><span class="st">"slider"</span>)],</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    justify<span class="op">=</span><span class="st">"start"</span>,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>mo.vstack([mo.ui.text(label<span class="op">=</span><span class="st">"world"</span>), mo.ui.number(<span class="dv">1</span>, <span class="dv">10</span>, label<span class="op">=</span><span class="st">"number"</span>)])</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> mo.vstack(</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        mo.hstack(</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>            [mo.ui.text(label<span class="op">=</span><span class="st">"hello"</span>), mo.ui.slider(<span class="dv">1</span>, <span class="dv">10</span>, label<span class="op">=</span><span class="st">"slider"</span>)],</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        mo.hstack(</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>            [mo.ui.text(label<span class="op">=</span><span class="st">"world"</span>), mo.ui.number(<span class="dv">1</span>, <span class="dv">10</span>, label<span class="op">=</span><span class="st">"number"</span>)],</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>).center()</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>mo.md(</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="ss">    Combine `mo.hstack` with `mo.vstack` to make grids:</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>grid<span class="sc">}</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="ss">    You can pass anything to `mo.hstack` to `mo.vstack` (including</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">    plots!).</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>**Customization.**</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>The presentation of stacked elements can be customized with some arguments</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>that are best understood by example.</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>justify <span class="op">=</span> mo.ui.dropdown(</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"start"</span>, <span class="st">"center"</span>, <span class="st">"end"</span>, <span class="st">"space-between"</span>, <span class="st">"space-around"</span>],</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    value<span class="op">=</span><span class="st">"space-between"</span>,</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"justify"</span>,</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>align <span class="op">=</span> mo.ui.dropdown(</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"start"</span>, <span class="st">"center"</span>, <span class="st">"end"</span>, <span class="st">"stretch"</span>], value<span class="op">=</span><span class="st">"center"</span>, label<span class="op">=</span><span class="st">"align"</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>gap <span class="op">=</span> mo.ui.number(start<span class="op">=</span><span class="dv">0</span>, step<span class="op">=</span><span class="fl">0.25</span>, stop<span class="op">=</span><span class="dv">2</span>, value<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">"gap"</span>)</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>wrap <span class="op">=</span> mo.ui.checkbox(label<span class="op">=</span><span class="st">"wrap"</span>)</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>mo.hstack([justify, align, gap, wrap], justify<span class="op">=</span><span class="st">"center"</span>)</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> mo.ui.slider(label<span class="op">=</span><span class="st">"box size"</span>, start<span class="op">=</span><span class="dv">60</span>, stop<span class="op">=</span><span class="dv">500</span>)</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>mo.hstack([size], justify<span class="op">=</span><span class="st">"center"</span>)</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>mo.hstack(</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    boxes,</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    align<span class="op">=</span>align.value,</span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    justify<span class="op">=</span>justify.value,</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    gap<span class="op">=</span>gap.value,</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    wrap<span class="op">=</span>wrap.value,</span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>mo.vstack(</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>    boxes,</span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>    align<span class="op">=</span>align.value,</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    gap<span class="op">=</span>gap.value,</span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_box(num<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    box_size <span class="op">=</span> size.value <span class="op">+</span> num <span class="op">*</span> <span class="dv">10</span></span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mo.Html(</span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"&lt;div style='min-width: </span><span class="sc">{</span>box_size<span class="sc">}</span><span class="ss">px; min-height: </span><span class="sc">{</span>box_size<span class="sc">}</span><span class="ss">px; background-color: orange; text-align: center; line-height: </span><span class="sc">{</span>box_size<span class="sc">}</span><span class="ss">px'&gt;</span><span class="sc">{</span><span class="bu">str</span>(num)<span class="sc">}</span><span class="ss">&lt;/div&gt;"</span></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Rows and columns</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>Arrange objects into rows and columns with <span class="in">`mo.hstack`</span> and <span class="in">`mo.vstack`</span>.</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>mo.hstack(</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    [mo.ui.text(label<span class="op">=</span><span class="st">"hello"</span>), mo.ui.slider(<span class="dv">1</span>, <span class="dv">10</span>, label<span class="op">=</span><span class="st">"slider"</span>)],</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    justify<span class="op">=</span><span class="st">"start"</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>mo.vstack([mo.ui.text(label<span class="op">=</span><span class="st">"world"</span>), mo.ui.number(<span class="dv">1</span>, <span class="dv">10</span>, label<span class="op">=</span><span class="st">"number"</span>)])</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> mo.vstack(</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        mo.hstack(</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>            [mo.ui.text(label<span class="op">=</span><span class="st">"hello"</span>), mo.ui.slider(<span class="dv">1</span>, <span class="dv">10</span>, label<span class="op">=</span><span class="st">"slider"</span>)],</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        mo.hstack(</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>            [mo.ui.text(label<span class="op">=</span><span class="st">"world"</span>), mo.ui.number(<span class="dv">1</span>, <span class="dv">10</span>, label<span class="op">=</span><span class="st">"number"</span>)],</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>).center()</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>mo.md(</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="ss">    Combine `mo.hstack` with `mo.vstack` to make grids:</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>grid<span class="sc">}</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">    You can pass anything to `mo.hstack` to `mo.vstack` (including</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="ss">    plots!).</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>**Customization.**</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>The presentation of stacked elements can be customized with some arguments</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>that are best understood by example.</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>justify <span class="op">=</span> mo.ui.dropdown(</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"start"</span>, <span class="st">"center"</span>, <span class="st">"end"</span>, <span class="st">"space-between"</span>, <span class="st">"space-around"</span>],</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    value<span class="op">=</span><span class="st">"space-between"</span>,</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"justify"</span>,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>align <span class="op">=</span> mo.ui.dropdown(</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"start"</span>, <span class="st">"center"</span>, <span class="st">"end"</span>, <span class="st">"stretch"</span>], value<span class="op">=</span><span class="st">"center"</span>, label<span class="op">=</span><span class="st">"align"</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>gap <span class="op">=</span> mo.ui.number(start<span class="op">=</span><span class="dv">0</span>, step<span class="op">=</span><span class="fl">0.25</span>, stop<span class="op">=</span><span class="dv">2</span>, value<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">"gap"</span>)</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>wrap <span class="op">=</span> mo.ui.checkbox(label<span class="op">=</span><span class="st">"wrap"</span>)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>mo.hstack([justify, align, gap, wrap], justify<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> mo.ui.slider(label<span class="op">=</span><span class="st">"box size"</span>, start<span class="op">=</span><span class="dv">60</span>, stop<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>mo.hstack([size], justify<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>mo.hstack(</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    boxes,</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    align<span class="op">=</span>align.value,</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    justify<span class="op">=</span>justify.value,</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    gap<span class="op">=</span>gap.value,</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    wrap<span class="op">=</span>wrap.value,</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>mo.vstack(</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>    boxes,</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    align<span class="op">=</span>align.value,</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    gap<span class="op">=</span>gap.value,</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_box(num<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>    box_size <span class="op">=</span> size.value <span class="op">+</span> num <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mo.Html(</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"&lt;div style='min-width: </span><span class="sc">{</span>box_size<span class="sc">}</span><span class="ss">px; min-height: </span><span class="sc">{</span>box_size<span class="sc">}</span><span class="ss">px; background-color: orange; text-align: center; line-height: </span><span class="sc">{</span>box_size<span class="sc">}</span><span class="ss">px'&gt;</span><span class="sc">{</span><span class="bu">str</span>(num)<span class="sc">}</span><span class="ss">&lt;/div&gt;"</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>boxes <span class="op">=</span> [create_box(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>)]</span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>mo.accordion(</span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `mo.hstack`"</span>: mo.doc(mo.hstack),</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `mo.vstack`"</span>: mo.doc(mo.vstack),</span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>**Justifying `Html`.** While you can center or right-justify any object</span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>using <span class="in">`mo.hstack`</span>, <span class="in">`Html`</span> objects (returned by most marimo</span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>functions, and subclassed by most marimo classes) have a shortcut using</span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>via their <span class="in">`center`</span>, <span class="in">`right`</span>, and <span class="in">`left`</span> methods.</span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>This markdown is left-justified.</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>boxes <span class="op">=</span> [create_box(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>)]</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>mo.accordion(</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `mo.hstack`"</span>: mo.doc(mo.hstack),</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `mo.vstack`"</span>: mo.doc(mo.vstack),</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>**Justifying `Html`.** While you can center or right-justify any object</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>using <span class="in">`mo.hstack`</span>, <span class="in">`Html`</span> objects (returned by most marimo</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>functions, and subclassed by most marimo classes) have a shortcut using</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>via their <span class="in">`center`</span>, <span class="in">`right`</span>, and <span class="in">`left`</span> methods.</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
 <span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>mo.md(<span class="st">"This markdown is centered."</span>).center()</span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>mo.md(<span class="st">"This markdown is right-justified."</span>).right()</span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>mo.accordion(</span>
-<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `Html.center`"</span>: mo.doc(mo.Html.center),</span>
-<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `Html.right`"</span>: mo.doc(mo.Html.right),</span>
-<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `Html.left`"</span>: mo.doc(mo.Html.left),</span>
-<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## Accordion</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>This markdown is left-justified.</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>mo.md(<span class="st">"This markdown is centered."</span>).center()</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>mo.md(<span class="st">"This markdown is right-justified."</span>).right()</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>mo.accordion(</span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `Html.center`"</span>: mo.doc(mo.Html.center),</span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `Html.right`"</span>: mo.doc(mo.Html.right),</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documentation: `Html.left`"</span>: mo.doc(mo.Html.left),</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>Create expandable shelves of content using <span class="in">`mo.accordion`</span>:</span>
-<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>An accordion can contain multiple items:</span>
-<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>mo.accordion(</span>
-<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Multiple items"</span>: <span class="st">"By default, only one item can be open at a time"</span>,</span>
-<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Allow multiple items to be open"</span>: (</span>
-<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>            <span class="st">"""</span></span>
-<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a><span class="st">            Use the keyword argument `multiple=True` to allow multiple items</span></span>
-<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a><span class="st">            to be open at the same time</span></span>
-<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a><span class="st">            """</span></span>
-<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tabs</span></span>
-<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>Use <span class="in">`mo.ui.tabs`</span> to display multiple objects in a single tabbed output:</span>
-<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>_settings <span class="op">=</span> mo.vstack(</span>
-<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a>        mo.md(<span class="st">"**Edit User**"</span>),</span>
-<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>        mo.ui.text(label<span class="op">=</span><span class="st">"First Name"</span>),</span>
-<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>        mo.ui.text(label<span class="op">=</span><span class="st">"Last Name"</span>),</span>
-<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>_organization <span class="op">=</span> mo.vstack(</span>
-<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>        mo.md(<span class="st">"**Edit Organization**"</span>),</span>
-<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>        mo.ui.text(label<span class="op">=</span><span class="st">"Organization Name"</span>),</span>
-<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>        mo.ui.number(label<span class="op">=</span><span class="st">"Number of employees"</span>, start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span><span class="dv">1000</span>),</span>
-<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>mo.ui.tabs(</span>
-<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>        <span class="st">"🧙‍♀ User"</span>: _settings,</span>
-<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>        <span class="st">"🏢 Organization"</span>: _organization,</span>
-<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>mo.accordion({<span class="st">"Documentation: `mo.ui.tabs`"</span>: mo.doc(mo.ui.tabs)})</span>
-<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a>_t <span class="op">=</span> [</span>
-<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>    mo.md(<span class="st">"**Hello!**"</span>),</span>
-<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a>    mo.md(<span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="kw">(</span><span class="vs">x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>),</span>
-<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"c"</span>: mo.ui.slider(<span class="dv">1</span>, <span class="dv">10</span>), <span class="st">"d"</span>: (mo.ui.checkbox(), mo.ui.switch())},</span>
-<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>mo.md(</span>
-<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
-<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a><span class="ss">    ## Tree</span></span>
-<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a><span class="ss">    Display a nested structure of lists, dictionaries, and tuples with</span></span>
-<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a><span class="ss">    `mo.tree`:</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="fu">## Accordion</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>Create expandable shelves of content using <span class="in">`mo.accordion`</span>:</span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>An accordion can contain multiple items:</span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>mo.accordion(</span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Multiple items"</span>: <span class="st">"By default, only one item can be open at a time"</span>,</span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Allow multiple items to be open"</span>: (</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>            <span class="st">"""</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a><span class="st">            Use the keyword argument `multiple=True` to allow multiple items</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a><span class="st">            to be open at the same time</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a><span class="st">            """</span></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tabs</span></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>Use <span class="in">`mo.ui.tabs`</span> to display multiple objects in a single tabbed output:</span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>_settings <span class="op">=</span> mo.vstack(</span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>        mo.md(<span class="st">"**Edit User**"</span>),</span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>        mo.ui.text(label<span class="op">=</span><span class="st">"First Name"</span>),</span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>        mo.ui.text(label<span class="op">=</span><span class="st">"Last Name"</span>),</span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>_organization <span class="op">=</span> mo.vstack(</span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>        mo.md(<span class="st">"**Edit Organization**"</span>),</span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>        mo.ui.text(label<span class="op">=</span><span class="st">"Organization Name"</span>),</span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>        mo.ui.number(label<span class="op">=</span><span class="st">"Number of employees"</span>, start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span><span class="dv">1000</span>),</span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>mo.ui.tabs(</span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>        <span class="st">"🧙‍♀ User"</span>: _settings,</span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a>        <span class="st">"🏢 Organization"</span>: _organization,</span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a>mo.accordion({<span class="st">"Documentation: `mo.ui.tabs`"</span>: mo.doc(mo.ui.tabs)})</span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>_t <span class="op">=</span> [</span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>    mo.md(<span class="st">"**Hello!**"</span>),</span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>    mo.md(<span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="kw">(</span><span class="vs">x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>),</span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"c"</span>: mo.ui.slider(<span class="dv">1</span>, <span class="dv">10</span>), <span class="st">"d"</span>: (mo.ui.checkbox(), mo.ui.switch())},</span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a>mo.md(</span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a><span class="ss">    ## Tree</span></span>
 <span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>mo<span class="sc">.</span>tree(_t)<span class="sc">}</span></span>
-<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
-<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a>mo.accordion({<span class="st">"Documentation: `mo.tree`"</span>: mo.doc(mo.tree)})</span>
-<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a><span class="fu">## Callout</span></span>
-<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a>Turn any markdown or HTML into an emphasized callout with the <span class="in">`callout`</span></span>
-<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>method:</span>
+<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a><span class="ss">    Display a nested structure of lists, dictionaries, and tuples with</span></span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a><span class="ss">    `mo.tree`:</span></span>
+<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>mo<span class="sc">.</span>tree(_t)<span class="sc">}</span></span>
+<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
+<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a>mo.accordion({<span class="st">"Documentation: `mo.tree`"</span>: mo.doc(mo.tree)})</span>
+<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a><span class="fu">## Callout</span></span>
 <span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a>callout_kind <span class="op">=</span> mo.ui.dropdown(</span>
-<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"neutral"</span>, <span class="st">"warn"</span>, <span class="st">"success"</span>, <span class="st">"info"</span>, <span class="st">"danger"</span>], value<span class="op">=</span><span class="st">"neutral"</span></span>
-<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>mo.md(</span>
-<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
-<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a><span class="ss">    **This is a callout!**</span></span>
-<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a><span class="ss">    You can turn any HTML or markdown into an emphasized callout.</span></span>
-<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a><span class="ss">    You can choose from a variety of different callout kind. This one is:</span></span>
-<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>callout_kind<span class="sc">}</span></span>
-<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
-<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>).callout(kind<span class="op">=</span>callout_kind.value)</span>
-<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a>mo.accordion({<span class="st">"Documentation: `mo.callout`"</span>: mo.doc(mo.callout)})</span>
-<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span>
-<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a>Turn any markdown or HTML into an emphasized callout with the <span class="in">`callout`</span></span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a>method:</span>
+<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a>callout_kind <span class="op">=</span> mo.ui.dropdown(</span>
+<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"neutral"</span>, <span class="st">"warn"</span>, <span class="st">"success"</span>, <span class="st">"info"</span>, <span class="st">"danger"</span>], value<span class="op">=</span><span class="st">"neutral"</span></span>
+<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>mo.md(</span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a><span class="ss">    **This is a callout!**</span></span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a><span class="ss">    You can turn any HTML or markdown into an emphasized callout.</span></span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a><span class="ss">    You can choose from a variety of different callout kind. This one is:</span></span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>callout_kind<span class="sc">}</span></span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
+<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a>).callout(kind<span class="op">=</span>callout_kind.value)</span>
+<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>mo.accordion({<span class="st">"Documentation: `mo.callout`"</span>: mo.doc(mo.callout)})</span>
+<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span>
+<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

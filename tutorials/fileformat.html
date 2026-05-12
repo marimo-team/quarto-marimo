@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../tutorials/external_dependencies.html" rel="next">
+<link href="../tutorials/sql.html" rel="next">
 <link href="../tutorials/layout.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../tutorials/ui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ui</span></a>
+ <span class="menu-text">UI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -219,6 +219,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../tutorials/fileformat.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Fileformat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SQL</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -259,13 +265,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#file-format" id="toc-file-format" class="nav-link active" data-scroll-target="#file-format">File Format</a>
   <ul class="collapse">
-  <li><a href="#importing-functions-and-classes-from-notebooks" id="toc-importing-functions-and-classes-from-notebooks" class="nav-link" data-scroll-target="#importing-functions-and-classes-from-notebooks">Importing functions and classes from notebooks</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">Properties</a></li>
+  <li><a href="#importing-functions-and-classes-from-notebooks" id="toc-importing-functions-and-classes-from-notebooks" class="nav-link" data-scroll-target="#importing-functions-and-classes-from-notebooks">Importing functions and classes from notebooks</a>
+  <ul class="collapse">
+  <li><a href="#declaring-imports-used-by-functions-and-classes" id="toc-declaring-imports-used-by-functions-and-classes" class="nav-link" data-scroll-target="#declaring-imports-used-by-functions-and-classes">Declaring imports used by functions and classes</a></li>
+  <li><a href="#functions-and-classes" id="toc-functions-and-classes" class="nav-link" data-scroll-target="#functions-and-classes">Functions and classes</a></li>
+  </ul></li>
   <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a>
   <ul class="collapse">
   <li><a href="#i-want-to-edit-notebooks-in-a-different-editor-what-do-i-need-to-know" id="toc-i-want-to-edit-notebooks-in-a-different-editor-what-do-i-need-to-know" class="nav-link" data-scroll-target="#i-want-to-edit-notebooks-in-a-different-editor-what-do-i-need-to-know">I want to edit notebooks in a different editor, what do I need to know?</a></li>
   <li><a href="#i-want-to-import-functions-from-a-marimo-notebook-what-do-i-need-to-know" id="toc-i-want-to-import-functions-from-a-marimo-notebook-what-do-i-need-to-know" class="nav-link" data-scroll-target="#i-want-to-import-functions-from-a-marimo-notebook-what-do-i-need-to-know">I want to import functions from a marimo notebook, what do I need to know?</a></li>
   <li><a href="#i-want-to-run-pytest-on-marimo-notebooks-what-do-i-need-to-know" id="toc-i-want-to-run-pytest-on-marimo-notebooks-what-do-i-need-to-know" class="nav-link" data-scroll-target="#i-want-to-run-pytest-on-marimo-notebooks-what-do-i-need-to-know">I want to run pytest on marimo notebooks, what do I need to know?</a></li>
   </ul></li>
+  <li><a href="#this-notebooks-source-code" id="toc-this-notebooks-source-code" class="nav-link" data-scroll-target="#this-notebooks-source-code">This notebook’s source code</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -313,8 +326,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>✏️ formattable using your tool of choice</li>
 <li>➕ easily versioned with git, producing small diffs</li>
 <li>🐍 usable as Python scripts, with UI elements taking their default values</li>
-<li>🧩 modular, exposing functions and classes that can be imported from the notebook <!----> ## Example</li>
+<li>🧩 modular, exposing functions and classes that can be imported from the notebook <!----></li>
 </ul>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
 <p>Consider a marimo notebook with the following four cells.</p>
 <p>First cell:</p>
 <pre class="python3"><code>print(text.value)</code></pre>
@@ -356,7 +371,10 @@ def _():
 if __name__ == "__main__":
     app.run()</code></pre>
 <p>As you can see, this is <em>pure Python</em>. This is part of the reason why marimo’s generated files are <strong>git-friendly</strong>: small changes made using the marimo editor result in small changes to the file that marimo generates.</p>
-<p>Moreover, the cell defining a single pure function <code>say_hello</code> was saved “top-level” in the notebook file, making it possible for you to import it into other Python files or notebooks. <!----> ## Properties</p>
+<p>Moreover, the cell defining a single pure function <code>say_hello</code> was saved “top-level” in the notebook file, making it possible for you to import it into other Python files or notebooks. <!----></p>
+</section>
+<section id="properties" class="level2">
+<h2 class="anchored" data-anchor-id="properties">Properties</h2>
 <p>marimo’s file format was designed to be easy to read and easy to work with, while also serving the needs of the marimo library. You can even edit the generated file’s cells directly, using your favorite text editor, and format the file with your favorite code formatter.</p>
 <p>We explain some properties of marimo’s file format below.</p>
 <marimo-island data-app-id="main" data-cell-id="vblA" data-reactive="true">
@@ -422,9 +440,12 @@ Python files.</span></span></div></marimo-accordion>
             </marimo-cell-output>
             <marimo-cell-code hidden="">mo.accordion(%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22Cells%20are%20functions%22%3A%20%22%22%22%0A%20%20%20%20In%20the%20%60dataflow%60%20tutorial%2C%20we%20saw%20that%20cells%20are%20like%20functions%20mapping%0A%20%20%20%20their%20refs%20(the%20global%20%20variables%20they%20uses%20but%20don't%20define)%20to%20their%0A%20%20%20%20defs%20(the%20global%20variables%20they%20define).%20The%20generated%20code%20makes%20this%0A%20%20%20%20analogy%20explicit.%0A%0A%20%20%20%20In%20the%20generated%20code%2C%20there%20is%20a%20function%20for%20each%20cell.%20The%20arguments%0A%20%20%20%20of%20%20the%20function%20are%20the%20cell's%20refs%20%2C%20and%20its%20returned%20variables%20are%0A%20%20%20%20its%20defs%20that%20are%20referenced%20by%20other%20cells.%0A%0A%20%20%20%20For%20example%2C%20the%20code%0A%0A%20%20%20%20%60%60%60python3%0A%20%20%20%20%40app.cell%0A%20%20%20%20def%20_(mo)%3A%0A%20%20%20%20%20%20%20%20text%20%3D%20mo.ui.text(value%3D%22Hello%2C%20World!%22)%0A%20%20%20%20%20%20%20%20text%0A%20%20%20%20%20%20%20%20return%20text%2C%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20says%20that%20the%20cell%20takes%20as%20input%20a%20variable%20called%20%60mo%60%2C%20and%20it%20creates%0A%20%20%20%20a%20global%20variable%20called%20%60text%60%20(that%20is%20read%20by%20another%20cell).%0A%0A%20%20%20%20In%20contrast%2C%20the%20code%0A%0A%20%20%20%20%60%60%60python3%0A%20%20%20%20%40app.cell%0A%20%20%20%20def%20_()%3A%0A%20%20%20%20%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20%20%20%20%20return%20mo%2C%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20says%20that%20the%20cell%20doesn't%20depend%20on%20any%20other%20cells%20(its%20argument%20list%0A%20%20%20%20is%20%20empty)%2C%20though%20it%20does%20create%20the%20variable%20%60mo%60%20which%20the%20previous%0A%20%20%20%20cell%20requires%20as%20input.%0A%20%20%20%20%22%22%22%2C%0A%20%20%20%20%20%20%20%20%22Cells%20are%20stored%20in%20presentation%20order%22%3A%20%22%22%22%0A%20%20%20%20Cells%20are%20stored%20in%20the%20order%20that%20they%20are%20arranged%20in%20the%20marimo%0A%20%20%20%20editor.%20So%20if%20you%20want%20to%20rearrange%0A%20%20%20%20your%20cells%20using%20your%20favorite%20text%20editor%2C%20just%20rearrange%20the%0A%20%20%20%20order%20that%20they're%20defined%20in%20the%20file.%0A%20%20%20%20%22%22%22%2C%0A%20%20%20%20%20%20%20%20%22Text%20formatting%20is%20preserved%22%3A%20%22%22%22%0A%20%20%20%20marimo%20guarantees%20that%20however%20your%20source%20code%20was%0A%20%20%20%20formatted%20in%20the%20marimo%20editor%20is%20exactly%20how%20it%20will%20be%20stored%20in%0A%20%20%20%20the%20generated%20code.%20For%20example%2C%20whitespace%2C%20line%20breaks%2C%20and%20so%20on%20are%0A%20%20%20%20all%20preserved%20exactly.%20This%20means%20that%20you%20can%20touch%20up%20formatting%20in%0A%20%20%20%20your%20text%20editor%2C%20either%20manually%20or%20using%20automated%20formatters%20like%0A%20%20%20%20Black%2C%20and%20be%20confident%20that%20your%20changes%20will%20be%20preserved.%0A%20%20%20%20%22%22%22%2C%0A%20%20%20%20%20%20%20%20%22Cell%20functions%20can%20have%20names%22%3A%20%22%22%22%0A%20%20%20%20If%20you%20want%20to%2C%20you%20can%20replace%20the%20default%20names%20for%20cell%20functions%0A%20%20%20%20with%20meaningful%20ones.%0A%0A%20%20%20%20For%20example%2C%20change%0A%0A%20%20%20%20%60%60%60python3%0A%20%20%20%20%40app.cell%0A%20%20%20%20def%20_(text)%3A%0A%20%20%20%20%20%20%20%20print(text.value)%0A%20%20%20%20%20%20%20%20return%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20to%0A%0A%20%20%20%20%60%60%60python3%0A%20%20%20%20%40app.cell%0A%20%20%20%20def%20echo(text)%3A%0A%20%20%20%20%20%20%20%20print(text.value)%0A%20%20%20%20%20%20%20%20return%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20This%20can%20make%20the%20generated%20code%20more%20readable.%0A%20%20%20%20%22%22%22%2C%0A%20%20%20%20%20%20%20%20%22No%20magical%20tokens%22%3A%20%22%22%22%0A%20%20%20%20marimo's%20generated%20code%20is%20pure%20Python%3B%20no%20magical%20syntax.%0A%20%20%20%20%22%22%22%2C%0A%20%20%20%20%20%20%20%20%22Cell%20signatures%20automatically%20maintained%22%3A%20%22%22%22%0A%20%20%20%20If%20when%20editing%20a%20cell%2C%20you%20forget%20to%20include%20all%20a%20cell's%20refs%20in%20its%0A%20%20%20%20argument%20list%2C%20or%20all%20its%20defs%20in%20its%20returns%2C%20marimo%20will%20fix%20them%20he%20next%0A%20%20%20%20time%20you%20try%20to%20open%20it%20in%20the%20marimo%20editor.%20So%20don't%20worry%20that%20you'll%0A%20%20%20%20botch%20a%20cell's%20signature%20when%20editing%20it.%0A%20%20%20%20%22%22%22%2C%0A%20%20%20%20%20%20%20%20%22The%20%60app%60%20object%22%3A%20%22%22%22%0A%20%20%20%20At%20the%20top%20of%20the%20generated%20code%2C%20a%20variable%20named%20%60app%60%20is%20created.%0A%20%20%20%20This%20object%20collects%20the%20cells%20into%20a%20dataflow%20graph%2C%20using%20the%20%60cell%60%0A%20%20%20%20decorator.%0A%20%20%20%20%22%22%22%2C%0A%20%20%20%20%20%20%20%20%22Runnable%20as%20a%20script%22%3A%20%22%22%22%0A%20%20%20%20You%20can%20run%20marimo%20apps%20as%20scripts%20at%20the%20command%20line%2C%0A%20%20%20%20using%20Python.%20This%20will%20execute%20the%20cells%20in%20a%0A%20%20%20%20topologically%20sorted%20order%2C%20just%20as%20they%20would%20run%20if%20you%20opened%20the%20app%0A%20%20%20%20with%20%60marimo%20edit%60.%0A%0A%20%20%20%20For%20example%3A%20running%20our%20example%20as%20a%20script%20would%20print%20%60Hello%0A%20%20%20%20World!%60%20to%20the%20console.%0A%20%20%20%20%22%22%22%2C%0A%20%20%20%20%20%20%20%20%22%22%22Usable%20as%20a%20module%22%22%22%3A%20%22%22%22%0A%20%20%20%20Import%20top-level%20functions%20and%20classes%20from%20the%20notebook%20into%20other%0A%20%20%20%20Python%20files.%0A%20%20%20%20%22%22%22%2C%0A%20%20%20%20%7D%0A)</marimo-cell-code>
         </marimo-island>
+</section>
 <section id="importing-functions-and-classes-from-notebooks" class="level2">
 <h2 class="anchored" data-anchor-id="importing-functions-and-classes-from-notebooks">Importing functions and classes from notebooks</h2>
-<p>The details of marimo’s file format are important if you want to import functions and classes defined in your notebook into other Python modules. If you don’t intend to do so, you can skip this section. <!----> ### Declaring imports used by functions and classes</p>
+<p>The details of marimo’s file format are important if you want to import functions and classes defined in your notebook into other Python modules. If you don’t intend to do so, you can skip this section. <!----></p>
+<section id="declaring-imports-used-by-functions-and-classes" class="level3">
+<h3 class="anchored" data-anchor-id="declaring-imports-used-by-functions-and-classes">Declaring imports used by functions and classes</h3>
 <p>marimo can serialize functions and classes into the top-level of a file, so you can import them with regular Python syntax:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_notebook <span class="im">import</span> my_function</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In particular, if a cell defines just a single function or class, and if that function or class is pure save for references to variables defined in a special <strong>setup cell</strong>, it will be serialized top-level.</p>
@@ -433,7 +454,10 @@ Python files.</span></span></div></marimo-accordion>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> app.setup:</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> marimo <span class="im">as</span> mo</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> dataclasses</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Modules imported in a setup cell can be used in “top-level” functions or classes. You can add the setup cell from the general menu of the editor under: ::lucide:diamond-plus:: Add setup cell. <!----> ### Functions and classes</p>
+<p>Modules imported in a setup cell can be used in “top-level” functions or classes. You can add the setup cell from the general menu of the editor under: Add setup cell. <!----></p>
+</section>
+<section id="functions-and-classes" class="level3">
+<h3 class="anchored" data-anchor-id="functions-and-classes">Functions and classes</h3>
 <p>Notebook files expose functions and classes that depend only on variables defined in the setup cell (or on other such functions or classes). For example, the following cell:</p>
 <marimo-island data-app-id="main" data-cell-id="bkHC" data-reactive="true">
     <marimo-cell-output>
@@ -469,8 +493,19 @@ Python files.</span></span></div></marimo-accordion>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> simulate(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">int</span>]:</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [roll_die() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.n_rolls)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <!---->
-<p>/// attention | Heads up ///</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Heads up">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Heads up
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Not all standalone functions will be exposed in the module. If your function depends on variables that are defined in other cells, then it won’t be exposed top-level.</p>
+</div>
+</div>
 <p>For example, this function will not be exposed:</p>
 <marimo-island data-app-id="main" data-cell-id="PKri" data-reactive="true">
     <marimo-cell-output>
@@ -485,6 +520,7 @@ Python files.</span></span></div></marimo-accordion>
     <marimo-cell-code hidden="">def%20not_a_top_level_function()%3A%0A%20%20%20%20%22%22%22%0A%20%20%20%20This%20function%20depends%20on%20a%20variable%20declared%20in%20another%20cell.%0A%0A%20%20%20%20As%20a%20result%20this%20function%20isn't%20exposed%20in%20the%20file%20%E2%80%94%20and%20the%20tooltip%20in%20the%0A%20%20%20%20bottom-right%20corner%20indicates%20this.%0A%20%20%20%20%22%22%22%0A%20%20%20%20return%20variable</marimo-cell-code>
 </marimo-island>
 </section>
+</section>
 <section id="faq" class="level2">
 <h2 class="anchored" data-anchor-id="faq">FAQ</h2>
 <section id="i-want-to-edit-notebooks-in-a-different-editor-what-do-i-need-to-know" class="level3">
@@ -497,7 +533,11 @@ Python files.</span></span></div></marimo-accordion>
 </section>
 <section id="i-want-to-run-pytest-on-marimo-notebooks-what-do-i-need-to-know" class="level3">
 <h3 class="anchored" data-anchor-id="i-want-to-run-pytest-on-marimo-notebooks-what-do-i-need-to-know">I want to run pytest on marimo notebooks, what do I need to know?</h3>
-<p>See the docs on <a href="https://docs.marimo.io/guides/testing/">testing</a>. <!----> ## This notebook’s source code</p>
+<p>See the docs on <a href="https://docs.marimo.io/guides/testing/">testing</a>. <!----></p>
+</section>
+</section>
+<section id="this-notebooks-source-code" class="level2">
+<h2 class="anchored" data-anchor-id="this-notebooks-source-code">This notebook’s source code</h2>
 <p>The source code of this notebook is shown below:</p>
 <marimo-island data-app-id="main" data-cell-id="SFPL" data-reactive="true">
     <marimo-cell-output>
@@ -507,7 +547,7 @@ Python files.</span></span></div></marimo-accordion>
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="BYtC" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="BYtC-0" random-id="460da03d-d427-c236-aa90-1e184e4501ed"><marimo-code-editor data-initial-value="&quot;#!/usr/bin/env python3\n\n\&quot;\&quot;\&quot;Execute Quarto marimo cells and build the bundle the engine consumes.\n\nThis module is the Python side of the extension: it parses the document with\nmarimo's markdown pipeline, builds the app once, and returns a shared page\nheader plus one rendered payload per marimo block.\n\nFor HTML output the header also carries the exported notebook source and a\ntrusted export marker. That gives islands the original notebook back during\nhydration, including document-level metadata that would be lost in a pure\ncell-by-cell reconstruction.\n\&quot;\&quot;\&quot;\n\nimport asyncio\nimport json\nimport os\nimport re\nimport sys\nfrom collections.abc import Callable\nfrom textwrap import dedent\nfrom typing import Any, ClassVar, Optional\nfrom urllib.parse import quote\n\n# Native to python\nfrom xml.etree.ElementTree import Element\n\nimport marimo\nfrom marimo import App, MarimoIslandGenerator\nfrom marimo._session.notebook import AppFileManager\n\ntry:\n    from marimo._convert.markdown.to_ir import (\n        MARIMO_MD,\n        MarimoMdParser as MarimoParser,\n        SafeWrap as SafeWrapGeneric,\n    )\nexcept ImportError:\n    from marimo._convert.markdown.markdown import (  # type: ignore[no-redef]\n        MARIMO_MD,\n        MarimoMdParser as MarimoParser,\n        SafeWrap as SafeWrapGeneric,\n    )\n\nfrom marimo._islands import MarimoIslandStub\n\nSafeWrap = SafeWrapGeneric[App]\n\n__version__ = \&quot;0.4.5\&quot;\n\n# See https://quarto.org/docs/computations/execution-options.html\ndefault_config = {\n    \&quot;eval\&quot;: True,\n    \&quot;echo\&quot;: False,\n    \&quot;output\&quot;: True,\n    \&quot;warning\&quot;: True,\n    \&quot;error\&quot;: True,\n    \&quot;include\&quot;: True,\n    # Particular to marimo\n    \&quot;editor\&quot;: False,\n}\n\n\ndef extract_and_strip_quarto_config(block: str) -> tuple[dict[str, Any], str]:\n    pattern = r\&quot;^\\s*\\#\\|\\s*(.*?)\\s*:\\s*(.*?)(?=\\n|\\Z)\&quot;\n    config: dict[str, Any] = {}\n    lines = block.split(\&quot;\\n\&quot;)\n    if not lines:\n        return config, block\n\n    split_index = 0\n    for i, line in enumerate(lines):\n        split_index = i\n        line = line.strip()\n        if not line:\n            continue\n        source_match = re.search(pattern, line)\n        if not source_match:\n            break\n        key, value = source_match.groups()\n        config[key] = json.loads(value)\n    return config, \&quot;\\n\&quot;.join(lines[split_index:])\n\n\ndef get_mime_render(\n    global_options: dict[str, Any],\n    stub: Optional[MarimoIslandStub],\n    config: dict[str, bool],\n    mime_sensitive: bool,\n) -> dict[str, Any]:\n    \&quot;\&quot;\&quot;Map one executed island stub to the payload Quarto should splice in.\n\n    This is where the export path forks between browser-hydrated HTML and\n    MIME-sensitive outputs like PDF. For HTML we prefer marimo's island HTML so\n    the page can hydrate later; for MIME-sensitive targets we degrade to static\n    figures or text because there is no browser runtime to finish the job.\n    \&quot;\&quot;\&quot;\n    # Local supersede global supersedes default options\n    config = {**global_options, **config}\n    if not config[\&quot;include\&quot;] or stub is None:\n        return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;}\n\n    eval_enabled = config[\&quot;eval\&quot;]\n    show_output = config[\&quot;output\&quot;] and eval_enabled\n    output = stub.output\n    render_options = {\n        \&quot;display_code\&quot;: config[\&quot;echo\&quot;],\n        \&quot;reactive\&quot;: eval_enabled and not mime_sensitive,\n        \&quot;code\&quot;: stub.code,\n    }\n\n    if output:\n        mimetype = output.mimetype\n        if show_output and mime_sensitive:\n            if mimetype.startswith(\&quot;image\&quot;):\n                return {\&quot;type\&quot;: \&quot;figure\&quot;, \&quot;value\&quot;: f\&quot;{output.data}\&quot;, **render_options}\n            # Handle mimebundle - extract image data if present\n            if mimetype == \&quot;application/vnd.marimo+mimebundle\&quot;:\n                try:\n                    bundle_data = (\n                        json.loads(output.data)\n                        if isinstance(output.data, str)\n                        else output.data\n                    )\n                    if not isinstance(bundle_data, dict):\n                        raise TypeError(\&quot;Expected mimebundle dictionary\&quot;)\n                    bundle: dict[str, Any] = bundle_data\n                    # Look for image data in the bundle\n                    for key in [\&quot;image/png\&quot;, \&quot;image/jpeg\&quot;, \&quot;image/svg+xml\&quot;]:\n                        if key in bundle:\n                            return {\n                                \&quot;type\&quot;: \&quot;figure\&quot;,\n                                \&quot;value\&quot;: bundle[key],\n                                **render_options,\n                            }\n                    # Fall back to text if no image\n                    if \&quot;text/plain\&quot; in bundle:\n                        return {\n                            \&quot;type\&quot;: \&quot;para\&quot;,\n                            \&quot;value\&quot;: bundle[\&quot;text/plain\&quot;],\n                            **render_options,\n                        }\n                except (json.JSONDecodeError, TypeError):\n                    pass  # Fall through to default handling\n            if mimetype.startswith((\&quot;text/plain\&quot;, \&quot;text/markdown\&quot;)):\n                return {\&quot;type\&quot;: \&quot;para\&quot;, \&quot;value\&quot;: f\&quot;{output.data}\&quot;, **render_options}\n            if mimetype == \&quot;application/vnd.marimo+error\&quot;:\n                if config[\&quot;error\&quot;]:\n                    return {\n                        \&quot;type\&quot;: \&quot;blockquote\&quot;,\n                        \&quot;value\&quot;: f\&quot;{output.data}\&quot;,\n                        **render_options,\n                    }\n                # Suppress errors otherwise\n                return {\&quot;type\&quot;: \&quot;para\&quot;, \&quot;value\&quot;: \&quot;\&quot;, **render_options}\n\n        elif mimetype == \&quot;application/vnd.marimo+error\&quot;:\n            if config[\&quot;warning\&quot;]:\n                sys.stderr.write(\n                    \&quot;Warning: Only the `disabled` codeblock attribute is utilized\&quot;\n                    \&quot; for pandoc export. Be sure to set desired code attributes \&quot;\n                    \&quot;in quarto form.\&quot;\n                )\n            if not config[\&quot;error\&quot;]:\n                return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;}\n\n    # Nothing to display (e.g. eval=false with echo=false)\n    if not config[\&quot;echo\&quot;] and not show_output:\n        return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;, **render_options}\n\n    # HTML as catch all default\n    return {\n        \&quot;type\&quot;: \&quot;html\&quot;,\n        \&quot;value\&quot;: stub.render(\n            display_code=config[\&quot;echo\&quot;],\n            display_output=show_output,\n            is_reactive=bool(render_options[\&quot;reactive\&quot;]),\n            as_raw=mime_sensitive,\n        ),\n        **render_options,\n    }\n\n\ndef app_config_from_root(root: Element) -> dict[str, Any]:\n    # Extract meta data from root attributes.\n    config_keys = {\&quot;title\&quot;: \&quot;app_title\&quot;, \&quot;marimo-layout\&quot;: \&quot;layout_file\&quot;}\n    config = {\n        config_keys[key]: value for key, value in root.items() if key in config_keys\n    }\n    # Try to pass on other attributes as is\n    config.update({k: v for k, v in root.items() if k not in config_keys})\n    # Remove values particular to markdown saves.\n    config.pop(\&quot;marimo-version\&quot;, None)\n    return config\n\n\ndef pyproject_to_script_metadata(pyproject: str) -> str:\n    \&quot;\&quot;\&quot;Lift Quarto frontmatter into the top-of-file metadata marimo exports use.\n\n    The browser-side islands runtime only sees notebook source, not the\n    original YAML frontmatter. Re-encoding the document-level ``pyproject`` as\n    script metadata lets the exported notebook carry dependency declarations in\n    the one place marimo already knows how to read during hydration.\n    \&quot;\&quot;\&quot;\n    body = dedent(pyproject).strip()\n    if not body:\n        return \&quot;\&quot;\n    if body.startswith(\&quot;# /// script\&quot;):\n        return f\&quot;{body}\\n\&quot;\n\n    commented_lines = [\&quot;# /// script\&quot;]\n    for line in body.splitlines():\n        commented_lines.append(f\&quot;# {line}\&quot; if line else \&quot;#\&quot;)\n    commented_lines.append(\&quot;# ///\&quot;)\n    return \&quot;\\n\&quot;.join(commented_lines) + \&quot;\\n\&quot;\n\n\ndef build_export_notebook_code(app: MarimoIslandGenerator, script_metadata: str) -> str:\n    \&quot;\&quot;\&quot;Serialize the executed app as a standalone marimo notebook source string.\&quot;\&quot;\&quot;\n    notebook_code = AppFileManager.from_app(app._app).to_code()\n    if script_metadata:\n        notebook_code = f\&quot;{script_metadata}{notebook_code}\&quot;\n    return notebook_code\n\n\ndef render_hidden_marimo_code(notebook_code: str) -> str:\n    return f\&quot;<marimo-code hidden>{quote(notebook_code, safe='')}</marimo-code>\&quot;\n\n\ndef json_script(value: str) -> str:\n    return (\n        json.dumps(value)\n        .replace(\&quot;<\&quot;, \&quot;\\\\u003C\&quot;)\n        .replace(\&quot;>\&quot;, \&quot;\\\\u003E\&quot;)\n        .replace(\&quot;&amp;\&quot;, \&quot;\\\\u0026\&quot;)\n    )\n\n\ndef render_export_context_script(notebook_code: str) -> str:\n    \&quot;\&quot;\&quot;Emit the trusted export marker consumed by marimo islands at runtime.\n\n    The hidden notebook source alone is not a trust signal because page markup\n    can be spoofed. This script installs a runtime-owned context object that\n    marimo core can validate before it trusts export-only affordances such as\n    inline virtual-file ``data:`` URLs.\n    \&quot;\&quot;\&quot;\n    return dedent(\n        f\&quot;\&quot;\&quot;\n        <script data-marimo=\&quot;true\&quot;>\n            Object.defineProperty(window, \&quot;__MARIMO_EXPORT_CONTEXT__\&quot;, {{\n                value: Object.freeze({{\n                    trusted: true,\n                    notebookCode: {json_script(notebook_code)},\n                }}),\n                writable: false,\n                configurable: false,\n            }});\n        </script>\n        \&quot;\&quot;\&quot;\n    ).strip()\n\n\ndef build_export_with_mime_context(\n    mime_sensitive: bool,\n) -> Callable[[Element], SafeWrap]:  # type: ignore[valid-type]\n    \&quot;\&quot;\&quot;Create the parser callback that turns a Quarto AST into export payloads.\n\n    Quarto asks for two variants of the same document:\n    (1) an HTML-oriented one for browser output and\n    (2) a MIME-sensitive one for formats like PDF.\n\n    The callback keeps those paths together so both are derived from one executed marimo app,\n    while only the HTML path receives notebook provenance and hydration metadata.\n    \&quot;\&quot;\&quot;\n\n    def tree_to_pandoc_export(root: Element) -> SafeWrap:  # type: ignore[valid-type]\n        global_options = {**default_config, **app_config_from_root(root)}\n        app = MarimoIslandGenerator()\n\n        has_attrs: bool = False\n        stubs: list[tuple[dict[str, bool], Optional[MarimoIslandStub]]] = []\n        for child in root:\n            # only process code cells\n            if child.tag == MARIMO_MD:\n                continue\n            # We only care about the disabled attribute.\n            if child.attrib.get(\&quot;disabled\&quot;) == \&quot;true\&quot;:\n                # Don't even add to generator\n                stubs.append(({\&quot;include\&quot;: False}, None))\n                continue\n            # Check to see id attrs are defined on the tag\n            has_attrs = has_attrs | bool(child.attrib.items())\n\n            code = str(child.text)\n            config, code = extract_and_strip_quarto_config(code)\n\n            try:\n                stub = app.add_code(\n                    code,\n                    is_raw=True,\n                )\n            except Exception:  # noqa: BLE001\n                stubs.append((config, None))\n                continue\n\n            assert isinstance(stub, MarimoIslandStub), \&quot;Unexpected error, please report\&quot;\n\n            stubs.append(\n                (\n                    config,\n                    stub,\n                )\n            )\n\n        if has_attrs and global_options.get(\&quot;warning\&quot;, True):\n            pass\n\n        if global_options.get(\&quot;eval\&quot;, True):\n            _ = asyncio.run(app.build())\n        dev_server = os.environ.get(\&quot;QUARTO_MARIMO_DEBUG_ENDPOINT\&quot;) or False\n        version_override = os.environ.get(\&quot;QUARTO_MARIMO_VERSION\&quot;, marimo.__version__)\n        header = app.render_head(\n            _development_url=dev_server, version_override=version_override\n        )\n        outputs = [\n            get_mime_render(global_options, stub, config, mime_sensitive)\n            for config, stub in stubs\n        ]\n        if not mime_sensitive:\n            script_metadata = pyproject_to_script_metadata(\n                str(global_options.get(\&quot;pyproject\&quot;, \&quot;\&quot;))\n            )\n            notebook_code = build_export_notebook_code(app, script_metadata)\n            header = (\n                render_export_context_script(notebook_code)\n                + render_hidden_marimo_code(notebook_code)\n                + header\n            )\n\n        return SafeWrap(  # type: ignore[no-any-return]\n            {\n                \&quot;header\&quot;: header,\n                \&quot;outputs\&quot;: outputs,\n                \&quot;count\&quot;: len(stubs),\n            }  # type: ignore[arg-type]\n        )\n\n    return tree_to_pandoc_export\n\n\nclass MarimoPandocParser(MarimoParser):  # type: ignore[misc]\n    \&quot;\&quot;\&quot;Parses Markdown to marimo notebook string.\&quot;\&quot;\&quot;\n\n    # TODO: Could upstream generic for keys- but this is fine.\n    output_formats: ClassVar[dict[str, Any]] = {  # type: ignore[assignment, misc]\n        \&quot;marimo-pandoc-export\&quot;: build_export_with_mime_context(mime_sensitive=False),  # type: ignore[dict-item]\n        \&quot;marimo-pandoc-export-with-mime\&quot;: build_export_with_mime_context(\n            mime_sensitive=True\n        ),  # type: ignore[dict-item]\n    }\n\n\ndef convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[str, Any]:\n    \&quot;\&quot;\&quot;Entry point used by the engine subprocess contract.\n\n    The TypeScript engine sends full markdown over stdin and expects a JSON bundle back.\n    Keeping that contract in one function makes the extension easier to test directly from Python\n    without going through Quarto itself.\n    \&quot;\&quot;\&quot;\n    if not text:\n        return {\&quot;header\&quot;: \&quot;\&quot;, \&quot;outputs\&quot;: []}\n    if mime_sensitive:\n        parser = MarimoPandocParser(output_format=\&quot;marimo-pandoc-export-with-mime\&quot;)  # type: ignore[arg-type]\n    else:\n        parser = MarimoPandocParser(output_format=\&quot;marimo-pandoc-export\&quot;)  # type: ignore[arg-type]\n    return parser.convert(text)  # type: ignore[arg-type, return-value, no-any-return]\n\n\nif __name__ == \&quot;__main__\&quot;:\n    assert len(sys.argv) in (3, 4), f\&quot;Unexpected call format got {sys.argv}\&quot;\n    _, reference_file, mime_sensitive = sys.argv[:3]\n    global_eval = sys.argv[3].lower() == \&quot;yes\&quot; if len(sys.argv) == 4 else True\n\n    file = sys.stdin.read()\n    if not file:\n        with open(reference_file) as f:\n            file = f.read()\n    no_js = mime_sensitive.lower() == \&quot;yes\&quot;\n    os.environ[\&quot;MARIMO_NO_JS\&quot;] = str(no_js).lower()\n\n    if not global_eval:\n        default_config[\&quot;eval\&quot;] = False\n\n    conversion = convert_from_md_to_pandoc_export(file, no_js)\n    sys.stdout.write(json.dumps(conversion))\n&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
+    <marimo-ui-element object-id="BYtC-0" random-id="2e9b6410-a2d6-6265-b1eb-dd9e6b997330"><marimo-code-editor data-initial-value="&quot;#!/usr/bin/env python3\n\n\&quot;\&quot;\&quot;Execute Quarto marimo cells and build the bundle the engine consumes.\n\nThis module is the Python side of the extension: it parses the document with\nmarimo's markdown pipeline, builds the app once, and returns a shared page\nheader plus one rendered payload per marimo block.\n\nFor HTML output the header also carries the exported notebook source and a\ntrusted export marker. That gives islands the original notebook back during\nhydration, including document-level metadata that would be lost in a pure\ncell-by-cell reconstruction.\n\&quot;\&quot;\&quot;\n\nimport asyncio\nimport json\nimport keyword\nimport os\nimport re\nimport sys\nfrom collections.abc import Callable\nfrom textwrap import dedent\nfrom typing import Any, ClassVar, Optional\nfrom urllib.parse import quote\n\n# Native to python\nfrom xml.etree.ElementTree import Element\n\nimport marimo\nfrom marimo import App, MarimoIslandGenerator\nfrom marimo._convert.common.format import sql_to_marimo\nfrom marimo._session.notebook import AppFileManager\n\ntry:\n    from marimo._convert.markdown.to_ir import (\n        MARIMO_MD,\n        MarimoMdParser as MarimoParser,\n        SafeWrap as SafeWrapGeneric,\n    )\nexcept ImportError:\n    from marimo._convert.markdown.markdown import (  # type: ignore[no-redef]\n        MARIMO_MD,\n        MarimoMdParser as MarimoParser,\n        SafeWrap as SafeWrapGeneric,\n    )\n\nfrom marimo._islands import MarimoIslandStub\n\nSafeWrap = SafeWrapGeneric[App]\n\n__version__ = \&quot;0.4.5\&quot;\n\n# See https://quarto.org/docs/computations/execution-options.html\ndefault_config = {\n    \&quot;eval\&quot;: True,\n    \&quot;echo\&quot;: False,\n    \&quot;output\&quot;: True,\n    \&quot;warning\&quot;: True,\n    \&quot;error\&quot;: True,\n    \&quot;include\&quot;: True,\n    # Particular to marimo\n    \&quot;editor\&quot;: False,\n}\n\nSQL_DOT_FENCE_REGEX = re.compile(\n    r\&quot;^(\\s*`{3,})\\s*\\{\\s*sql\\.marimo(?P<attrs>[^}]*)\\}\\s*$\&quot;,\n    re.MULTILINE,\n)\nDEFAULT_SQL_QUERY_TARGET = \&quot;_df\&quot;\n\n\ndef is_valid_python_identifier(name: str) -> bool:\n    return name.isidentifier() and not keyword.iskeyword(name)\n\n\ndef sql_query_target(query: Optional[str]) -> str:\n    if query and is_valid_python_identifier(query):\n        return query\n    return DEFAULT_SQL_QUERY_TARGET\n\n\ndef is_true_attr(value: Optional[str]) -> bool:\n    return str(value or \&quot;false\&quot;).lower() == \&quot;true\&quot;\n\n\ndef sql_code_to_python(\n    code: str,\n    query: Optional[str],\n    hide_output: bool = False,\n    engine: Optional[str] = None,\n) -> str:\n    \&quot;\&quot;\&quot;Convert a marimo markdown SQL cell into executable Python.\&quot;\&quot;\&quot;\n    return sql_to_marimo(code, sql_query_target(query), hide_output, engine)\n\n\ndef extract_and_strip_quarto_config(block: str) -> tuple[dict[str, Any], str]:\n    pattern = r\&quot;^\\s*\\#\\|\\s*(.*?)\\s*:\\s*(.*?)(?=\\n|\\Z)\&quot;\n    config: dict[str, Any] = {}\n    lines = block.split(\&quot;\\n\&quot;)\n    if not lines:\n        return config, block\n\n    split_index = 0\n    for i, line in enumerate(lines):\n        split_index = i\n        line = line.strip()\n        if not line:\n            continue\n        source_match = re.search(pattern, line)\n        if not source_match:\n            break\n        key, value = source_match.groups()\n        config[key] = json.loads(value)\n    return config, \&quot;\\n\&quot;.join(lines[split_index:])\n\n\ndef get_mime_render(\n    global_options: dict[str, Any],\n    stub: Optional[MarimoIslandStub],\n    config: dict[str, bool],\n    mime_sensitive: bool,\n) -> dict[str, Any]:\n    \&quot;\&quot;\&quot;Map one executed island stub to the payload Quarto should splice in.\n\n    This is where the export path forks between browser-hydrated HTML and\n    MIME-sensitive outputs like PDF. For HTML we prefer marimo's island HTML so\n    the page can hydrate later; for MIME-sensitive targets we degrade to static\n    figures or text because there is no browser runtime to finish the job.\n    \&quot;\&quot;\&quot;\n    # Local supersede global supersedes default options\n    config = {**global_options, **config}\n    if not config[\&quot;include\&quot;] or stub is None:\n        return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;}\n\n    eval_enabled = config[\&quot;eval\&quot;]\n    show_output = config[\&quot;output\&quot;] and eval_enabled\n    output = stub.output\n    render_options = {\n        \&quot;display_code\&quot;: config[\&quot;echo\&quot;],\n        \&quot;reactive\&quot;: eval_enabled and not mime_sensitive,\n        \&quot;code\&quot;: stub.code,\n    }\n\n    if output:\n        mimetype = output.mimetype\n        if show_output and mime_sensitive:\n            if mimetype.startswith(\&quot;image\&quot;):\n                return {\&quot;type\&quot;: \&quot;figure\&quot;, \&quot;value\&quot;: f\&quot;{output.data}\&quot;, **render_options}\n            # Handle mimebundle - extract image data if present\n            if mimetype == \&quot;application/vnd.marimo+mimebundle\&quot;:\n                try:\n                    bundle_data = (\n                        json.loads(output.data)\n                        if isinstance(output.data, str)\n                        else output.data\n                    )\n                    if not isinstance(bundle_data, dict):\n                        raise TypeError(\&quot;Expected mimebundle dictionary\&quot;)\n                    bundle: dict[str, Any] = bundle_data\n                    # Look for image data in the bundle\n                    for key in [\&quot;image/png\&quot;, \&quot;image/jpeg\&quot;, \&quot;image/svg+xml\&quot;]:\n                        if key in bundle:\n                            return {\n                                \&quot;type\&quot;: \&quot;figure\&quot;,\n                                \&quot;value\&quot;: bundle[key],\n                                **render_options,\n                            }\n                    # Fall back to text if no image\n                    if \&quot;text/plain\&quot; in bundle:\n                        return {\n                            \&quot;type\&quot;: \&quot;para\&quot;,\n                            \&quot;value\&quot;: bundle[\&quot;text/plain\&quot;],\n                            **render_options,\n                        }\n                except (json.JSONDecodeError, TypeError):\n                    pass  # Fall through to default handling\n            if mimetype.startswith((\&quot;text/plain\&quot;, \&quot;text/markdown\&quot;)):\n                return {\&quot;type\&quot;: \&quot;para\&quot;, \&quot;value\&quot;: f\&quot;{output.data}\&quot;, **render_options}\n            if mimetype == \&quot;application/vnd.marimo+error\&quot;:\n                if config[\&quot;error\&quot;]:\n                    return {\n                        \&quot;type\&quot;: \&quot;blockquote\&quot;,\n                        \&quot;value\&quot;: f\&quot;{output.data}\&quot;,\n                        **render_options,\n                    }\n                # Suppress errors otherwise\n                return {\&quot;type\&quot;: \&quot;para\&quot;, \&quot;value\&quot;: \&quot;\&quot;, **render_options}\n\n        elif mimetype == \&quot;application/vnd.marimo+error\&quot;:\n            if config[\&quot;warning\&quot;]:\n                sys.stderr.write(\n                    \&quot;Warning: Only the `disabled` codeblock attribute is utilized\&quot;\n                    \&quot; for pandoc export. Be sure to set desired code attributes \&quot;\n                    \&quot;in quarto form.\&quot;\n                )\n            if not config[\&quot;error\&quot;]:\n                return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;}\n\n    # Nothing to display (e.g. eval=false with echo=false)\n    if not config[\&quot;echo\&quot;] and not show_output:\n        return {\&quot;type\&quot;: \&quot;html\&quot;, \&quot;value\&quot;: \&quot;\&quot;, **render_options}\n\n    # HTML as catch all default\n    return {\n        \&quot;type\&quot;: \&quot;html\&quot;,\n        \&quot;value\&quot;: stub.render(\n            display_code=config[\&quot;echo\&quot;],\n            display_output=show_output,\n            is_reactive=bool(render_options[\&quot;reactive\&quot;]),\n            as_raw=mime_sensitive,\n        ),\n        **render_options,\n    }\n\n\ndef app_config_from_root(root: Element) -> dict[str, Any]:\n    # Extract meta data from root attributes.\n    config_keys = {\&quot;title\&quot;: \&quot;app_title\&quot;, \&quot;marimo-layout\&quot;: \&quot;layout_file\&quot;}\n    config = {\n        config_keys[key]: value for key, value in root.items() if key in config_keys\n    }\n    # Try to pass on other attributes as is\n    config.update({k: v for k, v in root.items() if k not in config_keys})\n    # Remove values particular to markdown saves.\n    config.pop(\&quot;marimo-version\&quot;, None)\n    return config\n\n\ndef pyproject_to_script_metadata(pyproject: str) -> str:\n    \&quot;\&quot;\&quot;Lift Quarto frontmatter into the top-of-file metadata marimo exports use.\n\n    The browser-side islands runtime only sees notebook source, not the\n    original YAML frontmatter. Re-encoding the document-level ``pyproject`` as\n    script metadata lets the exported notebook carry dependency declarations in\n    the one place marimo already knows how to read during hydration.\n    \&quot;\&quot;\&quot;\n    body = dedent(pyproject).strip()\n    if not body:\n        return \&quot;\&quot;\n    if body.startswith(\&quot;# /// script\&quot;):\n        return f\&quot;{body}\\n\&quot;\n\n    commented_lines = [\&quot;# /// script\&quot;]\n    for line in body.splitlines():\n        commented_lines.append(f\&quot;# {line}\&quot; if line else \&quot;#\&quot;)\n    commented_lines.append(\&quot;# ///\&quot;)\n    return \&quot;\\n\&quot;.join(commented_lines) + \&quot;\\n\&quot;\n\n\ndef build_export_notebook_code(app: MarimoIslandGenerator, script_metadata: str) -> str:\n    \&quot;\&quot;\&quot;Serialize the executed app as a standalone marimo notebook source string.\&quot;\&quot;\&quot;\n    notebook_code = AppFileManager.from_app(app._app).to_code()\n    if script_metadata:\n        notebook_code = f\&quot;{script_metadata}{notebook_code}\&quot;\n    return notebook_code\n\n\ndef render_hidden_marimo_code(notebook_code: str) -> str:\n    return f\&quot;<marimo-code hidden>{quote(notebook_code, safe='')}</marimo-code>\&quot;\n\n\ndef json_script(value: str) -> str:\n    return (\n        json.dumps(value)\n        .replace(\&quot;<\&quot;, \&quot;\\\\u003C\&quot;)\n        .replace(\&quot;>\&quot;, \&quot;\\\\u003E\&quot;)\n        .replace(\&quot;&amp;\&quot;, \&quot;\\\\u0026\&quot;)\n    )\n\n\ndef render_export_context_script(notebook_code: str) -> str:\n    \&quot;\&quot;\&quot;Emit the trusted export marker consumed by marimo islands at runtime.\n\n    The hidden notebook source alone is not a trust signal because page markup\n    can be spoofed. This script installs a runtime-owned context object that\n    marimo core can validate before it trusts export-only affordances such as\n    inline virtual-file ``data:`` URLs.\n    \&quot;\&quot;\&quot;\n    return dedent(\n        f\&quot;\&quot;\&quot;\n        <script data-marimo=\&quot;true\&quot;>\n            Object.defineProperty(window, \&quot;__MARIMO_EXPORT_CONTEXT__\&quot;, {{\n                value: Object.freeze({{\n                    trusted: true,\n                    notebookCode: {json_script(notebook_code)},\n                }}),\n                writable: false,\n                configurable: false,\n            }});\n        </script>\n        \&quot;\&quot;\&quot;\n    ).strip()\n\n\ndef build_export_with_mime_context(\n    mime_sensitive: bool,\n) -> Callable[[Element], SafeWrap]:  # type: ignore[valid-type]\n    \&quot;\&quot;\&quot;Create the parser callback that turns a Quarto AST into export payloads.\n\n    Quarto asks for two variants of the same document:\n    (1) an HTML-oriented one for browser output and\n    (2) a MIME-sensitive one for formats like PDF.\n\n    The callback keeps those paths together so both are derived from one executed marimo app,\n    while only the HTML path receives notebook provenance and hydration metadata.\n    \&quot;\&quot;\&quot;\n\n    def tree_to_pandoc_export(root: Element) -> SafeWrap:  # type: ignore[valid-type]\n        global_options = {**default_config, **app_config_from_root(root)}\n        app = MarimoIslandGenerator()\n\n        has_attrs: bool = False\n        stubs: list[tuple[dict[str, bool], Optional[MarimoIslandStub]]] = []\n        for child in root:\n            # only process code cells\n            if child.tag == MARIMO_MD:\n                continue\n            # We only care about the disabled attribute.\n            if child.attrib.get(\&quot;disabled\&quot;) == \&quot;true\&quot;:\n                # Don't even add to generator\n                stubs.append(({\&quot;include\&quot;: False}, None))\n                continue\n            # Check to see id attrs are defined on the tag\n            has_attrs = has_attrs | bool(child.attrib.items())\n\n            code = str(child.text)\n            config, code = extract_and_strip_quarto_config(code)\n            if child.attrib.get(\&quot;language\&quot;) == \&quot;sql\&quot;:\n                code = sql_code_to_python(\n                    code,\n                    child.attrib.get(\&quot;query\&quot;),\n                    hide_output=is_true_attr(child.attrib.get(\&quot;hide_output\&quot;)),\n                    engine=child.attrib.get(\&quot;engine\&quot;),\n                )\n\n            try:\n                stub = app.add_code(\n                    code,\n                    is_raw=True,\n                )\n            except Exception:  # noqa: BLE001\n                stubs.append((config, None))\n                continue\n\n            assert isinstance(stub, MarimoIslandStub), \&quot;Unexpected error, please report\&quot;\n\n            stubs.append(\n                (\n                    config,\n                    stub,\n                )\n            )\n\n        if has_attrs and global_options.get(\&quot;warning\&quot;, True):\n            pass\n\n        if global_options.get(\&quot;eval\&quot;, True):\n            _ = asyncio.run(app.build())\n        dev_server = os.environ.get(\&quot;QUARTO_MARIMO_DEBUG_ENDPOINT\&quot;) or False\n        version_override = os.environ.get(\&quot;QUARTO_MARIMO_VERSION\&quot;, marimo.__version__)\n        header = app.render_head(\n            _development_url=dev_server, version_override=version_override\n        )\n        outputs = [\n            get_mime_render(global_options, stub, config, mime_sensitive)\n            for config, stub in stubs\n        ]\n        if not mime_sensitive:\n            script_metadata = pyproject_to_script_metadata(\n                str(global_options.get(\&quot;pyproject\&quot;, \&quot;\&quot;))\n            )\n            notebook_code = build_export_notebook_code(app, script_metadata)\n            header = (\n                render_export_context_script(notebook_code)\n                + render_hidden_marimo_code(notebook_code)\n                + header\n            )\n\n        return SafeWrap(  # type: ignore[no-any-return]\n            {\n                \&quot;header\&quot;: header,\n                \&quot;outputs\&quot;: outputs,\n                \&quot;count\&quot;: len(stubs),\n            }  # type: ignore[arg-type]\n        )\n\n    return tree_to_pandoc_export\n\n\nclass MarimoPandocParser(MarimoParser):  # type: ignore[misc]\n    \&quot;\&quot;\&quot;Parses Markdown to marimo notebook string.\&quot;\&quot;\&quot;\n\n    # TODO: Could upstream generic for keys- but this is fine.\n    output_formats: ClassVar[dict[str, Any]] = {  # type: ignore[assignment, misc]\n        \&quot;marimo-pandoc-export\&quot;: build_export_with_mime_context(mime_sensitive=False),  # type: ignore[dict-item]\n        \&quot;marimo-pandoc-export-with-mime\&quot;: build_export_with_mime_context(\n            mime_sensitive=True\n        ),  # type: ignore[dict-item]\n    }\n\n\ndef convert_from_md_to_pandoc_export(text: str, mime_sensitive: bool) -> dict[str, Any]:\n    \&quot;\&quot;\&quot;Entry point used by the engine subprocess contract.\n\n    The TypeScript engine sends full markdown over stdin and expects a JSON bundle back.\n    Keeping that contract in one function makes the extension easier to test directly from Python\n    without going through Quarto itself.\n    \&quot;\&quot;\&quot;\n    if not text:\n        return {\&quot;header\&quot;: \&quot;\&quot;, \&quot;outputs\&quot;: []}\n    text = SQL_DOT_FENCE_REGEX.sub(r\&quot;\\1sql {.marimo\\g<attrs>}\&quot;, text)\n    if mime_sensitive:\n        parser = MarimoPandocParser(output_format=\&quot;marimo-pandoc-export-with-mime\&quot;)  # type: ignore[arg-type]\n    else:\n        parser = MarimoPandocParser(output_format=\&quot;marimo-pandoc-export\&quot;)  # type: ignore[arg-type]\n    return parser.convert(text)  # type: ignore[arg-type, return-value, no-any-return]\n\n\nif __name__ == \&quot;__main__\&quot;:\n    assert len(sys.argv) in (3, 4), f\&quot;Unexpected call format got {sys.argv}\&quot;\n    _, reference_file, mime_sensitive = sys.argv[:3]\n    global_eval = sys.argv[3].lower() == \&quot;yes\&quot; if len(sys.argv) == 4 else True\n\n    file = sys.stdin.read()\n    if not file:\n        with open(reference_file) as f:\n            file = f.read()\n    no_js = mime_sensitive.lower() == \&quot;yes\&quot;\n    os.environ[\&quot;MARIMO_NO_JS\&quot;] = str(no_js).lower()\n\n    if not global_eval:\n        default_config[\&quot;eval\&quot;] = False\n\n    conversion = convert_from_md_to_pandoc_export(file, no_js)\n    sys.stdout.write(json.dumps(conversion))\n&quot;" data-label="null" data-language="&quot;python&quot;" data-placeholder="&quot;&quot;" data-disabled="false" data-show-copy-button="true" data-debounce="false"></marimo-code-editor></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">mo.ui.code_editor(contents)</marimo-cell-code>
 </marimo-island>
@@ -515,7 +555,6 @@ Python files.</span></span></div></marimo-accordion>
 
 <!-- -->
 
-</section>
 </section>
 </section>
 
@@ -978,16 +1017,16 @@ Python files.</span></span></div></marimo-accordion>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../tutorials/external_dependencies.html" class="pagination-link" aria-label="External dependencies">
-        <span class="nav-page-text">External dependencies</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../tutorials/sql.html" class="pagination-link" aria-label="SQL">
+        <span class="nav-page-text">SQL</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Fileformat</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="an">marimo-version:</span><span class="co"> 0.13.2</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="an">marimo-version:</span><span class="co"> 0.23.1</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="an">header:</span><span class="co"> |-</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">  # Copyright 2025 Marimo. All rights reserved</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">  # Copyright 2026 Marimo. All rights reserved</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="setup"}</span></span>
@@ -1011,329 +1050,336 @@ Python files.</span></span></div></marimo-accordion>
 <span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>🐍 usable as Python  scripts, with UI  elements taking their default values</span>
 <span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>🧩 modular, exposing functions and classes that can be imported from the notebook</span>
 <span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>Consider a marimo notebook with the following four cells.</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>First cell:</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text.value)</span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>Second cell:</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> say_hello(name<span class="op">=</span><span class="st">"World"</span>):</span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>Third cell:</span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> mo.ui.text(value<span class="op">=</span>say_hello())</span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>text</span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>Fourth cell:</span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>For the above example, marimo would generate the following file</span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>contents:</span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo</span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>__generated_with <span class="op">=</span> <span class="st">"0.0.0"</span></span>
-<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> marimo.App()</span>
-<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a><span class="at">@app.cell</span></span>
-<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _(text):</span>
-<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(text.value)</span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span>
-<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="at">@app.function</span></span>
-<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> say_hello(name<span class="op">=</span><span class="st">"World"</span>):</span>
-<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
-<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a><span class="at">@app.cell</span></span>
-<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _(mo):</span>
-<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> mo.ui.text(value<span class="op">=</span><span class="st">"Hello, World!"</span>)</span>
-<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a>    text</span>
-<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (text,)</span>
-<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="at">@app.cell</span></span>
-<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _():</span>
-<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> marimo <span class="im">as</span> mo</span>
-<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mo,</span>
-<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>    app.run()</span>
-<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>As you can see, this is _pure Python_. This is part of the reason why</span>
-<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a>marimo's generated files are **git-friendly**: small changes made using</span>
-<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>the marimo editor result in small changes to the file that marimo</span>
-<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>generates.</span>
-<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>Moreover, the cell defining a single pure function <span class="in">`say_hello`</span> was saved "top-level" in the notebook file, making it possible for you to import it into other Python files or notebooks.</span>
-<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Properties</span></span>
-<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a>marimo's file format was designed to be easy to read and easy</span>
-<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a>to work with, while also serving the needs of the marimo library. You can</span>
-<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a>even edit the generated file's cells directly, using your favorite text</span>
-<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a>editor, and format the file with your favorite code formatter.</span>
-<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>We explain some properties of marimo's file format below.</span>
-<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a><span class="in">````python {.marimo hide_code="true"}</span></span>
-<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a>mo.accordion(</span>
-<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cells are functions"</span>: <span class="st">"""</span></span>
-<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="st">    In the `dataflow` tutorial, we saw that cells are like functions mapping</span></span>
-<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a><span class="st">    their refs (the global  variables they uses but don't define) to their</span></span>
-<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a><span class="st">    defs (the global variables they define). The generated code makes this</span></span>
-<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a><span class="st">    analogy explicit.</span></span>
-<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="st">    In the generated code, there is a function for each cell. The arguments</span></span>
-<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a><span class="st">    of  the function are the cell's refs , and its returned variables are</span></span>
-<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a><span class="st">    its defs that are referenced by other cells.</span></span>
-<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a><span class="st">    For example, the code</span></span>
-<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
-<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
-<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a><span class="st">    def _(mo):</span></span>
-<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="st">        text = mo.ui.text(value="Hello, World!")</span></span>
-<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="st">        text</span></span>
-<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="st">        return text,</span></span>
-<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
-<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="st">    says that the cell takes as input a variable called `mo`, and it creates</span></span>
-<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="st">    a global variable called `text` (that is read by another cell).</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>Consider a marimo notebook with the following four cells.</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>First cell:</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text.value)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>Second cell:</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> say_hello(name<span class="op">=</span><span class="st">"World"</span>):</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>Third cell:</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> mo.ui.text(value<span class="op">=</span>say_hello())</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>text</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>Fourth cell:</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>For the above example, marimo would generate the following file</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>contents:</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="in">```python3</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>__generated_with <span class="op">=</span> <span class="st">"0.0.0"</span></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> marimo.App()</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a><span class="at">@app.cell</span></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _(text):</span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(text.value)</span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a><span class="at">@app.function</span></span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> say_hello(name<span class="op">=</span><span class="st">"World"</span>):</span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a><span class="at">@app.cell</span></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _(mo):</span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> mo.ui.text(value<span class="op">=</span><span class="st">"Hello, World!"</span>)</span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>    text</span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (text,)</span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="at">@app.cell</span></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _():</span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> marimo <span class="im">as</span> mo</span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mo,</span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a>    app.run()</span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>As you can see, this is _pure Python_. This is part of the reason why</span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>marimo's generated files are **git-friendly**: small changes made using</span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a>the marimo editor result in small changes to the file that marimo</span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>generates.</span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a>Moreover, the cell defining a single pure function <span class="in">`say_hello`</span> was saved "top-level" in the notebook file, making it possible for you to import it into other Python files or notebooks.</span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## Properties</span></span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a>marimo's file format was designed to be easy to read and easy</span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a>to work with, while also serving the needs of the marimo library. You can</span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>even edit the generated file's cells directly, using your favorite text</span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a>editor, and format the file with your favorite code formatter.</span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a>We explain some properties of marimo's file format below.</span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a><span class="in">````python {.marimo hide_code="true"}</span></span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>mo.accordion(</span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cells are functions"</span>: <span class="st">"""</span></span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a><span class="st">    In the `dataflow` tutorial, we saw that cells are like functions mapping</span></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="st">    their refs (the global  variables they uses but don't define) to their</span></span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="st">    defs (the global variables they define). The generated code makes this</span></span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a><span class="st">    analogy explicit.</span></span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a><span class="st">    In the generated code, there is a function for each cell. The arguments</span></span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a><span class="st">    of  the function are the cell's refs , and its returned variables are</span></span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a><span class="st">    its defs that are referenced by other cells.</span></span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a><span class="st">    For example, the code</span></span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="st">    def _(mo):</span></span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="st">        text = mo.ui.text(value="Hello, World!")</span></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="st">        text</span></span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="st">        return text,</span></span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
 <span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="st">    In contrast, the code</span></span>
-<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
-<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
-<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a><span class="st">    def _():</span></span>
-<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="st">        import marimo as mo</span></span>
-<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="st">        return mo,</span></span>
-<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
-<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="st">    says that the cell doesn't depend on any other cells (its argument list</span></span>
-<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="st">    is  empty), though it does create the variable `mo` which the previous</span></span>
-<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="st">    cell requires as input.</span></span>
-<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
-<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cells are stored in presentation order"</span>: <span class="st">"""</span></span>
-<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="st">    Cells are stored in the order that they are arranged in the marimo</span></span>
-<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="st">    editor. So if you want to rearrange</span></span>
-<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="st">    your cells using your favorite text editor, just rearrange the</span></span>
-<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="st">    order that they're defined in the file.</span></span>
-<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
-<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Text formatting is preserved"</span>: <span class="st">"""</span></span>
-<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="st">    marimo guarantees that however your source code was</span></span>
-<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a><span class="st">    formatted in the marimo editor is exactly how it will be stored in</span></span>
-<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a><span class="st">    the generated code. For example, whitespace, line breaks, and so on are</span></span>
-<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="st">    all preserved exactly. This means that you can touch up formatting in</span></span>
-<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="st">    your text editor, either manually or using automated formatters like</span></span>
-<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a><span class="st">    Black, and be confident that your changes will be preserved.</span></span>
-<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
-<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cell functions can have names"</span>: <span class="st">"""</span></span>
-<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a><span class="st">    If you want to, you can replace the default names for cell functions</span></span>
-<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a><span class="st">    with meaningful ones.</span></span>
-<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a><span class="st">    For example, change</span></span>
-<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
-<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
-<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a><span class="st">    def _(text):</span></span>
-<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a><span class="st">        print(text.value)</span></span>
-<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a><span class="st">        return</span></span>
-<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
-<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a><span class="st">    to</span></span>
-<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
-<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
-<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a><span class="st">    def echo(text):</span></span>
-<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a><span class="st">        print(text.value)</span></span>
-<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a><span class="st">        return</span></span>
-<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
-<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a><span class="st">    This can make the generated code more readable.</span></span>
-<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
-<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No magical tokens"</span>: <span class="st">"""</span></span>
-<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a><span class="st">    marimo's generated code is pure Python; no magical syntax.</span></span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="st">    says that the cell takes as input a variable called `mo`, and it creates</span></span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a><span class="st">    a global variable called `text` (that is read by another cell).</span></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a><span class="st">    In contrast, the code</span></span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="st">    def _():</span></span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="st">        import marimo as mo</span></span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="st">        return mo,</span></span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="st">    says that the cell doesn't depend on any other cells (its argument list</span></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="st">    is  empty), though it does create the variable `mo` which the previous</span></span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="st">    cell requires as input.</span></span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cells are stored in presentation order"</span>: <span class="st">"""</span></span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="st">    Cells are stored in the order that they are arranged in the marimo</span></span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="st">    editor. So if you want to rearrange</span></span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="st">    your cells using your favorite text editor, just rearrange the</span></span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="st">    order that they're defined in the file.</span></span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Text formatting is preserved"</span>: <span class="st">"""</span></span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="st">    marimo guarantees that however your source code was</span></span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="st">    formatted in the marimo editor is exactly how it will be stored in</span></span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a><span class="st">    the generated code. For example, whitespace, line breaks, and so on are</span></span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="st">    all preserved exactly. This means that you can touch up formatting in</span></span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a><span class="st">    your text editor, either manually or using automated formatters like</span></span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a><span class="st">    Black, and be confident that your changes will be preserved.</span></span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cell functions can have names"</span>: <span class="st">"""</span></span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a><span class="st">    If you want to, you can replace the default names for cell functions</span></span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a><span class="st">    with meaningful ones.</span></span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a><span class="st">    For example, change</span></span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="st">    def _(text):</span></span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a><span class="st">        print(text.value)</span></span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a><span class="st">        return</span></span>
+<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a><span class="st">    to</span></span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a><span class="st">    ```python3</span></span>
+<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a><span class="st">    @app.cell</span></span>
+<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="st">    def echo(text):</span></span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a><span class="st">        print(text.value)</span></span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a><span class="st">        return</span></span>
+<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a><span class="st">    ```</span></span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a><span class="st">    This can make the generated code more readable.</span></span>
 <span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
-<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cell signatures automatically maintained"</span>: <span class="st">"""</span></span>
-<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a><span class="st">    If when editing a cell, you forget to include all a cell's refs in its</span></span>
-<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a><span class="st">    argument list, or all its defs in its returns, marimo will fix them he next</span></span>
-<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a><span class="st">    time you try to open it in the marimo editor. So don't worry that you'll</span></span>
-<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a><span class="st">    botch a cell's signature when editing it.</span></span>
-<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
-<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a>        <span class="st">"The `app` object"</span>: <span class="st">"""</span></span>
-<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="st">    At the top of the generated code, a variable named `app` is created.</span></span>
-<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a><span class="st">    This object collects the cells into a dataflow graph, using the `cell`</span></span>
-<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a><span class="st">    decorator.</span></span>
-<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
-<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Runnable as a script"</span>: <span class="st">"""</span></span>
-<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a><span class="st">    You can run marimo apps as scripts at the command line,</span></span>
-<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a><span class="st">    using Python. This will execute the cells in a</span></span>
-<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a><span class="st">    topologically sorted order, just as they would run if you opened the app</span></span>
-<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a><span class="st">    with `marimo edit`.</span></span>
-<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a><span class="st">    For example: running our example as a script would print `Hello</span></span>
-<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a><span class="st">    World!` to the console.</span></span>
-<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
-<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a>        <span class="st">"""Usable as a module"""</span>: <span class="st">"""</span></span>
-<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a><span class="st">    Import top-level functions and classes from the notebook into other</span></span>
-<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a><span class="st">    Python files.</span></span>
-<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
-<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-212"><a href="#cb11-212" aria-hidden="true" tabindex="-1"></a><span class="fu">## Importing functions and classes from notebooks</span></span>
-<span id="cb11-213"><a href="#cb11-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-214"><a href="#cb11-214" aria-hidden="true" tabindex="-1"></a>The details of marimo's file format are important if you want to import</span>
-<span id="cb11-215"><a href="#cb11-215" aria-hidden="true" tabindex="-1"></a>functions and classes defined in your notebook into other Python modules. If you</span>
-<span id="cb11-216"><a href="#cb11-216" aria-hidden="true" tabindex="-1"></a>don't intend to do so, you can skip this section.</span>
-<span id="cb11-217"><a href="#cb11-217" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb11-218"><a href="#cb11-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### Declaring imports used by functions and classes</span></span>
-<span id="cb11-219"><a href="#cb11-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-220"><a href="#cb11-220" aria-hidden="true" tabindex="-1"></a>marimo can serialize functions and classes into the top-level of a file, so you can import them with regular Python syntax:</span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No magical tokens"</span>: <span class="st">"""</span></span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a><span class="st">    marimo's generated code is pure Python; no magical syntax.</span></span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cell signatures automatically maintained"</span>: <span class="st">"""</span></span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a><span class="st">    If when editing a cell, you forget to include all a cell's refs in its</span></span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a><span class="st">    argument list, or all its defs in its returns, marimo will fix them he next</span></span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a><span class="st">    time you try to open it in the marimo editor. So don't worry that you'll</span></span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="st">    botch a cell's signature when editing it.</span></span>
+<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a>        <span class="st">"The `app` object"</span>: <span class="st">"""</span></span>
+<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a><span class="st">    At the top of the generated code, a variable named `app` is created.</span></span>
+<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a><span class="st">    This object collects the cells into a dataflow graph, using the `cell`</span></span>
+<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a><span class="st">    decorator.</span></span>
+<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Runnable as a script"</span>: <span class="st">"""</span></span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a><span class="st">    You can run marimo apps as scripts at the command line,</span></span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a><span class="st">    using Python. This will execute the cells in a</span></span>
+<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a><span class="st">    topologically sorted order, just as they would run if you opened the app</span></span>
+<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a><span class="st">    with `marimo edit`.</span></span>
+<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a><span class="st">    For example: running our example as a script would print `Hello</span></span>
+<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a><span class="st">    World!` to the console.</span></span>
+<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a>        <span class="st">"""Usable as a module"""</span>: <span class="st">"""</span></span>
+<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a><span class="st">    Import top-level functions and classes from the notebook into other</span></span>
+<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a><span class="st">    Python files.</span></span>
+<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-212"><a href="#cb11-212" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-213"><a href="#cb11-213" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb11-214"><a href="#cb11-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-215"><a href="#cb11-215" aria-hidden="true" tabindex="-1"></a><span class="fu">## Importing functions and classes from notebooks</span></span>
+<span id="cb11-216"><a href="#cb11-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-217"><a href="#cb11-217" aria-hidden="true" tabindex="-1"></a>The details of marimo's file format are important if you want to import</span>
+<span id="cb11-218"><a href="#cb11-218" aria-hidden="true" tabindex="-1"></a>functions and classes defined in your notebook into other Python modules. If you</span>
+<span id="cb11-219"><a href="#cb11-219" aria-hidden="true" tabindex="-1"></a>don't intend to do so, you can skip this section.</span>
+<span id="cb11-220"><a href="#cb11-220" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
 <span id="cb11-221"><a href="#cb11-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-222"><a href="#cb11-222" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb11-223"><a href="#cb11-223" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_notebook <span class="im">import</span> my_function</span>
-<span id="cb11-224"><a href="#cb11-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-222"><a href="#cb11-222" aria-hidden="true" tabindex="-1"></a><span class="fu">### Declaring imports used by functions and classes</span></span>
+<span id="cb11-223"><a href="#cb11-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-224"><a href="#cb11-224" aria-hidden="true" tabindex="-1"></a>marimo can serialize functions and classes into the top-level of a file, so you can import them with regular Python syntax:</span>
 <span id="cb11-225"><a href="#cb11-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-226"><a href="#cb11-226" aria-hidden="true" tabindex="-1"></a>In particular, if a cell defines just a single function or class, and if that function or class is pure</span>
-<span id="cb11-227"><a href="#cb11-227" aria-hidden="true" tabindex="-1"></a>save for references to variables defined in a special **setup cell**, it will be serialized top-level.</span>
-<span id="cb11-228"><a href="#cb11-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-229"><a href="#cb11-229" aria-hidden="true" tabindex="-1"></a>**Setup cell.** Notebooks can optionally include a setup cell that imports modules,</span>
-<span id="cb11-230"><a href="#cb11-230" aria-hidden="true" tabindex="-1"></a>written in the file as:</span>
-<span id="cb11-231"><a href="#cb11-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-232"><a href="#cb11-232" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- note this setup cell is hardcoded in the playground example --&gt;</span></span>
-<span id="cb11-233"><a href="#cb11-233" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb11-234"><a href="#cb11-234" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> app.setup:</span>
-<span id="cb11-235"><a href="#cb11-235" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> marimo <span class="im">as</span> mo</span>
-<span id="cb11-236"><a href="#cb11-236" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> dataclasses</span>
-<span id="cb11-237"><a href="#cb11-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-238"><a href="#cb11-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-239"><a href="#cb11-239" aria-hidden="true" tabindex="-1"></a>Modules imported in a setup cell can be used in "top-level" functions or</span>
-<span id="cb11-240"><a href="#cb11-240" aria-hidden="true" tabindex="-1"></a>classes. You can add the setup cell from the general menu of the editor under:</span>
-<span id="cb11-241"><a href="#cb11-241" aria-hidden="true" tabindex="-1"></a>:<span class="sc">:lucide:</span>diamond-plus:: Add setup cell.</span>
-<span id="cb11-242"><a href="#cb11-242" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb11-243"><a href="#cb11-243" aria-hidden="true" tabindex="-1"></a><span class="fu">### Functions and classes</span></span>
-<span id="cb11-244"><a href="#cb11-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-245"><a href="#cb11-245" aria-hidden="true" tabindex="-1"></a>Notebook files expose functions and classes that depend only on variables defined in the setup cell (or on other such functions or classes). For example, the following cell:</span>
-<span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-247"><a href="#cb11-247" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="*roll_die"}</span></span>
-<span id="cb11-248"><a href="#cb11-248" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roll_die():</span>
-<span id="cb11-249"><a href="#cb11-249" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb11-250"><a href="#cb11-250" aria-hidden="true" tabindex="-1"></a><span class="co">    A reusable function.</span></span>
+<span id="cb11-226"><a href="#cb11-226" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb11-227"><a href="#cb11-227" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_notebook <span class="im">import</span> my_function</span>
+<span id="cb11-228"><a href="#cb11-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-229"><a href="#cb11-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-230"><a href="#cb11-230" aria-hidden="true" tabindex="-1"></a>In particular, if a cell defines just a single function or class, and if that function or class is pure</span>
+<span id="cb11-231"><a href="#cb11-231" aria-hidden="true" tabindex="-1"></a>save for references to variables defined in a special **setup cell**, it will be serialized top-level.</span>
+<span id="cb11-232"><a href="#cb11-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-233"><a href="#cb11-233" aria-hidden="true" tabindex="-1"></a>**Setup cell.** Notebooks can optionally include a setup cell that imports modules,</span>
+<span id="cb11-234"><a href="#cb11-234" aria-hidden="true" tabindex="-1"></a>written in the file as:</span>
+<span id="cb11-235"><a href="#cb11-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-236"><a href="#cb11-236" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- note this setup cell is hardcoded in the playground example --&gt;</span></span>
+<span id="cb11-237"><a href="#cb11-237" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb11-238"><a href="#cb11-238" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> app.setup:</span>
+<span id="cb11-239"><a href="#cb11-239" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> marimo <span class="im">as</span> mo</span>
+<span id="cb11-240"><a href="#cb11-240" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> dataclasses</span>
+<span id="cb11-241"><a href="#cb11-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-242"><a href="#cb11-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-243"><a href="#cb11-243" aria-hidden="true" tabindex="-1"></a>Modules imported in a setup cell can be used in "top-level" functions or</span>
+<span id="cb11-244"><a href="#cb11-244" aria-hidden="true" tabindex="-1"></a>classes. You can add the setup cell from the general menu of the editor under:</span>
+<span id="cb11-245"><a href="#cb11-245" aria-hidden="true" tabindex="-1"></a>Add setup cell.</span>
+<span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb11-247"><a href="#cb11-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-248"><a href="#cb11-248" aria-hidden="true" tabindex="-1"></a><span class="fu">### Functions and classes</span></span>
+<span id="cb11-249"><a href="#cb11-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-250"><a href="#cb11-250" aria-hidden="true" tabindex="-1"></a>Notebook files expose functions and classes that depend only on variables defined in the setup cell (or on other such functions or classes). For example, the following cell:</span>
 <span id="cb11-251"><a href="#cb11-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-252"><a href="#cb11-252" aria-hidden="true" tabindex="-1"></a><span class="co">    Notice the indicator in the bottom right of the cell.</span></span>
-<span id="cb11-253"><a href="#cb11-253" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb11-254"><a href="#cb11-254" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> random.randint(<span class="dv">1</span>, <span class="dv">7</span>)</span>
-<span id="cb11-255"><a href="#cb11-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-252"><a href="#cb11-252" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="*roll_die"}</span></span>
+<span id="cb11-253"><a href="#cb11-253" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roll_die():</span>
+<span id="cb11-254"><a href="#cb11-254" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-255"><a href="#cb11-255" aria-hidden="true" tabindex="-1"></a><span class="co">    A reusable function.</span></span>
 <span id="cb11-256"><a href="#cb11-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-257"><a href="#cb11-257" aria-hidden="true" tabindex="-1"></a>... is saved in the notebook file as</span>
-<span id="cb11-258"><a href="#cb11-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-259"><a href="#cb11-259" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb11-260"><a href="#cb11-260" aria-hidden="true" tabindex="-1"></a><span class="at">@app.function</span></span>
-<span id="cb11-261"><a href="#cb11-261" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roll_die():</span>
-<span id="cb11-262"><a href="#cb11-262" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
-<span id="cb11-263"><a href="#cb11-263" aria-hidden="true" tabindex="-1"></a><span class="co">    A reusable function.</span></span>
-<span id="cb11-264"><a href="#cb11-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-265"><a href="#cb11-265" aria-hidden="true" tabindex="-1"></a><span class="co">    Notice the indicator in the bottom right of the cell.</span></span>
-<span id="cb11-266"><a href="#cb11-266" aria-hidden="true" tabindex="-1"></a><span class="co">    '''</span></span>
-<span id="cb11-267"><a href="#cb11-267" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> random.randint(<span class="dv">1</span>, <span class="dv">7</span>)</span>
-<span id="cb11-268"><a href="#cb11-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-257"><a href="#cb11-257" aria-hidden="true" tabindex="-1"></a><span class="co">    Notice the indicator in the bottom right of the cell.</span></span>
+<span id="cb11-258"><a href="#cb11-258" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-259"><a href="#cb11-259" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> random.randint(<span class="dv">1</span>, <span class="dv">7</span>)</span>
+<span id="cb11-260"><a href="#cb11-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-261"><a href="#cb11-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-262"><a href="#cb11-262" aria-hidden="true" tabindex="-1"></a>... is saved in the notebook file as</span>
+<span id="cb11-263"><a href="#cb11-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-264"><a href="#cb11-264" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb11-265"><a href="#cb11-265" aria-hidden="true" tabindex="-1"></a><span class="at">@app.function</span></span>
+<span id="cb11-266"><a href="#cb11-266" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roll_die():</span>
+<span id="cb11-267"><a href="#cb11-267" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
+<span id="cb11-268"><a href="#cb11-268" aria-hidden="true" tabindex="-1"></a><span class="co">    A reusable function.</span></span>
 <span id="cb11-269"><a href="#cb11-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-270"><a href="#cb11-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-271"><a href="#cb11-271" aria-hidden="true" tabindex="-1"></a>Making it importable as</span>
-<span id="cb11-272"><a href="#cb11-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-273"><a href="#cb11-273" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb11-274"><a href="#cb11-274" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_notebook <span class="im">import</span> roll_die</span>
-<span id="cb11-275"><a href="#cb11-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-276"><a href="#cb11-276" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb11-277"><a href="#cb11-277" aria-hidden="true" tabindex="-1"></a>Standalone classes are also exposed:</span>
-<span id="cb11-278"><a href="#cb11-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-279"><a href="#cb11-279" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="*SimulationExample"}</span></span>
-<span id="cb11-280"><a href="#cb11-280" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclasses.dataclass</span></span>
-<span id="cb11-281"><a href="#cb11-281" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimulationExample:</span>
-<span id="cb11-282"><a href="#cb11-282" aria-hidden="true" tabindex="-1"></a>    n_rolls: <span class="bu">int</span></span>
-<span id="cb11-283"><a href="#cb11-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-284"><a href="#cb11-284" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> simulate(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">int</span>]:</span>
-<span id="cb11-285"><a href="#cb11-285" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [roll_die() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.n_rolls)]</span>
-<span id="cb11-286"><a href="#cb11-286" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-287"><a href="#cb11-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-288"><a href="#cb11-288" aria-hidden="true" tabindex="-1"></a>This class is saved in the file as</span>
+<span id="cb11-270"><a href="#cb11-270" aria-hidden="true" tabindex="-1"></a><span class="co">    Notice the indicator in the bottom right of the cell.</span></span>
+<span id="cb11-271"><a href="#cb11-271" aria-hidden="true" tabindex="-1"></a><span class="co">    '''</span></span>
+<span id="cb11-272"><a href="#cb11-272" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> random.randint(<span class="dv">1</span>, <span class="dv">7</span>)</span>
+<span id="cb11-273"><a href="#cb11-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-274"><a href="#cb11-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-275"><a href="#cb11-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-276"><a href="#cb11-276" aria-hidden="true" tabindex="-1"></a>Making it importable as</span>
+<span id="cb11-277"><a href="#cb11-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-278"><a href="#cb11-278" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb11-279"><a href="#cb11-279" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_notebook <span class="im">import</span> roll_die</span>
+<span id="cb11-280"><a href="#cb11-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-281"><a href="#cb11-281" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb11-282"><a href="#cb11-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-283"><a href="#cb11-283" aria-hidden="true" tabindex="-1"></a>Standalone classes are also exposed:</span>
+<span id="cb11-284"><a href="#cb11-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-285"><a href="#cb11-285" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="*SimulationExample"}</span></span>
+<span id="cb11-286"><a href="#cb11-286" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclasses.dataclass</span></span>
+<span id="cb11-287"><a href="#cb11-287" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimulationExample:</span>
+<span id="cb11-288"><a href="#cb11-288" aria-hidden="true" tabindex="-1"></a>    n_rolls: <span class="bu">int</span></span>
 <span id="cb11-289"><a href="#cb11-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-290"><a href="#cb11-290" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb11-291"><a href="#cb11-291" aria-hidden="true" tabindex="-1"></a><span class="at">@app.class_definition</span></span>
-<span id="cb11-292"><a href="#cb11-292" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclasses.dataclass</span></span>
-<span id="cb11-293"><a href="#cb11-293" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimulationExample:</span>
-<span id="cb11-294"><a href="#cb11-294" aria-hidden="true" tabindex="-1"></a>    n_rolls: <span class="bu">int</span></span>
+<span id="cb11-290"><a href="#cb11-290" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> simulate(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">int</span>]:</span>
+<span id="cb11-291"><a href="#cb11-291" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [roll_die() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.n_rolls)]</span>
+<span id="cb11-292"><a href="#cb11-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-293"><a href="#cb11-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-294"><a href="#cb11-294" aria-hidden="true" tabindex="-1"></a>This class is saved in the file as</span>
 <span id="cb11-295"><a href="#cb11-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-296"><a href="#cb11-296" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> simulate(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">int</span>]:</span>
-<span id="cb11-297"><a href="#cb11-297" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [roll_die() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.n_rolls)]</span>
-<span id="cb11-298"><a href="#cb11-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-299"><a href="#cb11-299" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb11-300"><a href="#cb11-300" aria-hidden="true" tabindex="-1"></a>/// attention | Heads up</span>
-<span id="cb11-301"><a href="#cb11-301" aria-hidden="true" tabindex="-1"></a>///</span>
-<span id="cb11-302"><a href="#cb11-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-303"><a href="#cb11-303" aria-hidden="true" tabindex="-1"></a>Not all standalone functions will be exposed in the module. If your</span>
-<span id="cb11-304"><a href="#cb11-304" aria-hidden="true" tabindex="-1"></a>function depends on variables that are defined in other cells, then it won't</span>
-<span id="cb11-305"><a href="#cb11-305" aria-hidden="true" tabindex="-1"></a>be exposed top-level.</span>
+<span id="cb11-296"><a href="#cb11-296" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb11-297"><a href="#cb11-297" aria-hidden="true" tabindex="-1"></a><span class="at">@app.class_definition</span></span>
+<span id="cb11-298"><a href="#cb11-298" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclasses.dataclass</span></span>
+<span id="cb11-299"><a href="#cb11-299" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimulationExample:</span>
+<span id="cb11-300"><a href="#cb11-300" aria-hidden="true" tabindex="-1"></a>    n_rolls: <span class="bu">int</span></span>
+<span id="cb11-301"><a href="#cb11-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-302"><a href="#cb11-302" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> simulate(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">int</span>]:</span>
+<span id="cb11-303"><a href="#cb11-303" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [roll_die() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.n_rolls)]</span>
+<span id="cb11-304"><a href="#cb11-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-305"><a href="#cb11-305" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
 <span id="cb11-306"><a href="#cb11-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-307"><a href="#cb11-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-308"><a href="#cb11-308" aria-hidden="true" tabindex="-1"></a>For example, this function will not be exposed:</span>
-<span id="cb11-309"><a href="#cb11-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-310"><a href="#cb11-310" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb11-311"><a href="#cb11-311" aria-hidden="true" tabindex="-1"></a>variable <span class="op">=</span> <span class="dv">123</span></span>
-<span id="cb11-312"><a href="#cb11-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-307"><a href="#cb11-307" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning title="Heads up"}</span>
+<span id="cb11-308"><a href="#cb11-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-309"><a href="#cb11-309" aria-hidden="true" tabindex="-1"></a>Not all standalone functions will be exposed in the module. If your function depends on variables that are defined in other cells, then it won't be exposed top-level.</span>
+<span id="cb11-310"><a href="#cb11-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-311"><a href="#cb11-311" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-312"><a href="#cb11-312" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-313"><a href="#cb11-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-314"><a href="#cb11-314" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="wrapped_function_example"}</span></span>
-<span id="cb11-315"><a href="#cb11-315" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> not_a_top_level_function():</span>
-<span id="cb11-316"><a href="#cb11-316" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb11-317"><a href="#cb11-317" aria-hidden="true" tabindex="-1"></a><span class="co">    This function depends on a variable declared in another cell.</span></span>
-<span id="cb11-318"><a href="#cb11-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-319"><a href="#cb11-319" aria-hidden="true" tabindex="-1"></a><span class="co">    As a result this function isn't exposed in the file — and the tooltip in the</span></span>
-<span id="cb11-320"><a href="#cb11-320" aria-hidden="true" tabindex="-1"></a><span class="co">    bottom-right corner indicates this.</span></span>
-<span id="cb11-321"><a href="#cb11-321" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb11-322"><a href="#cb11-322" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> variable</span>
-<span id="cb11-323"><a href="#cb11-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-314"><a href="#cb11-314" aria-hidden="true" tabindex="-1"></a>For example, this function will not be exposed:</span>
+<span id="cb11-315"><a href="#cb11-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-316"><a href="#cb11-316" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb11-317"><a href="#cb11-317" aria-hidden="true" tabindex="-1"></a>variable <span class="op">=</span> <span class="dv">123</span></span>
+<span id="cb11-318"><a href="#cb11-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-319"><a href="#cb11-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-320"><a href="#cb11-320" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo name="wrapped_function_example"}</span></span>
+<span id="cb11-321"><a href="#cb11-321" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> not_a_top_level_function():</span>
+<span id="cb11-322"><a href="#cb11-322" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-323"><a href="#cb11-323" aria-hidden="true" tabindex="-1"></a><span class="co">    This function depends on a variable declared in another cell.</span></span>
 <span id="cb11-324"><a href="#cb11-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-325"><a href="#cb11-325" aria-hidden="true" tabindex="-1"></a><span class="fu">## FAQ</span></span>
-<span id="cb11-326"><a href="#cb11-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-327"><a href="#cb11-327" aria-hidden="true" tabindex="-1"></a><span class="fu">### I want to edit notebooks in a different editor, what do I need to know?</span></span>
-<span id="cb11-328"><a href="#cb11-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-329"><a href="#cb11-329" aria-hidden="true" tabindex="-1"></a>See the docs on <span class="co">[</span><span class="ot">using your own editor</span><span class="co">](https://docs.marimo.io/guides/editor_features/watching/)</span>.</span>
+<span id="cb11-325"><a href="#cb11-325" aria-hidden="true" tabindex="-1"></a><span class="co">    As a result this function isn't exposed in the file — and the tooltip in the</span></span>
+<span id="cb11-326"><a href="#cb11-326" aria-hidden="true" tabindex="-1"></a><span class="co">    bottom-right corner indicates this.</span></span>
+<span id="cb11-327"><a href="#cb11-327" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-328"><a href="#cb11-328" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> variable</span>
+<span id="cb11-329"><a href="#cb11-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-330"><a href="#cb11-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-331"><a href="#cb11-331" aria-hidden="true" tabindex="-1"></a><span class="fu">### I want to import functions from a marimo notebook, what do I need to know?</span></span>
+<span id="cb11-331"><a href="#cb11-331" aria-hidden="true" tabindex="-1"></a><span class="fu">## FAQ</span></span>
 <span id="cb11-332"><a href="#cb11-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-333"><a href="#cb11-333" aria-hidden="true" tabindex="-1"></a>See the docs on [reusable functions and</span>
-<span id="cb11-334"><a href="#cb11-334" aria-hidden="true" tabindex="-1"></a>classes](https://links.marimo.app/reusable-functions).</span>
-<span id="cb11-335"><a href="#cb11-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-336"><a href="#cb11-336" aria-hidden="true" tabindex="-1"></a><span class="fu">### I want to run pytest on marimo notebooks, what do I need to know?</span></span>
-<span id="cb11-337"><a href="#cb11-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-338"><a href="#cb11-338" aria-hidden="true" tabindex="-1"></a>See the docs on <span class="co">[</span><span class="ot">testing</span><span class="co">](https://docs.marimo.io/guides/testing/)</span>.</span>
-<span id="cb11-339"><a href="#cb11-339" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb11-340"><a href="#cb11-340" aria-hidden="true" tabindex="-1"></a><span class="fu">## This notebook's source code</span></span>
+<span id="cb11-333"><a href="#cb11-333" aria-hidden="true" tabindex="-1"></a><span class="fu">### I want to edit notebooks in a different editor, what do I need to know?</span></span>
+<span id="cb11-334"><a href="#cb11-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-335"><a href="#cb11-335" aria-hidden="true" tabindex="-1"></a>See the docs on <span class="co">[</span><span class="ot">using your own editor</span><span class="co">](https://docs.marimo.io/guides/editor_features/watching/)</span>.</span>
+<span id="cb11-336"><a href="#cb11-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-337"><a href="#cb11-337" aria-hidden="true" tabindex="-1"></a><span class="fu">### I want to import functions from a marimo notebook, what do I need to know?</span></span>
+<span id="cb11-338"><a href="#cb11-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-339"><a href="#cb11-339" aria-hidden="true" tabindex="-1"></a>See the docs on [reusable functions and</span>
+<span id="cb11-340"><a href="#cb11-340" aria-hidden="true" tabindex="-1"></a>classes](https://links.marimo.app/reusable-functions).</span>
 <span id="cb11-341"><a href="#cb11-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-342"><a href="#cb11-342" aria-hidden="true" tabindex="-1"></a>The source code of this notebook is shown below:</span>
+<span id="cb11-342"><a href="#cb11-342" aria-hidden="true" tabindex="-1"></a><span class="fu">### I want to run pytest on marimo notebooks, what do I need to know?</span></span>
 <span id="cb11-343"><a href="#cb11-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-344"><a href="#cb11-344" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb11-345"><a href="#cb11-345" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="va">__file__</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
-<span id="cb11-346"><a href="#cb11-346" aria-hidden="true" tabindex="-1"></a>    contents <span class="op">=</span> f.read()</span>
-<span id="cb11-347"><a href="#cb11-347" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-344"><a href="#cb11-344" aria-hidden="true" tabindex="-1"></a>See the docs on <span class="co">[</span><span class="ot">testing</span><span class="co">](https://docs.marimo.io/guides/testing/)</span>.</span>
+<span id="cb11-345"><a href="#cb11-345" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb11-346"><a href="#cb11-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-347"><a href="#cb11-347" aria-hidden="true" tabindex="-1"></a><span class="fu">## This notebook's source code</span></span>
 <span id="cb11-348"><a href="#cb11-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-349"><a href="#cb11-349" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
-<span id="cb11-350"><a href="#cb11-350" aria-hidden="true" tabindex="-1"></a>mo.ui.code_editor(contents)</span>
-<span id="cb11-351"><a href="#cb11-351" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb11-349"><a href="#cb11-349" aria-hidden="true" tabindex="-1"></a>The source code of this notebook is shown below:</span>
+<span id="cb11-350"><a href="#cb11-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-351"><a href="#cb11-351" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb11-352"><a href="#cb11-352" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="va">__file__</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb11-353"><a href="#cb11-353" aria-hidden="true" tabindex="-1"></a>    contents <span class="op">=</span> f.read()</span>
+<span id="cb11-354"><a href="#cb11-354" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-355"><a href="#cb11-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-356"><a href="#cb11-356" aria-hidden="true" tabindex="-1"></a><span class="in">```{python .marimo}</span></span>
+<span id="cb11-357"><a href="#cb11-357" aria-hidden="true" tabindex="-1"></a>mo.ui.code_editor(contents)</span>
+<span id="cb11-358"><a href="#cb11-358" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

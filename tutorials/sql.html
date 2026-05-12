@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sql – marimo-quarto</title>
+<title>SQL – marimo-quarto</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,6 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../tutorials/external_dependencies.html" rel="next">
+<link href="../tutorials/fileformat.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -109,16 +111,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
         value: Object.freeze({
             trusted: true,
-            notebookCode: "import marimo\n\n__generated_with = \"0.23.1\"\napp = marimo.App()\n\n\n@app.cell\ndef _():\n    has_duckdb_installed = False\n    try:\n        import duckdb\n\n        has_duckdb_installed = True\n    except ImportError:\n        pass\n\n    has_polars_installed = False\n    try:\n        import polars\n\n        has_polars_installed = True\n    except ImportError:\n        pass\n\n    has_pandas_installed = False\n    try:\n        import pandas\n\n        has_pandas_installed = True\n    except ImportError:\n        pass\n    return has_duckdb_installed, has_polars_installed\n\n\n@app.cell\ndef _(has_duckdb_installed, mo):\n    if has_duckdb_installed:\n        mo.output.replace(\n            mo.md(\n                \"\"\"\n                /// Tip | \"Installed\"\n\n                    If you see this, DuckDB is already installed.\n                ///\n                \"\"\"\n            )\n        )\n    else:\n        mo.output.replace(\n            mo.md(\n                \"\"\"\n                /// Warning | \"Not Installed\"\n                    If you see this, DuckDB is not installed.\n                ///\n                \"\"\"\n            )\n        )\n    return\n\n\n@app.cell\ndef _(has_polars_installed):\n    _SIZE = 1000\n\n\n    def _create_token_data(n_items=100):\n        import random\n        import string\n\n        def generate_random_string(length):\n            letters = string.ascii_lowercase\n            result_str = \"\".join(random.choice(letters) for i in range(length))\n            return result_str\n\n        def generate_random_numbers(mean, std_dev, num_samples):\n            return [int(random.gauss(mean, std_dev)) for _ in range(num_samples)]\n\n        random_numbers = generate_random_numbers(50, 15, n_items)\n        random_strings = sorted(\n            list(set([generate_random_string(3) for _ in range(n_items)]))\n        )\n\n        return {\n            \"token\": random_strings,\n            \"count\": random_numbers[: len(random_strings)],\n        }\n\n\n    _data = _create_token_data(_SIZE)\n\n    # Try polars\n    if has_polars_installed:\n        import polars as pl\n\n        df = pl.DataFrame(_data)\n    # Fallback to pandas (maybe trying to install it)\n    else:\n        import pandas as pd\n\n        df = pd.DataFrame(_data)\n    return\n\n\n@app.cell\ndef _(mo, string):\n    token_prefix = mo.ui.dropdown(\n        list(string.ascii_lowercase), label=\"token prefix\", value=\"a\"\n    )\n    token_prefix\n    return (token_prefix,)\n\n\n@app.cell\ndef _(mo):\n    charting_library = mo.ui.radio([\"matplotlib\", \"altair\", \"plotly\"])\n\n    mo.md(\n        f\"\"\"\n        Let's chart the result with a library of your choice:\n\n        {charting_library}\n        \"\"\"\n    )\n    return (charting_library,)\n\n\n@app.cell\ndef _(charting_library, mo, render_chart, token_prefix):\n    _header = mo.md(\n        f\"\"\"\n        We can re-use the dropdown from above: {token_prefix}\n\n        Now we have a histogram visualizing the token count distribution of tokens starting\n        with {token_prefix.value}, powered by your SQL query and UI element.\n        \"\"\"\n    )\n\n    render_chart(\n        charting_library.value, _header\n    ) if charting_library.value else None\n    return\n\n\n@app.cell\ndef _(mo, result, token_prefix):\n    def render_chart(charting_library, header):\n        return mo.vstack(\n            [header, render_charting_library(charting_library)]\n        ).center()\n\n\n    def render_charting_library(charting_library):\n        if charting_library == \"matplotlib\":\n            return render_matplotlib()\n        if charting_library == \"altair\":\n            return render_altair()\n        if charting_library == \"plotly\":\n            return render_plotly()\n\n\n    def render_matplotlib():\n        import matplotlib.pyplot as plt\n\n        plt.hist(result[\"count\"], label=token_prefix.value)\n        plt.xlabel(\"token count\")\n        plt.legend()\n        plt.tight_layout()\n        return plt.gcf()\n\n\n    def render_altair():\n        import altair as alt\n\n        chart = (\n            alt.Chart(result)\n            .mark_bar()\n            .encode(x=alt.X(\"count\", bin=True), y=alt.Y(\"count()\"))\n        )\n        return mo.ui.altair_chart(chart, chart_selection=False)\n\n\n    def render_plotly():\n        import plotly.graph_objects as go\n\n        return go.Figure(data=[go.Histogram(x=result[\"count\"])])\n\n    return (render_chart,)\n\n\n@app.cell\ndef _(cars, mo):\n    cylinders_dropdown = mo.ui.range_slider.from_series(\n        cars[\"Cylinders\"], debounce=True, show_value=True\n    )\n    origin_dropdown = mo.ui.dropdown.from_series(cars[\"Origin\"], value=\"Asia\")\n    mo.hstack([cylinders_dropdown, origin_dropdown]).left()\n    return\n\n\n@app.cell\ndef _(filtered_cars, mo):\n    mo.hstack(\n        [\n            mo.stat(label=\"Total cars\", value=str(len(filtered_cars))),\n            mo.stat(\n                label=\"Average MPG Highway\",\n                value=f\"{filtered_cars['MPG_Highway'].mean() or 0:.1f}\",\n            ),\n            mo.stat(\n                label=\"Average MPG City\",\n                value=f\"{filtered_cars['MPG_City'].mean() or 0:.1f}\",\n            ),\n        ]\n    )\n    return\n\n\n@app.cell\ndef _():\n    import marimo as mo\n    import random\n\n    return (mo,)\n\n\n@app.cell\ndef _():\n    import string\n\n    return (string,)\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+            notebookCode: "# /// script\n# requires-python = \"\u003E=3.11\"\n# dependencies = [\n#     \"marimo[sql]\u003E=0.23.1\",\n#     \"altair\",\n#     \"matplotlib\",\n#     \"pandas\",\n#     \"plotly\",\n# ]\n# ///\nimport marimo\n\n__generated_with = \"0.23.6\"\napp = marimo.App()\n\n\n@app.cell\ndef _():\n    has_duckdb_installed = False\n    try:\n        import duckdb\n\n        has_duckdb_installed = True\n    except ImportError:\n        pass\n\n    has_polars_installed = False\n    try:\n        import polars\n\n        has_polars_installed = True\n    except ImportError:\n        pass\n\n    has_pandas_installed = False\n    try:\n        import pandas\n\n        has_pandas_installed = True\n    except ImportError:\n        pass\n    return has_duckdb_installed, has_polars_installed\n\n\n@app.cell\ndef _(has_duckdb_installed, mo):\n    if has_duckdb_installed:\n        mo.output.replace(\n            mo.md(\n                \"\"\"\n                /// Tip | \"Installed\"\n\n                    If you see this, DuckDB is already installed.\n                ///\n                \"\"\"\n            )\n        )\n    else:\n        mo.output.replace(\n            mo.md(\n                \"\"\"\n                /// Warning | \"Not Installed\"\n                    If you see this, DuckDB is not installed.\n                ///\n                \"\"\"\n            )\n        )\n    return\n\n\n@app.cell\ndef _(has_polars_installed):\n    _SIZE = 1000\n\n\n    def _create_token_data(n_items=100):\n        import random\n        import string\n\n        def generate_random_string(length):\n            letters = string.ascii_lowercase\n            result_str = \"\".join(random.choice(letters) for i in range(length))\n            return result_str\n\n        def generate_random_numbers(mean, std_dev, num_samples):\n            return [int(random.gauss(mean, std_dev)) for _ in range(num_samples)]\n\n        random_numbers = generate_random_numbers(50, 15, n_items)\n        random_strings = sorted(\n            list(set([generate_random_string(3) for _ in range(n_items)]))\n        )\n\n        return {\n            \"token\": random_strings,\n            \"count\": random_numbers[: len(random_strings)],\n        }\n\n\n    _data = _create_token_data(_SIZE)\n\n    # Try polars\n    if has_polars_installed:\n        import polars as pl\n\n        df = pl.DataFrame(_data)\n    # Fallback to pandas (maybe trying to install it)\n    else:\n        import pandas as pd\n\n        df = pd.DataFrame(_data)\n    return (df,)\n\n\n@app.cell\ndef _(df, mo):\n    _df = mo.sql(\n        f\"\"\"\n        -- This SQL cell is special since we can reference existing dataframes in the global scope as a table in the SQL query. For example, we can reference the `df` dataframe in the global scope, which was defined in another cell using Python.\n\n        SELECT * FROM df;\n\n        -- By default, the output variable starts with an underscore (`_df`), making it private to this cell. To access the query result in another cell, change the name of the output variable.\n        \"\"\"\n    )\n    return\n\n\n@app.cell\ndef _(mo, string):\n    token_prefix = mo.ui.dropdown(\n        list(string.ascii_lowercase), label=\"token prefix\", value=\"a\"\n    )\n    token_prefix\n    return (token_prefix,)\n\n\n@app.cell\ndef _(df, mo, token_prefix):\n    result = mo.sql(\n        f\"\"\"\n        -- Change the dropdown to see the SQL query filter itself!\n        --\n        -- Here we use a duckdb function called `starts_with`:\n        SELECT * FROM df WHERE starts_with(token, '{token_prefix.value}')\n\n        -- Notice that we named the output variable `result`\n        \"\"\"\n    )\n    return (result,)\n\n\n@app.cell\ndef _(mo):\n    charting_library = mo.ui.radio([\"matplotlib\", \"altair\", \"plotly\"])\n\n    mo.md(\n        f\"\"\"\n        Let's chart the result with a library of your choice:\n\n        {charting_library}\n        \"\"\"\n    )\n    return (charting_library,)\n\n\n@app.cell\ndef _(charting_library, mo, render_chart, token_prefix):\n    _header = mo.md(\n        f\"\"\"\n        We can re-use the dropdown from above: {token_prefix}\n\n        Now we have a histogram visualizing the token count distribution of tokens starting\n        with {token_prefix.value}, powered by your SQL query and UI element.\n        \"\"\"\n    )\n\n    render_chart(\n        charting_library.value, _header\n    ) if charting_library.value else None\n    return\n\n\n@app.cell\ndef _(mo, result, token_prefix):\n    def render_chart(charting_library, header):\n        return mo.vstack(\n            [header, render_charting_library(charting_library)]\n        ).center()\n\n\n    def render_charting_library(charting_library):\n        if charting_library == \"matplotlib\":\n            return render_matplotlib()\n        if charting_library == \"altair\":\n            return render_altair()\n        if charting_library == \"plotly\":\n            return render_plotly()\n\n\n    def render_matplotlib():\n        import matplotlib.pyplot as plt\n\n        plt.hist(result[\"count\"], label=token_prefix.value)\n        plt.xlabel(\"token count\")\n        plt.legend()\n        plt.tight_layout()\n        return plt.gcf()\n\n\n    def render_altair():\n        import altair as alt\n\n        chart = (\n            alt.Chart(result)\n            .mark_bar()\n            .encode(x=alt.X(\"count\", bin=True), y=alt.Y(\"count()\"))\n        )\n        return mo.ui.altair_chart(chart, chart_selection=False)\n\n\n    def render_plotly():\n        import plotly.graph_objects as go\n\n        return go.Figure(data=[go.Histogram(x=result[\"count\"])])\n\n    return (render_chart,)\n\n\n@app.cell\ndef _():\n    # We use pandas for the CSV fetch because DuckDB in Pyodide does not support HTTPFS extensions\n    def read_cars_df():\n        import pandas as pd\n\n        try:\n            return pd.read_csv(\"https://datasets.marimo.app/cars.csv\")\n        except Exception:\n            # datasets.marimo.app returns 403 from time to time, so we add this as a fallback\n            return pd.DataFrame(\n                [\n                    {\n                        \"Name\": \"Honda Civic\",\n                        \"Origin\": \"Asia\",\n                        \"Cylinders\": 4,\n                        \"MPG_City\": 30,\n                        \"MPG_Highway\": 38,\n                    },\n                    {\n                        \"Name\": \"Toyota Camry\",\n                        \"Origin\": \"Asia\",\n                        \"Cylinders\": 4,\n                        \"MPG_City\": 28,\n                        \"MPG_Highway\": 39,\n                    },\n                    {\n                        \"Name\": \"Ford F-150\",\n                        \"Origin\": \"USA\",\n                        \"Cylinders\": 6,\n                        \"MPG_City\": 20,\n                        \"MPG_Highway\": 26,\n                    },\n                    {\n                        \"Name\": \"BMW 328i\",\n                        \"Origin\": \"Europe\",\n                        \"Cylinders\": 4,\n                        \"MPG_City\": 23,\n                        \"MPG_Highway\": 34,\n                    },\n                    {\n                        \"Name\": \"Mazda MX-5\",\n                        \"Origin\": \"Asia\",\n                        \"Cylinders\": 4,\n                        \"MPG_City\": 26,\n                        \"MPG_Highway\": 34,\n                    },\n                ]\n            )\n\n    cars_df = read_cars_df()\n    return (cars_df,)\n\n\n@app.cell\ndef _(cars_df, mo):\n    cars = mo.sql(\n        f\"\"\"\n        -- Download a CSV and create an in-memory table; this is optional.\n        CREATE OR replace TABLE cars as (\n            SELECT * FROM cars_df\n        );\n\n        -- Query the table\n        SELECT * from cars;\n        \"\"\"\n    )\n    return\n\n\n@app.cell\ndef _(cars, mo):\n    cylinders_dropdown = mo.ui.range_slider.from_series(\n        cars[\"Cylinders\"], debounce=True, show_value=True\n    )\n    origin_dropdown = mo.ui.dropdown.from_series(cars[\"Origin\"], value=\"Asia\")\n    mo.hstack([cylinders_dropdown, origin_dropdown]).left()\n    return cylinders_dropdown, origin_dropdown\n\n\n@app.cell\ndef _(cars, cylinders_dropdown, mo, origin_dropdown):\n    filtered_cars = mo.sql(\n        f\"\"\"\n        SELECT * FROM cars\n        WHERE\n            Cylinders \u003E= {cylinders_dropdown.value[0]}\n            AND\n            Cylinders \u003C= {cylinders_dropdown.value[1]}\n            AND\n            ORIGIN = '{origin_dropdown.value}'\n        \"\"\"\n    )\n    return (filtered_cars,)\n\n\n@app.cell\ndef _(filtered_cars, mo):\n    mo.hstack(\n        [\n            mo.stat(label=\"Total cars\", value=str(len(filtered_cars))),\n            mo.stat(\n                label=\"Average MPG Highway\",\n                value=f\"{filtered_cars['MPG_Highway'].mean() or 0:.1f}\",\n            ),\n            mo.stat(\n                label=\"Average MPG City\",\n                value=f\"{filtered_cars['MPG_City'].mean() or 0:.1f}\",\n            ),\n        ]\n    )\n    return\n\n\n@app.cell\ndef _():\n    import marimo as mo\n    import random\n\n    return (mo,)\n\n\n@app.cell\ndef _():\n    import string\n\n    return (string,)\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
         }),
         writable: false,
         configurable: false,
     });
-</script><meta property="og:title" content="Sql – marimo-quarto">
+</script><meta property="og:title" content="SQL – marimo-quarto">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="marimo-quarto">
-</head><body class="quarto-light"><marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.23.1%22%0Aapp%20%3D%20marimo.App%28%29%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20has_duckdb_installed%20%3D%20False%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20import%20duckdb%0A%0A%20%20%20%20%20%20%20%20has_duckdb_installed%20%3D%20True%0A%20%20%20%20except%20ImportError%3A%0A%20%20%20%20%20%20%20%20pass%0A%0A%20%20%20%20has_polars_installed%20%3D%20False%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20import%20polars%0A%0A%20%20%20%20%20%20%20%20has_polars_installed%20%3D%20True%0A%20%20%20%20except%20ImportError%3A%0A%20%20%20%20%20%20%20%20pass%0A%0A%20%20%20%20has_pandas_installed%20%3D%20False%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20import%20pandas%0A%0A%20%20%20%20%20%20%20%20has_pandas_installed%20%3D%20True%0A%20%20%20%20except%20ImportError%3A%0A%20%20%20%20%20%20%20%20pass%0A%20%20%20%20return%20has_duckdb_installed%2C%20has_polars_installed%0A%0A%0A%40app.cell%0Adef%20_%28has_duckdb_installed%2C%20mo%29%3A%0A%20%20%20%20if%20has_duckdb_installed%3A%0A%20%20%20%20%20%20%20%20mo.output.replace%28%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%20Tip%20%7C%20%22Installed%22%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20If%20you%20see%20this%2C%20DuckDB%20is%20already%20installed.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%20%20%20%29%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20mo.output.replace%28%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%20Warning%20%7C%20%22Not%20Installed%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20If%20you%20see%20this%2C%20DuckDB%20is%20not%20installed.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%20%20%20%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28has_polars_installed%29%3A%0A%20%20%20%20_SIZE%20%3D%201000%0A%0A%0A%20%20%20%20def%20_create_token_data%28n_items%3D100%29%3A%0A%20%20%20%20%20%20%20%20import%20random%0A%20%20%20%20%20%20%20%20import%20string%0A%0A%20%20%20%20%20%20%20%20def%20generate_random_string%28length%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20letters%20%3D%20string.ascii_lowercase%0A%20%20%20%20%20%20%20%20%20%20%20%20result_str%20%3D%20%22%22.join%28random.choice%28letters%29%20for%20i%20in%20range%28length%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20result_str%0A%0A%20%20%20%20%20%20%20%20def%20generate_random_numbers%28mean%2C%20std_dev%2C%20num_samples%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20%5Bint%28random.gauss%28mean%2C%20std_dev%29%29%20for%20_%20in%20range%28num_samples%29%5D%0A%0A%20%20%20%20%20%20%20%20random_numbers%20%3D%20generate_random_numbers%2850%2C%2015%2C%20n_items%29%0A%20%20%20%20%20%20%20%20random_strings%20%3D%20sorted%28%0A%20%20%20%20%20%20%20%20%20%20%20%20list%28set%28%5Bgenerate_random_string%283%29%20for%20_%20in%20range%28n_items%29%5D%29%29%0A%20%20%20%20%20%20%20%20%29%0A%0A%20%20%20%20%20%20%20%20return%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22token%22%3A%20random_strings%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22count%22%3A%20random_numbers%5B%3A%20len%28random_strings%29%5D%2C%0A%20%20%20%20%20%20%20%20%7D%0A%0A%0A%20%20%20%20_data%20%3D%20_create_token_data%28_SIZE%29%0A%0A%20%20%20%20%23%20Try%20polars%0A%20%20%20%20if%20has_polars_installed%3A%0A%20%20%20%20%20%20%20%20import%20polars%20as%20pl%0A%0A%20%20%20%20%20%20%20%20df%20%3D%20pl.DataFrame%28_data%29%0A%20%20%20%20%23%20Fallback%20to%20pandas%20%28maybe%20trying%20to%20install%20it%29%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20%20%20%20%20df%20%3D%20pd.DataFrame%28_data%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28mo%2C%20string%29%3A%0A%20%20%20%20token_prefix%20%3D%20mo.ui.dropdown%28%0A%20%20%20%20%20%20%20%20list%28string.ascii_lowercase%29%2C%20label%3D%22token%20prefix%22%2C%20value%3D%22a%22%0A%20%20%20%20%29%0A%20%20%20%20token_prefix%0A%20%20%20%20return%20%28token_prefix%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28mo%29%3A%0A%20%20%20%20charting_library%20%3D%20mo.ui.radio%28%5B%22matplotlib%22%2C%20%22altair%22%2C%20%22plotly%22%5D%29%0A%0A%20%20%20%20mo.md%28%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20Let%27s%20chart%20the%20result%20with%20a%20library%20of%20your%20choice%3A%0A%0A%20%20%20%20%20%20%20%20%7Bcharting_library%7D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%29%0A%20%20%20%20return%20%28charting_library%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28charting_library%2C%20mo%2C%20render_chart%2C%20token_prefix%29%3A%0A%20%20%20%20_header%20%3D%20mo.md%28%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20We%20can%20re-use%20the%20dropdown%20from%20above%3A%20%7Btoken_prefix%7D%0A%0A%20%20%20%20%20%20%20%20Now%20we%20have%20a%20histogram%20visualizing%20the%20token%20count%20distribution%20of%20tokens%20starting%0A%20%20%20%20%20%20%20%20with%20%7Btoken_prefix.value%7D%2C%20powered%20by%20your%20SQL%20query%20and%20UI%20element.%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%29%0A%0A%20%20%20%20render_chart%28%0A%20%20%20%20%20%20%20%20charting_library.value%2C%20_header%0A%20%20%20%20%29%20if%20charting_library.value%20else%20None%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28mo%2C%20result%2C%20token_prefix%29%3A%0A%20%20%20%20def%20render_chart%28charting_library%2C%20header%29%3A%0A%20%20%20%20%20%20%20%20return%20mo.vstack%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Bheader%2C%20render_charting_library%28charting_library%29%5D%0A%20%20%20%20%20%20%20%20%29.center%28%29%0A%0A%0A%20%20%20%20def%20render_charting_library%28charting_library%29%3A%0A%20%20%20%20%20%20%20%20if%20charting_library%20%3D%3D%20%22matplotlib%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20render_matplotlib%28%29%0A%20%20%20%20%20%20%20%20if%20charting_library%20%3D%3D%20%22altair%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20render_altair%28%29%0A%20%20%20%20%20%20%20%20if%20charting_library%20%3D%3D%20%22plotly%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20render_plotly%28%29%0A%0A%0A%20%20%20%20def%20render_matplotlib%28%29%3A%0A%20%20%20%20%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%0A%20%20%20%20%20%20%20%20plt.hist%28result%5B%22count%22%5D%2C%20label%3Dtoken_prefix.value%29%0A%20%20%20%20%20%20%20%20plt.xlabel%28%22token%20count%22%29%0A%20%20%20%20%20%20%20%20plt.legend%28%29%0A%20%20%20%20%20%20%20%20plt.tight_layout%28%29%0A%20%20%20%20%20%20%20%20return%20plt.gcf%28%29%0A%0A%0A%20%20%20%20def%20render_altair%28%29%3A%0A%20%20%20%20%20%20%20%20import%20altair%20as%20alt%0A%0A%20%20%20%20%20%20%20%20chart%20%3D%20%28%0A%20%20%20%20%20%20%20%20%20%20%20%20alt.Chart%28result%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.mark_bar%28%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.encode%28x%3Dalt.X%28%22count%22%2C%20bin%3DTrue%29%2C%20y%3Dalt.Y%28%22count%28%29%22%29%29%0A%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%20%20%20return%20mo.ui.altair_chart%28chart%2C%20chart_selection%3DFalse%29%0A%0A%0A%20%20%20%20def%20render_plotly%28%29%3A%0A%20%20%20%20%20%20%20%20import%20plotly.graph_objects%20as%20go%0A%0A%20%20%20%20%20%20%20%20return%20go.Figure%28data%3D%5Bgo.Histogram%28x%3Dresult%5B%22count%22%5D%29%5D%29%0A%0A%20%20%20%20return%20%28render_chart%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28cars%2C%20mo%29%3A%0A%20%20%20%20cylinders_dropdown%20%3D%20mo.ui.range_slider.from_series%28%0A%20%20%20%20%20%20%20%20cars%5B%22Cylinders%22%5D%2C%20debounce%3DTrue%2C%20show_value%3DTrue%0A%20%20%20%20%29%0A%20%20%20%20origin_dropdown%20%3D%20mo.ui.dropdown.from_series%28cars%5B%22Origin%22%5D%2C%20value%3D%22Asia%22%29%0A%20%20%20%20mo.hstack%28%5Bcylinders_dropdown%2C%20origin_dropdown%5D%29.left%28%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28filtered_cars%2C%20mo%29%3A%0A%20%20%20%20mo.hstack%28%0A%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.stat%28label%3D%22Total%20cars%22%2C%20value%3Dstr%28len%28filtered_cars%29%29%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.stat%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3D%22Average%20MPG%20Highway%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20value%3Df%22%7Bfiltered_cars%5B%27MPG_Highway%27%5D.mean%28%29%20or%200%3A.1f%7D%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.stat%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3D%22Average%20MPG%20City%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20value%3Df%22%7Bfiltered_cars%5B%27MPG_City%27%5D.mean%28%29%20or%200%3A.1f%7D%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%2C%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20random%0A%0A%20%20%20%20return%20%28mo%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20import%20string%0A%0A%20%20%20%20return%20%28string%2C%29%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run%28%29%0A</marimo-code><script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/main.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.1/dist/style.css" rel="stylesheet" title="marimo-islands" crossorigin="anonymous">
+</head><body class="nav-sidebar docked quarto-light"><marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.11%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22marimo%5Bsql%5D%3E%3D0.23.1%22%2C%0A%23%20%20%20%20%20%22altair%22%2C%0A%23%20%20%20%20%20%22matplotlib%22%2C%0A%23%20%20%20%20%20%22pandas%22%2C%0A%23%20%20%20%20%20%22plotly%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.23.6%22%0Aapp%20%3D%20marimo.App%28%29%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20has_duckdb_installed%20%3D%20False%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20import%20duckdb%0A%0A%20%20%20%20%20%20%20%20has_duckdb_installed%20%3D%20True%0A%20%20%20%20except%20ImportError%3A%0A%20%20%20%20%20%20%20%20pass%0A%0A%20%20%20%20has_polars_installed%20%3D%20False%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20import%20polars%0A%0A%20%20%20%20%20%20%20%20has_polars_installed%20%3D%20True%0A%20%20%20%20except%20ImportError%3A%0A%20%20%20%20%20%20%20%20pass%0A%0A%20%20%20%20has_pandas_installed%20%3D%20False%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20import%20pandas%0A%0A%20%20%20%20%20%20%20%20has_pandas_installed%20%3D%20True%0A%20%20%20%20except%20ImportError%3A%0A%20%20%20%20%20%20%20%20pass%0A%20%20%20%20return%20has_duckdb_installed%2C%20has_polars_installed%0A%0A%0A%40app.cell%0Adef%20_%28has_duckdb_installed%2C%20mo%29%3A%0A%20%20%20%20if%20has_duckdb_installed%3A%0A%20%20%20%20%20%20%20%20mo.output.replace%28%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%20Tip%20%7C%20%22Installed%22%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20If%20you%20see%20this%2C%20DuckDB%20is%20already%20installed.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%20%20%20%29%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20mo.output.replace%28%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%20Warning%20%7C%20%22Not%20Installed%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20If%20you%20see%20this%2C%20DuckDB%20is%20not%20installed.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%20%20%20%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28has_polars_installed%29%3A%0A%20%20%20%20_SIZE%20%3D%201000%0A%0A%0A%20%20%20%20def%20_create_token_data%28n_items%3D100%29%3A%0A%20%20%20%20%20%20%20%20import%20random%0A%20%20%20%20%20%20%20%20import%20string%0A%0A%20%20%20%20%20%20%20%20def%20generate_random_string%28length%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20letters%20%3D%20string.ascii_lowercase%0A%20%20%20%20%20%20%20%20%20%20%20%20result_str%20%3D%20%22%22.join%28random.choice%28letters%29%20for%20i%20in%20range%28length%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20result_str%0A%0A%20%20%20%20%20%20%20%20def%20generate_random_numbers%28mean%2C%20std_dev%2C%20num_samples%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20%5Bint%28random.gauss%28mean%2C%20std_dev%29%29%20for%20_%20in%20range%28num_samples%29%5D%0A%0A%20%20%20%20%20%20%20%20random_numbers%20%3D%20generate_random_numbers%2850%2C%2015%2C%20n_items%29%0A%20%20%20%20%20%20%20%20random_strings%20%3D%20sorted%28%0A%20%20%20%20%20%20%20%20%20%20%20%20list%28set%28%5Bgenerate_random_string%283%29%20for%20_%20in%20range%28n_items%29%5D%29%29%0A%20%20%20%20%20%20%20%20%29%0A%0A%20%20%20%20%20%20%20%20return%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22token%22%3A%20random_strings%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22count%22%3A%20random_numbers%5B%3A%20len%28random_strings%29%5D%2C%0A%20%20%20%20%20%20%20%20%7D%0A%0A%0A%20%20%20%20_data%20%3D%20_create_token_data%28_SIZE%29%0A%0A%20%20%20%20%23%20Try%20polars%0A%20%20%20%20if%20has_polars_installed%3A%0A%20%20%20%20%20%20%20%20import%20polars%20as%20pl%0A%0A%20%20%20%20%20%20%20%20df%20%3D%20pl.DataFrame%28_data%29%0A%20%20%20%20%23%20Fallback%20to%20pandas%20%28maybe%20trying%20to%20install%20it%29%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20%20%20%20%20df%20%3D%20pd.DataFrame%28_data%29%0A%20%20%20%20return%20%28df%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28df%2C%20mo%29%3A%0A%20%20%20%20_df%20%3D%20mo.sql%28%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20--%20This%20SQL%20cell%20is%20special%20since%20we%20can%20reference%20existing%20dataframes%20in%20the%20global%20scope%20as%20a%20table%20in%20the%20SQL%20query.%20For%20example%2C%20we%20can%20reference%20the%20%60df%60%20dataframe%20in%20the%20global%20scope%2C%20which%20was%20defined%20in%20another%20cell%20using%20Python.%0A%0A%20%20%20%20%20%20%20%20SELECT%20%2A%20FROM%20df%3B%0A%0A%20%20%20%20%20%20%20%20--%20By%20default%2C%20the%20output%20variable%20starts%20with%20an%20underscore%20%28%60_df%60%29%2C%20making%20it%20private%20to%20this%20cell.%20To%20access%20the%20query%20result%20in%20another%20cell%2C%20change%20the%20name%20of%20the%20output%20variable.%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28mo%2C%20string%29%3A%0A%20%20%20%20token_prefix%20%3D%20mo.ui.dropdown%28%0A%20%20%20%20%20%20%20%20list%28string.ascii_lowercase%29%2C%20label%3D%22token%20prefix%22%2C%20value%3D%22a%22%0A%20%20%20%20%29%0A%20%20%20%20token_prefix%0A%20%20%20%20return%20%28token_prefix%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28df%2C%20mo%2C%20token_prefix%29%3A%0A%20%20%20%20result%20%3D%20mo.sql%28%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20--%20Change%20the%20dropdown%20to%20see%20the%20SQL%20query%20filter%20itself%21%0A%20%20%20%20%20%20%20%20--%0A%20%20%20%20%20%20%20%20--%20Here%20we%20use%20a%20duckdb%20function%20called%20%60starts_with%60%3A%0A%20%20%20%20%20%20%20%20SELECT%20%2A%20FROM%20df%20WHERE%20starts_with%28token%2C%20%27%7Btoken_prefix.value%7D%27%29%0A%0A%20%20%20%20%20%20%20%20--%20Notice%20that%20we%20named%20the%20output%20variable%20%60result%60%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%29%0A%20%20%20%20return%20%28result%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28mo%29%3A%0A%20%20%20%20charting_library%20%3D%20mo.ui.radio%28%5B%22matplotlib%22%2C%20%22altair%22%2C%20%22plotly%22%5D%29%0A%0A%20%20%20%20mo.md%28%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20Let%27s%20chart%20the%20result%20with%20a%20library%20of%20your%20choice%3A%0A%0A%20%20%20%20%20%20%20%20%7Bcharting_library%7D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%29%0A%20%20%20%20return%20%28charting_library%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28charting_library%2C%20mo%2C%20render_chart%2C%20token_prefix%29%3A%0A%20%20%20%20_header%20%3D%20mo.md%28%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20We%20can%20re-use%20the%20dropdown%20from%20above%3A%20%7Btoken_prefix%7D%0A%0A%20%20%20%20%20%20%20%20Now%20we%20have%20a%20histogram%20visualizing%20the%20token%20count%20distribution%20of%20tokens%20starting%0A%20%20%20%20%20%20%20%20with%20%7Btoken_prefix.value%7D%2C%20powered%20by%20your%20SQL%20query%20and%20UI%20element.%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%29%0A%0A%20%20%20%20render_chart%28%0A%20%20%20%20%20%20%20%20charting_library.value%2C%20_header%0A%20%20%20%20%29%20if%20charting_library.value%20else%20None%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28mo%2C%20result%2C%20token_prefix%29%3A%0A%20%20%20%20def%20render_chart%28charting_library%2C%20header%29%3A%0A%20%20%20%20%20%20%20%20return%20mo.vstack%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Bheader%2C%20render_charting_library%28charting_library%29%5D%0A%20%20%20%20%20%20%20%20%29.center%28%29%0A%0A%0A%20%20%20%20def%20render_charting_library%28charting_library%29%3A%0A%20%20%20%20%20%20%20%20if%20charting_library%20%3D%3D%20%22matplotlib%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20render_matplotlib%28%29%0A%20%20%20%20%20%20%20%20if%20charting_library%20%3D%3D%20%22altair%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20render_altair%28%29%0A%20%20%20%20%20%20%20%20if%20charting_library%20%3D%3D%20%22plotly%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20render_plotly%28%29%0A%0A%0A%20%20%20%20def%20render_matplotlib%28%29%3A%0A%20%20%20%20%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%0A%20%20%20%20%20%20%20%20plt.hist%28result%5B%22count%22%5D%2C%20label%3Dtoken_prefix.value%29%0A%20%20%20%20%20%20%20%20plt.xlabel%28%22token%20count%22%29%0A%20%20%20%20%20%20%20%20plt.legend%28%29%0A%20%20%20%20%20%20%20%20plt.tight_layout%28%29%0A%20%20%20%20%20%20%20%20return%20plt.gcf%28%29%0A%0A%0A%20%20%20%20def%20render_altair%28%29%3A%0A%20%20%20%20%20%20%20%20import%20altair%20as%20alt%0A%0A%20%20%20%20%20%20%20%20chart%20%3D%20%28%0A%20%20%20%20%20%20%20%20%20%20%20%20alt.Chart%28result%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.mark_bar%28%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.encode%28x%3Dalt.X%28%22count%22%2C%20bin%3DTrue%29%2C%20y%3Dalt.Y%28%22count%28%29%22%29%29%0A%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%20%20%20return%20mo.ui.altair_chart%28chart%2C%20chart_selection%3DFalse%29%0A%0A%0A%20%20%20%20def%20render_plotly%28%29%3A%0A%20%20%20%20%20%20%20%20import%20plotly.graph_objects%20as%20go%0A%0A%20%20%20%20%20%20%20%20return%20go.Figure%28data%3D%5Bgo.Histogram%28x%3Dresult%5B%22count%22%5D%29%5D%29%0A%0A%20%20%20%20return%20%28render_chart%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20%23%20We%20use%20pandas%20for%20the%20CSV%20fetch%20because%20DuckDB%20in%20Pyodide%20does%20not%20support%20HTTPFS%20extensions%0A%20%20%20%20def%20read_cars_df%28%29%3A%0A%20%20%20%20%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20pd.read_csv%28%22https%3A%2F%2Fdatasets.marimo.app%2Fcars.csv%22%29%0A%20%20%20%20%20%20%20%20except%20Exception%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20datasets.marimo.app%20returns%20403%20from%20time%20to%20time%2C%20so%20we%20add%20this%20as%20a%20fallback%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20pd.DataFrame%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22Honda%20Civic%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22Asia%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%204%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2030%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2038%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22Toyota%20Camry%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22Asia%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%204%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2028%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2039%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22Ford%20F-150%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22USA%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%206%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2020%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2026%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22BMW%20328i%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22Europe%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%204%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2023%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2034%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22Mazda%20MX-5%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22Asia%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%204%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2026%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2034%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%0A%20%20%20%20cars_df%20%3D%20read_cars_df%28%29%0A%20%20%20%20return%20%28cars_df%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28cars_df%2C%20mo%29%3A%0A%20%20%20%20cars%20%3D%20mo.sql%28%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20--%20Download%20a%20CSV%20and%20create%20an%20in-memory%20table%3B%20this%20is%20optional.%0A%20%20%20%20%20%20%20%20CREATE%20OR%20replace%20TABLE%20cars%20as%20%28%0A%20%20%20%20%20%20%20%20%20%20%20%20SELECT%20%2A%20FROM%20cars_df%0A%20%20%20%20%20%20%20%20%29%3B%0A%0A%20%20%20%20%20%20%20%20--%20Query%20the%20table%0A%20%20%20%20%20%20%20%20SELECT%20%2A%20from%20cars%3B%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28cars%2C%20mo%29%3A%0A%20%20%20%20cylinders_dropdown%20%3D%20mo.ui.range_slider.from_series%28%0A%20%20%20%20%20%20%20%20cars%5B%22Cylinders%22%5D%2C%20debounce%3DTrue%2C%20show_value%3DTrue%0A%20%20%20%20%29%0A%20%20%20%20origin_dropdown%20%3D%20mo.ui.dropdown.from_series%28cars%5B%22Origin%22%5D%2C%20value%3D%22Asia%22%29%0A%20%20%20%20mo.hstack%28%5Bcylinders_dropdown%2C%20origin_dropdown%5D%29.left%28%29%0A%20%20%20%20return%20cylinders_dropdown%2C%20origin_dropdown%0A%0A%0A%40app.cell%0Adef%20_%28cars%2C%20cylinders_dropdown%2C%20mo%2C%20origin_dropdown%29%3A%0A%20%20%20%20filtered_cars%20%3D%20mo.sql%28%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20SELECT%20%2A%20FROM%20cars%0A%20%20%20%20%20%20%20%20WHERE%0A%20%20%20%20%20%20%20%20%20%20%20%20Cylinders%20%3E%3D%20%7Bcylinders_dropdown.value%5B0%5D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20AND%0A%20%20%20%20%20%20%20%20%20%20%20%20Cylinders%20%3C%3D%20%7Bcylinders_dropdown.value%5B1%5D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20AND%0A%20%20%20%20%20%20%20%20%20%20%20%20ORIGIN%20%3D%20%27%7Borigin_dropdown.value%7D%27%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%29%0A%20%20%20%20return%20%28filtered_cars%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28filtered_cars%2C%20mo%29%3A%0A%20%20%20%20mo.hstack%28%0A%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.stat%28label%3D%22Total%20cars%22%2C%20value%3Dstr%28len%28filtered_cars%29%29%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.stat%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3D%22Average%20MPG%20Highway%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20value%3Df%22%7Bfiltered_cars%5B%27MPG_Highway%27%5D.mean%28%29%20or%200%3A.1f%7D%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.stat%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3D%22Average%20MPG%20City%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20value%3Df%22%7Bfiltered_cars%5B%27MPG_City%27%5D.mean%28%29%20or%200%3A.1f%7D%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%2C%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%29%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20random%0A%0A%20%20%20%20return%20%28mo%2C%29%0A%0A%0A%40app.cell%0Adef%20_%28%29%3A%0A%20%20%20%20import%20string%0A%0A%20%20%20%20return%20%28string%2C%29%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run%28%29%0A</marimo-code><script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.6/dist/main.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.6/dist/style.css" rel="stylesheet" title="marimo-islands" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -131,9 +133,130 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/sql.html">SQL</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">marimo-quarto</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">marimo + quarto</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../tutorials/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/dataflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dataflow</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/ui.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/markdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/layout.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Layout</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/fileformat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fileformat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/sql.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">SQL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/external_dependencies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">External dependencies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/markdown_format.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/for_jupyter_users.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">marimo for Jupyter users</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/example-pdf.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PDF example</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -144,6 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#creating-sql-cells" id="toc-creating-sql-cells" class="nav-link" data-scroll-target="#creating-sql-cells">Creating SQL cells</a></li>
   <li><a href="#python-representation" id="toc-python-representation" class="nav-link" data-scroll-target="#python-representation">Python representation</a></li>
+  <li><a href="#querying-dataframes-with-sql" id="toc-querying-dataframes-with-sql" class="nav-link" data-scroll-target="#querying-dataframes-with-sql">Querying dataframes with SQL</a></li>
   <li><a href="#from-python-to-sql-and-back" id="toc-from-python-to-sql-and-back" class="nav-link" data-scroll-target="#from-python-to-sql-and-back">From Python to SQL and back</a></li>
   <li><a href="#csvs-parquet-postgres-and-more" id="toc-csvs-parquet-postgres-and-more" class="nav-link" data-scroll-target="#csvs-parquet-postgres-and-more">CSVs, Parquet, Postgres, and more …</a></li>
   </ul></li>
@@ -153,9 +277,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/sql.html">SQL</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Sql</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">SQL</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -174,7 +298,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="hello-sql" class="level1">
 <h1>Hello, SQL!</h1>
-<p><em>Let’s dive into the world of SQL where we don’t just address tables, we also join them!</em> <!----> With marimo, you can mix-and-match both <strong>Python and SQL</strong>. To create a SQL cell, you first need to install some additional dependencies, including <a href="https://duckdb.org/">duckdb</a>. Obtain these dependencies with</p>
+<p><em>Let’s dive into the world of SQL where we don’t just address tables, we also join them!</em> <!----></p>
+<p>With marimo, you can mix-and-match both <strong>Python and SQL</strong>. To create a SQL cell, you first need to install some additional dependencies, including <a href="https://duckdb.org/">duckdb</a>. Obtain these dependencies with</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">'marimo[sql]'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <marimo-island data-app-id="main" data-cell-id="Hbol" data-reactive="true">
     <marimo-cell-output>
@@ -184,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </marimo-island>
 <marimo-island data-app-id="main" data-cell-id="MJUe" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>/// Warning | \&quot;Not Installed\&quot;\n    If you see this, DuckDB is not installed.\n///</span></span>&quot;"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><div class=\&quot;admonition tip\&quot;>\n<p class=\&quot;admonition-title\&quot;>\&quot;Installed\&quot;</span>\n<div class=\&quot;language-teratermmacro highlight\&quot;><pre><span></span><code><span class=\&quot;k\&quot;>If</span><span class=\&quot;w\&quot;> </span><span class=\&quot;nv\&quot;>you</span><span class=\&quot;w\&quot;> </span><span class=\&quot;nv\&quot;>see</span><span class=\&quot;w\&quot;> </span><span class=\&quot;nv\&quot;>this</span>,<span class=\&quot;w\&quot;> </span><span class=\&quot;nv\&quot;>DuckDB</span><span class=\&quot;w\&quot;> </span><span class=\&quot;nv\&quot;>is</span><span class=\&quot;w\&quot;> </span><span class=\&quot;nv\&quot;>already</span><span class=\&quot;w\&quot;> </span><span class=\&quot;nv\&quot;>installed</span>.\n</code></pre></div>\n</div></span>&quot;"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">if%20has_duckdb_installed%3A%0A%20%20%20%20mo.output.replace(%0A%20%20%20%20%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%20Tip%20%7C%20%22Installed%22%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20If%20you%20see%20this%2C%20DuckDB%20is%20already%20installed.%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20)%0Aelse%3A%0A%20%20%20%20mo.output.replace(%0A%20%20%20%20%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%20Warning%20%7C%20%22Not%20Installed%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20If%20you%20see%20this%2C%20DuckDB%20is%20not%20installed.%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%2F%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20)</marimo-cell-code>
 </marimo-island>
@@ -192,8 +317,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="creating-sql-cells">Creating SQL cells</h2>
 <p>Once the required dependencies are installed, you can create SQL cells in one of the following ways:</p>
 <ul>
-<li>right click the <strong>Add Cell</strong> ::lucide:circle-plus:: buttons on the left of a cell;</li>
-<li>click the <strong>Convert to SQL</strong> ::lucide:database:: button in the cell menu ::lucide:ellipsis::</li>
+<li>right click the <strong>Add Cell</strong> buttons on the left of a cell;</li>
+<li>click the <strong>Convert to SQL</strong> button in the cell menu</li>
 <li>click the <strong>Add SQL Cell</strong> at the bottom of the page;</li>
 </ul>
 </section>
@@ -202,43 +327,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>marimo is still just Python, even when using SQL. Here is an example of how marimo embeds SQL in Python in its file format:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>output_df <span class="op">=</span> mo.sql(<span class="ss">f"SELECT * FROM my_table LIMIT </span><span class="sc">{</span>max_rows<span class="sc">.</span>value<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Notice that we have an <strong><code>output_df</code></strong> variable in the cell. This is a resulting Polars DataFrame (if you have <code>polars</code> installed) or a Pandas DataFrame (if you don’t). One of them must be installed in order to interact with the SQL result.</p>
-<p>The SQL statement itself is an formatted string (f-string), so this means they can contain any valid Python code, such as the values of UI elements. This means your SQL statement and results can be reactive! 🚀 <!----> ## Querying dataframes with SQL <!----> /// Tip | “Data sources panel”</p>
-<pre><code>Click the database "barrel" icon in the left toolbar to see all dataframes and in-
-memory tables that your notebook has access to.</code></pre>
-<p>/// <!----> Let’s take a look at a SQL cell. The next cell generates a dataframe called <code>df</code>.</p>
+<p>The SQL statement itself is an formatted string (f-string), so this means they can contain any valid Python code, such as the values of UI elements. This means your SQL statement and results can be reactive! 🚀 <!----></p>
+</section>
+<section id="querying-dataframes-with-sql" class="level2">
+<h2 class="anchored" data-anchor-id="querying-dataframes-with-sql">Querying dataframes with SQL</h2>
+<!---->
+<div class="callout callout-style-default callout-tip callout-titled" title="Data sources panel">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Data sources panel
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click the database “barrel” icon in the left toolbar to see all dataframes and in-memory tables that your notebook has access to.</p>
+</div>
+</div>
+<!---->
+<p>Let’s take a look at a SQL cell. The next cell generates a dataframe called <code>df</code>.</p>
 <marimo-island data-app-id="main" data-cell-id="vblA" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;No module named 'pandas'&quot;,&quot;exception_type&quot;:&quot;ModuleNotFoundError&quot;,&quot;raising_cell&quot;:null,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
+    <span></span>
     </marimo-cell-output>
     <marimo-cell-code hidden="">_SIZE%20%3D%201000%0A%0A%0Adef%20_create_token_data(n_items%3D100)%3A%0A%20%20%20%20import%20random%0A%20%20%20%20import%20string%0A%0A%20%20%20%20def%20generate_random_string(length)%3A%0A%20%20%20%20%20%20%20%20letters%20%3D%20string.ascii_lowercase%0A%20%20%20%20%20%20%20%20result_str%20%3D%20%22%22.join(random.choice(letters)%20for%20i%20in%20range(length))%0A%20%20%20%20%20%20%20%20return%20result_str%0A%0A%20%20%20%20def%20generate_random_numbers(mean%2C%20std_dev%2C%20num_samples)%3A%0A%20%20%20%20%20%20%20%20return%20%5Bint(random.gauss(mean%2C%20std_dev))%20for%20_%20in%20range(num_samples)%5D%0A%0A%20%20%20%20random_numbers%20%3D%20generate_random_numbers(50%2C%2015%2C%20n_items)%0A%20%20%20%20random_strings%20%3D%20sorted(%0A%20%20%20%20%20%20%20%20list(set(%5Bgenerate_random_string(3)%20for%20_%20in%20range(n_items)%5D))%0A%20%20%20%20)%0A%0A%20%20%20%20return%20%7B%0A%20%20%20%20%20%20%20%20%22token%22%3A%20random_strings%2C%0A%20%20%20%20%20%20%20%20%22count%22%3A%20random_numbers%5B%3A%20len(random_strings)%5D%2C%0A%20%20%20%20%7D%0A%0A%0A_data%20%3D%20_create_token_data(_SIZE)%0A%0A%23%20Try%20polars%0Aif%20has_polars_installed%3A%0A%20%20%20%20import%20polars%20as%20pl%0A%0A%20%20%20%20df%20%3D%20pl.DataFrame(_data)%0A%23%20Fallback%20to%20pandas%20(maybe%20trying%20to%20install%20it)%0Aelse%3A%0A%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20df%20%3D%20pd.DataFrame(_data)</marimo-cell-code>
 </marimo-island>
 <p>Next, we create a SQL query, refercing the Python dataframe <code>df</code> directly.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql marimo code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- This SQL cell is special since we can reference existing dataframes in the global scope as a table in the SQL query. For example, we can reference the `df` dataframe in the global scope, which was defined in another cell using Python.</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> df;</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- By default, the output variable starts with an underscore (`_df`), making it private to this cell. To access the query result in another cell, change the name of the output variable.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql marimo code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- This SQL cell is special since we can reference existing dataframes in the global scope as a table in the SQL query. For example, we can reference the `df` dataframe in the global scope, which was defined in another cell using Python.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> df;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- By default, the output variable starts with an underscore (`_df`), making it private to this cell. To access the query result in another cell, change the name of the output variable.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="from-python-to-sql-and-back" class="level2">
 <h2 class="anchored" data-anchor-id="from-python-to-sql-and-back">From Python to SQL and back</h2>
 <!---->
 <p>You can create SQL statements that depend on Python values, such as UI elements:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-query="result"><pre class="sourceCode sql marimo code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Change the dropdown to see the SQL query filter itself!</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Here we use a duckdb function called `starts_with`:</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> df <span class="kw">WHERE</span> starts_with(token, <span class="st">'{token_prefix.value}'</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- Notice that we named the output variable `result`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<marimo-island data-app-id="main" data-cell-id="bkHC" data-reactive="true">
+    <marimo-cell-output>
+    <marimo-ui-element object-id="bkHC-0" random-id="dc24395d-85b2-a549-bcde-350db5d82ffb"><marimo-table data-initial-value="[]" data-label="null" data-data="&quot;[{\&quot;token\&quot;:\&quot;aav\&quot;,\&quot;count\&quot;:34},{\&quot;token\&quot;:\&quot;aax\&quot;,\&quot;count\&quot;:91},{\&quot;token\&quot;:\&quot;aby\&quot;,\&quot;count\&quot;:36},{\&quot;token\&quot;:\&quot;afh\&quot;,\&quot;count\&quot;:28},{\&quot;token\&quot;:\&quot;alh\&quot;,\&quot;count\&quot;:52},{\&quot;token\&quot;:\&quot;alo\&quot;,\&quot;count\&quot;:38},{\&quot;token\&quot;:\&quot;alw\&quot;,\&quot;count\&quot;:49},{\&quot;token\&quot;:\&quot;amt\&quot;,\&quot;count\&quot;:46},{\&quot;token\&quot;:\&quot;aop\&quot;,\&quot;count\&quot;:74},{\&quot;token\&quot;:\&quot;aph\&quot;,\&quot;count\&quot;:32}]&quot;" data-total-rows="974" data-total-columns="2" data-max-columns="50" data-banner-text="&quot;&quot;" data-pagination="true" data-page-size="10" data-field-types="[[&quot;token&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;count&quot;,[&quot;integer&quot;,&quot;i64&quot;]]]" data-show-filters="true" data-show-download="true" data-show-column-summaries="true" data-show-data-types="true" data-show-page-size-selector="true" data-show-column-explorer="true" data-show-chart-builder="true" data-row-headers="[]" data-has-stable-row-id="false" data-lazy="false" data-preload="false"></marimo-table></marimo-ui-element>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">_df%20%3D%20mo.sql(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20--%20This%20SQL%20cell%20is%20special%20since%20we%20can%20reference%20existing%20dataframes%20in%20the%20global%20scope%20as%20a%20table%20in%20the%20SQL%20query.%20For%20example%2C%20we%20can%20reference%20the%20%60df%60%20dataframe%20in%20the%20global%20scope%2C%20which%20was%20defined%20in%20another%20cell%20using%20Python.%0A%0A%20%20%20%20SELECT%20*%20FROM%20df%3B%0A%0A%20%20%20%20--%20By%20default%2C%20the%20output%20variable%20starts%20with%20an%20underscore%20(%60_df%60)%2C%20making%20it%20private%20to%20this%20cell.%20To%20access%20the%20query%20result%20in%20another%20cell%2C%20change%20the%20name%20of%20the%20output%20variable.%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-query="result"><pre class="sourceCode sql marimo code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Change the dropdown to see the SQL query filter itself!</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Here we use a duckdb function called `starts_with`:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> df <span class="kw">WHERE</span> starts_with(token, <span class="st">'{token_prefix.value}'</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- Notice that we named the output variable `result`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Since we named the output variable above <strong><code>result</code></strong>, we can use it back in Python.</p>
 <marimo-island data-app-id="main" data-cell-id="lEQa" data-reactive="true">
     <marimo-cell-output>
-    <marimo-ui-element object-id="lEQa-0" random-id="560fa3a9-2779-6607-662c-2f78b85fea96"><marimo-dropdown data-initial-value="[&quot;a&quot;]" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>token prefix</span></span>&quot;" data-options="[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;,&quot;g&quot;,&quot;h&quot;,&quot;i&quot;,&quot;j&quot;,&quot;k&quot;,&quot;l&quot;,&quot;m&quot;,&quot;n&quot;,&quot;o&quot;,&quot;p&quot;,&quot;q&quot;,&quot;r&quot;,&quot;s&quot;,&quot;t&quot;,&quot;u&quot;,&quot;v&quot;,&quot;w&quot;,&quot;x&quot;,&quot;y&quot;,&quot;z&quot;]" data-allow-select-none="false" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element>
+    <marimo-ui-element object-id="lEQa-0" random-id="2df76e84-10fb-6bee-3345-83b1440d8fd5"><marimo-dropdown data-initial-value="[&quot;a&quot;]" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>token prefix</span></span>&quot;" data-options="[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;,&quot;g&quot;,&quot;h&quot;,&quot;i&quot;,&quot;j&quot;,&quot;k&quot;,&quot;l&quot;,&quot;m&quot;,&quot;n&quot;,&quot;o&quot;,&quot;p&quot;,&quot;q&quot;,&quot;r&quot;,&quot;s&quot;,&quot;t&quot;,&quot;u&quot;,&quot;v&quot;,&quot;w&quot;,&quot;x&quot;,&quot;y&quot;,&quot;z&quot;]" data-allow-select-none="false" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element>
     </marimo-cell-output>
     <marimo-cell-code hidden="">token_prefix%20%3D%20mo.ui.dropdown(%0A%20%20%20%20list(string.ascii_lowercase)%2C%20label%3D%22token%20prefix%22%2C%20value%3D%22a%22%0A)%0Atoken_prefix</marimo-cell-code>
 </marimo-island>
+<marimo-island data-app-id="main" data-cell-id="PKri" data-reactive="true">
+    <marimo-cell-output>
+    <marimo-ui-element object-id="PKri-0" random-id="e52f259f-5251-dc69-a712-fc920715e2ab"><marimo-table data-initial-value="[]" data-label="null" data-data="&quot;[{\&quot;token\&quot;:\&quot;aav\&quot;,\&quot;count\&quot;:34},{\&quot;token\&quot;:\&quot;aax\&quot;,\&quot;count\&quot;:91},{\&quot;token\&quot;:\&quot;aby\&quot;,\&quot;count\&quot;:36},{\&quot;token\&quot;:\&quot;afh\&quot;,\&quot;count\&quot;:28},{\&quot;token\&quot;:\&quot;alh\&quot;,\&quot;count\&quot;:52},{\&quot;token\&quot;:\&quot;alo\&quot;,\&quot;count\&quot;:38},{\&quot;token\&quot;:\&quot;alw\&quot;,\&quot;count\&quot;:49},{\&quot;token\&quot;:\&quot;amt\&quot;,\&quot;count\&quot;:46},{\&quot;token\&quot;:\&quot;aop\&quot;,\&quot;count\&quot;:74},{\&quot;token\&quot;:\&quot;aph\&quot;,\&quot;count\&quot;:32}]&quot;" data-total-rows="27" data-total-columns="2" data-max-columns="50" data-banner-text="&quot;&quot;" data-pagination="true" data-page-size="10" data-field-types="[[&quot;token&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;count&quot;,[&quot;integer&quot;,&quot;i64&quot;]]]" data-show-filters="true" data-show-download="true" data-show-column-summaries="true" data-show-data-types="true" data-show-page-size-selector="true" data-show-column-explorer="true" data-show-chart-builder="true" data-row-headers="[]" data-has-stable-row-id="false" data-lazy="false" data-preload="false"></marimo-table></marimo-ui-element>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">result%20%3D%20mo.sql(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20--%20Change%20the%20dropdown%20to%20see%20the%20SQL%20query%20filter%20itself!%0A%20%20%20%20--%0A%20%20%20%20--%20Here%20we%20use%20a%20duckdb%20function%20called%20%60starts_with%60%3A%0A%20%20%20%20SELECT%20*%20FROM%20df%20WHERE%20starts_with(token%2C%20'%7Btoken_prefix.value%7D')%0A%0A%20%20%20%20--%20Notice%20that%20we%20named%20the%20output%20variable%20%60result%60%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Xref" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Let's chart the result with a library of your choice:</span>\n<span class=\&quot;paragraph\&quot;><marimo-ui-element object-id='Xref-0' random-id='c55f9927-253b-edf5-9708-69849bf8e877'><marimo-radio data-initial-value='null' data-label='null' data-options='[&amp;quot;matplotlib&amp;quot;,&amp;quot;altair&amp;quot;,&amp;quot;plotly&amp;quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element></span></span>&quot;"></marimo-mime-renderer>
+    <marimo-mime-renderer data-mime="&quot;text/markdown&quot;" data-data="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Let's chart the result with a library of your choice:</span>\n<span class=\&quot;paragraph\&quot;><marimo-ui-element object-id='Xref-0' random-id='686c9840-7f81-745e-72ed-2c69c1d45122'><marimo-radio data-initial-value='null' data-label='null' data-options='[&amp;quot;matplotlib&amp;quot;,&amp;quot;altair&amp;quot;,&amp;quot;plotly&amp;quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element></span></span>&quot;"></marimo-mime-renderer>
     </marimo-cell-output>
     <marimo-cell-code hidden="">charting_library%20%3D%20mo.ui.radio(%5B%22matplotlib%22%2C%20%22altair%22%2C%20%22plotly%22%5D)%0A%0Amo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20Let's%20chart%20the%20result%20with%20a%20library%20of%20your%20choice%3A%0A%0A%20%20%20%20%7Bcharting_library%7D%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
 </marimo-island>
@@ -247,42 +400,55 @@ memory tables that your notebook has access to.</code></pre>
 <h2 class="anchored" data-anchor-id="csvs-parquet-postgres-and-more">CSVs, Parquet, Postgres, and more …</h2>
 <!---->
 <p>We’re not limited to querying dataframes. We can also query an <strong>HTTP URL, S3 path, or a file path to a local csv or parquet file</strong>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> <span class="st">'s3://my-bucket/file.parquet'</span>;</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> read_csv(<span class="st">'path/to/example.csv'</span>);</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> read_parquet(<span class="st">'path/to/example.parquet'</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> <span class="st">'s3://my-bucket/file.parquet'</span>;</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> read_csv(<span class="st">'path/to/example.csv'</span>);</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> read_parquet(<span class="st">'path/to/example.parquet'</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>With a bit of boilerplate, you can even read and write to <strong>Postgres</strong>, and join Postgres tables with dataframes in the same query. For a full list of supported data sources, check out the <a href="https://duckdb.org/docs/extensions/overview">duckdb extensions</a> and our <a href="https://github.com/marimo-team/marimo/blob/main/examples/sql/duckdb_connections.**py**">example notebook on duckdb connections</a>.</p>
-<p>For this example, we will query an HTTP endpoint of a csv.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-query="cars"><pre class="sourceCode sql marimo code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Download a CSV and create an in-memory table; this is optional.</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">replace</span> <span class="kw">TABLE</span> cars <span class="kw">as</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://datasets.marimo.app/cars.csv'</span>;</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Query the table</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">from</span> cars;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For this example, we will query a dataframe loaded from a csv.</p>
 <marimo-island data-app-id="main" data-cell-id="SFPL" data-reactive="true">
     <marimo-cell-output>
     <span></span>
     </marimo-cell-output>
     <marimo-cell-code hidden="">_header%20%3D%20mo.md(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20We%20can%20re-use%20the%20dropdown%20from%20above%3A%20%7Btoken_prefix%7D%0A%0A%20%20%20%20Now%20we%20have%20a%20histogram%20visualizing%20the%20token%20count%20distribution%20of%20tokens%20starting%0A%20%20%20%20with%20%7Btoken_prefix.value%7D%2C%20powered%20by%20your%20SQL%20query%20and%20UI%20element.%0A%20%20%20%20%22%22%22%0A)%0A%0Arender_chart(%0A%20%20%20%20charting_library.value%2C%20_header%0A)%20if%20charting_library.value%20else%20None</marimo-cell-code>
 </marimo-island>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-query="filtered_cars"><pre class="sourceCode sql marimo code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> cars</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    Cylinders <span class="op">&gt;=</span> {cylinders_dropdown.<span class="fu">value</span>[<span class="dv">0</span>]}</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    Cylinders <span class="op">&lt;=</span> {cylinders_dropdown.<span class="fu">value</span>[<span class="dv">1</span>]}</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    ORIGIN <span class="op">=</span> <span class="st">'{origin_dropdown.value}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-query="cars"><pre class="sourceCode sql marimo code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Download a CSV and create an in-memory table; this is optional.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">replace</span> <span class="kw">TABLE</span> cars <span class="kw">as</span> (</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> cars_df</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- Query the table</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">from</span> cars;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <marimo-island data-app-id="main" data-cell-id="BYtC" data-reactive="true">
     <marimo-cell-output>
     <span></span>
     </marimo-cell-output>
     <marimo-cell-code hidden="">def%20render_chart(charting_library%2C%20header)%3A%0A%20%20%20%20return%20mo.vstack(%0A%20%20%20%20%20%20%20%20%5Bheader%2C%20render_charting_library(charting_library)%5D%0A%20%20%20%20).center()%0A%0A%0Adef%20render_charting_library(charting_library)%3A%0A%20%20%20%20if%20charting_library%20%3D%3D%20%22matplotlib%22%3A%0A%20%20%20%20%20%20%20%20return%20render_matplotlib()%0A%20%20%20%20if%20charting_library%20%3D%3D%20%22altair%22%3A%0A%20%20%20%20%20%20%20%20return%20render_altair()%0A%20%20%20%20if%20charting_library%20%3D%3D%20%22plotly%22%3A%0A%20%20%20%20%20%20%20%20return%20render_plotly()%0A%0A%0Adef%20render_matplotlib()%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%0A%20%20%20%20plt.hist(result%5B%22count%22%5D%2C%20label%3Dtoken_prefix.value)%0A%20%20%20%20plt.xlabel(%22token%20count%22)%0A%20%20%20%20plt.legend()%0A%20%20%20%20plt.tight_layout()%0A%20%20%20%20return%20plt.gcf()%0A%0A%0Adef%20render_altair()%3A%0A%20%20%20%20import%20altair%20as%20alt%0A%0A%20%20%20%20chart%20%3D%20(%0A%20%20%20%20%20%20%20%20alt.Chart(result)%0A%20%20%20%20%20%20%20%20.mark_bar()%0A%20%20%20%20%20%20%20%20.encode(x%3Dalt.X(%22count%22%2C%20bin%3DTrue)%2C%20y%3Dalt.Y(%22count()%22))%0A%20%20%20%20)%0A%20%20%20%20return%20mo.ui.altair_chart(chart%2C%20chart_selection%3DFalse)%0A%0A%0Adef%20render_plotly()%3A%0A%20%20%20%20import%20plotly.graph_objects%20as%20go%0A%0A%20%20%20%20return%20go.Figure(data%3D%5Bgo.Histogram(x%3Dresult%5B%22count%22%5D)%5D)</marimo-cell-code>
 </marimo-island>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-query="filtered_cars"><pre class="sourceCode sql marimo code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> cars</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    Cylinders <span class="op">&gt;=</span> {cylinders_dropdown.<span class="fu">value</span>[<span class="dv">0</span>]}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    Cylinders <span class="op">&lt;=</span> {cylinders_dropdown.<span class="fu">value</span>[<span class="dv">1</span>]}</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    ORIGIN <span class="op">=</span> <span class="st">'{origin_dropdown.value}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<marimo-island data-app-id="main" data-cell-id="RGSE" data-reactive="true">
+    <marimo-cell-output>
+    <span></span>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">%23%20We%20use%20pandas%20for%20the%20CSV%20fetch%20because%20DuckDB%20in%20Pyodide%20does%20not%20support%20HTTPFS%20extensions%0Adef%20read_cars_df()%3A%0A%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20return%20pd.read_csv(%22https%3A%2F%2Fdatasets.marimo.app%2Fcars.csv%22)%0A%20%20%20%20except%20Exception%3A%0A%20%20%20%20%20%20%20%20%23%20datasets.marimo.app%20returns%20403%20from%20time%20to%20time%2C%20so%20we%20add%20this%20as%20a%20fallback%0A%20%20%20%20%20%20%20%20return%20pd.DataFrame(%0A%20%20%20%20%20%20%20%20%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22Honda%20Civic%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22Asia%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%204%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2030%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2038%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22Toyota%20Camry%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22Asia%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%204%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2028%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2039%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22Ford%20F-150%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22USA%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%206%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2020%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2026%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22BMW%20328i%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22Europe%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%204%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2023%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2034%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Name%22%3A%20%22Mazda%20MX-5%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Origin%22%3A%20%22Asia%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Cylinders%22%3A%204%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_City%22%3A%2026%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22MPG_Highway%22%3A%2034%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%20%20)%0A%0Acars_df%20%3D%20read_cars_df()</marimo-cell-code>
+</marimo-island>
 <marimo-island data-app-id="main" data-cell-id="Kclp" data-reactive="true">
     <marimo-cell-output>
-    <marimo-mime-renderer data-mime="&quot;application/vnd.marimo+error&quot;" data-data="[{&quot;type&quot;:&quot;exception&quot;,&quot;msg&quot;:&quot;name 'cars' is not defined&quot;,&quot;exception_type&quot;:&quot;NameError&quot;,&quot;raising_cell&quot;:null,&quot;traceback&quot;:null}]"></marimo-mime-renderer>
+    <marimo-ui-element object-id="Kclp-0" random-id="3f676ddc-27e2-8ddf-a23d-3ffd1a6146e8"><marimo-table data-initial-value="[]" data-label="null" data-data="&quot;[{\&quot;Name\&quot;:\&quot;Honda Civic\&quot;,\&quot;Origin\&quot;:\&quot;Asia\&quot;,\&quot;Cylinders\&quot;:4,\&quot;MPG_City\&quot;:30,\&quot;MPG_Highway\&quot;:38},{\&quot;Name\&quot;:\&quot;Toyota Camry\&quot;,\&quot;Origin\&quot;:\&quot;Asia\&quot;,\&quot;Cylinders\&quot;:4,\&quot;MPG_City\&quot;:28,\&quot;MPG_Highway\&quot;:39},{\&quot;Name\&quot;:\&quot;Ford F-150\&quot;,\&quot;Origin\&quot;:\&quot;USA\&quot;,\&quot;Cylinders\&quot;:6,\&quot;MPG_City\&quot;:20,\&quot;MPG_Highway\&quot;:26},{\&quot;Name\&quot;:\&quot;BMW 328i\&quot;,\&quot;Origin\&quot;:\&quot;Europe\&quot;,\&quot;Cylinders\&quot;:4,\&quot;MPG_City\&quot;:23,\&quot;MPG_Highway\&quot;:34},{\&quot;Name\&quot;:\&quot;Mazda MX-5\&quot;,\&quot;Origin\&quot;:\&quot;Asia\&quot;,\&quot;Cylinders\&quot;:4,\&quot;MPG_City\&quot;:26,\&quot;MPG_Highway\&quot;:34}]&quot;" data-total-rows="5" data-total-columns="5" data-max-columns="50" data-banner-text="&quot;&quot;" data-pagination="true" data-page-size="10" data-field-types="[[&quot;Name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Origin&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Cylinders&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;MPG_City&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;MPG_Highway&quot;,[&quot;integer&quot;,&quot;i64&quot;]]]" data-show-filters="true" data-show-download="true" data-show-column-summaries="false" data-show-data-types="true" data-show-page-size-selector="false" data-show-column-explorer="true" data-show-chart-builder="true" data-row-headers="[]" data-has-stable-row-id="false" data-lazy="false" data-preload="false"></marimo-table></marimo-ui-element>
+    </marimo-cell-output>
+    <marimo-cell-code hidden="">cars%20%3D%20mo.sql(%0A%20%20%20%20f%22%22%22%0A%20%20%20%20--%20Download%20a%20CSV%20and%20create%20an%20in-memory%20table%3B%20this%20is%20optional.%0A%20%20%20%20CREATE%20OR%20replace%20TABLE%20cars%20as%20(%0A%20%20%20%20%20%20%20%20SELECT%20*%20FROM%20cars_df%0A%20%20%20%20)%3B%0A%0A%20%20%20%20--%20Query%20the%20table%0A%20%20%20%20SELECT%20*%20from%20cars%3B%0A%20%20%20%20%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
+<marimo-island data-app-id="main" data-cell-id="emfo" data-reactive="true">
+    <marimo-cell-output>
+    <div style="display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: flex-start;flex-wrap: nowrap;gap: 0rem"><div><div style="display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: normal;flex-wrap: nowrap;gap: 0.5rem"><marimo-ui-element object-id="emfo-0" random-id="4428c079-a441-6ac3-224f-df0fdb4d156a"><marimo-range-slider data-initial-value="[4.0,6.0]" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Cylinders</span></span>&quot;" data-start="4.0" data-stop="6.0" data-steps="[]" data-debounce="true" data-orientation="&quot;horizontal&quot;" data-show-value="true" data-full-width="false" data-disabled="false"></marimo-range-slider></marimo-ui-element><marimo-ui-element object-id="emfo-1" random-id="02dc512b-7002-c987-d988-d5e4a6eb5230"><marimo-dropdown data-initial-value="[&quot;Asia&quot;]" data-label="&quot;<span class=\&quot;markdown prose dark:prose-invert contents\&quot;><span class=\&quot;paragraph\&quot;>Origin</span></span>&quot;" data-options="[&quot;Asia&quot;,&quot;Europe&quot;,&quot;USA&quot;]" data-allow-select-none="false" data-searchable="false" data-full-width="false"></marimo-dropdown></marimo-ui-element></div></div></div>
     </marimo-cell-output>
     <marimo-cell-code hidden="">cylinders_dropdown%20%3D%20mo.ui.range_slider.from_series(%0A%20%20%20%20cars%5B%22Cylinders%22%5D%2C%20debounce%3DTrue%2C%20show_value%3DTrue%0A)%0Aorigin_dropdown%20%3D%20mo.ui.dropdown.from_series(cars%5B%22Origin%22%5D%2C%20value%3D%22Asia%22)%0Amo.hstack(%5Bcylinders_dropdown%2C%20origin_dropdown%5D).left()</marimo-cell-code>
 </marimo-island>
@@ -744,324 +910,406 @@ memory tables that your notebook has access to.</code></pre>
       }
     }
   });
-  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Sql</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">marimo-version:</span><span class="co"> 0.13.2</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">width:</span><span class="co"> medium</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu"># Hello, SQL!</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>_Let's dive into the world of SQL where we don't just address tables, we also join them!_</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>With marimo, you can mix-and-match both **Python and SQL**. To create a</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>SQL cell, you first need to install some additional dependencies,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>including <span class="co">[</span><span class="ot">duckdb</span><span class="co">](https://duckdb.org/)</span>. Obtain these dependencies with</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">'marimo[sql]'</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>has_duckdb_installed <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> duckdb</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    has_duckdb_installed <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>has_polars_installed <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> polars</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    has_polars_installed <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>has_pandas_installed <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> pandas</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    has_pandas_installed <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> has_duckdb_installed:</span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    mo.output.replace(</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>        mo.md(</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>            <span class="st">"""</span></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="st">            /// Tip | "Installed"</span></span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="st">                If you see this, DuckDB is already installed.</span></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="st">            ///</span></span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="st">            """</span></span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    mo.output.replace(</span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>        mo.md(</span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>            <span class="st">"""</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="st">            /// Warning | "Not Installed"</span></span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="st">                If you see this, DuckDB is not installed.</span></span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="st">            ///</span></span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="st">            """</span></span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Creating SQL cells</span></span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>Once the required dependencies are installed, you can create SQL cells</span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>in one of the following ways:</span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>right click the **Add Cell** :<span class="sc">:lucide:</span>circle-plus:: buttons on the left of</span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>a cell;</span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>click the **Convert to SQL** :<span class="sc">:lucide:</span>database:: button in the cell menu :<span class="sc">:lucide:</span>ellipsis::</span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>click the **Add SQL Cell** at the bottom of the page;</span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Python representation</span></span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>marimo is still just Python, even when using SQL. Here is an example of</span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>how marimo embeds SQL in Python in its file format:</span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>output_df <span class="op">=</span> mo.sql(<span class="ss">f"SELECT * FROM my_table LIMIT </span><span class="sc">{</span>max_rows<span class="sc">.</span>value<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>Notice that we have an **`output_df`** variable in the cell. This is a</span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>resulting Polars DataFrame (if you have <span class="in">`polars`</span> installed) or a Pandas</span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>DataFrame (if you don't). One of them must be installed in order to</span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>interact with the SQL result.</span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>The SQL statement itself is an formatted string (f-string), so this</span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>means they can contain any valid Python code, such as the values of UI</span>
-<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>elements. This means your SQL statement and results can be reactive! 🚀</span>
-<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Querying dataframes with SQL</span></span>
-<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>/// Tip | "Data sources panel"</span>
-<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="in">    Click the database "barrel" icon in the left toolbar to see all dataframes and in-</span></span>
-<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="in">    memory tables that your notebook has access to.</span></span>
-<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>///</span>
-<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>Let's take a look at a SQL cell. The next cell generates a dataframe called <span class="in">`df`</span>.</span>
-<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>_SIZE <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _create_token_data(n_items<span class="op">=</span><span class="dv">100</span>):</span>
-<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> random</span>
-<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> string</span>
-<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generate_random_string(length):</span>
-<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>        letters <span class="op">=</span> string.ascii_lowercase</span>
-<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>        result_str <span class="op">=</span> <span class="st">""</span>.join(random.choice(letters) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(length))</span>
-<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result_str</span>
-<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generate_random_numbers(mean, std_dev, num_samples):</span>
-<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="bu">int</span>(random.gauss(mean, std_dev)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(num_samples)]</span>
-<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>    random_numbers <span class="op">=</span> generate_random_numbers(<span class="dv">50</span>, <span class="dv">15</span>, n_items)</span>
-<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a>    random_strings <span class="op">=</span> <span class="bu">sorted</span>(</span>
-<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>        <span class="bu">list</span>(<span class="bu">set</span>([generate_random_string(<span class="dv">3</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_items)]))</span>
-<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
-<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a>        <span class="st">"token"</span>: random_strings,</span>
-<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a>        <span class="st">"count"</span>: random_numbers[: <span class="bu">len</span>(random_strings)],</span>
-<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>_data <span class="op">=</span> _create_token_data(_SIZE)</span>
-<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a><span class="co"># Try polars</span></span>
-<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> has_polars_installed:</span>
-<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pl.DataFrame(_data)</span>
-<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a><span class="co"># Fallback to pandas (maybe trying to install it)</span></span>
-<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(_data)</span>
-<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>Next, we create a SQL query, refercing the Python dataframe <span class="in">`df`</span> directly.</span>
-<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo}</span></span>
-<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a><span class="co">-- This SQL cell is special since we can reference existing dataframes in the global scope as a table in the SQL query. For example, we can reference the `df` dataframe in the global scope, which was defined in another cell using Python.</span></span>
-<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> df;</span>
-<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a><span class="co">-- By default, the output variable starts with an underscore (`_df`), making it private to this cell. To access the query result in another cell, change the name of the output variable.</span></span>
-<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a><span class="fu">## From Python to SQL and back</span></span>
-<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a>You can create SQL statements that depend on Python values, such as UI elements:</span>
-<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a>token_prefix <span class="op">=</span> mo.ui.dropdown(</span>
-<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(string.ascii_lowercase), label<span class="op">=</span><span class="st">"token prefix"</span>, value<span class="op">=</span><span class="st">"a"</span></span>
-<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a>token_prefix</span>
-<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo query="result"}</span></span>
-<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a><span class="co">-- Change the dropdown to see the SQL query filter itself!</span></span>
-<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
-<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a><span class="co">-- Here we use a duckdb function called `starts_with`:</span></span>
-<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> df <span class="kw">WHERE</span> starts_with(token, <span class="st">'{token_prefix.value}'</span>)</span>
-<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a><span class="co">-- Notice that we named the output variable `result`</span></span>
-<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a>Since we named the output variable above **`result`**,</span>
-<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a>we can use it back in Python.</span>
-<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a>charting_library <span class="op">=</span> mo.ui.radio([<span class="st">"matplotlib"</span>, <span class="st">"altair"</span>, <span class="st">"plotly"</span>])</span>
-<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a>mo.md(</span>
-<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
-<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a><span class="ss">    Let's chart the result with a library of your choice:</span></span>
-<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>charting_library<span class="sc">}</span></span>
-<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
-<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a>_header <span class="op">=</span> mo.md(</span>
-<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
-<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a><span class="ss">    We can re-use the dropdown from above: </span><span class="sc">{</span>token_prefix<span class="sc">}</span></span>
-<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a><span class="ss">    Now we have a histogram visualizing the token count distribution of tokens starting</span></span>
-<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a><span class="ss">    with </span><span class="sc">{</span>token_prefix<span class="sc">.</span>value<span class="sc">}</span><span class="ss">, powered by your SQL query and UI element.</span></span>
-<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
-<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a>render_chart(</span>
-<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a>    charting_library.value, _header</span>
-<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a>) <span class="cf">if</span> charting_library.value <span class="cf">else</span> <span class="va">None</span></span>
-<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_chart(charting_library, header):</span>
-<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mo.vstack(</span>
-<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a>        [header, render_charting_library(charting_library)]</span>
-<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a>    ).center()</span>
-<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_charting_library(charting_library):</span>
-<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> charting_library <span class="op">==</span> <span class="st">"matplotlib"</span>:</span>
-<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> render_matplotlib()</span>
-<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> charting_library <span class="op">==</span> <span class="st">"altair"</span>:</span>
-<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> render_altair()</span>
-<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> charting_library <span class="op">==</span> <span class="st">"plotly"</span>:</span>
-<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> render_plotly()</span>
-<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_matplotlib():</span>
-<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a>    plt.hist(result[<span class="st">"count"</span>], label<span class="op">=</span>token_prefix.value)</span>
-<span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"token count"</span>)</span>
-<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
-<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> plt.gcf()</span>
-<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-233"><a href="#cb9-233" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_altair():</span>
-<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb9-235"><a href="#cb9-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a>    chart <span class="op">=</span> (</span>
-<span id="cb9-237"><a href="#cb9-237" aria-hidden="true" tabindex="-1"></a>        alt.Chart(result)</span>
-<span id="cb9-238"><a href="#cb9-238" aria-hidden="true" tabindex="-1"></a>        .mark_bar()</span>
-<span id="cb9-239"><a href="#cb9-239" aria-hidden="true" tabindex="-1"></a>        .encode(x<span class="op">=</span>alt.X(<span class="st">"count"</span>, <span class="bu">bin</span><span class="op">=</span><span class="va">True</span>), y<span class="op">=</span>alt.Y(<span class="st">"count()"</span>))</span>
-<span id="cb9-240"><a href="#cb9-240" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mo.ui.altair_chart(chart, chart_selection<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-243"><a href="#cb9-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_plotly():</span>
-<span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
-<span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> go.Figure(data<span class="op">=</span>[go.Histogram(x<span class="op">=</span>result[<span class="st">"count"</span>])])</span>
-<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-249"><a href="#cb9-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a><span class="fu">## CSVs, Parquet, Postgres, and more ...</span></span>
-<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
-<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>We're not limited to querying dataframes. We can also query an **HTTP URL, S3 path, or a file path to a local csv or parquet file**.</span>
-<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a><span class="in">```sql</span></span>
-<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
-<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> <span class="st">'s3://my-bucket/file.parquet'</span>;</span>
-<span id="cb9-257"><a href="#cb9-257" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
-<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> read_csv(<span class="st">'path/to/example.csv'</span>);</span>
-<span id="cb9-259"><a href="#cb9-259" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
-<span id="cb9-260"><a href="#cb9-260" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> read_parquet(<span class="st">'path/to/example.parquet'</span>);</span>
-<span id="cb9-261"><a href="#cb9-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a>With a bit of boilerplate, you can even read and write to **Postgres**, and join Postgres tables with dataframes in the same query. For a full list of supported data sources, check out the [duckdb extensions](https://duckdb.org/docs/extensions/overview) and our [example notebook on duckdb connections](https://github.com/marimo-team/marimo/blob/main/examples/sql/duckdb_connections.**py**).</span>
-<span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-265"><a href="#cb9-265" aria-hidden="true" tabindex="-1"></a>For this example, we will query an HTTP endpoint of a csv.</span>
-<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo query="cars"}</span></span>
-<span id="cb9-268"><a href="#cb9-268" aria-hidden="true" tabindex="-1"></a><span class="co">-- Download a CSV and create an in-memory table; this is optional.</span></span>
-<span id="cb9-269"><a href="#cb9-269" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">replace</span> <span class="kw">TABLE</span> cars <span class="kw">as</span></span>
-<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://datasets.marimo.app/cars.csv'</span>;</span>
-<span id="cb9-271"><a href="#cb9-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-272"><a href="#cb9-272" aria-hidden="true" tabindex="-1"></a><span class="co">-- Query the table</span></span>
-<span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">from</span> cars;</span>
-<span id="cb9-274"><a href="#cb9-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-275"><a href="#cb9-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-276"><a href="#cb9-276" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-277"><a href="#cb9-277" aria-hidden="true" tabindex="-1"></a>cylinders_dropdown <span class="op">=</span> mo.ui.range_slider.from_series(</span>
-<span id="cb9-278"><a href="#cb9-278" aria-hidden="true" tabindex="-1"></a>    cars[<span class="st">"Cylinders"</span>], debounce<span class="op">=</span><span class="va">True</span>, show_value<span class="op">=</span><span class="va">True</span></span>
-<span id="cb9-279"><a href="#cb9-279" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-280"><a href="#cb9-280" aria-hidden="true" tabindex="-1"></a>origin_dropdown <span class="op">=</span> mo.ui.dropdown.from_series(cars[<span class="st">"Origin"</span>], value<span class="op">=</span><span class="st">"Asia"</span>)</span>
-<span id="cb9-281"><a href="#cb9-281" aria-hidden="true" tabindex="-1"></a>mo.hstack([cylinders_dropdown, origin_dropdown]).left()</span>
-<span id="cb9-282"><a href="#cb9-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-283"><a href="#cb9-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-284"><a href="#cb9-284" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo query="filtered_cars"}</span></span>
-<span id="cb9-285"><a href="#cb9-285" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> cars</span>
-<span id="cb9-286"><a href="#cb9-286" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span></span>
-<span id="cb9-287"><a href="#cb9-287" aria-hidden="true" tabindex="-1"></a>    Cylinders <span class="op">&gt;=</span> {cylinders_dropdown<span class="ch">.</span>value[<span class="dv">0</span>]}</span>
-<span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
-<span id="cb9-289"><a href="#cb9-289" aria-hidden="true" tabindex="-1"></a>    Cylinders <span class="op">&lt;=</span> {cylinders_dropdown<span class="ch">.</span>value[<span class="dv">1</span>]}</span>
-<span id="cb9-290"><a href="#cb9-290" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
-<span id="cb9-291"><a href="#cb9-291" aria-hidden="true" tabindex="-1"></a>    ORIGIN <span class="op">=</span> <span class="st">'{origin_dropdown.value}'</span></span>
-<span id="cb9-292"><a href="#cb9-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-293"><a href="#cb9-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-294"><a href="#cb9-294" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-295"><a href="#cb9-295" aria-hidden="true" tabindex="-1"></a>mo.hstack(</span>
-<span id="cb9-296"><a href="#cb9-296" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb9-297"><a href="#cb9-297" aria-hidden="true" tabindex="-1"></a>        mo.stat(label<span class="op">=</span><span class="st">"Total cars"</span>, value<span class="op">=</span><span class="bu">str</span>(<span class="bu">len</span>(filtered_cars))),</span>
-<span id="cb9-298"><a href="#cb9-298" aria-hidden="true" tabindex="-1"></a>        mo.stat(</span>
-<span id="cb9-299"><a href="#cb9-299" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span><span class="st">"Average MPG Highway"</span>,</span>
-<span id="cb9-300"><a href="#cb9-300" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>filtered_cars[<span class="st">'MPG_Highway'</span>]<span class="sc">.</span>mean() <span class="kw">or</span> <span class="dv">0</span><span class="sc">:.1f}</span><span class="ss">"</span>,</span>
-<span id="cb9-301"><a href="#cb9-301" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a>        mo.stat(</span>
-<span id="cb9-303"><a href="#cb9-303" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span><span class="st">"Average MPG City"</span>,</span>
-<span id="cb9-304"><a href="#cb9-304" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>filtered_cars[<span class="st">'MPG_City'</span>]<span class="sc">.</span>mean() <span class="kw">or</span> <span class="dv">0</span><span class="sc">:.1f}</span><span class="ss">"</span>,</span>
-<span id="cb9-305"><a href="#cb9-305" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb9-306"><a href="#cb9-306" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb9-307"><a href="#cb9-307" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-308"><a href="#cb9-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-309"><a href="#cb9-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-310"><a href="#cb9-310" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-311"><a href="#cb9-311" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span>
-<span id="cb9-312"><a href="#cb9-312" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb9-313"><a href="#cb9-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-314"><a href="#cb9-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-315"><a href="#cb9-315" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
-<span id="cb9-316"><a href="#cb9-316" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> string</span>
-<span id="cb9-317"><a href="#cb9-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../tutorials/fileformat.html" class="pagination-link" aria-label="Fileformat">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Fileformat</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../tutorials/external_dependencies.html" class="pagination-link" aria-label="External dependencies">
+        <span class="nav-page-text">External dependencies</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> SQL</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">marimo-version:</span><span class="co"> 0.23.1</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">width:</span><span class="co"> medium</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="an">header:</span><span class="co"> |-</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">  # Copyright 2026 Marimo. All rights reserved</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="an">pyproject:</span><span class="co"> |</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">    requires-python = "&gt;=3.11"</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">    dependencies = [</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">        "marimo[sql]&gt;=0.23.1",</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">        "altair",</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">        "matplotlib",</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">        "pandas",</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">        "plotly",</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">    ]</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu"># Hello, SQL!</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>_Let's dive into the world of SQL where we don't just address tables, we also join them!_</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>With marimo, you can mix-and-match both **Python and SQL**. To create a</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>SQL cell, you first need to install some additional dependencies,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>including <span class="co">[</span><span class="ot">duckdb</span><span class="co">](https://duckdb.org/)</span>. Obtain these dependencies with</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">'marimo[sql]'</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>has_duckdb_installed <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> duckdb</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    has_duckdb_installed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>has_polars_installed <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> polars</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    has_polars_installed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>has_pandas_installed <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> pandas</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    has_pandas_installed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> has_duckdb_installed:</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>    mo.output.replace(</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>        mo.md(</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>            <span class="st">"""</span></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="st">            /// Tip | "Installed"</span></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="st">                If you see this, DuckDB is already installed.</span></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="st">            ///</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="st">            """</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>    mo.output.replace(</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>        mo.md(</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>            <span class="st">"""</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="st">            /// Warning | "Not Installed"</span></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="st">                If you see this, DuckDB is not installed.</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="st">            ///</span></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="st">            """</span></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Creating SQL cells</span></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>Once the required dependencies are installed, you can create SQL cells</span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>in one of the following ways:</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>right click the **Add Cell** buttons on the left of</span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>a cell;</span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>click the **Convert to SQL** button in the cell menu</span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>click the **Add SQL Cell** at the bottom of the page;</span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## Python representation</span></span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>marimo is still just Python, even when using SQL. Here is an example of</span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a>how marimo embeds SQL in Python in its file format:</span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>output_df <span class="op">=</span> mo.sql(<span class="ss">f"SELECT * FROM my_table LIMIT </span><span class="sc">{</span>max_rows<span class="sc">.</span>value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a>Notice that we have an **`output_df`** variable in the cell. This is a</span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>resulting Polars DataFrame (if you have <span class="in">`polars`</span> installed) or a Pandas</span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>DataFrame (if you don't). One of them must be installed in order to</span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a>interact with the SQL result.</span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>The SQL statement itself is an formatted string (f-string), so this</span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>means they can contain any valid Python code, such as the values of UI</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>elements. This means your SQL statement and results can be reactive! 🚀</span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## Querying dataframes with SQL</span></span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip title="Data sources panel"}</span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a>Click the database "barrel" icon in the left toolbar to see all dataframes and in-memory tables that your notebook has access to.</span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a>Let's take a look at a SQL cell. The next cell generates a dataframe called <span class="in">`df`</span>.</span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a>_SIZE <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _create_token_data(n_items<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> random</span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> string</span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generate_random_string(length):</span>
+<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>        letters <span class="op">=</span> string.ascii_lowercase</span>
+<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>        result_str <span class="op">=</span> <span class="st">""</span>.join(random.choice(letters) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(length))</span>
+<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result_str</span>
+<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generate_random_numbers(mean, std_dev, num_samples):</span>
+<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="bu">int</span>(random.gauss(mean, std_dev)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(num_samples)]</span>
+<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>    random_numbers <span class="op">=</span> generate_random_numbers(<span class="dv">50</span>, <span class="dv">15</span>, n_items)</span>
+<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>    random_strings <span class="op">=</span> <span class="bu">sorted</span>(</span>
+<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a>        <span class="bu">list</span>(<span class="bu">set</span>([generate_random_string(<span class="dv">3</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_items)]))</span>
+<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>        <span class="st">"token"</span>: random_strings,</span>
+<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a>        <span class="st">"count"</span>: random_numbers[: <span class="bu">len</span>(random_strings)],</span>
+<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a>_data <span class="op">=</span> _create_token_data(_SIZE)</span>
+<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a><span class="co"># Try polars</span></span>
+<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> has_polars_installed:</span>
+<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pl.DataFrame(_data)</span>
+<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a><span class="co"># Fallback to pandas (maybe trying to install it)</span></span>
+<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(_data)</span>
+<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a>Next, we create a SQL query, refercing the Python dataframe <span class="in">`df`</span> directly.</span>
+<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo}</span></span>
+<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a><span class="co">-- This SQL cell is special since we can reference existing dataframes in the global scope as a table in the SQL query. For example, we can reference the `df` dataframe in the global scope, which was defined in another cell using Python.</span></span>
+<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> df;</span>
+<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a><span class="co">-- By default, the output variable starts with an underscore (`_df`), making it private to this cell. To access the query result in another cell, change the name of the output variable.</span></span>
+<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## From Python to SQL and back</span></span>
+<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>You can create SQL statements that depend on Python values, such as UI elements:</span>
+<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a>token_prefix <span class="op">=</span> mo.ui.dropdown(</span>
+<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(string.ascii_lowercase), label<span class="op">=</span><span class="st">"token prefix"</span>, value<span class="op">=</span><span class="st">"a"</span></span>
+<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a>token_prefix</span>
+<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo query="result"}</span></span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a><span class="co">-- Change the dropdown to see the SQL query filter itself!</span></span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
+<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a><span class="co">-- Here we use a duckdb function called `starts_with`:</span></span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> df <span class="kw">WHERE</span> starts_with(token, <span class="st">'{token_prefix.value}'</span>)</span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a><span class="co">-- Notice that we named the output variable `result`</span></span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a>Since we named the output variable above **`result`**,</span>
+<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a>we can use it back in Python.</span>
+<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a>charting_library <span class="op">=</span> mo.ui.radio([<span class="st">"matplotlib"</span>, <span class="st">"altair"</span>, <span class="st">"plotly"</span>])</span>
+<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a>mo.md(</span>
+<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
+<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a><span class="ss">    Let's chart the result with a library of your choice:</span></span>
+<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>charting_library<span class="sc">}</span></span>
+<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
+<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a>_header <span class="op">=</span> mo.md(</span>
+<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"""</span></span>
+<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a><span class="ss">    We can re-use the dropdown from above: </span><span class="sc">{</span>token_prefix<span class="sc">}</span></span>
+<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a><span class="ss">    Now we have a histogram visualizing the token count distribution of tokens starting</span></span>
+<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a><span class="ss">    with </span><span class="sc">{</span>token_prefix<span class="sc">.</span>value<span class="sc">}</span><span class="ss">, powered by your SQL query and UI element.</span></span>
+<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
+<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a>render_chart(</span>
+<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a>    charting_library.value, _header</span>
+<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a>) <span class="cf">if</span> charting_library.value <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_chart(charting_library, header):</span>
+<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mo.vstack(</span>
+<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a>        [header, render_charting_library(charting_library)]</span>
+<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a>    ).center()</span>
+<span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_charting_library(charting_library):</span>
+<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> charting_library <span class="op">==</span> <span class="st">"matplotlib"</span>:</span>
+<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> render_matplotlib()</span>
+<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> charting_library <span class="op">==</span> <span class="st">"altair"</span>:</span>
+<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> render_altair()</span>
+<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> charting_library <span class="op">==</span> <span class="st">"plotly"</span>:</span>
+<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> render_plotly()</span>
+<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_matplotlib():</span>
+<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a>    plt.hist(result[<span class="st">"count"</span>], label<span class="op">=</span>token_prefix.value)</span>
+<span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"token count"</span>)</span>
+<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb8-245"><a href="#cb8-245" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> plt.gcf()</span>
+<span id="cb8-247"><a href="#cb8-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-248"><a href="#cb8-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_altair():</span>
+<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb8-251"><a href="#cb8-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-252"><a href="#cb8-252" aria-hidden="true" tabindex="-1"></a>    chart <span class="op">=</span> (</span>
+<span id="cb8-253"><a href="#cb8-253" aria-hidden="true" tabindex="-1"></a>        alt.Chart(result)</span>
+<span id="cb8-254"><a href="#cb8-254" aria-hidden="true" tabindex="-1"></a>        .mark_bar()</span>
+<span id="cb8-255"><a href="#cb8-255" aria-hidden="true" tabindex="-1"></a>        .encode(x<span class="op">=</span>alt.X(<span class="st">"count"</span>, <span class="bu">bin</span><span class="op">=</span><span class="va">True</span>), y<span class="op">=</span>alt.Y(<span class="st">"count()"</span>))</span>
+<span id="cb8-256"><a href="#cb8-256" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mo.ui.altair_chart(chart, chart_selection<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-258"><a href="#cb8-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-259"><a href="#cb8-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-260"><a href="#cb8-260" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_plotly():</span>
+<span id="cb8-261"><a href="#cb8-261" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb8-262"><a href="#cb8-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-263"><a href="#cb8-263" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> go.Figure(data<span class="op">=</span>[go.Histogram(x<span class="op">=</span>result[<span class="st">"count"</span>])])</span>
+<span id="cb8-264"><a href="#cb8-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-265"><a href="#cb8-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a><span class="fu">## CSVs, Parquet, Postgres, and more ...</span></span>
+<span id="cb8-267"><a href="#cb8-267" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!----&gt;</span></span>
+<span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a>We're not limited to querying dataframes. We can also query an **HTTP URL, S3 path, or a file path to a local csv or parquet file**.</span>
+<span id="cb8-270"><a href="#cb8-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-271"><a href="#cb8-271" aria-hidden="true" tabindex="-1"></a><span class="in">```sql</span></span>
+<span id="cb8-272"><a href="#cb8-272" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
+<span id="cb8-273"><a href="#cb8-273" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> <span class="st">'s3://my-bucket/file.parquet'</span>;</span>
+<span id="cb8-274"><a href="#cb8-274" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
+<span id="cb8-275"><a href="#cb8-275" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> read_csv(<span class="st">'path/to/example.csv'</span>);</span>
+<span id="cb8-276"><a href="#cb8-276" aria-hidden="true" tabindex="-1"></a><span class="co">-- or</span></span>
+<span id="cb8-277"><a href="#cb8-277" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> read_parquet(<span class="st">'path/to/example.parquet'</span>);</span>
+<span id="cb8-278"><a href="#cb8-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-279"><a href="#cb8-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-280"><a href="#cb8-280" aria-hidden="true" tabindex="-1"></a>With a bit of boilerplate, you can even read and write to **Postgres**, and join Postgres tables with dataframes in the same query. For a full list of supported data sources, check out the [duckdb extensions](https://duckdb.org/docs/extensions/overview) and our [example notebook on duckdb connections](https://github.com/marimo-team/marimo/blob/main/examples/sql/duckdb_connections.**py**).</span>
+<span id="cb8-281"><a href="#cb8-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-282"><a href="#cb8-282" aria-hidden="true" tabindex="-1"></a>For this example, we will query a dataframe loaded from a csv.</span>
+<span id="cb8-283"><a href="#cb8-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-284"><a href="#cb8-284" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-285"><a href="#cb8-285" aria-hidden="true" tabindex="-1"></a><span class="co"># We use pandas for the CSV fetch because DuckDB in Pyodide does not support HTTPFS extensions</span></span>
+<span id="cb8-286"><a href="#cb8-286" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_cars_df():</span>
+<span id="cb8-287"><a href="#cb8-287" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-288"><a href="#cb8-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-289"><a href="#cb8-289" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb8-290"><a href="#cb8-290" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.read_csv(<span class="st">"https://datasets.marimo.app/cars.csv"</span>)</span>
+<span id="cb8-291"><a href="#cb8-291" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb8-292"><a href="#cb8-292" aria-hidden="true" tabindex="-1"></a>        <span class="co"># datasets.marimo.app returns 403 from time to time, so we add this as a fallback</span></span>
+<span id="cb8-293"><a href="#cb8-293" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.DataFrame(</span>
+<span id="cb8-294"><a href="#cb8-294" aria-hidden="true" tabindex="-1"></a>            [</span>
+<span id="cb8-295"><a href="#cb8-295" aria-hidden="true" tabindex="-1"></a>                {</span>
+<span id="cb8-296"><a href="#cb8-296" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Name"</span>: <span class="st">"Honda Civic"</span>,</span>
+<span id="cb8-297"><a href="#cb8-297" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Origin"</span>: <span class="st">"Asia"</span>,</span>
+<span id="cb8-298"><a href="#cb8-298" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Cylinders"</span>: <span class="dv">4</span>,</span>
+<span id="cb8-299"><a href="#cb8-299" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_City"</span>: <span class="dv">30</span>,</span>
+<span id="cb8-300"><a href="#cb8-300" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_Highway"</span>: <span class="dv">38</span>,</span>
+<span id="cb8-301"><a href="#cb8-301" aria-hidden="true" tabindex="-1"></a>                },</span>
+<span id="cb8-302"><a href="#cb8-302" aria-hidden="true" tabindex="-1"></a>                {</span>
+<span id="cb8-303"><a href="#cb8-303" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Name"</span>: <span class="st">"Toyota Camry"</span>,</span>
+<span id="cb8-304"><a href="#cb8-304" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Origin"</span>: <span class="st">"Asia"</span>,</span>
+<span id="cb8-305"><a href="#cb8-305" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Cylinders"</span>: <span class="dv">4</span>,</span>
+<span id="cb8-306"><a href="#cb8-306" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_City"</span>: <span class="dv">28</span>,</span>
+<span id="cb8-307"><a href="#cb8-307" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_Highway"</span>: <span class="dv">39</span>,</span>
+<span id="cb8-308"><a href="#cb8-308" aria-hidden="true" tabindex="-1"></a>                },</span>
+<span id="cb8-309"><a href="#cb8-309" aria-hidden="true" tabindex="-1"></a>                {</span>
+<span id="cb8-310"><a href="#cb8-310" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Name"</span>: <span class="st">"Ford F-150"</span>,</span>
+<span id="cb8-311"><a href="#cb8-311" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Origin"</span>: <span class="st">"USA"</span>,</span>
+<span id="cb8-312"><a href="#cb8-312" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Cylinders"</span>: <span class="dv">6</span>,</span>
+<span id="cb8-313"><a href="#cb8-313" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_City"</span>: <span class="dv">20</span>,</span>
+<span id="cb8-314"><a href="#cb8-314" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_Highway"</span>: <span class="dv">26</span>,</span>
+<span id="cb8-315"><a href="#cb8-315" aria-hidden="true" tabindex="-1"></a>                },</span>
+<span id="cb8-316"><a href="#cb8-316" aria-hidden="true" tabindex="-1"></a>                {</span>
+<span id="cb8-317"><a href="#cb8-317" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Name"</span>: <span class="st">"BMW 328i"</span>,</span>
+<span id="cb8-318"><a href="#cb8-318" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Origin"</span>: <span class="st">"Europe"</span>,</span>
+<span id="cb8-319"><a href="#cb8-319" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Cylinders"</span>: <span class="dv">4</span>,</span>
+<span id="cb8-320"><a href="#cb8-320" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_City"</span>: <span class="dv">23</span>,</span>
+<span id="cb8-321"><a href="#cb8-321" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_Highway"</span>: <span class="dv">34</span>,</span>
+<span id="cb8-322"><a href="#cb8-322" aria-hidden="true" tabindex="-1"></a>                },</span>
+<span id="cb8-323"><a href="#cb8-323" aria-hidden="true" tabindex="-1"></a>                {</span>
+<span id="cb8-324"><a href="#cb8-324" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Name"</span>: <span class="st">"Mazda MX-5"</span>,</span>
+<span id="cb8-325"><a href="#cb8-325" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Origin"</span>: <span class="st">"Asia"</span>,</span>
+<span id="cb8-326"><a href="#cb8-326" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Cylinders"</span>: <span class="dv">4</span>,</span>
+<span id="cb8-327"><a href="#cb8-327" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_City"</span>: <span class="dv">26</span>,</span>
+<span id="cb8-328"><a href="#cb8-328" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"MPG_Highway"</span>: <span class="dv">34</span>,</span>
+<span id="cb8-329"><a href="#cb8-329" aria-hidden="true" tabindex="-1"></a>                },</span>
+<span id="cb8-330"><a href="#cb8-330" aria-hidden="true" tabindex="-1"></a>            ]</span>
+<span id="cb8-331"><a href="#cb8-331" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-332"><a href="#cb8-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-333"><a href="#cb8-333" aria-hidden="true" tabindex="-1"></a>cars_df <span class="op">=</span> read_cars_df()</span>
+<span id="cb8-334"><a href="#cb8-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-335"><a href="#cb8-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-336"><a href="#cb8-336" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo query="cars"}</span></span>
+<span id="cb8-337"><a href="#cb8-337" aria-hidden="true" tabindex="-1"></a><span class="co">-- Download a CSV and create an in-memory table; this is optional.</span></span>
+<span id="cb8-338"><a href="#cb8-338" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">replace</span> <span class="kw">TABLE</span> cars <span class="kw">as</span> (</span>
+<span id="cb8-339"><a href="#cb8-339" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> cars_df</span>
+<span id="cb8-340"><a href="#cb8-340" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb8-341"><a href="#cb8-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-342"><a href="#cb8-342" aria-hidden="true" tabindex="-1"></a><span class="co">-- Query the table</span></span>
+<span id="cb8-343"><a href="#cb8-343" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">from</span> cars;</span>
+<span id="cb8-344"><a href="#cb8-344" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-345"><a href="#cb8-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-346"><a href="#cb8-346" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-347"><a href="#cb8-347" aria-hidden="true" tabindex="-1"></a>cylinders_dropdown <span class="op">=</span> mo.ui.range_slider.from_series(</span>
+<span id="cb8-348"><a href="#cb8-348" aria-hidden="true" tabindex="-1"></a>    cars[<span class="st">"Cylinders"</span>], debounce<span class="op">=</span><span class="va">True</span>, show_value<span class="op">=</span><span class="va">True</span></span>
+<span id="cb8-349"><a href="#cb8-349" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-350"><a href="#cb8-350" aria-hidden="true" tabindex="-1"></a>origin_dropdown <span class="op">=</span> mo.ui.dropdown.from_series(cars[<span class="st">"Origin"</span>], value<span class="op">=</span><span class="st">"Asia"</span>)</span>
+<span id="cb8-351"><a href="#cb8-351" aria-hidden="true" tabindex="-1"></a>mo.hstack([cylinders_dropdown, origin_dropdown]).left()</span>
+<span id="cb8-352"><a href="#cb8-352" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-353"><a href="#cb8-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-354"><a href="#cb8-354" aria-hidden="true" tabindex="-1"></a><span class="in">```sql {.marimo query="filtered_cars"}</span></span>
+<span id="cb8-355"><a href="#cb8-355" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> cars</span>
+<span id="cb8-356"><a href="#cb8-356" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span></span>
+<span id="cb8-357"><a href="#cb8-357" aria-hidden="true" tabindex="-1"></a>    Cylinders <span class="op">&gt;=</span> {cylinders_dropdown<span class="ch">.</span>value[<span class="dv">0</span>]}</span>
+<span id="cb8-358"><a href="#cb8-358" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
+<span id="cb8-359"><a href="#cb8-359" aria-hidden="true" tabindex="-1"></a>    Cylinders <span class="op">&lt;=</span> {cylinders_dropdown<span class="ch">.</span>value[<span class="dv">1</span>]}</span>
+<span id="cb8-360"><a href="#cb8-360" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
+<span id="cb8-361"><a href="#cb8-361" aria-hidden="true" tabindex="-1"></a>    ORIGIN <span class="op">=</span> <span class="st">'{origin_dropdown.value}'</span></span>
+<span id="cb8-362"><a href="#cb8-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-363"><a href="#cb8-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-364"><a href="#cb8-364" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-365"><a href="#cb8-365" aria-hidden="true" tabindex="-1"></a>mo.hstack(</span>
+<span id="cb8-366"><a href="#cb8-366" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb8-367"><a href="#cb8-367" aria-hidden="true" tabindex="-1"></a>        mo.stat(label<span class="op">=</span><span class="st">"Total cars"</span>, value<span class="op">=</span><span class="bu">str</span>(<span class="bu">len</span>(filtered_cars))),</span>
+<span id="cb8-368"><a href="#cb8-368" aria-hidden="true" tabindex="-1"></a>        mo.stat(</span>
+<span id="cb8-369"><a href="#cb8-369" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span><span class="st">"Average MPG Highway"</span>,</span>
+<span id="cb8-370"><a href="#cb8-370" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>filtered_cars[<span class="st">'MPG_Highway'</span>]<span class="sc">.</span>mean() <span class="kw">or</span> <span class="dv">0</span><span class="sc">:.1f}</span><span class="ss">"</span>,</span>
+<span id="cb8-371"><a href="#cb8-371" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb8-372"><a href="#cb8-372" aria-hidden="true" tabindex="-1"></a>        mo.stat(</span>
+<span id="cb8-373"><a href="#cb8-373" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span><span class="st">"Average MPG City"</span>,</span>
+<span id="cb8-374"><a href="#cb8-374" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>filtered_cars[<span class="st">'MPG_City'</span>]<span class="sc">.</span>mean() <span class="kw">or</span> <span class="dv">0</span><span class="sc">:.1f}</span><span class="ss">"</span>,</span>
+<span id="cb8-375"><a href="#cb8-375" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb8-376"><a href="#cb8-376" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb8-377"><a href="#cb8-377" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-378"><a href="#cb8-378" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-379"><a href="#cb8-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-380"><a href="#cb8-380" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-381"><a href="#cb8-381" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span>
+<span id="cb8-382"><a href="#cb8-382" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb8-383"><a href="#cb8-383" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-384"><a href="#cb8-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-385"><a href="#cb8-385" aria-hidden="true" tabindex="-1"></a><span class="in">```python {.marimo hide_code="true"}</span></span>
+<span id="cb8-386"><a href="#cb8-386" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> string</span>
+<span id="cb8-387"><a href="#cb8-387" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
