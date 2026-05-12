@@ -2,6 +2,8 @@
 title: PDF example
 format: pdf
 engine: marimo
+header: |-
+  # Copyright 2026 Marimo. All rights reserved
 pyproject: |
     requires-python = ">=3.11"
     dependencies = [

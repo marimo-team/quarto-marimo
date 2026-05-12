@@ -30,6 +30,16 @@ Deno.test("python {.marimo} legacy syntax returns true", () => {
   assertEquals(isMarimoCell(cell), true);
 });
 
+Deno.test("sql {.marimo} legacy syntax returns true", () => {
+  const cell = makeCell("sql", "```sql {.marimo query=\"result\"}\nSELECT 1");
+  assertEquals(isMarimoCell(cell), true);
+});
+
+Deno.test("sql.marimo language returns true", () => {
+  const cell = makeCell("sql.marimo", "SELECT 1");
+  assertEquals(isMarimoCell(cell), true);
+});
+
 Deno.test("plain python without .marimo returns false", () => {
   const cell = makeCell("python", "print('hello')");
   assertEquals(isMarimoCell(cell), false);

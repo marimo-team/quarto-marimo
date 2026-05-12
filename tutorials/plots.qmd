@@ -1,7 +1,15 @@
 ---
 title: Plots
-marimo-version: 0.13.2
-eval: false
+marimo-version: 0.23.1
+header: |-
+  # Copyright 2026 Marimo. All rights reserved
+pyproject: |
+    requires-python = ">=3.11"
+    dependencies = [
+        "marimo>=0.23.1",
+        "matplotlib",
+        "numpy",
+    ]
 ---
 
 # Plotting
@@ -16,8 +24,10 @@ plotly, seaborn, and altair.
 This tutorial gives examples using matplotlib; other libraries are
 used similarly.
 <!---->
+
 ## Matplotlib
 <!---->
+
 To show a plot, include it in the last expression of a cell (just
 like any other output).
 
@@ -122,6 +132,7 @@ mo.md(
 
 ## Other libraries
 <!---->
+
 marimo also supports these other plotting libraries:
 
 - Plotly
@@ -139,7 +150,7 @@ module_not_found_explainer = mo.md(
     """
     ## Oops!
 
-    It looks like you're missing a package that this tutorial 
+    It looks like you're missing a package that this tutorial
     requires.
 
     Use the package manager panel on the left to install **numpy** and **matplotlib**,

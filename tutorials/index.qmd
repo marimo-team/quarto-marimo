@@ -1,6 +1,8 @@
 ---
 title: marimo tutorials
 format: html
+header: |-
+  # Copyright 2026 Marimo. All rights reserved
 ---
 
 Open a tutorial.
@@ -20,5 +22,6 @@ Recommended sequence:
 - [plots](plots.html)
 - [layout](layout.html)
 - [fileformat](fileformat.html)
+- [sql](sql.html)
 - [external-dependencies](external_dependencies.html)
-- [for-jupyter-users](marimo_for_jupyter_users.html)
+- [for-jupyter-users](for_jupyter_users.html)

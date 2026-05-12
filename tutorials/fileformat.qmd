@@ -1,8 +1,8 @@
 ---
 title: Fileformat
-marimo-version: 0.13.2
+marimo-version: 0.23.1
 header: |-
-  # Copyright 2025 Marimo. All rights reserved
+  # Copyright 2026 Marimo. All rights reserved
 ---
 
 ```python {.marimo name="setup"}
@@ -26,6 +26,7 @@ These files are:
 - 🐍 usable as Python  scripts, with UI  elements taking their default values
 - 🧩 modular, exposing functions and classes that can be imported from the notebook
 <!---->
+
 ## Example
 
 Consider a marimo notebook with the following four cells.
@@ -52,6 +53,7 @@ Fourth cell:
 import marimo as mo
 ```
 <!---->
+
 For the above example, marimo would generate the following file
 contents:
 
@@ -92,6 +94,7 @@ generates.
 
 Moreover, the cell defining a single pure function `say_hello` was saved "top-level" in the notebook file, making it possible for you to import it into other Python files or notebooks.
 <!---->
+
 ## Properties
 
 marimo's file format was designed to be easy to read and easy
@@ -215,6 +218,7 @@ The details of marimo's file format are important if you want to import
 functions and classes defined in your notebook into other Python modules. If you
 don't intend to do so, you can skip this section.
 <!---->
+
 ### Declaring imports used by functions and classes
 
 marimo can serialize functions and classes into the top-level of a file, so you can import them with regular Python syntax:
@@ -238,8 +242,9 @@ with app.setup:
 
 Modules imported in a setup cell can be used in "top-level" functions or
 classes. You can add the setup cell from the general menu of the editor under:
-::lucide:diamond-plus:: Add setup cell.
+Add setup cell.
 <!---->
+
 ### Functions and classes
 
 Notebook files expose functions and classes that depend only on variables defined in the setup cell (or on other such functions or classes). For example, the following cell:
@@ -274,6 +279,7 @@ Making it importable as
 from my_notebook import roll_die
 ```
 <!---->
+
 Standalone classes are also exposed:
 
 ```python {.marimo name="*SimulationExample"}
@@ -297,12 +303,12 @@ class SimulationExample:
         return [roll_die() for _ in range(self.n_rolls)]
 ```
 <!---->
-/// attention | Heads up
-///
 
-Not all standalone functions will be exposed in the module. If your
-function depends on variables that are defined in other cells, then it won't
-be exposed top-level.
+::: {.callout-warning title="Heads up"}
+
+Not all standalone functions will be exposed in the module. If your function depends on variables that are defined in other cells, then it won't be exposed top-level.
+
+:::
 
 
 For example, this function will not be exposed:
@@ -337,6 +343,7 @@ classes](https://links.marimo.app/reusable-functions).
 
 See the docs on [testing](https://docs.marimo.io/guides/testing/).
 <!---->
+
 ## This notebook's source code
 
 The source code of this notebook is shown below:
