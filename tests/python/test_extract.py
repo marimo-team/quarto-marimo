@@ -6,6 +6,7 @@ from urllib.parse import unquote
 from xml.etree.ElementTree import Element
 
 from _extensions.marimo.extract import (
+    _ParseError,
     app_config_from_root,
     convert_from_md_to_pandoc_export,
     default_config,
@@ -229,6 +230,45 @@ SELECT * FROM df;
         assert "SELECT * FROM df;" in notebook_code
         assert result["count"] == 1
 
+    def test_md_class_form_with_space_routes_as_sql(self):
+        """MO-6285: `{sql .marimo}` (md class-form with space) was misclassified as python
+        and silently produced empty output. Should now be normalized to the qmd-form
+        and converted via `sql_to_marimo`."""
+        markdown = """---
+eval: false
+---
+
+```{sql .marimo query="result"}
+SELECT * FROM df;
+```
+"""
+        result = self._convert_without_eval(markdown)
+
+        notebook_code = self._extract_notebook_code(result["header"])
+        assert "result = mo.sql(" in notebook_code
+        assert "SELECT * FROM df;" in notebook_code
+        assert result["count"] == 1
+
+    def test_python_syntax_error_renders_visible_error(self):
+        """MO-6287: cells whose source fails `app.add_code` were silently dropped to
+        an empty HTML node. They should now render a visible <pre class="marimo-error">."""
+        markdown = "```{python .marimo}\ndef bad(:\n```\n"
+        result = convert_from_md_to_pandoc_export(markdown, mime_sensitive=False)
+
+        assert result["count"] == 1
+        value = result["outputs"][0]["value"]
+        assert "marimo-error" in value, f"expected marimo-error block, got: {value!r}"
+        assert "SyntaxError" in value
+
+    def test_python_syntax_error_renders_blockquote_in_pdf(self):
+        """MO-6287, mime-sensitive path: parse errors render as a blockquote, not empty."""
+        markdown = "```{python .marimo}\ndef bad(:\n```\n"
+        result = convert_from_md_to_pandoc_export(markdown, mime_sensitive=True)
+
+        assert result["count"] == 1
+        assert result["outputs"][0]["type"] == "blockquote"
+        assert "SyntaxError" in result["outputs"][0]["value"]
+
 
 class TestGetMimeRender:
     def _make_stub(self, code="x = 1", output=None):
@@ -277,3 +317,32 @@ class TestGetMimeRender:
         result = get_mime_render(global_options, stub, {}, mime_sensitive=False)
         stub.render.assert_called_once()
         assert result["value"] == "<div>output</div>"
+
+    def test_parse_error_renders_visible_pre_in_html(self):
+        result = get_mime_render(
+            {**default_config},
+            _ParseError("SyntaxError: bad"),
+            {},
+            mime_sensitive=False,
+        )
+        assert result["type"] == "html"
+        assert "marimo-error" in result["value"]
+        assert "SyntaxError: bad" in result["value"]
+
+    def test_parse_error_renders_blockquote_when_mime_sensitive(self):
+        result = get_mime_render(
+            {**default_config},
+            _ParseError("boom"),
+            {},
+            mime_sensitive=True,
+        )
+        assert result == {"type": "blockquote", "value": "boom"}
+
+    def test_parse_error_suppressed_when_error_disabled(self):
+        result = get_mime_render(
+            {**default_config},
+            _ParseError("boom"),
+            {"error": False},
+            mime_sensitive=False,
+        )
+        assert result == {"type": "html", "value": ""}

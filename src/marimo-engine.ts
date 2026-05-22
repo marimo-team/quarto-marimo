@@ -156,15 +156,15 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
   },
 
   claimsLanguage: (language: string, firstClass?: string): boolean | number => {
-    // Claim {python .marimo} with priority 2 (overrides Jupyter's fallback)
-    if (language === "python" && firstClass === "marimo") {
+    // Claim {python .marimo} / {sql .marimo} with priority 2 (overrides Jupyter/sql fallback)
+    if ((language === "python" || language === "sql") && firstClass === "marimo") {
       return 2;
     }
-    // Claim {python.marimo} with priority 1 (no competition for this language)
-    if (language === "python.marimo") {
+    // Claim {python.marimo} / {sql.marimo} with priority 1 (no competition for this language)
+    if (language === "python.marimo" || language === "sql.marimo") {
       return 1;
     }
-    return false; // Don't claim other python blocks
+    return false; // Don't claim other python/sql blocks
   },
 
   canFreeze: false,
