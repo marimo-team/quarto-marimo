@@ -19,6 +19,7 @@ import os
 import re
 import sys
 from collections.abc import Callable
+from dataclasses import dataclass
 from textwrap import dedent
 from typing import Any, ClassVar, Optional
 from urllib.parse import quote
@@ -48,6 +49,19 @@ from marimo._islands import MarimoIslandStub
 
 SafeWrap = SafeWrapGeneric[App]
 
+
+@dataclass(frozen=True, slots=True)
+class _ParseError:
+    """Sentinel for a cell whose source couldn't be added to the app.
+
+    Surfaces parse-time exceptions (e.g. `SyntaxError`) that would otherwise be
+    swallowed by the broad except around `app.add_code` and rendered as empty
+    HTML, leaving the reader no clue that a cell was dropped. (Linear MO-6287.)
+    """
+
+    message: str
+
+
 __version__ = "0.4.5"
 
 # See https://quarto.org/docs/computations/execution-options.html
@@ -62,8 +76,13 @@ default_config = {
     "editor": False,
 }
 
+# Rewrite md-form SQL fences (both dot-joined and class-with-space) to the
+# qmd-form `sql {.marimo ...}` shape that marimo's parser classifies as
+# language="sql". Without this both `{sql.marimo}` and `{sql .marimo}` are
+# parsed as language="python", drop into `app.add_code` as raw SQL, and emit
+# empty cells. (Linear MO-6285.)
 SQL_DOT_FENCE_REGEX = re.compile(
-    r"^(\s*`{3,})\s*\{\s*sql\.marimo(?P<attrs>[^}]*)\}\s*$",
+    r"^(\s*`{3,})\s*\{\s*sql\s*\.marimo(?P<attrs>[^}]*)\}\s*$",
     re.MULTILINE,
 )
 DEFAULT_SQL_QUERY_TARGET = "_df"
@@ -116,7 +135,7 @@ def extract_and_strip_quarto_config(block: str) -> tuple[dict[str, Any], str]:
 
 def get_mime_render(
     global_options: dict[str, Any],
-    stub: Optional[MarimoIslandStub],
+    stub: Optional[MarimoIslandStub | _ParseError],
     config: dict[str, bool],
     mime_sensitive: bool,
 ) -> dict[str, Any]:
@@ -131,6 +150,16 @@ def get_mime_render(
     config = {**global_options, **config}
     if not config["include"] or stub is None:
         return {"type": "html", "value": ""}
+
+    if isinstance(stub, _ParseError):
+        if not config["error"]:
+            return {"type": "html", "value": ""}
+        if mime_sensitive:
+            return {"type": "blockquote", "value": stub.message}
+        return {
+            "type": "html",
+            "value": f'<pre class="marimo-error">{stub.message}</pre>',
+        }
 
     eval_enabled = config["eval"]
     show_output = config["output"] and eval_enabled
@@ -310,7 +339,9 @@ def build_export_with_mime_context(
         app = MarimoIslandGenerator()
 
         has_attrs: bool = False
-        stubs: list[tuple[dict[str, bool], Optional[MarimoIslandStub]]] = []
+        stubs: list[
+            tuple[dict[str, bool], Optional[MarimoIslandStub | _ParseError]]
+        ] = []
         for child in root:
             # only process code cells
             if child.tag == MARIMO_MD:
@@ -338,8 +369,10 @@ def build_export_with_mime_context(
                     code,
                     is_raw=True,
                 )
-            except Exception:  # noqa: BLE001
-                stubs.append((config, None))
+            except Exception as exc:  # noqa: BLE001
+                msg = f"{type(exc).__name__}: {exc}"
+                sys.stderr.write(f"marimo: failed to parse cell: {msg}\n")
+                stubs.append((config, _ParseError(msg)))
                 continue
 
             assert isinstance(stub, MarimoIslandStub), "Unexpected error, please report"
