@@ -109,6 +109,12 @@ def sql_code_to_python(
     engine: Optional[str] = None,
 ) -> str:
     """Convert a marimo markdown SQL cell into executable Python."""
+    if engine is not None and not is_valid_python_identifier(engine):
+        sys.stderr.write(
+            f"marimo: ignoring invalid SQL engine name {engine!r} "
+            "(must be a Python identifier); falling back to default engine\n"
+        )
+        engine = None
     return sql_to_marimo(code, sql_query_target(query), hide_output, engine)
 
 

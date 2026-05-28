@@ -133,6 +133,38 @@ class TestSqlCodeToPython:
         assert "output=False" in result
         assert "engine=engine" in result
 
+    def test_invalid_engine_with_hyphen_falls_back_to_default(self, capsys):
+        result = sql_code_to_python(
+            "SELECT * FROM df;",
+            "filtered",
+            engine="my-engine",
+        )
+
+        assert "engine=" not in result
+        assert "my-engine" not in result
+        assert "invalid SQL engine name 'my-engine'" in capsys.readouterr().err
+
+    def test_invalid_engine_with_leading_digit_falls_back_to_default(self, capsys):
+        result = sql_code_to_python(
+            "SELECT * FROM df;",
+            "filtered",
+            engine="123bad",
+        )
+
+        assert "engine=" not in result
+        assert "123bad" not in result
+        assert "invalid SQL engine name '123bad'" in capsys.readouterr().err
+
+    def test_keyword_engine_falls_back_to_default(self, capsys):
+        result = sql_code_to_python(
+            "SELECT * FROM df;",
+            "filtered",
+            engine="class",
+        )
+
+        assert "engine=" not in result
+        assert "invalid SQL engine name 'class'" in capsys.readouterr().err
+
 
 class TestConvertFromMdToPandocExport:
     def _extract_notebook_code(self, header: str) -> str:
