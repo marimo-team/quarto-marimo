@@ -1,22 +1,29 @@
 from __future__ import annotations
 
-from _extensions.marimo.command import extract_command
+from pathlib import Path
+
+from _extensions.marimo.python.command import extract_command
 
 
-class TestExtractCommand:
-    def test_pep723_header(self):
-        header = '# /// script\n# dependencies = ["marimo"]\n# ///'
-        result = extract_command(header)
-        assert isinstance(result, list)
-        assert result[0] == "run"
+def test_extract_command_projects_document_dependencies_to_uv() -> None:
+    command = extract_command('dependencies = ["polars==1.0"]')
+    requirements_path = Path(command[command.index("--with-requirements") + 1])
+    try:
+        requirements = requirements_path.read_text().splitlines()
+    finally:
+        requirements_path.unlink()
 
-    def test_plain_header_wrapped(self):
-        header = '[project]\ndependencies = ["marimo"]'
-        result = extract_command(header)
-        assert isinstance(result, list)
-        assert result[0] == "run"
+    assert command[0] == "run"
+    assert "polars==1.0" in requirements
+    assert any(requirement.startswith("marimo") for requirement in requirements)
 
-    def test_empty_string(self):
-        result = extract_command("")
-        assert isinstance(result, list)
-        assert result[0] == "run"
+
+def test_extract_command_wraps_comment_leading_toml() -> None:
+    command = extract_command('# dependency rationale\ndependencies = ["polars==1.0"]')
+    requirements_path = Path(command[command.index("--with-requirements") + 1])
+    try:
+        requirements = requirements_path.read_text().splitlines()
+    finally:
+        requirements_path.unlink()
+
+    assert "polars==1.0" in requirements

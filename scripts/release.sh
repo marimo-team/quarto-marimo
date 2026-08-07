@@ -137,8 +137,7 @@ echo "  • New Version: $NEW_VERSION"
 echo "  • Version Type: $VERSION_TYPE"
 echo "  • Files to be modified:"
 echo "    - _extensions/marimo/_extension.yml"
-echo "    - _extensions/marimo/extract.py"
-echo "    - _extensions/marimo/marimo-engine.js"
+echo "    - _extensions/marimo/python/extract.py"
 
 if ! confirm "Proceed with release?"; then
   print_warning "Release cancelled"
@@ -149,15 +148,13 @@ fi
 print_step "Updating version"
 sed -i.bak "s/^version: $CURRENT_VERSION/version: $NEW_VERSION/" _extensions/marimo/_extension.yml
 rm -f _extensions/marimo/_extension.yml.bak
-sed -i.bak "s/__version__ = \"$CURRENT_VERSION\"/__version__ = \"$NEW_VERSION\"/" _extensions/marimo/extract.py
-rm -f _extensions/marimo/extract.py.bak
-sed -i.bak "s/const VERSION = \"$CURRENT_VERSION\"/const VERSION = \"$NEW_VERSION\"/" _extensions/marimo/marimo-engine.js
-rm -f _extensions/marimo/marimo-engine.js.bak
-print_success "Version updated to $NEW_VERSION in _extension.yml, extract.py, and marimo-engine.js"
+sed -i.bak "s/__version__ = \"$CURRENT_VERSION\"/__version__ = \"$NEW_VERSION\"/" _extensions/marimo/python/extract.py
+rm -f _extensions/marimo/python/extract.py.bak
+print_success "Version updated to $NEW_VERSION"
 
 # Commit version change
 print_step "Committing version change"
-git add _extensions/marimo/_extension.yml _extensions/marimo/extract.py _extensions/marimo/marimo-engine.js
+git add _extensions/marimo/_extension.yml _extensions/marimo/python/extract.py
 git commit -m "release: v$NEW_VERSION"
 print_success "Version change committed"
 
