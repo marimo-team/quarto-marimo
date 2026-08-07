@@ -1,0 +1,19 @@
+body.quarto-light #quarto-sidebar {
+  background-color: #f7f9f8;
+  border-right: 1px solid #dce3e0 !important;
+}
+
+body.quarto-dark #quarto-sidebar {
+  background-color: #1c201e;
+  border-right: 1px solid #343a37 !important;
+}
+
+.sidebar-logo-link {
+  display: inline-flex;
+}
+
+.sidebar-logo {
+  max-width: 100%;
+  padding-bottom: 0;
+  width: 190px;
+}

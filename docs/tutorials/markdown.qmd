@@ -1,12 +1,12 @@
 ---
 title: Markdown
-marimo-version: 0.23.1
+marimo-version: 0.23.16
 header: |-
   # Copyright 2026 Marimo. All rights reserved
 pyproject: |
     requires-python = ">=3.11"
     dependencies = [
-        "marimo>=0.23.1",
+        "marimo>=0.23.16",
         "matplotlib",
         "numpy",
         "polars",
@@ -71,7 +71,7 @@ mo.md(
 
 renders the display math
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.md(
     r'''
     \[
@@ -81,7 +81,7 @@ mo.md(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Tip: `r''` strings": mo.md(
@@ -92,7 +92,7 @@ mo.accordion(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Note: KaTeX": mo.md(
@@ -163,7 +163,7 @@ mo.md(
 mo.md(f"Your leaves: {'🍃' * leaves.value}")
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Tip: UI elements can format themselves": """
@@ -202,7 +202,7 @@ mo.md(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Tip: outputs are automatically converted to HTML": """
@@ -266,12 +266,12 @@ mo.md(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 import matplotlib.pyplot as plt
 import numpy as np
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 import math
 
 import marimo as mo

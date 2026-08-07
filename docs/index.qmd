@@ -1,0 +1,84 @@
+---
+title: Make Quarto documents reactive with marimo
+description: Python, SQL, and Markdown cells share one marimo app across the document.
+image: /assets/quarto-marimo-og.png
+image-alt: The quarto-marimo wordmark beside a blue Quarto symbol inside a marimo ring.
+open-graph:
+  title: Make Quarto documents reactive with marimo
+twitter-card:
+  title: Make Quarto documents reactive with marimo
+format: html
+---
+
+[Quarto](https://quarto.org/) turns Markdown into websites, books,
+presentations, and other publication formats. `quarto-marimo` adds reactive
+Python, SQL, and Markdown cells to those publications.
+
+The extension compiles each document's `.marimo` cells into one marimo app.
+Quarto places each result at its authored position and publishes the surrounding
+document.
+
+```{python .marimo}
+#| echo: true
+import marimo as mo
+
+slider = mo.ui.slider(start=1, stop=10, label="Exclamation marks")
+slider
+```
+
+```{python .marimo}
+mo.md(f"## Hello from marimo{'!' * slider.value}")
+```
+
+Changing the slider reruns the dependent cell in the browser.
+
+## Install the extension
+
+Install Quarto 1.9.20 or newer, then add `quarto-marimo`:
+
+```bash
+quarto add marimo-team/quarto-marimo
+```
+
+## Create a reactive page
+
+Create `index.qmd`:
+
+````markdown
+---
+title: Reactive Quarto page
+engine: marimo
+format: html
+---
+
+```python {.marimo}
+import marimo as mo
+
+slider = mo.ui.slider(1, 10, 1, label="Items")
+slider
+```
+
+```python {.marimo}
+mo.md(f"The slider is set to **{slider.value}**.")
+```
+````
+
+Preview the page:
+
+```bash
+quarto preview
+```
+
+HTML output remains interactive in the browser. Formats such as PDF receive the
+evaluated cell output.
+
+## Convert a marimo notebook
+
+Convert an existing marimo notebook to Quarto Markdown:
+
+```bash
+marimo export md notebook.py -o notebook.qmd
+```
+
+Use the tutorials in the sidebar to explore marimo dataflow, UI elements,
+Markdown, plots, layouts, SQL, and external dependencies inside Quarto.
