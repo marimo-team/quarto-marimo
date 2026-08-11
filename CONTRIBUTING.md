@@ -42,6 +42,15 @@ quarto-marimo/
 │   ├── _extension.yml
 │   ├── marimo-engine.js          # Stable release loader
 │   └── python/                   # Shipped Python runtime
+│       ├── command.py            # Resolve dependencies into uv arguments
+│       ├── extract.py            # Compiler subprocess entry point
+│       └── quarto_marimo/
+│           ├── authoring.py      # Normalize Quarto cells and options
+│           ├── cli.py            # Parse and compile one document
+│           ├── compiler.py       # Vendored marimo page compiler
+│           ├── document.py       # Collect one page compilation request
+│           ├── protocol.py       # Page protocol models and validation
+│           └── static.py         # Project output into Quarto records
 ├── src/
 │   ├── engine/                   # Quarto engine source
 │   ├── browser/                  # Quarto browser adapter
