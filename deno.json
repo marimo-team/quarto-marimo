@@ -9,10 +9,10 @@
     "@marimo-team/mdx-marimo/bridge/element": "npm:@marimo-team/mdx-marimo@0.0.5/bridge/element",
     "@marimo-team/mdx-marimo/bridge/protocol": "npm:@marimo-team/mdx-marimo@0.0.5/bridge/protocol",
     "@marimo-team/mdx-marimo/styles.css": "npm:@marimo-team/mdx-marimo@0.0.5/styles.css",
-    "@std/assert": "jsr:@std/assert@1.0.14",
+    "@std/assert": "jsr:@std/assert@1.0.19",
     "@quarto/types": "./types/quarto-types.d.ts",
-    "linkedom": "npm:linkedom@0.18.12",
-    "path": "jsr:@std/path@1.0.8"
+    "linkedom": "npm:linkedom@0.18.13",
+    "path": "jsr:@std/path@1.1.6"
   },
   "bundle": {
     "entryPoint": "src/engine/index.ts",
