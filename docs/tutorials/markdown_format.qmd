@@ -1,12 +1,12 @@
 ---
 title: Markdown
-marimo-version: 0.23.1
+marimo-version: 0.23.16
 header: |-
   # Copyright 2026 Marimo. All rights reserved
 pyproject: |
     requires-python = ">=3.11"
     dependencies = [
-        "marimo[sql]>=0.23.1",
+        "marimo[sql]>=0.23.16",
         "matplotlib",
     ]
 ---
@@ -81,7 +81,7 @@ View the source of this notebook to see how this cell was created.
 You can still hide cell code in markdown notebooks:
 
 ````md
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 form = (
     # ...
     # Just something a bit more complicated
@@ -92,7 +92,7 @@ form
 ```
 ````
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 form = (
     mo.md('''
     **Just how great is markdown?.**
@@ -113,12 +113,12 @@ form
 and disable cells too:
 
 ````md
-```python {.marimo disabled="true"}
+```{python .marimo disabled="true"}
 print("This code cell is disabled, there should be no output!")
 ```
 ````
 
-```python {.marimo disabled="true"}
+```{python .marimo disabled="true"}
 print("This code cell is disabled, there should be no output!")
 ```
 
@@ -133,12 +133,12 @@ print("This code cell has a syntax error"
 and on notebook save, will annotate the cell for you:
 
 ````md
-```python {.marimo unparseable="true"}
+```{python .marimo unparsable="true"}
 print("This code cell has a syntax error"
 ```
 ````
 
-```python {.marimo unparsable="true"}
+```{python .marimo unparsable="true"}
 print("This code cell has a syntax error"
 ```
 
@@ -189,7 +189,7 @@ Multicolumn mode works, but the first cell in a column must be a python cell in
 order to specify column start and to save correctly:
 
 ````md
-```python {.marimo column="1"}
+```{python .marimo column="1"}
 print("First cell in column 1")
 ```
 ````
@@ -202,12 +202,12 @@ markdown notebook cells like you can in a python notebook; but you can still
 give your cells a name:
 
 ````md
-```python {.marimo name="maybe"}
+```{python .marimo name="maybe"}
 # 🎵 Hey, I just met you, and this is crazy
 ```
 ````
 
-```python {.marimo name="maybe"}
+```{python .marimo name="maybe"}
 # But here's my `cell_id`, so call me, `maybe` 🎶
 ```
 
@@ -216,7 +216,7 @@ give your cells a name:
 You can also run SQL queries in markdown cells through marimo, using a `sql` code block. For instance:
 
 ````md
-```sql {.marimo}
+```{sql .marimo}
 SELECT GREATEST(x, y), SQRT(z) from uniformly_random_numbers
 ```
 ````
@@ -225,7 +225,7 @@ The resultant distribution may be surprising! 🎲[^surprise]
 
 [^surprise]: The general distributions should be the same
 
-```sql {.marimo}
+```{sql .marimo}
 SELECT GREATEST(a, b), SQRT(c) from uniformly_random_numbers
 ```
 
@@ -233,7 +233,7 @@ In this SQL format, Python variable interpolation in SQL queries occurs automati
 For instance, here's how to create a random uniform distribution and assign it to the dataframe `uniformly_random_numbers` used above:
 
 ````md
-```sql {.marimo query="uniformly_random_numbers" hide_output="true"}
+```{sql .marimo query="uniformly_random_numbers" hide_output="true"}
 SELECT i.range::text AS id,
        random() AS x,
        random() AS y,
@@ -246,12 +246,12 @@ FROM
 
 You can learn more about other SQL use in the SQL tutorial (`marimo tutorial sql`)
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 sample_count = mo.ui.slider(1, 1000, value=1000, label="Sample Count")
 sample_count
 ```
 
-```sql {.marimo query="uniformly_random_numbers" hide_output="True"}
+```{sql .marimo query="uniformly_random_numbers" hide_output="True"}
 SELECT i.range::text AS id,
        random() AS a,
        random() AS b,
@@ -275,6 +275,6 @@ $ marimo convert my_marimo.md > my_marimo.py
 Be sure to checkout the markdown.py tutorial (`marimo tutorial markdown`) for
 more information on to type-set and render markdown in marimo.
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 import marimo as mo
 ```

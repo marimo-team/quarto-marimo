@@ -1,6 +1,6 @@
 ---
 title: Intro
-marimo-version: 0.23.1
+marimo-version: 0.23.16
 header: |-
   # Copyright 2026 Marimo. All rights reserved
 ---
@@ -29,7 +29,7 @@ mo.md(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Tip: disabling automatic execution": mo.md(
@@ -49,7 +49,7 @@ mo.accordion(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.md(
     """
     Tip: This is a tutorial notebook. You can create your own notebooks
@@ -71,7 +71,7 @@ Reactivity keeps your program state and outputs in sync with your code,
 making for a dynamic programming environment that prevents bugs before they
 happen.
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 (
     mo.md(
         f"""
@@ -100,7 +100,7 @@ happen.
 changed = False
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Tip: execution order": (
@@ -120,7 +120,7 @@ mo.accordion(
 constraint on how names appear in cells: no two cells may define the same
 variable.
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Tip: encapsulation": (
@@ -133,7 +133,7 @@ mo.accordion(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Tip: private variables": (
@@ -268,7 +268,7 @@ the right conditions, clumps together to form a small sphere
 called a "marimo moss ball". Made of just strands of algae, these
 beloved assemblages are greater than the sum of their parts.
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 tips = {
     "Saving": (
         """

@@ -5,7 +5,7 @@ header: |-
 pyproject: |
     requires-python = ">=3.11"
     dependencies = [
-        "marimo>=0.23.1",
+        "marimo>=0.23.16",
         "wigglystuff",
     ]
 ---
@@ -21,7 +21,7 @@ under `pyproject`.
 pyproject: |
   requires-python = ">=3.11"
   dependencies = [
-    "marimo>=0.23.1",
+    "marimo>=0.23.16",
     "wigglystuff",
   ]
 ---

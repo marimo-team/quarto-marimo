@@ -1,6 +1,6 @@
 ---
 title: marimo for Jupyter users
-marimo-version: 0.23.1
+marimo-version: 0.23.16
 header: |-
   # Copyright 2026 Marimo. All rights reserved
 ---
@@ -80,7 +80,7 @@ In contrast, Jupyter's lack of reactivity makes IPyWidgets difficult to use.
 
 marimo notebooks can be shared as read-only web apps: just serve it with
 
-```marimo run your_notebook.py```
+`marimo run your_notebook.py`
 
 at the command-line.
 

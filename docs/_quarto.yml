@@ -1,0 +1,78 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - assets/*
+  render:
+    - index.qmd
+    - tutorials/*.qmd
+  preview:
+    port: 7777
+
+website:
+  title: "quarto-marimo"
+  description: "Reactive marimo cells for Quarto documents."
+  image: "/assets/quarto-marimo-og.png"
+  site-url: "https://marimo-team.github.io/quarto-marimo"
+  site-path: /quarto-marimo/
+  page-navigation: true
+  back-to-top-navigation: true
+  open-graph:
+    description: "Python, SQL, and Markdown cells share one marimo app across the document."
+    image: "/assets/quarto-marimo-og.png"
+    image-alt: "The quarto-marimo wordmark beside a blue Quarto symbol inside a marimo ring."
+    image-width: 2400
+    image-height: 1260
+    locale: en_US
+    site-name: "quarto-marimo"
+  twitter-card:
+    description: "Python, SQL, and Markdown cells share one marimo app across the document."
+    image: "/assets/quarto-marimo-og.png"
+    image-alt: "The quarto-marimo wordmark beside a blue Quarto symbol inside a marimo ring."
+    image-width: 2400
+    image-height: 1260
+    card-style: summary_large_image
+  sidebar:
+    title: false
+    logo:
+      light:
+        path: /assets/quarto-marimo-lockup-horizontal-light.svg
+        alt: quarto-marimo
+      dark:
+        path: /assets/quarto-marimo-lockup-horizontal-dark.svg
+        alt: quarto-marimo
+    logo-href: /index.qmd
+    style: "docked"
+    search: true
+    id: get-started
+    contents:
+      - href: index.qmd
+        id: guide
+      - section: "Tutorials"
+        href: tutorials/index.qmd
+        title: Tutorials
+        contents:
+          - href: tutorials/intro.qmd
+          - href: tutorials/dataflow.qmd
+          - href: tutorials/ui.qmd
+          - href: tutorials/markdown.qmd
+          - href: tutorials/plots.qmd
+          - href: tutorials/layout.qmd
+          - href: tutorials/fileformat.qmd
+          - href: tutorials/sql.qmd
+          - href: tutorials/external_dependencies.qmd
+          - href: tutorials/markdown_format.qmd
+          - href: tutorials/for_jupyter_users.qmd
+      - href: tutorials/example-pdf.qmd
+
+format:
+  html:
+    theme:
+      light: zephyr
+      dark: darkly
+    respect-user-color-scheme: true
+    css: styles.css
+    toc: true
+    code-tools: true
+    code-fold: true
+    code-summary: "Show the code"

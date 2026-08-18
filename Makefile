@@ -1,4 +1,4 @@
-.PHONY: build browser-build engine-build clean-python-cache test test-ts test-py lint preview render ci clean setup
+.PHONY: build browser-build engine-build docs-prepare clean-python-cache test test-ts test-py lint preview render ci clean setup
 
 VERSION := $(shell grep '^version:' _extensions/marimo/_extension.yml | sed 's/.*: *//')
 ENGINE_ARTIFACT := dist/marimo-engine-v$(VERSION).js
@@ -55,6 +55,11 @@ engine-build:
 	mv dist/marimo-engine.js $(ENGINE_ARTIFACT)
 	cp $(ENGINE_ARTIFACT) $(ENGINE_CACHE)
 
+docs-prepare: build
+	$(MAKE) clean-python-cache
+	rm -rf docs/_extensions
+	cd docs && quarto add .. --no-prompt
+
 clean-python-cache:
 	find _extensions/marimo -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete
 	find _extensions/marimo -type d -name __pycache__ -empty -delete
@@ -74,18 +79,18 @@ lint:
 	$(DENO) lint _extensions/marimo/marimo-engine.js src tests
 	$(DENO) check _extensions/marimo/marimo-engine.js src/engine/index.ts src/browser/index.ts
 
-preview: build
-	quarto preview
+preview: docs-prepare
+	cd docs && quarto preview
 
-render: build
-	quarto render
+render: docs-prepare
+	cd docs && quarto render
 
 ci: setup
 	$(QUARTO_DIR)/bin/quarto install tinytex --no-prompt
 	$(MAKE) render
 
 clean:
-	rm -rf dist _site .quarto
+	rm -rf dist docs/_site docs/.quarto docs/_extensions
 	rm -rf _extensions/marimo/assets
 	rm -f _extensions/marimo/marimo-engine-v*.js
 	$(MAKE) clean-python-cache

@@ -1,12 +1,12 @@
 ---
 title: Plots
-marimo-version: 0.23.1
+marimo-version: 0.23.16
 header: |-
   # Copyright 2026 Marimo. All rights reserved
 pyproject: |
     requires-python = ">=3.11"
     dependencies = [
-        "marimo>=0.23.1",
+        "marimo>=0.23.16",
         "matplotlib",
         "numpy",
     ]
@@ -14,7 +14,7 @@ pyproject: |
 
 # Plotting
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 check_dependencies()
 ```
 
@@ -56,7 +56,7 @@ plt.plot([1, 2])
 plt.gca()
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(plt_show_explainer)
 ```
 
@@ -145,7 +145,7 @@ or embed them in markdown with `mo.as_html`.
 If you would like another library to be integrated into marimo, please
 get in touch.
 
-````python {.marimo hide_code="true"}
+````{python .marimo hide_code="true"}
 module_not_found_explainer = mo.md(
     """
     ## Oops!
@@ -171,7 +171,7 @@ def check_dependencies():
         return module_not_found_explainer
 ````
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 plt_show_explainer = {
     "Using `plt.show()`": """
     You can use `plt.show()` or `figure.show()` to display

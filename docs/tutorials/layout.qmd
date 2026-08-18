@@ -1,6 +1,6 @@
 ---
 title: Layout
-marimo-version: 0.23.1
+marimo-version: 0.23.16
 header: |-
   # Copyright 2026 Marimo. All rights reserved
 ---
@@ -103,7 +103,7 @@ def create_box(num=1):
 boxes = [create_box(i) for i in range(1, 5)]
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Documentation: `mo.hstack`": mo.doc(mo.hstack),
@@ -128,7 +128,7 @@ mo.md("This markdown is centered.").center()
 mo.md("This markdown is right-justified.").right()
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Documentation: `Html.center`": mo.doc(mo.Html.center),
@@ -188,7 +188,7 @@ mo.ui.tabs(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion({"Documentation: `mo.ui.tabs`": mo.doc(mo.ui.tabs)})
 ```
 
@@ -211,7 +211,7 @@ mo.md(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion({"Documentation: `mo.tree`": mo.doc(mo.tree)})
 ```
 
@@ -238,7 +238,7 @@ mo.md(
 ).callout(kind=callout_kind.value)
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.accordion({"Documentation: `mo.callout`": mo.doc(mo.callout)})
 ```
 

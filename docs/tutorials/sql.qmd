@@ -1,13 +1,13 @@
 ---
 title: SQL
-marimo-version: 0.23.1
+marimo-version: 0.23.16
 width: medium
 header: |-
   # Copyright 2026 Marimo. All rights reserved
 pyproject: |
     requires-python = ">=3.11"
     dependencies = [
-        "marimo[sql]>=0.23.1",
+        "marimo[sql]>=0.23.16",
         "altair",
         "matplotlib",
         "pandas",
@@ -28,7 +28,7 @@ including [duckdb](https://duckdb.org/). Obtain these dependencies with
 pip install 'marimo[sql]'
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 has_duckdb_installed = False
 try:
     import duckdb
@@ -54,7 +54,7 @@ except ImportError:
     pass
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 if has_duckdb_installed:
     mo.output.replace(
         mo.md(
@@ -118,7 +118,7 @@ Click the database "barrel" icon in the left toolbar to see all dataframes and i
 
 Let's take a look at a SQL cell. The next cell generates a dataframe called `df`.
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 _SIZE = 1000
 
 
@@ -161,7 +161,7 @@ else:
 
 Next, we create a SQL query, refercing the Python dataframe `df` directly.
 
-```sql {.marimo}
+```{sql .marimo}
 -- This SQL cell is special since we can reference existing dataframes in the global scope as a table in the SQL query. For example, we can reference the `df` dataframe in the global scope, which was defined in another cell using Python.
 
 SELECT * FROM df;
@@ -174,14 +174,14 @@ SELECT * FROM df;
 
 You can create SQL statements that depend on Python values, such as UI elements:
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 token_prefix = mo.ui.dropdown(
     list(string.ascii_lowercase), label="token prefix", value="a"
 )
 token_prefix
 ```
 
-```sql {.marimo query="result"}
+```{sql .marimo query="result"}
 -- Change the dropdown to see the SQL query filter itself!
 --
 -- Here we use a duckdb function called `starts_with`:
@@ -193,7 +193,7 @@ SELECT * FROM df WHERE starts_with(token, '{token_prefix.value}')
 Since we named the output variable above **`result`**,
 we can use it back in Python.
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 charting_library = mo.ui.radio(["matplotlib", "altair", "plotly"])
 
 mo.md(
@@ -205,7 +205,7 @@ mo.md(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 _header = mo.md(
     f"""
     We can re-use the dropdown from above: {token_prefix}
@@ -220,7 +220,7 @@ render_chart(
 ) if charting_library.value else None
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 def render_chart(charting_library, header):
     return mo.vstack(
         [header, render_charting_library(charting_library)]
@@ -281,7 +281,7 @@ With a bit of boilerplate, you can even read and write to **Postgres**, and join
 
 For this example, we will query a dataframe loaded from a csv.
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 # We use pandas for the CSV fetch because DuckDB in Pyodide does not support HTTPFS extensions
 def read_cars_df():
     import pandas as pd
@@ -333,7 +333,7 @@ def read_cars_df():
 cars_df = read_cars_df()
 ```
 
-```sql {.marimo query="cars"}
+```{sql .marimo query="cars"}
 -- Download a CSV and create an in-memory table; this is optional.
 CREATE OR replace TABLE cars as (
     SELECT * FROM cars_df
@@ -343,7 +343,7 @@ CREATE OR replace TABLE cars as (
 SELECT * from cars;
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 cylinders_dropdown = mo.ui.range_slider.from_series(
     cars["Cylinders"], debounce=True, show_value=True
 )
@@ -351,7 +351,7 @@ origin_dropdown = mo.ui.dropdown.from_series(cars["Origin"], value="Asia")
 mo.hstack([cylinders_dropdown, origin_dropdown]).left()
 ```
 
-```sql {.marimo query="filtered_cars"}
+```{sql .marimo query="filtered_cars"}
 SELECT * FROM cars
 WHERE
     Cylinders >= {cylinders_dropdown.value[0]}
@@ -361,7 +361,7 @@ WHERE
     ORIGIN = '{origin_dropdown.value}'
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 mo.hstack(
     [
         mo.stat(label="Total cars", value=str(len(filtered_cars))),
@@ -377,11 +377,11 @@ mo.hstack(
 )
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 import marimo as mo
 import random
 ```
 
-```python {.marimo hide_code="true"}
+```{python .marimo hide_code="true"}
 import string
 ```

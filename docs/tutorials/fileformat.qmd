@@ -1,11 +1,11 @@
 ---
 title: Fileformat
-marimo-version: 0.23.1
+marimo-version: 0.23.16
 header: |-
   # Copyright 2026 Marimo. All rights reserved
 ---
 
-```python {.marimo name="setup"}
+```{python .marimo name="setup"}
 import dataclasses
 import random
 ```
@@ -104,7 +104,7 @@ editor, and format the file with your favorite code formatter.
 
 We explain some properties of marimo's file format below.
 
-````python {.marimo hide_code="true"}
+````{python .marimo hide_code="true"}
 mo.accordion(
     {
         "Cells are functions": """
@@ -249,7 +249,7 @@ Add setup cell.
 
 Notebook files expose functions and classes that depend only on variables defined in the setup cell (or on other such functions or classes). For example, the following cell:
 
-```python {.marimo name="*roll_die"}
+```{python .marimo name="*roll_die"}
 def roll_die():
     """
     A reusable function.
@@ -282,7 +282,7 @@ from my_notebook import roll_die
 
 Standalone classes are also exposed:
 
-```python {.marimo name="*SimulationExample"}
+```{python .marimo name="*SimulationExample"}
 @dataclasses.dataclass
 class SimulationExample:
     n_rolls: int
@@ -317,7 +317,7 @@ For example, this function will not be exposed:
 variable = 123
 ```
 
-```python {.marimo name="wrapped_function_example"}
+```{python .marimo name="wrapped_function_example"}
 def not_a_top_level_function():
     """
     This function depends on a variable declared in another cell.

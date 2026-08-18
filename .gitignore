@@ -32,5 +32,6 @@ result
 
 # Build and local extension artifacts
 /dist/
+/docs/_extensions/
 /_extensions/marimo/assets/
 /_extensions/marimo/marimo-engine-v*.js

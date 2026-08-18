@@ -15,10 +15,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2
-        with:
-          version: ${{ env.QUARTO_VERSION }}
-
       - uses: prefix-dev/setup-pixi@f00437f565399d418b0acc85936d12c1fb668347 # v0.10.1
         with:
           pixi-version: ${{ env.PIXI_VERSION }}
@@ -30,4 +26,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@800bbc83122db9d4c38fcd284782d5afe62e52df # releases/v4
         with:
           branch: gh-pages
-          folder: _site
+          folder: docs/_site
