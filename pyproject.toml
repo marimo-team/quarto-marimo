@@ -39,31 +39,36 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
 ]
 
+[dependency-groups]
+dev = ["deno>=2.8"]
+
 [tool.pixi.workspace]
 channels = ["conda-forge"]
 name = "quarto-marimo"
 platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
 
 [tool.pixi.tasks]
-# todo: add typescript lint?
-lint = "ruff check && mypy _extensions/marimo/"
-serve = "quarto preview"
-render = "quarto render"
-ci = "quarto install tinytex --no-prompt && quarto render"
+lint = "make lint"
+setup = "make setup"
+build = { cmd = "make build", depends-on = ["setup"] }
+serve = { cmd = "make preview", depends-on = ["setup"] }
+render = { cmd = "make render", depends-on = ["setup"] }
+ci = "make ci"
 refresh = "./scripts/export.sh"
-test-ts = "deno test --no-check --allow-read --allow-write --allow-env"
-test-py = "uv run --with pytest pytest tests/python -v"
-test = { cmd = "deno test --no-check --allow-read --allow-write --allow-env && uv run --with pytest pytest tests/python -v" }
+test = "make test"
 
 [tool.pixi.dependencies]
 marimo = ">=0.23.16"
 pandoc = ">=3.4,<4"
 pyyaml = ">=6.0.2,<7"
-stylua = ">=2.0.2,<3"
+ruff = ">=0.16.1"
 uv = ">=0.11,<0.12"
 mypy = ">=1.15.0,<2"
 hatch = ">=1.14.1,<2"
 pytest = ">=9,<10"
+
+[tool.pixi.environments]
+default = ["dev"]
 
 [project.urls]
 homepage = "https://github.com/marimo-team/quarto-marimo"
@@ -72,7 +77,7 @@ homepage = "https://github.com/marimo-team/quarto-marimo"
 installer = "uv"
 
 [tool.hatch.version]
-path = "_extensions/marimo/extract.py"
+path = "_extensions/marimo/python/extract.py"
 
 [tool.hatch.build.targets.sdist]
 include = ["/_extensions"]
@@ -87,7 +92,7 @@ artifacts = ["_extensions"]
 dependencies = ["uv>=0.4.17"]
 
 [tool.hatch.envs.default]
-features = ["dev"]
+dependency-groups = ["dev"]
 python = "3.12"
 installer = "uv"
 dependencies = [

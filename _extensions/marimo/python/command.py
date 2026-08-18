@@ -12,21 +12,9 @@ import json
 import sys
 import tempfile
 from textwrap import dedent
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from marimo._cli.sandbox import construct_uv_flags  # type: ignore[no-redef]
-    from marimo._utils.inline_script_metadata import (
-        PyProjectReader,  # type: ignore[no-redef]
-    )
-else:
-    try:
-        from marimo._internal.sandbox import PyProjectReader, construct_uv_flags
-    except ImportError:
-        from marimo._cli.sandbox import construct_uv_flags  # type: ignore[no-redef]
-        from marimo._utils.inline_script_metadata import (
-            PyProjectReader,  # type: ignore[no-redef]
-        )
+from marimo._cli.sandbox import construct_uv_flags
+from marimo._utils.inline_script_metadata import PyProjectReader
 
 
 def extract_command(header: str) -> list[str]:
@@ -36,7 +24,8 @@ def extract_command(header: str) -> list[str]:
     in inline script metadata so dependency resolution follows marimo's
     existing sandbox rules instead of a second copy of the same logic here.
     """
-    if not header.startswith("#"):
+    header = dedent(header).strip()
+    if not header.splitlines() or header.splitlines()[0].strip() != "# /// script":
         header = "\n# ".join(["# /// script", *header.splitlines(), "///"])
     pyproject = PyProjectReader.from_script(header)
     with tempfile.NamedTemporaryFile(
@@ -50,7 +39,7 @@ def extract_command(header: str) -> list[str]:
 if __name__ == "__main__":
     assert len(sys.argv) == 1, f"Unexpected call format got {sys.argv}"
 
-    header = dedent(sys.stdin.read())
+    header = sys.stdin.read()
 
     command = extract_command(header)
     sys.stdout.write(json.dumps(command))

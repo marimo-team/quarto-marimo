@@ -30,5 +30,7 @@ result
 
 **/*.quarto_ipynb
 
-# Cached engine bundles (downloaded by shim or built locally)
-_extensions/marimo/marimo-engine-v*.js
+# Build and local extension artifacts
+/dist/
+/_extensions/marimo/assets/
+/_extensions/marimo/marimo-engine-v*.js
