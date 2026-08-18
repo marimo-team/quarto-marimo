@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from quarto_marimo.cli import main
 
-__version__ = "0.4.5"
+__version__ = "0.5.0"
 
 
 if __name__ == "__main__":
