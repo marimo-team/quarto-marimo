@@ -1,91 +1,162 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for coding agents working on the Quarto engine extension for reactive
+marimo cells. Read this before changing engine discovery, page compilation,
+browser mounting, generated assets, or release automation.
 
-## Build & Test Commands
+## Commands
+
+Use Pixi 0.68 or newer. Pixi provides Python, marimo, Deno, Pandoc, Ruff, mypy,
+and pytest. The Makefile installs Quarto 1.9.37 under `.quarto-dev`.
+
+| Purpose | Command | Expected result |
+| --- | --- | --- |
+| Install | `pixi install --locked` | Create the locked development environment |
+| Set up Quarto | `pixi run setup` | Install the pinned Quarto release |
+| Lint and type-check | `pixi run lint` | Ruff, mypy, Deno formatting, linting, and type checks pass |
+| Tests | `pixi run test` | TypeScript and Python tests pass |
+| Build | `pixi run build` | Create the versioned engine, browser, and CSS artifacts |
+| Render docs | `pixi run render` | Install the local extension and render the documentation site |
+| Preview docs | `pixi run serve` | Install the local extension and start Quarto preview |
+| Refresh tutorials | `pixi run refresh` | Export the installed marimo tutorials as Quarto Markdown |
+| Clean | `make clean` | Delete build artifacts, extension caches, and rendered docs |
+
+Run focused tests with:
 
 ```bash
-# Run all tests (TypeScript + Python)
-make test
-
-# TypeScript tests only
-deno test --no-check --allow-read --allow-write --allow-env
-
-# Single TypeScript test file
-deno test --no-check --allow-read --allow-write --allow-env tests/cell-execution-regex.test.ts
-
-# Python tests only
-uv run --with pytest pytest tests/python -v
-
-# Single Python test
-uv run --with pytest pytest tests/python/test_extract.py::test_function_name -v
-
-# Lint (ruff + mypy)
-make lint
-
-# Verify TypeScript compiles (does NOT update the committed marimo-engine.js)
-make build
-
-# Smoke test a render
-quarto render tutorials/intro.qmd --to html
+pixi run deno test --allow-read --allow-write --allow-env --allow-run tests/engine/process.test.ts
+pixi run pytest tests/python/test_document.py -v
 ```
+
+`make test-ts` and `make test-py` run each full suite separately. Use
+`pixi run lint && pixi run test && pixi run render` as the pull request gate.
 
 ## Architecture
 
-This is a Quarto [engine extension](https://quarto.org/docs/extensions/engines.html) that executes marimo cells inside `.qmd` documents. It has two components that work together:
+- `src/engine` is the Quarto adapter. It claims `.qmd` and `.md` files with
+  `.marimo` fences, reads document metadata, runs the Python compiler, projects
+  each result back into Quarto Markdown, and adds browser assets for HTML.
+- `_extensions/marimo/python/command.py` converts the document `pyproject`
+  front matter into `uv run` arguments with marimo's sandbox utilities.
+- `_extensions/marimo/python/quarto_marimo` owns document collection, compiler
+  invocation, protocol models, and MIME-aware static output. `extract.py` is
+  the subprocess entry point loaded by the TypeScript engine.
+- `src/browser` registers `marimo-quarto-island` through the published
+  `@marimo-team/mdx-marimo` bridge and supplies Quarto theme detection.
+- `_extensions/marimo/marimo-engine.js` is the committed release loader. It
+  reads the extension version, caches matching release artifacts, and imports
+  the versioned engine.
 
-### TypeScript engine (`src/marimo-engine.ts` → `_extensions/marimo/marimo-engine.js`)
+The execution flow is:
 
-Do not edit `marimo-engine.js` by hand — it is the compiled output. Rebuild with `make build` (or `quarto call build-ts-extension`), but note that `make build` builds a versioned artifact and then restores the committed `.js` via `git checkout`. The committed `.js` is what Quarto actually loads.
+```text
+.qmd source
+  -> Quarto engine
+  -> Python document collector
+  -> marimo page compiler
+  -> compiled page protocol
+  -> Quarto projection
+  -> interactive islands or static output
+```
 
-The engine is registered with Quarto and claims any `.qmd`/`.md` file containing `` {python .marimo} `` blocks (`claimsFile`, `claimsLanguage`). On `execute`, it:
+## Dependency rule
 
-1. Calls `command.py` to build `uv run` flags from the document's `pyproject` YAML front matter (inline script metadata format).
-2. Calls `extract.py` passing the full markdown via stdin.
-3. Receives a JSON result containing a `header` (marimo islands JS/CSS) and `outputs` (one per marimo cell).
-4. Splits the document into chunks, replaces each marimo cell with its rendered output.
-5. For HTML: injects the islands header into `<head>` via `include-in-header`.
-6. For PDF/LaTeX/typst (`mime_sensitive=true`): outputs are static figures or plain text instead of interactive islands.
+The Quarto adapters depend on host-neutral contracts from
+`@marimo-team/mdx-marimo`. The shared bridge must never depend on Quarto syntax,
+Quarto engine types, Pandoc output, or Quarto theme classes.
 
-### Python engine (`_extensions/marimo/extract.py`)
+- Keep fence discovery, front matter, `#|` options, process orchestration,
+  Pandoc projection, and theme detection in this repository.
+- Keep payload projection, custom element lifecycle, app retention, runtime
+  assets, and shared styles in the mdx-marimo bridge.
+- Keep `_extensions/marimo/python/quarto_marimo/compiler.py` aligned with
+  [`packages/islands-compiler/compiler.py`](https://github.com/marimo-team/mdx-marimo/blob/main/packages/islands-compiler/compiler.py).
+  Quarto-specific collection and static projection belong in the surrounding
+  Python modules.
+- Keep `src/browser` focused on element registration and host theme resolution.
 
-Called as a subprocess by the TS engine. Uses marimo's internal `MarimoIslandGenerator` to execute cells and `MarimoIslandStub` to render them. The `MarimoPandocParser` subclasses marimo's markdown parser to intercept the parsed AST and emit either interactive islands or MIME-appropriate static output.
+## Conventions
 
-`__version__` in this file is the extension's version source of truth (also mirrored in `_extension.yml`).
+- TypeScript source lives under `src`. Quarto engine types live in
+  `types/quarto-types.d.ts`. TypeScript tests are grouped by `tests/engine` and
+  `tests/browser`.
+- Shipped Python lives under `_extensions/marimo/python`. Python tests live in
+  `tests/python` and use absolute `quarto_marimo` imports.
+- Format Python with `pixi run ruff format`. Format TypeScript with
+  `pixi run deno fmt deno.json src tests`.
+- Test through engine discovery, subprocess payloads, protocol records,
+  projected Markdown, registered elements, and rendered documents. Avoid
+  assertions against generated formatting or private helper structure.
+- Keep comments for protocol constraints, lifecycle ordering, subprocess
+  behavior, generated artifacts, and host compatibility rules.
 
-### Dependency resolver (`_extensions/marimo/command.py`)
+## Runtime invariants
 
-Called by the TS engine before `extract.py` to construct the `uv run` flags. Reads the document's `pyproject` YAML block (inline script metadata) to determine which packages to install into the sandbox.
+- Compile one source document into one `MarimoPageRequest` and one shared
+  marimo app.
+- Preserve one compiled result for every authored `.marimo` cell, in source
+  order. A projection count mismatch fails the render.
+- For interactive HTML, the engine projects protocol payloads into custom
+  elements and injects the browser adapter once through `include-in-header`.
+- Static formats project each compiled MIME result into Quarto Markdown,
+  figures, raw HTML, or error blocks.
+- Derive page identity from metadata, defaults, setup cells, and authored cells
+  so temporary filenames do not change app identity.
+- Keep protocol version 2 aligned across the vendored compiler, Python models,
+  TypeScript guards, bridge projection, and tests.
 
-## Key Environment Variables
+## Environment variables
 
-| Variable | Purpose |
-|---|---|
-| `QUARTO_MARIMO_VERSION` | Override the marimo JS version loaded by islands (default: installed version). Use to bisect regressions. |
-| `QUARTO_MARIMO_DEBUG_ENDPOINT` | Override the islands runtime location. Leave unset for CDN, use `/marimo-frontend` for a site-local copied bundle, or an absolute URL for an already-running local server. |
-| `QUARTO_MARIMO_LOCAL_FRONTEND_ROOT` | Override the local `marimo/frontend` checkout used by `scripts/sync_local_frontend.py` when `QUARTO_MARIMO_DEBUG_ENDPOINT` is a relative site path. |
-| `MARIMO_NO_JS` | Set to `true` for non-JS output formats (PDF etc.); disables interactive islands |
+| Variable | Behavior |
+| --- | --- |
+| `QUARTO_MARIMO_VERSION` | Select the marimo runtime version compiled into interactive output. Use it to bisect runtime regressions. |
+| `QUARTO_MARIMO_DEBUG_ENDPOINT` | Load marimo runtime assets from an absolute development server URL. |
+| `QUARTO_MARIMO_TIMEOUT_SECONDS` | Set the compiler subprocess timeout. The default is 300 seconds. |
+| `MARIMO_NO_JS` | Marks static compilation for marimo. The Python entry point sets it from the requested output mode. |
 
-For local preview/debugging against a sibling `marimo` checkout, prefer
-`QUARTO_MARIMO_DEBUG_ENDPOINT=/marimo-frontend`. `_quarto.yml` runs
-`scripts/sync_local_frontend.py` after render so `_site/marimo-frontend/dist`
-matches the runtime path referenced by the generated pages.
+## Authoring options
 
-## Document-level Options
+The engine claims Python, SQL, and Markdown fences with the `.marimo` class,
+including both `` ```python {.marimo} `` and `` ```{python .marimo} `` forms.
 
-These go in `.qmd` YAML front matter (or `_quarto.yml` for global defaults):
+Document front matter supports:
 
-- `external-env: true` — skip `uv` sandbox, use the ambient Python environment
-- `pyproject: |` — inline script metadata block for declaring dependencies
-- `eval: false` — disable cell execution globally
+- `external-env: true` to run compilation in the active Python environment.
+- `pyproject: |` to declare dependencies for the `uv` sandbox.
+- `eval: false` to disable cell execution for the document.
+- `header: |` to add a Python setup cell before authored cells.
 
-Cell-level execution options (`#| key: value` inside code blocks): `eval`, `echo`, `output`, `warning`, `error`, `include`, `editor`.
+Cell `#|` options include `eval`, `echo`, `output`, `server-output`, `error`,
+`include`, `editor`, `hide-code`, `hide-output`, `disabled`, `unparsable`,
+`name`, and `column`. SQL cells also accept `query` and `engine`.
+
+## Generated artifacts
+
+`make build` creates three versioned release artifacts:
+
+- `dist/marimo-engine-v<version>.js`
+- `dist/browser-v<version>.js`
+- `dist/islands-bridge-v<version>.css`
+
+The build also stages ignored copies under `_extensions/marimo` for local
+renders. Change engine behavior in `src/engine`, browser behavior in
+`src/browser`, and bridge behavior in mdx-marimo. Edit the committed
+`marimo-engine.js` loader when its download or cache contract changes.
+
+`pixi run refresh` regenerates `docs/tutorials` from the installed marimo
+tutorials with `marimo export md --flavor qmd`. Review generated tutorial
+changes before committing them.
 
 ## Release
 
+Run the release script from a clean `main` checkout:
+
 ```bash
-./scripts/release.sh patch   # 0.0.x
-./scripts/release.sh minor   # 0.x.0
+./scripts/release.sh patch
+./scripts/release.sh minor
 ```
 
-Bumps version in `_extension.yml`, `extract.py`, and `marimo-engine.js`, then commits and tags. The publish GitHub Action fires on tags and creates the GitHub Release.
+The script runs tests, linting, and the build. It keeps the version in
+`_extensions/marimo/_extension.yml` aligned with `extract.py`, creates a release
+commit, and offers to push the commit and tag. The publish workflow builds the
+three versioned artifacts and attaches them to the matching GitHub release.

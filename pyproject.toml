@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "quarto-marimo"
-description = "marimo package for quarto"
+description = "Reactive marimo cells for Quarto documents."
 dynamic = ["version"]
 dependencies = [
     # for marimo
@@ -31,7 +31,6 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "Intended Audience :: Education",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -54,7 +53,7 @@ build = { cmd = "make build", depends-on = ["setup"] }
 serve = { cmd = "make preview", depends-on = ["setup"] }
 render = { cmd = "make render", depends-on = ["setup"] }
 ci = "make ci"
-refresh = "./scripts/export.sh"
+refresh = "./docs/scripts/update_tutorials.sh"
 test = "make test"
 
 [tool.pixi.dependencies]
@@ -62,9 +61,7 @@ marimo = ">=0.23.16"
 pandoc = ">=3.4,<4"
 pyyaml = ">=6.0.2,<7"
 ruff = ">=0.16.1"
-uv = ">=0.11,<0.12"
-mypy = ">=1.15.0,<2"
-hatch = ">=1.14.1,<2"
+mypy = ">=2.3,<3"
 pytest = ">=9,<10"
 
 [tool.pixi.environments]
@@ -81,11 +78,9 @@ path = "_extensions/marimo/python/extract.py"
 
 [tool.hatch.build.targets.sdist]
 include = ["/_extensions"]
-artifacts = ["_extensions"]
 
 [tool.hatch.build.targets.wheel]
 include = ["/_extensions"]
-artifacts = ["_extensions"]
 
 # Override the default uv version to use the latest version
 [tool.hatch.envs.hatch-uv]
@@ -98,7 +93,7 @@ installer = "uv"
 dependencies = [
     "uv>=0.4.17", # so we can bump the version used by hatch
     # Typo checking
-    "typos~=1.48.0",
+    "typos~=1.49.0",
 ]
 
 [tool.hatch.envs.default.scripts]
