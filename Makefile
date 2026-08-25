@@ -6,6 +6,7 @@ ENGINE_CACHE := _extensions/marimo/marimo-engine-v$(VERSION).js
 
 QUARTO_VERSION ?= 1.9.37
 QUARTO_DIR := .quarto-dev/$(QUARTO_VERSION)
+QUARTO_DOWNLOAD_URL ?= https://github.com/quarto-dev/quarto-cli/releases/download/v$(QUARTO_VERSION)/$(QUARTO_PKG)
 
 ifeq ($(shell uname -s),Darwin)
   QUARTO_PKG := quarto-$(QUARTO_VERSION)-macos.tar.gz
@@ -32,12 +33,26 @@ else
   PYTEST := uv run --with pytest pytest
 endif
 
+# macOS archives are flat. Linux archives wrap the tree in a versioned directory.
 $(QUARTO_DIR)/bin/quarto:
-	mkdir -p $(QUARTO_DIR)
-	curl -fSL -o /tmp/$(QUARTO_PKG) \
-		https://github.com/quarto-dev/quarto-cli/releases/download/v$(QUARTO_VERSION)/$(QUARTO_PKG)
-	tar xzf /tmp/$(QUARTO_PKG) -C $(QUARTO_DIR)
-	rm /tmp/$(QUARTO_PKG)
+	@set -eu; \
+	stage=$$(mktemp -d); \
+	trap 'rm -rf "$$stage"' EXIT; \
+	archive="$$stage/$(QUARTO_PKG)"; \
+	unpacked="$$stage/unpacked"; \
+	mkdir -p "$$unpacked"; \
+	curl -fSL -o "$$archive" "$(QUARTO_DOWNLOAD_URL)"; \
+	tar xzf "$$archive" -C "$$unpacked"; \
+	if [ -x "$$unpacked/bin/quarto" ]; then \
+		root="$$unpacked"; \
+	elif [ -x "$$unpacked/quarto-$(QUARTO_VERSION)/bin/quarto" ]; then \
+		root="$$unpacked/quarto-$(QUARTO_VERSION)"; \
+	else \
+		echo "Unsupported Quarto archive layout: missing bin/quarto" >&2; \
+		exit 1; \
+	fi; \
+	mkdir -p "$(QUARTO_DIR)"; \
+	cp -R "$$root/." "$(QUARTO_DIR)"
 
 setup: $(QUARTO_DIR)/bin/quarto
 
