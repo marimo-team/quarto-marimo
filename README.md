@@ -118,7 +118,8 @@ pyproject: |
 ```
 
 Set `external-env: true` to execute with the active Python environment during
-the Quarto build.
+the Quarto build. Set `QUARTO_PYTHON` to choose its Python executable. It
+defaults to `python` on `PATH`.
 
 Set `header` to Python source that runs as a setup cell before the authored
 cells:

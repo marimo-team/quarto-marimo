@@ -109,6 +109,7 @@ Quarto engine types, Pandoc output, or Quarto theme classes.
 
 | Variable | Behavior |
 | --- | --- |
+| `QUARTO_PYTHON` | Select the Python executable used by `external-env: true`. Defaults to `python` on `PATH`. |
 | `QUARTO_MARIMO_VERSION` | Select the marimo runtime version compiled into interactive output. Use it to bisect runtime regressions. |
 | `QUARTO_MARIMO_DEBUG_ENDPOINT` | Load marimo runtime assets from an absolute development server URL. |
 | `QUARTO_MARIMO_TIMEOUT_SECONDS` | Set the compiler subprocess timeout. The default is 300 seconds. |

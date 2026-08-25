@@ -39,7 +39,7 @@ export async function runMarimoCompiler(
   let temporaryDirectory: string | undefined;
 
   if (options.externalEnv) {
-    command = "python";
+    command = Deno.env.get("QUARTO_PYTHON") || "python";
     args = [extractPath];
   } else {
     command = "uv";
