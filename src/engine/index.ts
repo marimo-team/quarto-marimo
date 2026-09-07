@@ -59,7 +59,8 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
 
   claimsLanguage: (language: string, firstClass?: string): boolean | number => {
     if (
-      (language === "python" || language === "sql" ||
+      (language === "python" ||
+        language === "sql" ||
         language === "markdown") &&
       firstClass === "marimo"
     ) {
@@ -142,7 +143,11 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
       ),
 
     execute: async (options: ExecuteOptions): Promise<ExecuteResult> => {
-      const interactive = quarto.format.isHtmlCompatible(options.format);
+      const htmlCompatible = quarto.format.isHtmlCompatible(options.format);
+      const interactive = isInteractiveFormat(
+        htmlCompatible,
+        options.target.metadata,
+      );
       const execution = await quarto.console.withSpinner(
         { message: "Executing marimo cells..." },
         async () =>
@@ -165,14 +170,18 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
       const marimoCells = chunks.cells.filter(isMarimoCell);
       const projected = execution.kind === "page"
         ? projectInteractivePage(execution.page)
-        : await projectStaticPage(execution.outputs, htmlToMarkdown);
+        : await projectStaticPage(
+          execution.outputs,
+          htmlToMarkdown,
+          htmlCompatible,
+        );
       validateProjectionCount(projected, marimoCells.length);
 
       let index = 0;
       const markdown = chunks.cells
         .map((cell) =>
           isMarimoCell(cell)
-            ? projected[index++] ?? ""
+            ? (projected[index++] ?? "")
             : cell.sourceVerbatim.value
         )
         .join("");
@@ -200,6 +209,13 @@ const marimoEngineDiscovery: ExecutionEngineDiscovery = {
       Promise.resolve(),
   }),
 };
+
+export function isInteractiveFormat(
+  isHtmlCompatible: boolean,
+  metadata: Record<string, unknown>,
+): boolean {
+  return isHtmlCompatible && metadata.interactive !== false;
+}
 
 async function htmlToMarkdown(html: string): Promise<string> {
   const result = await quarto.system.pandoc(
