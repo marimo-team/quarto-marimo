@@ -8,6 +8,15 @@ import {
 
 const defaultCompilerTimeoutMs = 300_000;
 
+// Deno exchanges UTF-8 bytes on stdin and stdout, but Python decodes and
+// encodes those streams with the host locale unless UTF-8 mode is on. Windows
+// locales such as cp932 otherwise turn document text into mojibake and lone
+// surrogates that later fail JSON encoding.
+const pythonUtf8Environment: Record<string, string> = {
+  PYTHONUTF8: "1",
+  PYTHONIOENCODING: "utf-8",
+};
+
 export type StaticMarimoOutput = {
   type: "html" | "figure" | "para" | "plain" | "blockquote";
   value: string;
@@ -118,7 +127,7 @@ export async function executeProcess(
 ): Promise<string> {
   const child = new Deno.Command(command, {
     args,
-    env,
+    env: { ...pythonUtf8Environment, ...env },
     stdin: "piped",
     stdout: "piped",
     stderr: "piped",

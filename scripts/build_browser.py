@@ -38,6 +38,7 @@ def bundle(source: str | Path, *options: str) -> subprocess.CompletedProcess[str
         ],
         cwd=REPO_ROOT,
         text=True,
+        encoding="utf-8",
         capture_output=True,
         check=False,
     )

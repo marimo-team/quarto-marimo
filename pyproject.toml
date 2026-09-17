@@ -173,6 +173,7 @@ extend-select = [
     "B019",   # Use of functools.lru_cache or functools.cache on methods can lead to memory leaks
     "TRY002", # Prohibit use of `raise Exception`, use specific exceptions instead.
     "T201",   # No print statements
+    "PLW1514", # Unspecified encoding on open(), subprocess, and friends
     "D3",  # pydocstyle Quotes Issues
     "D4",  # pydocstyle Docstring Content Issues
     "D207",  # Docstring is under-indented

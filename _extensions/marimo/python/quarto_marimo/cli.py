@@ -111,7 +111,9 @@ def main(argv: list[str] | None = None) -> int:
     interactive = output_mode.lower() == "html"
     os.environ["MARIMO_NO_JS"] = str(not interactive).lower()
 
-    source = sys.stdin.read()
+    # The engine always sends UTF-8 bytes. Bypass the locale-dependent text
+    # wrappers so a cp932 or similar host locale cannot corrupt the document.
+    source = sys.stdin.buffer.read().decode("utf-8")
     if not source:
         source = Path(reference_file).read_text(encoding="utf-8")
     with redirect_stdout(sys.stderr):
@@ -121,5 +123,6 @@ def main(argv: list[str] | None = None) -> int:
             interactive=interactive,
             global_eval=global_eval,
         )
-    sys.stdout.write(json.dumps(result))
+    sys.stdout.buffer.write(json.dumps(result).encode("utf-8"))
+    sys.stdout.flush()
     return 0

@@ -29,7 +29,7 @@ def extract_command(header: str) -> list[str]:
         header = "\n# ".join(["# /// script", *header.splitlines(), "///"])
     pyproject = PyProjectReader.from_script(header)
     with tempfile.NamedTemporaryFile(
-        mode="w", delete=False, suffix=".txt"
+        mode="w", encoding="utf-8", delete=False, suffix=".txt"
     ) as temp_file:
         flags = construct_uv_flags(pyproject, temp_file, [], [])
         temp_file.flush()
@@ -39,7 +39,9 @@ def extract_command(header: str) -> list[str]:
 if __name__ == "__main__":
     assert len(sys.argv) == 1, f"Unexpected call format got {sys.argv}"
 
-    header = sys.stdin.read()
+    # The engine always sends UTF-8 bytes; do not trust the host locale codec.
+    header = sys.stdin.buffer.read().decode("utf-8")
 
     command = extract_command(header)
-    sys.stdout.write(json.dumps(command))
+    sys.stdout.buffer.write(json.dumps(command).encode("utf-8"))
+    sys.stdout.flush()

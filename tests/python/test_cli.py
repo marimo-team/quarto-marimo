@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import io
+import json
+import sys
+
 import pytest
-from quarto_marimo.cli import convert_markdown
+from quarto_marimo.cli import convert_markdown, main
 
 MARKDOWN = """
 ---
@@ -88,3 +92,37 @@ def test_fence_attributes_control_static_code_and_output():
 
     assert result["outputs"][0]["displayCode"] is False
     assert result["outputs"][1]["value"] == ""
+
+
+JAPANESE_MARKDOWN = """
+---
+title: 日本語
+---
+
+# 日本語
+
+```{python .marimo}
+import marimo as mo
+
+mo.md("こんにちわ")
+```
+"""
+
+
+def test_main_reads_utf8_stdin_under_a_non_utf8_locale(monkeypatch):
+    # Emulate a Japanese Windows host: Python wraps stdin and stdout with cp932
+    # and surrogateescape while the engine sends UTF-8 bytes (GitHub #103).
+    stdin = io.TextIOWrapper(
+        io.BytesIO(JAPANESE_MARKDOWN.encode("utf-8")),
+        encoding="cp932",
+        errors="surrogateescape",
+    )
+    stdout = io.TextIOWrapper(io.BytesIO(), encoding="cp932", errors="surrogateescape")
+    monkeypatch.setattr(sys, "stdin", stdin)
+    monkeypatch.setattr(sys, "stdout", stdout)
+
+    assert main(["page.qmd", "static", "yes"]) == 0
+
+    result = json.loads(stdout.buffer.getvalue().decode("utf-8"))
+    assert result["kind"] == "static"
+    assert "こんにちわ" in result["outputs"][0]["value"]
