@@ -61,3 +61,37 @@ Deno.test("compiler processes stop at the configured timeout", async () => {
     "marimo compilation timed out",
   );
 });
+
+Deno.test({
+  name: "compiler processes run Python in UTF-8 mode and exchange UTF-8 bytes",
+  ignore: Deno.build.os === "windows",
+  async fn() {
+    const command = await Deno.makeTempFile();
+    try {
+      // Echo the UTF-8 controls and the raw stdin bytes back as a payload so
+      // the test observes exactly what a Python child would see.
+      await Deno.writeTextFile(
+        command,
+        '#!/bin/sh\ninput=$(cat)\nprintf \'{"env":"%s","stdin":"%s"}\' "$PYTHONUTF8:$PYTHONIOENCODING" "$input"\n',
+      );
+      await Deno.chmod(command, 0o755);
+
+      const quarto = {
+        console: { info: () => {} },
+      } as unknown as QuartoAPI;
+      const output = await executeProcess(
+        quarto,
+        command,
+        [],
+        "こんにちわ 日本語",
+      );
+
+      assertEquals(JSON.parse(output), {
+        env: "1:utf-8",
+        stdin: "こんにちわ 日本語",
+      });
+    } finally {
+      await Deno.remove(command);
+    }
+  },
+});

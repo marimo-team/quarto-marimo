@@ -9,7 +9,7 @@ def test_extract_command_projects_document_dependencies_to_uv() -> None:
     command = extract_command('dependencies = ["polars==1.0"]')
     requirements_path = Path(command[command.index("--with-requirements") + 1])
     try:
-        requirements = requirements_path.read_text().splitlines()
+        requirements = requirements_path.read_text(encoding="utf-8").splitlines()
     finally:
         requirements_path.unlink()
 
@@ -22,7 +22,7 @@ def test_extract_command_wraps_comment_leading_toml() -> None:
     command = extract_command('# dependency rationale\ndependencies = ["polars==1.0"]')
     requirements_path = Path(command[command.index("--with-requirements") + 1])
     try:
-        requirements = requirements_path.read_text().splitlines()
+        requirements = requirements_path.read_text(encoding="utf-8").splitlines()
     finally:
         requirements_path.unlink()
 
