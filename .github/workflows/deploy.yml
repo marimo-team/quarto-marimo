@@ -23,7 +23,7 @@ jobs:
         run: pixi run ci
 
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@800bbc83122db9d4c38fcd284782d5afe62e52df # releases/v4
+        uses: JamesIves/github-pages-deploy-action@fa24774553152dd7873cd16ebd8d959b010c5445 # releases/v4
         with:
           branch: gh-pages
           folder: docs/_site
