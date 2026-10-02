@@ -133,6 +133,23 @@ Deno.test("uses a raw HTML fence longer than its content", async () => {
   );
 });
 
+Deno.test("preserves non-table html output when preserveHtml is true", async () => {
+  const [projected] = await projectStaticPage(
+    [{
+      type: "html",
+      value: '<span class="highlight">colored</span>',
+      displayCode: false,
+      code: "",
+      language: "python",
+    }],
+    (html) => Promise.resolve(html),
+    true,
+  );
+
+  assertStringIncludes(projected, "{=html}");
+  assertStringIncludes(projected, '<span class="highlight">colored</span>');
+});
+
 Deno.test("rejects mismatched compiler and source cell counts", () => {
   assertThrows(
     () => validateProjectionCount(["one"], 2),
