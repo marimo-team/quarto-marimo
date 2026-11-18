@@ -87,15 +87,4 @@ pixi run render
 
 ## Releases
 
-From a clean `main` checkout, run:
-
-```bash
-./scripts/release.sh patch
-# or
-./scripts/release.sh minor
-```
-
-The script validates the repository, updates `_extension.yml` and the Python
-package version, and creates the release commit. It prompts before pushing the
-commit or creating and pushing the tag. The publish workflow builds and
-attaches the versioned engine, browser, and style artifacts.
+See [Releases](RELEASING.md) to request, review, and publish a version through a release PR.
