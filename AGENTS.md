@@ -150,14 +150,4 @@ changes before committing them.
 
 ## Release
 
-Run the release script from a clean `main` checkout:
-
-```bash
-./scripts/release.sh patch
-./scripts/release.sh minor
-```
-
-The script runs tests, linting, and the build. It keeps the version in
-`_extensions/marimo/_extension.yml` aligned with `extract.py`, creates a release
-commit, and offers to push the commit and tag. The publish workflow builds the
-three versioned artifacts and attaches them to the matching GitHub release.
+See [RELEASING.md](RELEASING.md). The release command requests a versioned PR.

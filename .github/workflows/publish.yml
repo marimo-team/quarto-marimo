@@ -10,12 +10,26 @@ on:
 env:
   QUARTO_VERSION: 1.9.37
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: "${{ vars.CI_RUNNER_SMALL || 'ubuntu-latest' }}"
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Read coordinated release version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: python3 scripts/release-metadata.py > "$RUNNER_TEMP/release-manifest.json"
+      - name: Validate release tag
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: marimo-team/internal-gh-actions/validate-release@3a52681ab8e200a34175ec8e5d14985e4e7ce3c3
+        with:
+          manifest: ${{ runner.temp }}/release-manifest.json
 
       - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2
         with:
@@ -56,7 +70,7 @@ jobs:
 
       - name: Notify release result
         if: always()
-        uses: marimo-team/internal-gh-actions/release-notification@91f15bebd3f322db6717ba5a17983928a47ec991 # main
+        uses: marimo-team/internal-gh-actions/release-notification@3a52681ab8e200a34175ec8e5d14985e4e7ce3c3
         with:
           status: ${{ job.status }}
           slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL_RELEASES }}
