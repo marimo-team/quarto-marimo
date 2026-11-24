@@ -70,7 +70,8 @@ quarto preview
 ```
 
 HTML output remains interactive in the browser. Formats such as PDF receive the
-evaluated cell output.
+evaluated cell output. To keep the compiled output in HTML without the browser
+runtime, set `interactive: false` in the document front matter.
 
 ## Convert a marimo notebook
 
