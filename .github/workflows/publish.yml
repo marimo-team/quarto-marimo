@@ -70,7 +70,7 @@ jobs:
 
       - name: Notify release result
         if: always()
-        uses: marimo-team/internal-gh-actions/release-notification@3a52681ab8e200a34175ec8e5d14985e4e7ce3c3
+        uses: marimo-team/internal-gh-actions/release-notification@0a3db0e04217aaa03b3d011502874b020e9466a3
         with:
           status: ${{ job.status }}
           slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL_RELEASES }}
